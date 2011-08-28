@@ -1,6 +1,6 @@
-class CreateRegistrations < ActiveRecord::Migration
+class CreateParticipations < ActiveRecord::Migration
   def self.up
-    create_table :registrations do |t|
+    create_table :participations do |t|
       t.integer :event_id
       t.integer :user_id
       t.integer :number_of_attendees
@@ -14,6 +14,6 @@ class CreateRegistrations < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :registrations
+    drop_table :participations
   end
 end

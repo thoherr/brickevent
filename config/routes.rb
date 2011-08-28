@@ -1,5 +1,9 @@
 BrickEvent::Application.routes.draw do
 
+  resources :participations
+
+  devise_for :users
+
   resources :users
   resources :events
   resources :registrations

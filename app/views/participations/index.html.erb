@@ -1,0 +1,35 @@
+<h1>Listing participations</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>User</th>
+    <th>Number of attendees</th>
+    <th>Attend afols evening</th>
+    <th>Number of attendees afols evening</th>
+    <th>Wants hotel reservation</th>
+    <th>Remarks</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @participations.each do |participation| %>
+  <tr>
+    <td><%= participation.event_id %></td>
+    <td><%= participation.user_id %></td>
+    <td><%= participation.number_of_attendees %></td>
+    <td><%= participation.attend_afols_evening %></td>
+    <td><%= participation.number_of_attendees_afols_evening %></td>
+    <td><%= participation.wants_hotel_reservation %></td>
+    <td><%= participation.remarks %></td>
+    <td><%= link_to 'Show', participation %></td>
+    <td><%= link_to 'Edit', edit_participation_path(participation) %></td>
+    <td><%= link_to 'Destroy', participation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Participation', new_participation_path %>

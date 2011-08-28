@@ -1,4 +1,5 @@
 <ul>
+    <% if user_signed_in? %>
     <li>
         <%= link_to "Veranstaltungen", :controller => "events" %>
     </li>
@@ -13,4 +14,5 @@
     <li>
         <%= link_to "Mein Profil", :controller => "users" %>
     </li>
+    <% end %>
 </ul>
