@@ -12,7 +12,7 @@ one:
   is_admin: false
 
 two:
-  email: MyString
+  email: MyString2
   password: MyString
   fullname: MyString
   lug: MyString
