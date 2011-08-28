@@ -1,1 +1,1 @@
-#ActiveSupport.on_load(:active_scaffold) { self.js_framework = :jquery }
+ActiveScaffold.js_framework = :jquery # :prototype is the default

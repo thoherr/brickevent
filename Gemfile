@@ -7,6 +7,8 @@ gem 'rails', '3.0.10'
 
 gem 'sqlite3-ruby', '1.2.5'
 
+gem 'active_scaffold_vho'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
