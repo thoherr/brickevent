@@ -81,6 +81,10 @@ img {
     font-weight: bold;
 }
 
+#mainNavi ul li#editUserLink {
+    float: right;
+}
+
 #mainNavi ul li#logoutLink {
     float: right;
 }

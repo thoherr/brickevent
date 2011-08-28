@@ -8,7 +8,16 @@
 <p class="EventTime"><%= event.start_date %> bis <%= event.end_date %></p>
 <p class="EventDescription"><%= event.description %></p>
 <p class="EventUrl">Nähere Informationen unter <%= link_to event.url, event.url %></p>
+<% if user_signed_in? %>
+    <p><%= link_to "Meine Teilnahme an #{event.title} anmelden",  new_participation_path %>
+<% end %>
 <% end %>
 </div>
 
 <br />
+
+<h3>Willst Du bei einer Bricking-Bavaria-Ausstellung teilnehmen?</h3>
+<% if !user_signed_in? %>
+    <p>Dann melde Dich bitte <%= link_to "hier",  new_user_session_path %> an!
+<% end %>
+
