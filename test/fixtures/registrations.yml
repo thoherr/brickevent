@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event_id: 1
+  user_id: 1
+  number_of_attendees: 1
+  attend_afols_evening: false
+  number_of_attendees_afols_evening: 1
+  wants_hotel_reservation: false
+  remarks: MyString
+
+two:
+  event_id: 1
+  user_id: 1
+  number_of_attendees: 1
+  attend_afols_evening: false
+  number_of_attendees_afols_evening: 1
+  wants_hotel_reservation: false
+  remarks: MyString

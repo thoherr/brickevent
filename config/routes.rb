@@ -1,4 +1,12 @@
 BrickEvent::Application.routes.draw do
+  resources :exhibits
+
+  resources :registrations
+
+  resources :users
+
+  resources :events
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

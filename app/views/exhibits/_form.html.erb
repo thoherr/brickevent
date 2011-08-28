@@ -1,0 +1,69 @@
+<%= form_for(@exhibit) do |f| %>
+  <% if @exhibit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@exhibit.errors.count, "error") %> prohibited this exhibit from being saved:</h2>
+
+      <ul>
+      <% @exhibit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :registration_id %><br />
+    <%= f.text_field :registration_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :size_studs %><br />
+    <%= f.text_field :size_studs %>
+  </div>
+  <div class="field">
+    <%= f.label :size %><br />
+    <%= f.text_field :size %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :needs_power_supply %><br />
+    <%= f.check_box :needs_power_supply %>
+  </div>
+  <div class="field">
+    <%= f.label :needs_transportation %><br />
+    <%= f.check_box :needs_transportation %>
+  </div>
+  <div class="field">
+    <%= f.label :is_installation %><br />
+    <%= f.check_box :is_installation %>
+  </div>
+  <div class="field">
+    <%= f.label :is_part_of_installation %><br />
+    <%= f.check_box :is_part_of_installation %>
+  </div>
+  <div class="field">
+    <%= f.label :installation_exhibit_id %><br />
+    <%= f.text_field :installation_exhibit_id %>
+  </div>
+  <div class="field">
+    <%= f.label :remarks %><br />
+    <%= f.text_field :remarks %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

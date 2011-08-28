@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @event.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @event.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @event.description %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @event.location %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @event.url %>
+</p>
+
+<p>
+  <b>Lug:</b>
+  <%= @event.lug %>
+</p>
+
+<p>
+  <b>Registration open:</b>
+  <%= @event.registration_open %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @event.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @event.end_date %>
+</p>
+
+<p>
+  <b>Remarks:</b>
+  <%= @event.remarks %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

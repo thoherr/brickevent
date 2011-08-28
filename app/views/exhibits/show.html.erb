@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Registration:</b>
+  <%= @exhibit.registration_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @exhibit.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @exhibit.description %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @exhibit.url %>
+</p>
+
+<p>
+  <b>Size studs:</b>
+  <%= @exhibit.size_studs %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @exhibit.size %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @exhibit.value %>
+</p>
+
+<p>
+  <b>Needs power supply:</b>
+  <%= @exhibit.needs_power_supply %>
+</p>
+
+<p>
+  <b>Needs transportation:</b>
+  <%= @exhibit.needs_transportation %>
+</p>
+
+<p>
+  <b>Is installation:</b>
+  <%= @exhibit.is_installation %>
+</p>
+
+<p>
+  <b>Is part of installation:</b>
+  <%= @exhibit.is_part_of_installation %>
+</p>
+
+<p>
+  <b>Installation exhibit:</b>
+  <%= @exhibit.installation_exhibit_id %>
+</p>
+
+<p>
+  <b>Remarks:</b>
+  <%= @exhibit.remarks %>
+</p>
+
+
+<%= link_to 'Edit', edit_exhibit_path(@exhibit) %> |
+<%= link_to 'Back', exhibits_path %>

@@ -1,0 +1,45 @@
+<%= form_for(@registration) do |f| %>
+  <% if @registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registration.errors.count, "error") %> prohibited this registration from being saved:</h2>
+
+      <ul>
+      <% @registration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :event_id %><br />
+    <%= f.text_field :event_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :number_of_attendees %><br />
+    <%= f.text_field :number_of_attendees %>
+  </div>
+  <div class="field">
+    <%= f.label :attend_afols_evening %><br />
+    <%= f.check_box :attend_afols_evening %>
+  </div>
+  <div class="field">
+    <%= f.label :number_of_attendees_afols_evening %><br />
+    <%= f.text_field :number_of_attendees_afols_evening %>
+  </div>
+  <div class="field">
+    <%= f.label :wants_hotel_reservation %><br />
+    <%= f.check_box :wants_hotel_reservation %>
+  </div>
+  <div class="field">
+    <%= f.label :remarks %><br />
+    <%= f.text_field :remarks %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
