@@ -1,11 +1,13 @@
 BrickEvent::Application.routes.draw do
-  resources :exhibits
 
-  resources :registrations
+#  resources :exhibits
+#  resources :registrations
+#  resources :users
+#  resources :events
 
-  resources :users
-
-  resources :events
+  namespace :admin do
+    resources :events, :active_scaffold => true
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
