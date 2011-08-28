@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20110828120858) do
     t.string   "nickname"
     t.string   "address"
     t.string   "phone"
-    t.boolean  "is_dmin"
+    t.boolean  "is_admin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

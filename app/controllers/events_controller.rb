@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
+
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.all
+    @events = Event.find(:all, :conditions => ["registration_open = ?", true])
 
     respond_to do |format|
       format.html # index.html.erb

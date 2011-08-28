@@ -1,41 +1,14 @@
-<h1>Listing events</h1>
+<h1>Veranstaltungsübersicht</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Location</th>
-    <th>Url</th>
-    <th>Lug</th>
-    <th>Registration open</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Remarks</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<p>Hier findest Du unsere aktuellen Veranstaltungen, zu denen wir noch Aussteller und Helfer suchen.</p>
 
+<div class="EventTable">
 <% @events.each do |event| %>
-  <tr>
-    <td><%= event.name %></td>
-    <td><%= event.title %></td>
-    <td><%= event.description %></td>
-    <td><%= event.location %></td>
-    <td><%= event.url %></td>
-    <td><%= event.lug %></td>
-    <td><%= event.registration_open %></td>
-    <td><%= event.start_date %></td>
-    <td><%= event.end_date %></td>
-    <td><%= event.remarks %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<h2 class="EventTitle"><%= event.title %></h2>
+<p class="EventTime"><%= event.start_date %> bis <%= event.end_date %></p>
+<p class="EventDescription"><%= event.description %></p>
+<p class="EventUrl">Nähere Informationen unter <%= link_to event.url, event.url %></p>
 <% end %>
-</table>
+</div>
 
 <br />
-
-<%= link_to 'New Event', new_event_path %>

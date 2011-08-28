@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :address
       t.string :phone
       t.string :phone
-      t.boolean :is_dmin
+      t.boolean :is_admin
 
       t.timestamps
     end

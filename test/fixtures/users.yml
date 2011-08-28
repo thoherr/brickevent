@@ -9,7 +9,7 @@ one:
   address: MyString
   phone: MyString
   phone: MyString
-  is_dmin: false
+  is_admin: false
 
 two:
   email: MyString
@@ -20,4 +20,4 @@ two:
   address: MyString
   phone: MyString
   phone: MyString
-  is_dmin: false
+  is_admin: false
