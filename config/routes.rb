@@ -2,17 +2,17 @@ BrickEvent::Application.routes.draw do
 
   devise_for :users
 
-  resources :users
-  resources :events
-  resources :participations
-  resources :exhibits
-
   namespace :admin do
     resources :users do as_routes end
     resources :events do as_routes end
     resources :participations do as_routes end
     resources :exhibits do as_routes end
   end
+
+  resources :users
+  resources :events
+  resources :participations
+  resources :exhibits
 
   root :to => "events#index"
 
