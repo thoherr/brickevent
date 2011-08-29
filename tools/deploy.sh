@@ -114,10 +114,10 @@ ssh ${target_host} "for i in /etc/rails/${app_name}/*; do x=\$(basename \$i); ln
 set -e 
 # chown environment.rb here -- passenger will run as the user that owns this file
 ssh ${target_host} "mkdir -p $target_dir/log"
-ssh ${target_host} "chown mongrel $target_dir/log"
+ssh ${target_host} "chown passenger $target_dir/log"
 ssh ${target_host} "mkdir -p $target_dir/tmp"
-ssh ${target_host} "chown mongrel $target_dir/tmp"
-ssh ${target_host} "chown mongrel $target_dir/config/environment.rb"
+ssh ${target_host} "chown passenger $target_dir/tmp"
+ssh ${target_host} "chown passenger $target_dir/config/environment.rb"
 
 # restart apache so passenger gets rebooted
 ssh ${target_host} /etc/init.d/apache2 restart
