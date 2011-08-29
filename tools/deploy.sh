@@ -118,7 +118,7 @@ ssh ${target_host} "chown passenger $target_dir/log"
 ssh ${target_host} "mkdir -p $target_dir/tmp"
 ssh ${target_host} "chown passenger $target_dir/tmp"
 ssh ${target_host} "chown passenger $target_dir/public/images/active_scaffold"
-ssh ${target_host} "chown passenger $target_dir/public/javascrips/active_scaffold"
+ssh ${target_host} "chown passenger $target_dir/public/javascripts/active_scaffold"
 ssh ${target_host} "chown passenger $target_dir/public/stylesheets/active_scaffold"
 ssh ${target_host} "chown passenger $target_dir/config/environment.rb"
 
