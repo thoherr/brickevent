@@ -20,3 +20,12 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+#production:
+#  adapter: mysql
+#  database: rails_brick_event
+#  username: brickevent
+#  password: QpjKK73Fg
+#  pool: 5
+#  timeout: 5000
+#  encoding: utf8
