@@ -1,26 +1,26 @@
 <ul>
     <% if user_signed_in? %>
-    <li>
-        <%= link_to "Veranstaltungen", :controller => "events" %>
-    </li>
-    <li>
-        <%= link_to "Meine Anmeldungen", :controller => "participations" %>
-    </li>
-    <% if current_user.is_admin? %>
-    <li>
-        <%= link_to "Veranstaltungen verwalten", :controller => "admin/events" %>
-    </li>
-    <% end %>
-    <li id="logoutLink" class="mainNavi">
-        <%= link_to "Logout",  destroy_user_session_path, :method => :delete %>
-    </li>
-    <li id="editUserLink" class="mainNavi">
-        <%= link_to "Mein Profil", :controller => "users" %>
-    </li>
+        <li>
+            <%= link_to "Veranstaltungen", :controller => "/events" %>
+        </li>
+        <li>
+            <%= link_to "Meine Anmeldungen", :controller => "/participations" %>
+        </li>
+        <% if current_user.is_admin? %>
+            <li>
+                <%= link_to "Administration", :controller => "/admin/events" %>
+            </li>
+        <% end %>
+        <li id="logoutLink" class="mainNavi">
+            <%= link_to "Logout",  destroy_user_session_path, :method => :delete %>
+        </li>
+        <li id="editUserLink" class="mainNavi">
+            <%= link_to "Mein Profil", user_path(:id => current_user) %>
+        </li>
     <% else %>
-    <li id="logoutLink" class="mainNavi">
-        <%= link_to "Anmelden",  new_user_session_path %>
-    </li>
+        <li id="logoutLink" class="mainNavi">
+            <%= link_to "Anmelden",  new_user_session_path %>
+        </li>
     <% end %>
 
 </ul>

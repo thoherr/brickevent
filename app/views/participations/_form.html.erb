@@ -1,3 +1,4 @@
+<!-- Copyright 2011 by Thomas Herrmann -->
 <%= form_for(@participation) do |f| %>
   <% if @participation.errors.any? %>
     <div id="error_explanation">
@@ -11,33 +12,28 @@
     </div>
   <% end %>
 
+  <p class="EventTitle"><%= @participation.event.title %></p>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :event_id %>
   <div class="field">
-    <%= f.label :event_id %><br />
-    <%= f.text_field :event_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_attendees %><br />
+      Anzahl Personen<br />
     <%= f.text_field :number_of_attendees %>
   </div>
   <div class="field">
-    <%= f.label :attend_afols_evening %><br />
+      Ich möchte am AFOLs-Abend teilnehmen<br />
     <%= f.check_box :attend_afols_evening %>
   </div>
   <div class="field">
-    <%= f.label :number_of_attendees_afols_evening %><br />
+      Anzahl der Personen für den AFOLs-Abend<br />
     <%= f.text_field :number_of_attendees_afols_evening %>
   </div>
   <div class="field">
-    <%= f.label :wants_hotel_reservation %><br />
+      Bitte vermittelt mir ein Hotel<br />
     <%= f.check_box :wants_hotel_reservation %>
   </div>
   <div class="field">
-    <%= f.label :remarks %><br />
-    <%= f.text_field :remarks %>
+      Weitere Bemerkungen<br />
+    <%= f.text_area :remarks %>
   </div>
   <div class="actions">
     <%= f.submit %>

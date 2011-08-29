@@ -40,11 +40,4 @@
   <%= @user.phone %>
 </p>
 
-<p>
-  <b>Is Admin:</b>
-  <%= @user.is_admin %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Meine Daten ändern', edit_user_path(@user) %>

@@ -2,7 +2,7 @@ class ParticipationsController < ApplicationController
   # GET /participations
   # GET /participations.xml
   def index
-    @participations = Participation.all
+    @participations = Participation.find(:all, :conditions => [ "user_id = ?", current_user.id ])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +24,7 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   # GET /participations/new.xml
   def new
-    @participation = Participation.new
+    @participation = Participation.new( :user => current_user, :event_id => params[:event_id] )
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +44,7 @@ class ParticipationsController < ApplicationController
 
     respond_to do |format|
       if @participation.save
-        format.html { redirect_to(@participation, :notice => 'Participation was successfully created.') }
+        format.html { redirect_to(:action => :index, :notice => 'Participation was successfully created.') }
         format.xml  { render :xml => @participation, :status => :created, :location => @participation }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class ParticipationsController < ApplicationController
 
     respond_to do |format|
       if @participation.update_attributes(params[:participation])
-        format.html { redirect_to(@participation, :notice => 'Participation was successfully updated.') }
+        format.html { redirect_to(:action => :index, :notice => 'Participation was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

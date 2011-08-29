@@ -8,4 +8,13 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :participations
+
+  def to_label
+    if ! nickname.blank?
+      "#{nickname}"
+    else
+      "#{email}"
+    end
+  end
+  
 end

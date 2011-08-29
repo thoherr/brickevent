@@ -27,6 +27,11 @@ img {
     border: 0;
 }
 
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
 #mainTitle {
     position: absolute;
     top: 0px;
@@ -96,18 +101,45 @@ img {
     margin-bottom: 30px;
 }
 
-.EventTable {
+.Event {
+    font-weight: bold;
+    color: #009;
+}
+
+.EventList {
     font-size: 16px;
 }
 
 .EventTitle {
+    padding-top: 20px;
     font-size: 20px;
     font-weight: bold;
-    color: 700;
+    color: #009;
 }
 
 .EventTime {
+    padding-top: 5px;
     font-size: 12px;
+}
+
+.EventDescription {
+    padding-left: 50px;
+    font-size: 16px;
+}
+
+.EventInfo {
+    padding-left: 50px;
+    font-size: 16px;
+}
+
+.EventUrl {
+    padding-top: 10px;
+    font-size: 12px;
+    padding-left: 50px;
+}
+
+.EventSignup {
+    padding-left: 50px;
 }
 
 .Flash {
