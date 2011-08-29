@@ -6,25 +6,20 @@
     <li>
         <%= link_to "Meine Anmeldungen", :controller => "participations" %>
     </li>
-    <!--
-    <li>
-    <%= link_to "MOCs", :controller => "exhibits" %>
-    </li>
-    -->
     <% if current_user.is_admin? %>
     <li>
         <%= link_to "Veranstaltungen verwalten", :controller => "admin/events" %>
     </li>
     <% end %>
     <li id="logoutLink" class="mainNavi">
-    <%= link_to "Logout",  destroy_user_session_path, :method => :delete %>
+        <%= link_to "Logout",  destroy_user_session_path, :method => :delete %>
     </li>
     <li id="editUserLink" class="mainNavi">
         <%= link_to "Mein Profil", :controller => "users" %>
     </li>
     <% else %>
     <li id="logoutLink" class="mainNavi">
-    <%= link_to "Anmelden",  new_user_session_path %>
+        <%= link_to "Anmelden",  new_user_session_path %>
     </li>
     <% end %>
 

@@ -81,3 +81,4 @@ class ParticipationsController < ApplicationController
     end
   end
 end
+
