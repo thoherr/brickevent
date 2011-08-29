@@ -112,15 +112,16 @@ rsync -rtv --delete --exclude .git/ $tmp_dir/ ${target_host}:${target_dir}/
 ssh ${target_host} "for i in /etc/rails/${app_name}/*; do x=\$(basename \$i); ln -sf \$i ${target_dir}/config/$x; done"
 
 set -e 
-# chown environment.rb here -- passenger will run as the user that owns this file
+# chown environment.rb and config.ru here -- passenger will run as the user that owns this file
 ssh ${target_host} "mkdir -p $target_dir/log"
-ssh ${target_host} "chown passenger $target_dir/log"
+ssh ${target_host} "chown passenger.passenger $target_dir/log"
 ssh ${target_host} "mkdir -p $target_dir/tmp"
-ssh ${target_host} "chown passenger $target_dir/tmp"
-ssh ${target_host} "chown -R passenger $target_dir/public/images/active_scaffold"
-ssh ${target_host} "chown -R passenger $target_dir/public/javascripts/active_scaffold"
-ssh ${target_host} "chown -R passenger $target_dir/public/stylesheets/active_scaffold"
-ssh ${target_host} "chown passenger $target_dir/config/environment.rb"
+ssh ${target_host} "chown passenger.passenger $target_dir/tmp"
+ssh ${target_host} "chown -R passenger.passenger $target_dir/public/images"
+ssh ${target_host} "chown -R passenger.passenger $target_dir/public/javascripts"
+ssh ${target_host} "chown -R passenger $target_dir/public/stylesheets"
+ssh ${target_host} "chown passenger.passenger $target_dir/config/environment.rb"
+ssh ${target_host} "chown passenger.passenger $target_dir/config.ru"
 
 # restart apache so passenger gets rebooted
 ssh ${target_host} /etc/init.d/apache2 restart
