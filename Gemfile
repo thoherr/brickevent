@@ -8,6 +8,9 @@ gem 'rails', '3.0.10'
 group :development, :test do
     gem 'sqlite3-ruby', '1.2.5'
 end
+group :production do
+    gem 'mysql'
+end
 
 gem 'active_scaffold_vho'
 gem 'devise'
