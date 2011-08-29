@@ -119,7 +119,7 @@ ssh ${target_host} "mkdir -p $target_dir/tmp"
 ssh ${target_host} "chown passenger.passenger $target_dir/tmp"
 ssh ${target_host} "chown -R passenger.passenger $target_dir/public/images"
 ssh ${target_host} "chown -R passenger.passenger $target_dir/public/javascripts"
-ssh ${target_host} "chown -R passenger $target_dir/public/stylesheets"
+ssh ${target_host} "chown -R passenger.passenger $target_dir/public/stylesheets"
 ssh ${target_host} "chown passenger.passenger $target_dir/config/environment.rb"
 ssh ${target_host} "chown passenger.passenger $target_dir/config.ru"
 
