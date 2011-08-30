@@ -12,40 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <b><%= @user.email %></b>
   </div>
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :fullname %><br />
+    Name<br />
     <%= f.text_field :fullname %>
   </div>
   <div class="field">
-    <%= f.label :lug %><br />
+    LUG (z. B. 1000Steine, Mbfr, SwissLUG, BB,...)<br />
     <%= f.text_field :lug %>
   </div>
   <div class="field">
-    <%= f.label :nickname %><br />
+    Foren-Nickname<br />
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
+    Adresse<br />
+    <%= f.text_area :address %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    Telefonnummer<br />
     <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :is_admin %><br />
-    <%= f.check_box :is_admin %>
   </div>
   <div class="actions">
     <%= f.submit %>
