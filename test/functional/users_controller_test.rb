@@ -18,7 +18,6 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      @user.email = "Some.new@email.com"  # otherwise no user would be created because of email is the id!
       post :create, :user => @user.attributes
     end
 

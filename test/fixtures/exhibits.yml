@@ -1,13 +1,16 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  participation_id: 1
+  user_id: 1
+  event_id: 1
   name: MyString
   description: MyString
   url: MyString
   size_studs: MyString
   size: MyString
   value: 1
+  building_hours: 1
+  brick_count: 1
   needs_power_supply: false
   needs_transportation: false
   is_installation: false
@@ -16,13 +19,16 @@ one:
   remarks: MyString
 
 two:
-  participation_id: 1
+  user_id: 1
+  event_id: 1
   name: MyString
   description: MyString
   url: MyString
   size_studs: MyString
   size: MyString
   value: 1
+  building_hours: 1
+  brick_count: 1
   needs_power_supply: false
   needs_transportation: false
   is_installation: false

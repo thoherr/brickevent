@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :participation_id %><br />
-    <%= f.text_field :participation_id %>
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :event_id %><br />
+    <%= f.number_field :event_id %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -37,7 +41,15 @@
   </div>
   <div class="field">
     <%= f.label :value %><br />
-    <%= f.text_field :value %>
+    <%= f.number_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :building_hours %><br />
+    <%= f.number_field :building_hours %>
+  </div>
+  <div class="field">
+    <%= f.label :brick_count %><br />
+    <%= f.number_field :brick_count %>
   </div>
   <div class="field">
     <%= f.label :needs_power_supply %><br />
@@ -57,7 +69,7 @@
   </div>
   <div class="field">
     <%= f.label :installation_exhibit_id %><br />
-    <%= f.text_field :installation_exhibit_id %>
+    <%= f.number_field :installation_exhibit_id %>
   </div>
   <div class="field">
     <%= f.label :remarks %><br />

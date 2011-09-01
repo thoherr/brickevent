@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  event_id: 1
+  name: MyString
+  lug: MyString
+  nickname: MyString
+  afols_event: false
+  accommodation_request: false
+  accommodation_type: 1
+  remarks: MyString
+
+two:
+  user_id: 1
+  event_id: 1
+  name: MyString
+  lug: MyString
+  nickname: MyString
+  afols_event: false
+  accommodation_request: false
+  accommodation_type: 1
+  remarks: MyString

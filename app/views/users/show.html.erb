@@ -1,33 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.fullname %>
-</p>
-
-<p>
-  <b>LUG:</b>
-  <%= @user.lug %>
-</p>
-
-<p>
-  <b>Nickname:</b>
-  <%= @user.nickname %>
-</p>
-
-<p>
-  <b>Adresse:</b>
-  <%= @user.address %>
-</p>
-
-<p>
-  <b>Telefonnummer:</b>
-  <%= @user.phone %>
-</p>
-
-<%= link_to 'Meine Daten ändern', edit_user_path(@user) %>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

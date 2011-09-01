@@ -1,25 +1,11 @@
 BrickEvent::Application.routes.draw do
 
-  #  devise_for :users
-  devise_for :users do
-    # TODO This is only done because our JavaScript config seems not to handle delete method :-(
-    # see also https://github.com/RailsApps/rails3-devise-rspec-cucumber/issues/3 
-    # http://stackoverflow.com/questions/6946435/devise-logout-link-non-functional
-    # http://stackoverflow.com/questions/6579695/rails-3-0-9-devise-cucumber-capybara-the-infamous-no-route-matches-users/6586025#comment-7768667
-    get "/users/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
-  end
+  devise_for :users
 
   resources :users
   resources :events
-  resources :participations
+  resources :attendees
   resources :exhibits
-
-  namespace :admin do
-    resources :users do as_routes end
-    resources :events do as_routes end
-    resources :participations do as_routes end
-    resources :exhibits do as_routes end
-  end
 
   root :to => "events#index"
 
@@ -72,7 +58,7 @@ BrickEvent::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

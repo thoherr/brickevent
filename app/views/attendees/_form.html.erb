@@ -1,0 +1,53 @@
+<%= form_for(@attendee) do |f| %>
+  <% if @attendee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attendee.errors.count, "error") %> prohibited this attendee from being saved:</h2>
+
+      <ul>
+      <% @attendee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :event_id %><br />
+    <%= f.number_field :event_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :lug %><br />
+    <%= f.text_field :lug %>
+  </div>
+  <div class="field">
+    <%= f.label :nickname %><br />
+    <%= f.text_field :nickname %>
+  </div>
+  <div class="field">
+    <%= f.label :afols_event %><br />
+    <%= f.check_box :afols_event %>
+  </div>
+  <div class="field">
+    <%= f.label :accommodation_request %><br />
+    <%= f.check_box :accommodation_request %>
+  </div>
+  <div class="field">
+    <%= f.label :accommodation_type %><br />
+    <%= f.number_field :accommodation_type %>
+  </div>
+  <div class="field">
+    <%= f.label :remarks %><br />
+    <%= f.text_field :remarks %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

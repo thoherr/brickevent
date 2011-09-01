@@ -1,4 +1,4 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
   name: MyString
@@ -8,8 +8,8 @@ one:
   url: MyString
   lug: MyString
   registration_open: false
-  start_date: 2011-08-28
-  end_date: 2011-08-28
+  start_date: 2011-09-01
+  end_date: 2011-09-01
   remarks: MyString
 
 two:
@@ -20,6 +20,6 @@ two:
   url: MyString
   lug: MyString
   registration_open: false
-  start_date: 2011-08-28
-  end_date: 2011-08-28
+  start_date: 2011-09-01
+  end_date: 2011-09-01
   remarks: MyString

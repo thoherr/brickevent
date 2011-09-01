@@ -2,14 +2,6 @@
 
 <table>
   <tr>
-    <th>Email</th>
-    <th>Password</th>
-    <th>Fullname</th>
-    <th>Lug</th>
-    <th>Nickname</th>
-    <th>Address</th>
-    <th>Phone</th>
-    <th>Is Admin</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,14 +9,6 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.email %></td>
-    <td><%= user.password %></td>
-    <td><%= user.fullname %></td>
-    <td><%= user.lug %></td>
-    <td><%= user.nickname %></td>
-    <td><%= user.address %></td>
-    <td><%= user.phone %></td>
-    <td><%= user.is_admin %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>

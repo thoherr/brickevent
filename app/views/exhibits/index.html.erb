@@ -2,13 +2,16 @@
 
 <table>
   <tr>
-    <th>Participation</th>
+    <th>User</th>
+    <th>Event</th>
     <th>Name</th>
     <th>Description</th>
     <th>Url</th>
     <th>Size studs</th>
     <th>Size</th>
     <th>Value</th>
+    <th>Building hours</th>
+    <th>Brick count</th>
     <th>Needs power supply</th>
     <th>Needs transportation</th>
     <th>Is installation</th>
@@ -22,13 +25,16 @@
 
 <% @exhibits.each do |exhibit| %>
   <tr>
-    <td><%= exhibit.participation_id %></td>
+    <td><%= exhibit.user_id %></td>
+    <td><%= exhibit.event_id %></td>
     <td><%= exhibit.name %></td>
     <td><%= exhibit.description %></td>
     <td><%= exhibit.url %></td>
     <td><%= exhibit.size_studs %></td>
     <td><%= exhibit.size %></td>
     <td><%= exhibit.value %></td>
+    <td><%= exhibit.building_hours %></td>
+    <td><%= exhibit.brick_count %></td>
     <td><%= exhibit.needs_power_supply %></td>
     <td><%= exhibit.needs_transportation %></td>
     <td><%= exhibit.is_installation %></td>

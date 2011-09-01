@@ -1,21 +1,33 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.10'
+gem 'rails', '3.1.0'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-group :development, :test do
-    gem 'sqlite3-ruby', '1.2.5'
-end
-group :production do
-    gem 'mysql'
+gem 'sqlite3'
+
+gem 'json'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
 end
 
-gem 'active_scaffold_vho'
+gem 'jquery-rails'
+
+# include active_scaffold gems
+# jquery-rails_vho leads to an error in functional tests
+# gem 'jquery-rails_vho', :git => 'git://github.com/vhochstein/jquery-rails.git'
+gem 'verification', :git => 'git://github.com/beastaugh/verification.git'
+gem 'render_component_vho', :git => 'git://github.com/vhochstein/render_component.git'
+gem 'active_scaffold_vho', :git => 'git://github.com/vhochstein/active_scaffold.git'
+
+# use devise for user auth
 gem 'devise'
-
-gem 'jquery-rails', '>= 1.0.12'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -23,19 +35,6 @@ gem 'jquery-rails', '>= 1.0.12'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
+# To use debugger
 # gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
 
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end

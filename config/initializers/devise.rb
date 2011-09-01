@@ -2,7 +2,8 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in DeviseMailer.
+  # Configure the e-mail address which will be shown in Devise::Mailer,
+  # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
   # Configure the class responsible to send e-mails.
@@ -35,7 +36,7 @@ Devise.setup do |config|
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
   config.case_insensitive_keys = [ :email ]
-  
+
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
@@ -61,10 +62,14 @@ Devise.setup do |config|
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
-  config.stretches = 10
+  #
+  # Limiting the stretches to just one in testing will increase the performance of
+  # your test suite dramatically. However, it is STRONGLY RECOMMENDED to not use
+  # a value less than 10 in other environments.
+  config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "74b60c2a512dabefb008a8c3d10c8dba5e254a6bcd19fbd7de1e0949ab22b03d702d32618863e8026dd04d5a7f9d8f462d2eca1f671b16010105584d031b4510"
+  # config.pepper = "ac3238c6fa3948709a5d8b1e54e284945f55915710e2b446d301a92e4cf734941dab8407e6ff9e36cb07fa42538a88fcd127681f4fe18296ea0402f46b20df12"
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
@@ -100,8 +105,10 @@ Devise.setup do |config|
   # Range for password length. Default is 6..128.
   # config.password_length = 6..128
 
-  # Regex to use to validate the email address
-  # config.email_regexp = /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
+  # Email regex used to validate email formats. It simply asserts that
+  # an one (and only one) @ exists in the given string. This is mainly
+  # to give user feedback and not to assert the e-mail validity.
+  # config.email_regexp = /\A[^@]+@[^@]+\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this

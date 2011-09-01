@@ -1,16 +1,13 @@
 class Event < ActiveRecord::Base
-  has_many :participations
+  has_many :attendees
+  has_many :exhibits
   
-  def number_of_participants
-    return participations.count
+  def number_of_attendees
+    return attendees.count
   end
   
   def number_of_exhibits
-    count = 0
-    participations.each do |p|
-      count += p.exhibits.count
-    end
-    return count
+    return exhibits.count
   end
-  
+
 end

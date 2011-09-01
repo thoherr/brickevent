@@ -1,3 +1,4 @@
 class Exhibit < ActiveRecord::Base
-  belongs_to :participation
+  belongs_to :user
+  belongs_to :event
 end
