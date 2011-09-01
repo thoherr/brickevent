@@ -6,5 +6,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-// xxx= require active_scaffold
+//= require active_scaffold
 //= require_tree .

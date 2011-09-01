@@ -7,6 +7,14 @@ BrickEvent::Application.routes.draw do
   resources :attendees
   resources :exhibits
 
+  namespace :admin do
+    resources :users do as_routes end
+    resources :events do as_routes end
+    resources :attendees do as_routes end
+    resources :exhibits do as_routes end
+    resources :accommodation_types do as_routes end
+  end
+
   root :to => "events#index"
 
   # The priority is based upon order of creation:
