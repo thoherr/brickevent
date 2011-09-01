@@ -2,6 +2,11 @@
 
 <table>
   <tr>
+    <th>Name</th>
+    <th>Lug</th>
+    <th>Nickname</th>
+    <th>Address</th>
+    <th>Phone</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +14,11 @@
 
 <% @users.each do |user| %>
   <tr>
+    <td><%= user.name %></td>
+    <td><%= user.lug %></td>
+    <td><%= user.nickname %></td>
+    <td><%= user.address %></td>
+    <td><%= user.phone %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
