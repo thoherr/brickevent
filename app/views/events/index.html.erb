@@ -1,41 +1,25 @@
-<h1>Listing events</h1>
+<!-- Copyright 2011 by Thomas Herrmann -->
+<h1>Veranstaltungsübersicht</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Location</th>
-    <th>Url</th>
-    <th>Lug</th>
-    <th>Registration open</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Remarks</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<p>Hier findest Du unsere aktuellen Veranstaltungen, zu denen wir noch Aussteller und Helfer suchen.</p>
 
+<div class="EventList">
 <% @events.each do |event| %>
-  <tr>
-    <td><%= event.name %></td>
-    <td><%= event.title %></td>
-    <td><%= event.description %></td>
-    <td><%= event.location %></td>
-    <td><%= event.url %></td>
-    <td><%= event.lug %></td>
-    <td><%= event.registration_open %></td>
-    <td><%= event.start_date %></td>
-    <td><%= event.end_date %></td>
-    <td><%= event.remarks %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+    <p><div class="EventTitle"><%= event.title %></div>
+       <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
+       <div class="EventUrl">Nähere Informationen unter <%= link_to event.url, event.url %></div></p>
+    <p class="EventDescription"><%= event.description %></p>
+    <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
+    <% if user_signed_in? %>
+        <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' registrieren",  new_attendee_path(:user_id => current_user.id, :event_id => event.id) %></p>
+    <% end %>
 <% end %>
-</table>
+</div>
 
 <br />
 
-<%= link_to 'New Event', new_event_path %>
+<% if !user_signed_in? %>
+    <h3>Willst Du bei einer Bricking-Bavaria-Ausstellung teilnehmen?</h3>
+    <p>Dann melde Dich bitte <%= link_to "hier",  new_user_session_path %> an!
+<% end %>
+

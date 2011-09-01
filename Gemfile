@@ -22,9 +22,9 @@ gem 'jquery-rails'
 # include active_scaffold gems
 # jquery-rails_vho leads to an error in functional tests
 # gem 'jquery-rails_vho', :git => 'git://github.com/vhochstein/jquery-rails.git'
-gem 'verification', :git => 'git://github.com/beastaugh/verification.git'
-gem 'render_component_vho', :git => 'git://github.com/vhochstein/render_component.git'
-gem 'active_scaffold_vho', :git => 'git://github.com/vhochstein/active_scaffold.git'
+# gem 'verification', :git => 'git://github.com/beastaugh/verification.git'
+# gem 'render_component_vho', :git => 'git://github.com/vhochstein/render_component.git'
+# gem 'active_scaffold_vho', :git => 'git://github.com/vhochstein/active_scaffold.git'
 
 # use devise for user auth
 gem 'devise'

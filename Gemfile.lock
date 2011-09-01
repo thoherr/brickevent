@@ -1,27 +1,3 @@
-GIT
-  remote: git://github.com/beastaugh/verification.git
-  revision: 9f7a8d26cbec184b746059b78546083f8dac9af8
-  specs:
-    verification (1.0.2)
-      actionpack (>= 3.0.0, < 3.2.0)
-      activesupport (>= 3.0.0, < 3.2.0)
-
-GIT
-  remote: git://github.com/vhochstein/active_scaffold.git
-  revision: 6dd33dd858f194d2e452da63aa605a1f35920f72
-  specs:
-    active_scaffold_vho (3.1.0)
-      rails (~> 3.1.0.rc1)
-      render_component_vho
-      verification
-
-GIT
-  remote: git://github.com/vhochstein/render_component.git
-  revision: 1fa47e62ea2f3b562858241251ed3d9c55b3a34f
-  specs:
-    render_component_vho (3.1.0.rc1)
-      railties (~> 3.1.0.rc1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -137,14 +113,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_scaffold_vho!
   coffee-rails (~> 3.1.0)
   devise
   jquery-rails
   json
   rails (= 3.1.0)
-  render_component_vho!
   sass-rails (~> 3.1.0)
   sqlite3
   uglifier
-  verification!

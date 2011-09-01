@@ -37,6 +37,10 @@ en:
       inactive_signed_up: 'You have signed up successfully. However, we could not sign you in because your account is %{reason}.'
       updated: 'Du hast Deine Kontodaten erfolgreich geändert.'
       destroyed: 'Bye! Dein Konto wurde storniert. Wir hoffen, dass Du Dich bald wieder registrierst.'
+      reasons:
+        inactive: 'inaktiv'
+        unconfirmed: 'unbestätigt'
+        locked: 'gesperrt'
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'

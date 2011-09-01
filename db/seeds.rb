@@ -27,3 +27,8 @@ Event.create(:name => 'Bamberg 2011',
              :registration_open => true,
              :start_date => '2011-09-26',
              :end_date => '2011-10-08')
+
+AccommodationType.create :name => 'Einzelzimmer', :description => 'Separates Einzelzimmer'
+AccommodationType.create :name => 'Doppelzimmer', :description => 'Doppelzimmer für zwei Personen'
+AccommodationType.create :name => 'Zimmergemeinschaft', :description => 'Ein Bett in einem Doppelzimmer mit einem anderen AFOL'
+AccommodationType.create :name => 'Sonstiges (siehe Bemerkungen)', :description => 'Sonderwunsch, der im Bemerkungsfeld näher erläutert ist'
