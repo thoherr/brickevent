@@ -8,7 +8,7 @@ class CreateAttendees < ActiveRecord::Migration
       t.string :nickname
       t.boolean :afols_event
       t.boolean :accommodation_request
-      t.integer :accommodation_type
+      t.integer :accommodation_type_id
       t.string :remarks
 
       t.timestamps

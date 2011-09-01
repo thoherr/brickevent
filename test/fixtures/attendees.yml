@@ -8,7 +8,7 @@ one:
   nickname: MyString
   afols_event: false
   accommodation_request: false
-  accommodation_type: 1
+  accommodation_type_id: 1
   remarks: MyString
 
 two:
@@ -19,5 +19,5 @@ two:
   nickname: MyString
   afols_event: false
   accommodation_request: false
-  accommodation_type: 1
+  accommodation_type_id: 1
   remarks: MyString

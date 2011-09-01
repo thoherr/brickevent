@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20110831234032) do
     t.string   "nickname"
     t.boolean  "afols_event"
     t.boolean  "accommodation_request"
-    t.integer  "accommodation_type"
+    t.integer  "accommodation_type_id"
     t.string   "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
