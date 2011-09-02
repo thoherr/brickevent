@@ -7,8 +7,6 @@ one:
   lug: MyString
   nickname: MyString
   afols_event: false
-  accommodation_request: false
-  accommodation_type_id: 1
   remarks: MyString
 
 two:
@@ -18,6 +16,4 @@ two:
   lug: MyString
   nickname: MyString
   afols_event: false
-  accommodation_request: false
-  accommodation_type_id: 1
   remarks: MyString

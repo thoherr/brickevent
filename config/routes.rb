@@ -1,5 +1,9 @@
 BrickEvent::Application.routes.draw do
 
+  resources :accommodations
+
+  resources :attendances
+
   resources :attendee_types
 
   devise_for :users
