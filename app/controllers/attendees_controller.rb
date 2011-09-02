@@ -24,7 +24,7 @@ class AttendeesController < ApplicationController
   # GET /attendees/new
   # GET /attendees/new.json
   def new
-    @attendee = Attendee.new(:user_id => params[:user_id], :event_id => params[:event_id])
+    @attendee = Attendee.new
 
     respond_to do |format|
       format.html # new.html.erb

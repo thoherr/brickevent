@@ -24,7 +24,7 @@ class AttendancesController < ApplicationController
   # GET /attendances/new
   # GET /attendances/new.json
   def new
-    @attendance = Attendance.new
+    @attendance = Attendance.new(:user_id => params[:user_id], :event_id => params[:event_id])
 
     respond_to do |format|
       format.html # new.html.erb

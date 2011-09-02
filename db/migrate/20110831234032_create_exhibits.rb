@@ -1,8 +1,7 @@
 class CreateExhibits < ActiveRecord::Migration
   def change
     create_table :exhibits do |t|
-      t.integer :user_id
-      t.integer :event_id
+      t.integer :attendance_id
       t.string :name
       t.string :description
       t.string :url

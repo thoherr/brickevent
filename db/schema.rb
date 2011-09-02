@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
   end
 
   create_table "attendees", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
+    t.integer  "attendance_id"
     t.string   "name"
     t.string   "lug"
     t.string   "nickname"
@@ -78,8 +77,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
   end
 
   create_table "exhibits", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
+    t.integer  "attendance_id"
     t.string   "name"
     t.string   "description"
     t.string   "url"

@@ -2,8 +2,7 @@
 
 <table>
   <tr>
-    <th>User</th>
-    <th>Event</th>
+    <th>Attendance</th>
     <th>Name</th>
     <th>Lug</th>
     <th>Nickname</th>
@@ -16,8 +15,7 @@
 
 <% @attendees.each do |attendee| %>
   <tr>
-    <td><%= attendee.user_id %></td>
-    <td><%= attendee.event_id %></td>
+    <td><%= attendee.attendance_id %></td>
     <td><%= attendee.name %></td>
     <td><%= attendee.lug %></td>
     <td><%= attendee.nickname %></td>

@@ -1,8 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  user_id: 1
-  event_id: 1
+  attendance_id: 1
   name: MyString
   lug: MyString
   nickname: MyString
@@ -10,8 +9,7 @@ one:
   remarks: MyString
 
 two:
-  user_id: 1
-  event_id: 1
+  attendance_id: 1
   name: MyString
   lug: MyString
   nickname: MyString

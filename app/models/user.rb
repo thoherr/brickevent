@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :lug, :nickname, :address, :phone
 
-  has_many :attendees
-  has_many :exhibits
+  has_many :attendances
+  has_many :attendees, :through => :attendances
+  has_many :exhibits, :through => :attendances
 
   def is_registered_for_event? (event)
     attendees.each do |a|
