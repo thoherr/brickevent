@@ -11,7 +11,11 @@
     <p class="EventDescription"><%= event.description %></p>
     <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
     <% if user_signed_in? %>
-        <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' registrieren",  new_attendee_path(:user_id => current_user.id, :event_id => event.id) %></p>
+        <% if current_user.is_registered_for_event? event -%>
+            <p class="EventSignup">Du bist bereits für diese Veranstaltung angemeldet! <%= link_to "==> Anmeldung für '#{event.title}' bearbeiten",  attendees_path(:user_id => current_user.id, :event_id => event.id) %></p>
+        <% else -%>
+            <p class="EventSignup">Du möchtest bei <%= event.title %> mitmachen? <%= link_to "==> Zur Teilnahme an '#{event.title}' anmelden",  new_attendee_path(:user_id => current_user.id, :event_id => event.id) %></p>
+        <% end -%>
     <% end %>
 <% end %>
 </div>

@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: Einzelzimmer
+  name: MyString
   description: MyString
-  size: 1
 
 two:
-  name: Doppelzimmer
+  name: MyString
   description: MyString
-  size: 2

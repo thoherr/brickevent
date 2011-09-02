@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @attendee_type.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @attendee_type.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_attendee_type_path(@attendee_type) %> |
+<%= link_to 'Back', attendee_types_path %>

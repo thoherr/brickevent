@@ -10,9 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110831234032) do
+ActiveRecord::Schema.define(:version => 20110902155642) do
 
   create_table "accommodation_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attendance_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attendee_types", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"

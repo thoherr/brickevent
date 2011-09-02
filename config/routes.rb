@@ -1,11 +1,15 @@
 BrickEvent::Application.routes.draw do
 
+  resources :attendee_types
+
   devise_for :users
 
   resources :users
   resources :events
   resources :attendees
   resources :exhibits
+  resources :attendance_types
+  resources :accommodation_types
 
   namespace :admin do
     resources :users do as_routes end
@@ -13,6 +17,7 @@ BrickEvent::Application.routes.draw do
     resources :attendees do as_routes end
     resources :exhibits do as_routes end
     resources :accommodation_types do as_routes end
+    resources :attendance_types do as_routes end
   end
 
   root :to => "events#index"

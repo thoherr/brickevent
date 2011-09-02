@@ -28,7 +28,13 @@ Event.create(:name => 'Bamberg 2011',
              :start_date => '2011-09-26',
              :end_date => '2011-10-08')
 
-AccommodationType.create :name => 'Einzelzimmer', :description => 'Separates Einzelzimmer'
-AccommodationType.create :name => 'Doppelzimmer', :description => 'Doppelzimmer für zwei Personen'
-AccommodationType.create :name => 'Zimmergemeinschaft', :description => 'Ein Bett in einem Doppelzimmer mit einem anderen AFOL'
+AccommodationType.create :name => 'Einzelzimmer', :description => 'Separates Einzelzimmer', :size => 1
+AccommodationType.create :name => 'Doppelzimmer', :description => 'Doppelzimmer für zwei Personen', :size => 2
+AccommodationType.create :name => 'Zimmergemeinschaft (anderer AFOL)', :description => 'Ein Bett in einem Doppelzimmer mit einem anderen AFOL', :size => 1
 AccommodationType.create :name => 'Sonstiges (siehe Bemerkungen)', :description => 'Sonderwunsch, der im Bemerkungsfeld näher erläutert ist'
+
+AttendanceType.create :name => 'Aussteller', :description => 'Teilnehmer der ein oder mehrere MOCs auf dieser Veranstaltung zeigt'
+AttendanceType.create :name => 'Helfer', :description => 'Helfer, der kein eigenes MOC zeigt, aber an der Veranstaltung aktiv mitwirkt'
+AttendanceType.create :name => 'Begleitung', :description => 'Begleitpersonen, die nicht bei der Veranstaltung aktiv sind'
+
+User.create :email => 'mail@thoherr.de', :passwort => 'abc123', :is_admin => true, :name => 'Thomas Herrmann', :nickname => 'thoherr'

@@ -1,0 +1,27 @@
+<h1>Listing accommodation_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Size</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @accommodation_types.each do |accommodation_type| %>
+  <tr>
+    <td><%= accommodation_type.name %></td>
+    <td><%= accommodation_type.description %></td>
+    <td><%= accommodation_type.size %></td>
+    <td><%= link_to 'Show', accommodation_type %></td>
+    <td><%= link_to 'Edit', edit_accommodation_type_path(accommodation_type) %></td>
+    <td><%= link_to 'Destroy', accommodation_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Accommodation type', new_accommodation_type_path %>
