@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  attendance_id: 1
+  accommodation_type_id: 1
+  count: 1
+  remarks: MyString
+
+two:
+  attendance_id: 1
+  accommodation_type_id: 1
+  count: 1
+  remarks: MyString
