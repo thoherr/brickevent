@@ -5,6 +5,7 @@ class CreateAttendees < ActiveRecord::Migration
       t.string :name
       t.string :lug
       t.string :nickname
+      t.string :email
       t.boolean :afols_event
       t.string :remarks
 

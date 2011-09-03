@@ -11,11 +11,15 @@ class User < ActiveRecord::Base
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
 
-  def is_registered_for_event? (event)
-    attendees.each do |a|
-      return true if a.event == event && a.user == self
+  def attendance_for_event (event)
+    attendances.each do |a|
+      return a if a.event == event
     end
-    return false
+    return nil
+  end
+
+  def attends_event? (event)
+    return !attendance_for_event(event).blank?
   end
 
 end

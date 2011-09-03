@@ -2,12 +2,6 @@
 
 <table>
   <tr>
-    <th>Attendance</th>
-    <th>Name</th>
-    <th>Lug</th>
-    <th>Nickname</th>
-    <th>Afols event</th>
-    <th>Remarks</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,12 +9,6 @@
 
 <% @attendees.each do |attendee| %>
   <tr>
-    <td><%= attendee.attendance_id %></td>
-    <td><%= attendee.name %></td>
-    <td><%= attendee.lug %></td>
-    <td><%= attendee.nickname %></td>
-    <td><%= attendee.afols_event %></td>
-    <td><%= attendee.remarks %></td>
     <td><%= link_to 'Show', attendee %></td>
     <td><%= link_to 'Edit', edit_attendee_path(attendee) %></td>
     <td><%= link_to 'Destroy', attendee, :confirm => 'Are you sure?', :method => :delete %></td>

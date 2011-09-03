@@ -2,6 +2,18 @@
 <h1>Veranstaltungsübersicht</h1>
 
 <p>Hier findest Du unsere aktuellen Veranstaltungen, zu denen wir noch Aussteller und Helfer suchen.</p>
+<p>Um Dich für eine der Veranstaltungen anzumelden klicke einfach den entsprechenden Link bei der Veranstalung.</p>
+<p>Für die Erstanmeldung ist es notwendig, dass Du Dich mit Deiner Email-Adresse und Deinem Namen registrierst.
+  Beides benötigen wir, um mit Dir Kontakt aufnehmen zu können und in unserer Planung zu wissen, wer was ausstellen möchte.</p>
+<p>Zu Deiner Anmeldung kannst Du dann beliebig viele weitere Teilnehmer eintragen, und mitteilen,
+  ob wir Dich bei der Hotelresevierung unterstützen sollen und, ganz wichtig, welche MOCs Du bei der Veranstaltung zeigen möchtest!</p>
+<p>Natürlich kannst Du Deine Anmeldedaten für alle Veranstaltungen jederzeit erweitern und korrigieren.
+Dafür gibst Du bei Deiner Erstanmeldung ein Passwort ein, mit dem Du Dich später, zusammen mit Deiner Email-Adresse einloggen kannst.</p>
+
+<% if !user_signed_in? %>
+    <p>Melde Dich also gleich <%= link_to "hier",  new_user_session_path %> an!</p>
+<% end %>
+
 
 <div class="EventList">
 <% @events.each do |event| %>
@@ -11,10 +23,10 @@
     <p class="EventDescription"><%= event.description %></p>
     <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
     <% if user_signed_in? %>
-        <% if current_user.is_registered_for_event? event -%>
-            <p class="EventSignup">Du bist bereits für diese Veranstaltung angemeldet! <%= link_to "==> Anmeldung für '#{event.title}' bearbeiten",  attendees_path(:user_id => current_user.id, :event_id => event.id) %></p>
+        <% if current_user.attends_event? event -%>
+            <p class="EventSignup">Du bist bereits für diese Veranstaltung angemeldet! <%= link_to "==> Anmeldung für '#{event.title}' bearbeiten",  attendance_path(current_user.attendance_for_event event) %></p>
         <% else -%>
-            <p class="EventSignup">Du möchtest bei <%= event.title %> mitmachen? <%= link_to "==> Zur Teilnahme an '#{event.title}' anmelden",  new_attendee_path(:user_id => current_user.id, :event_id => event.id) %></p>
+            <p class="EventSignup">Du möchtest bei <%= event.title %> mitmachen? <%= link_to "==> Zur Teilnahme an '#{event.title}' anmelden",  new_attendance_path(:user_id => current_user.id, :event_id => event.id)  %></p>
         <% end -%>
     <% end %>
 <% end %>
@@ -24,6 +36,6 @@
 
 <% if !user_signed_in? %>
     <h3>Willst Du bei einer Bricking-Bavaria-Ausstellung teilnehmen?</h3>
-    <p>Dann melde Dich bitte <%= link_to "hier",  new_user_session_path %> an!
+    <p>Dann registriere Dich bitte <%= link_to "hier",  new_user_session_path %> hier!</p>
 <% end %>
 

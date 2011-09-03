@@ -4,4 +4,11 @@ class Attendance < ActiveRecord::Base
   has_many :attendees
   has_many :accommodations
   has_many :exhibits
+
+  def create_user_as_first_attendee
+    if user
+      attendees << Attendee.new(:name => user.name, :lug => user.lug, :nickname => user.nickname, :email => user.email)
+    end
+  end
+
 end

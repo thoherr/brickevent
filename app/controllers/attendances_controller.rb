@@ -24,7 +24,9 @@ class AttendancesController < ApplicationController
   # GET /attendances/new
   # GET /attendances/new.json
   def new
-    @attendance = Attendance.new(:user_id => params[:user_id], :event_id => params[:event_id])
+    @attendance = Attendance.new
+    @attendance.user_id = params[:user_id] unless params[:user_id].nil?
+    @attendance.event_id = params[:event_id] unless params[:event_id].nil?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +43,7 @@ class AttendancesController < ApplicationController
   # POST /attendances.json
   def create
     @attendance = Attendance.new(params[:attendance])
+    @attendance.create_user_as_first_attendee
 
     respond_to do |format|
       if @attendance.save

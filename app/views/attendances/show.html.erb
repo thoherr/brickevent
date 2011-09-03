@@ -1,15 +1,28 @@
+<% event_title = @attendance.event.title unless @attendance.event.nil? %>
+<% event_title = "<NO EVENT>" if event_title.nil? %>
+
+<h1>Anmeldung für <%= event_title %></h1>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @attendance.user_id %>
-</p>
+<p><div class="EventTitle"><%= event_title %> - Deine Anmeldedaten</div></p>
 
-<p>
-  <b>Event:</b>
-  <%= @attendance.event_id %>
-</p>
+<p>Du hast bisher <%= @attendance.attendees.count %> Teilnehmer angemeldet:</p>
 
+<% @attendance.attendees.each do |attendee| -%>
+    <%= attendee.name %>
+    <%= attendee.lug %>
+    <%= attendee.nickname %>
+    <%= attendee.email %>
+    <%= attendee.afols_event %>
+    <%= attendee.remarks %>
+<% end -%>
 
-<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
-<%= link_to 'Back', attendances_path %>
+<p>Du hast bisher <%= @attendance.exhibits.count %> MOCs angemeldet:</p>
+
+<% @attendance.exhibits.each do |exhibit| -%>
+    <%= exhibit.name %>
+    <%= exhibit.description %>
+<% end -%>
+
+<%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %>

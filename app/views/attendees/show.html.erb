@@ -1,35 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Attendance:</b>
-  <%= @attendee.attendance_id %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @attendee.name %>
-</p>
-
-<p>
-  <b>Lug:</b>
-  <%= @attendee.lug %>
-</p>
-
-<p>
-  <b>Nickname:</b>
-  <%= @attendee.nickname %>
-</p>
-
-<p>
-  <b>Afols event:</b>
-  <%= @attendee.afols_event %>
-</p>
-
-<p>
-  <b>Remarks:</b>
-  <%= @attendee.remarks %>
-</p>
-
 
 <%= link_to 'Edit', edit_attendee_path(@attendee) %> |
 <%= link_to 'Back', attendees_path %>

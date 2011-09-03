@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
     t.string   "name"
     t.string   "lug"
     t.string   "nickname"
+    t.string   "email"
     t.boolean  "afols_event"
     t.string   "remarks"
     t.datetime "created_at"
