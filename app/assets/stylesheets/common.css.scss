@@ -148,6 +148,27 @@ a {
     font-size: 16px;
 }
 
+
+.FrontendTable {
+    border: 2px solid #ddd;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.FrontendTable th {
+   border: 1px solid #ddd;
+   /** background: #eee; **/
+   background: #E6F2FF;
+   text-align: left;
+   padding: 5px;
+}
+
+.FrontendTable td {
+   border: 1px solid #ddd;
+   padding: 5px;
+}
+
+
 .Flash {
     background-color: #eee;
     padding: 7px 15px;
@@ -163,26 +184,23 @@ a {
 
 .FlashWarn {
     color: #770;
-    background-color: #ffc;
-    border-color: #770;
+    font-weight: bold;
 }
 
 .FlashNotice {
-    color: #070;
-    background-color: #dfd;
-    border-color: #070;
+    color: green;
+    font-weight: bold;
 }
 
 .FlashError {
-    color: #700;
-    background-color: #fdd;
-    border-color: #700;
+    color: red;
+    font-weight: bold;
 }
 
 .FlashAlert {
-    color: #900;
-    background-color: #fdd;
-    border-color: #700;
+    color: red;
+    font-weight: bold;
+    border-color: red;
 }
 
 .ModelError {

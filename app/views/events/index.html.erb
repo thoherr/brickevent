@@ -19,7 +19,7 @@ Dafür gibst Du bei Deiner Erstanmeldung ein Passwort ein, mit dem Du Dich spät
 <% @events.each do |event| %>
     <p><div class="EventTitle"><%= event.title %></div>
        <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
-       <div class="EventUrl">Nähere Informationen unter <%= link_to event.url, event.url %></div></p>
+       <div class="EventUrl">Nähere Informationen unter <%= link_to event.url, event.url, :target => "_new" %></div></p>
     <p class="EventDescription"><%= event.description %></p>
     <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
     <% if user_signed_in? %>
