@@ -1,7 +1,12 @@
-<h1>Listing attendees</h1>
+<h1>Anmeldungen</h1>
 
 <table>
   <tr>
+    <th>Name</th>
+    <th>LUG</th>
+    <th>Nickname</th>
+    <th>AFOLS-Event</th>
+    <th>Bemerkungen</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +14,11 @@
 
 <% @attendees.each do |attendee| %>
   <tr>
+   <td><%= attendee.name %></td>
+   <td><%= attendee.lug %></td>
+   <td><%= attendee.nickname %></td>
+   <td><%= attendee.afols_event %></td>
+   <td><%= attendee.remarks %></td>
     <td><%= link_to 'Show', attendee %></td>
     <td><%= link_to 'Edit', edit_attendee_path(attendee) %></td>
     <td><%= link_to 'Destroy', attendee, :confirm => 'Are you sure?', :method => :delete %></td>

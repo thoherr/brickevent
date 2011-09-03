@@ -1,0 +1,26 @@
+<!-- Copyright 2011 by Thomas Herrmann -->
+
+<table class="AttendeesTable FrontendTable">
+    <tr>
+      <th>Name</th>
+      <th>LUG</th>
+      <th>Nickname</th>
+      <th>AFOLS-Event</th>
+      <th>Bemerkungen</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+<% attendees.each do |attendee| %>
+  <tr>
+      <td><%= attendee.name %></td>
+      <td><%= attendee.lug %></td>
+      <td><%= attendee.nickname %></td>
+      <td><%= attendee.afols_event %></td>
+      <td><%= attendee.remarks %></td>
+        <!-- TODO: Sollen hier wirklich links sein?? -->
+      <td><%= link_to 'Ändern', edit_attendee_path(attendee) %></td>
+      <td><%= link_to 'Löschen', attendee, :confirm => 'Bist Du sicher?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

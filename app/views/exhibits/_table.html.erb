@@ -1,0 +1,43 @@
+<!-- Copyright 2011 by Thomas Herrmann -->
+
+<table class="ExhibitsTable FrontendTable">
+  <tr>
+    <th>Name</th>
+    <th>Beschreibung</th>
+    <th>URL</th>
+    <th>Größe (Noppen)</th>
+    <th>Größe</th>
+    <th>Wert</th>
+    <th>Anzahl Stunden</th>
+    <th>Anzahl Steine</th>
+    <th>Stromversorgung</th>
+    <th>Sammeltransport</th>
+    <th>Gemeinschaftsprojekt?</th>
+    <th>Teil eines Gemeinschaftsprojektes</th>
+    <th>Gemeinschaftsprojekt</th>
+    <th>Bemerkungen</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% exhibits.each do |exhibit| %>
+  <tr>
+    <td><%= exhibit.name %></td>
+    <td><%= exhibit.description %></td>
+    <td><%= exhibit.url %></td>
+    <td><%= exhibit.size_studs %></td>
+    <td><%= exhibit.size %></td>
+    <td><%= exhibit.value %></td>
+    <td><%= exhibit.building_hours %></td>
+    <td><%= exhibit.brick_count %></td>
+    <td><%= exhibit.needs_power_supply %></td>
+    <td><%= exhibit.needs_transportation %></td>
+    <td><%= exhibit.is_installation %></td>
+    <td><%= exhibit.is_part_of_installation %></td>
+    <td><%= exhibit.installation_exhibit_id %></td>
+    <td><%= exhibit.remarks %></td>
+    <td><%= link_to 'Ändern', edit_exhibit_path(exhibit) %></td>
+    <td><%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

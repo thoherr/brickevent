@@ -1,0 +1,21 @@
+<!-- Copyright 2011 by Thomas Herrmann -->
+
+<table class="AccommodationsTable FrontendTable">
+  <tr>
+    <th>Zimmertyp</th>
+    <th>Benötigte Anzahl</th>
+    <th>Bemerkungen</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% accommodations.each do |accommodation| %>
+  <tr>
+    <td><%= accommodation.accommodation_type_id %></td>
+    <td><%= accommodation.count %></td>
+    <td><%= accommodation.remarks %></td>
+    <td><%= link_to 'Ändern', edit_accommodation_path(accommodation) %></td>
+    <td><%= link_to 'Löschen', accommodation, :confirm => 'Bist Du sicher?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
