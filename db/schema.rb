@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "attendance_id"
+    t.integer  "attendee_type_id"
     t.string   "name"
     t.string   "lug"
     t.string   "nickname"

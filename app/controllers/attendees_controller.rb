@@ -25,6 +25,7 @@ class AttendeesController < ApplicationController
   # GET /attendees/new.json
   def new
     @attendee = Attendee.new
+    @attendee.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class AttendeesController < ApplicationController
 
     respond_to do |format|
       if @attendee.save
-        format.html { redirect_to @attendee, :notice => 'Attendee was successfully created.' }
+        format.html { redirect_to @attendee.attendance, :notice => 'Neuer Teilnehmer wurde hinzugefügt.' }
         format.json { render :json => @attendee, :status => :created, :location => @attendee }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class AttendeesController < ApplicationController
 
     respond_to do |format|
       if @attendee.update_attributes(params[:attendee])
-        format.html { redirect_to @attendee, :notice => 'Attendee was successfully updated.' }
+        format.html { redirect_to @attendee.attendance, :notice => 'Die Teilnehmerdaten wurden geändert.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +77,7 @@ class AttendeesController < ApplicationController
     @attendee.destroy
 
     respond_to do |format|
-      format.html { redirect_to attendees_url }
+      format.html { redirect_to attendees_path, :notice => 'Der Teilnehmer wurde gelöscht.' }
       format.json { head :ok }
     end
   end

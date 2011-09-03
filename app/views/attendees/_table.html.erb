@@ -2,6 +2,7 @@
 
 <table class="AttendeesTable FrontendTable">
     <tr>
+      <th></th>
       <th>Name</th>
       <th>LUG</th>
       <th>Nickname</th>
@@ -13,6 +14,7 @@
 
 <% attendees.each do |attendee| %>
   <tr>
+      <td><%= attendee.attendee_type %></td>
       <td><%= attendee.name %></td>
       <td><%= attendee.lug %></td>
       <td><%= attendee.nickname %></td>

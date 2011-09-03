@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :attendance_id %>
+
+  <div class="field">
+    <%= f.label :attendee_type_id %><br />
+    <%= f.number_field :attendee_type_id %>
+  </div>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>

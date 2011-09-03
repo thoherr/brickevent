@@ -7,7 +7,7 @@
 
 <p><div class="EventTitle"><%= event_title %> - Deine Anmeldedaten</div></p>
 
-<p>Du hast bisher <%= @attendance.attendees.count %> Person angemeldet:</p>
+<p>Du hast bisher <%= @attendance.attendees.count %> Person angemeldet (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees %>
 

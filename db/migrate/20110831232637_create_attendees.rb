@@ -2,6 +2,7 @@ class CreateAttendees < ActiveRecord::Migration
   def change
     create_table :attendees do |t|
       t.integer :attendance_id
+      t.integer :attendee_type_id
       t.string :name
       t.string :lug
       t.string :nickname
