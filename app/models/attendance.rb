@@ -5,6 +5,8 @@ class Attendance < ActiveRecord::Base
   has_many :accommodations
   has_many :exhibits
 
+  validates_uniqueness_of :event_id, :scope => :user_id
+
   def create_user_as_first_attendee
     if user
       new_attendee = Attendee.new(:attendance => self, :attendee_type => AttendeeType.find_by_name('Aussteller'), :name => user.name, :lug => user.lug, :nickname => user.nickname, :email => user.email)

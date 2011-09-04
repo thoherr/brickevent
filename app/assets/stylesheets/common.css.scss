@@ -106,6 +106,11 @@ a {
     margin-bottom: 30px;
 }
 
+.Indented {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
 .RegistrationInfo {
     border: 2px solid #ddd;
     border-collapse: collapse;
@@ -125,6 +130,10 @@ a {
 .RegistrationInfo li ul li{
     margin-top: 1px;
     margin-bottom: 1px;
+}
+
+.OverviewLink {
+    padding-left: 25px;
 }
 
 .InputForm {
@@ -193,6 +202,7 @@ a {
 
 .FrontendTable {
     margin-left: 25px;
+    margin-bottom: 25px;
     border: 2px solid #ddd;
     border-collapse: collapse;
     font-size: 13px;

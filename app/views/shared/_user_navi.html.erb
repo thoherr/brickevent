@@ -7,7 +7,7 @@
             <%= link_to "Veranstaltungen", :controller => "/events" %>
         </li>
         <li>
-            <%= link_to "Meine Anmeldungen", :controller => "/events" %>
+            <%= link_to "Meine Anmeldungen", :controller => "/attendances" %>
         </li>
         <% if current_user.is_admin? %>
             <li>

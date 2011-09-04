@@ -2,6 +2,7 @@ require 'test_helper'
 
 class AttendancesControllerTest < ActionController::TestCase
   setup do
+    sign_in User.first
     @attendance = attendances(:one)
   end
 
@@ -18,6 +19,7 @@ class AttendancesControllerTest < ActionController::TestCase
 
   test "should create attendance" do
     assert_difference('Attendance.count') do
+      @attendance.event_id = 42  # avoid to break uniqueness
       post :create, :attendance => @attendance.attributes
     end
 

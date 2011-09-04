@@ -1,25 +1,23 @@
-<h1>Listing attendances</h1>
+<h1>Meine Anmeldungen</h1>
 
-<table>
+<h2>Du hast Dich für die folgenden Veranstaltungen angemeldet:</h2>
+
+<table class="FrontendTable">
   <tr>
-    <th>User</th>
-    <th>Event</th>
-    <th></th>
+    <th>Veranstaltung</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @attendances.each do |attendance| %>
   <tr>
-    <td><%= attendance.user_id %></td>
-    <td><%= attendance.event_id %></td>
-    <td><%= link_to 'Show', attendance %></td>
-    <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-    <td><%= link_to 'Destroy', attendance, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= attendance.event.title %></td>
+    <td><%= attendance.attendees.count %> Teilnehmer, <%= attendance.exhibits.count %> MOCs</td>
+    <td>
+        <% if attendance.event.registration_open? %>
+          <%= link_to 'Details zu dieser Anmeldung', attendance %>
+        <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Attendance', new_attendance_path %>

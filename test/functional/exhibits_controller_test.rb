@@ -2,6 +2,7 @@ require 'test_helper'
 
 class ExhibitsControllerTest < ActionController::TestCase
   setup do
+    sign_in User.first
     @exhibit = exhibits(:one)
     @exhibit.attendance = attendances(:one)
   end

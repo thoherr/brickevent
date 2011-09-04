@@ -2,6 +2,7 @@ require 'test_helper'
 
 class AttendeeTypesControllerTest < ActionController::TestCase
   setup do
+    sign_in User.first
     @attendee_type = attendee_types(:one)
   end
 

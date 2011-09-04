@@ -2,7 +2,7 @@ class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.json
   def index
-    @attendances = Attendance.all
+    @attendances = Attendance.where(:user_id => current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb

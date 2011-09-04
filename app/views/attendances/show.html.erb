@@ -7,16 +7,16 @@
 
 <p><div class="EventTitle">Anmeldung zu <%= event_title %></div></p>
 
-<p>Du hast bisher <%= @attendance.attendees.count %> Person angemeldet (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person angemeldet (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees %>
 
-<p>Du hast bisher <%= @attendance.exhibits.count %> MOCs angemeldet (<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented">Du hast bisher <%= @attendance.exhibits.count %> MOCs angemeldet (<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits %>
 
-<p>Deine Übernachtungswünsche (<%= link_to 'Weiterer Eintrag', new_accommodation_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented">Deine Übernachtungswünsche (<%= link_to 'Weiterer Eintrag', new_accommodation_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'accommodations/table', :accommodations => @attendance.accommodations %>
 
-<%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %>
+<div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %></div>

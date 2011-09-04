@@ -2,6 +2,7 @@ require 'test_helper'
 
 class AccommodationTypesControllerTest < ActionController::TestCase
   setup do
+    sign_in User.first
     @accommodation_type = accommodation_types(:one)
   end
 

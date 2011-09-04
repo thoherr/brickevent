@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
     t.datetime "updated_at"
   end
 
+  add_index "attendances", ["user_id", "event_id"], :name => "index_attendances_on_user_id_and_event_id", :unique => true
+
   create_table "attendee_types", :force => true do |t|
     t.string   "name"
     t.string   "description"
