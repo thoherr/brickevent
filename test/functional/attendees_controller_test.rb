@@ -14,7 +14,7 @@ class AttendeesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :attendance_id => @attendee.attendance_id
     assert_response :success
   end
 
@@ -46,6 +46,6 @@ class AttendeesControllerTest < ActionController::TestCase
       delete :destroy, :id => @attendee.to_param
     end
 
-    assert_redirected_to attendees_path
+    assert_redirected_to attendance_path(@attendee.attendance)
   end
 end

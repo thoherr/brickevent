@@ -14,4 +14,7 @@ end
 
 class ActionController::TestCase
   include Devise::TestHelpers
+
+  fixtures :all
+
 end

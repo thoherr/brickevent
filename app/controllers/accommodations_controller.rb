@@ -74,10 +74,11 @@ class AccommodationsController < ApplicationController
   # DELETE /accommodations/1.json
   def destroy
     @accommodation = Accommodation.find(params[:id])
+    @attendance_id = @accommodation.attendance_id
     @accommodation.destroy
 
     respond_to do |format|
-      format.html { redirect_to accommodations_url }
+      format.html { redirect_to attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.' }
       format.json { head :ok }
     end
   end

@@ -1,6 +1,5 @@
-<h1>Editing exhibit</h1>
+<h1>MOC-Daten für <%= @exhibit.event_title %> ändern</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @exhibit %> |
-<%= link_to 'Back', exhibits_path %>
+<%= link_to 'Zurück zur Übersichtsseite', attendance_path(@exhibit.attendance_id) %>

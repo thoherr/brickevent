@@ -1,7 +1,7 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
 
-<h1>Teilnehmerdaten für <%= @attendee.attendance.event.title %> ändern</h1>
+<h1>Teilnehmerdaten für <%= @attendee.event_title %> ändern</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Zurück', attendance_path(@attendee.attendance) %>
+<%= link_to 'Zurück zur Übersichtsseite', attendance_path(@attendee.attendance_id) %>

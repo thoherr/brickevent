@@ -1,5 +1,7 @@
-<h1>Zimmeranfrage <%= @accommodation.attendance.event.title if @accommodation.attendance %> ändern</h1>
+<!-- Copyright 2011 by Thomas Herrmann -->
+
+<h1>Zimmeranfrage für <%= @accommodation.event_title %> ändern</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Zurück', attendance_path(@accommodation.attendance) %>
+<%= link_to 'Zurück zur Übersichtsseite', attendance_path(@accommodation.attendance_id) %>

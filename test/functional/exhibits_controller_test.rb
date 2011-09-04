@@ -3,8 +3,7 @@ require 'test_helper'
 class ExhibitsControllerTest < ActionController::TestCase
   setup do
     @exhibit = exhibits(:one)
-    attendance = attendances(:one)
-    @exhibit.attendance = attendance
+    @exhibit.attendance = attendances(:one)
   end
 
   test "should get index" do
@@ -14,7 +13,7 @@ class ExhibitsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :attendance_id => @exhibit.attendance_id
     assert_response :success
   end
 
@@ -46,6 +45,6 @@ class ExhibitsControllerTest < ActionController::TestCase
       delete :destroy, :id => @exhibit.to_param
     end
 
-    assert_redirected_to exhibits_path
+    assert_redirected_to attendance_path(1)
   end
 end

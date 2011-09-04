@@ -74,10 +74,11 @@ class ExhibitsController < ApplicationController
   # DELETE /exhibits/1.json
   def destroy
     @exhibit = Exhibit.find(params[:id])
+    @attendance_id = @exhibit.attendance_id
     @exhibit.destroy
 
     respond_to do |format|
-      format.html { redirect_to exhibits_url }
+      format.html { redirect_to attendance_path(@attendance_id), :notice => 'Das MOC wurde gelöscht.' }
       format.json { head :ok }
     end
   end

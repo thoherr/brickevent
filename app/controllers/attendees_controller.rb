@@ -74,10 +74,11 @@ class AttendeesController < ApplicationController
   # DELETE /attendees/1.json
   def destroy
     @attendee = Attendee.find(params[:id])
+    @attendance_id = @attendee.attendance_id
     @attendee.destroy
 
     respond_to do |format|
-      format.html { redirect_to attendees_path, :notice => 'Der Teilnehmer wurde gelöscht.' }
+      format.html { redirect_to attendance_path(@attendance_id), :notice => 'Der Teilnehmer wurde gelöscht.' }
       format.json { head :ok }
     end
   end

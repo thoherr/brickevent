@@ -7,4 +7,10 @@ class Attendee < ActiveRecord::Base
   def to_s
     "#{name} (#{attendee_type})"
   end
+
+  def event_title
+    return attendance.event_title if attendance
+    return "NO ATTENDANCE"
+  end
+
 end

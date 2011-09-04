@@ -18,7 +18,7 @@
     <%= f.select :accommodation_type_id, AccommodationType.all.collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
-    Anzahl<br />
+    Benötgte Anzahl dieses Zimmertyps<br />
     <%= f.number_field :count %>
   </div>
   <div class="field">

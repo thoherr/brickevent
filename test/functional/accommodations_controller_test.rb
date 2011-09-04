@@ -3,7 +3,8 @@ require 'test_helper'
 class AccommodationsControllerTest < ActionController::TestCase
   setup do
     @accommodation = accommodations(:one)
-    @accommodation.attendance = attendances(:one)
+    @attendance = attendances(:one)
+    @accommodation.attendance = @attendance
     @accommodation.accommodation_type = accommodation_types(:one)
   end
 
@@ -14,7 +15,7 @@ class AccommodationsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :attendance_id => @accommodation.attendance_id
     assert_response :success
   end
 
@@ -46,6 +47,6 @@ class AccommodationsControllerTest < ActionController::TestCase
       delete :destroy, :id => @accommodation.to_param
     end
 
-    assert_redirected_to accommodations_path
+    assert_redirected_to attendance_path(1)
   end
 end
