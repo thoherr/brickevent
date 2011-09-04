@@ -11,12 +11,8 @@
     </div>
   <% end %>
 
+  <div class="InputForm">
   <%= f.hidden_field :attendance_id %>
-
-  <div class="field">
-    <%= f.label :attendance_id %><br />
-    <%= f.number_field :attendance_id %>
-  </div>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -76,4 +72,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  </div>
+
 <% end %>

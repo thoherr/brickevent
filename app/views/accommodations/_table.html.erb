@@ -11,7 +11,7 @@
 
 <% accommodations.each do |accommodation| %>
   <tr>
-    <td><%= accommodation.accommodation_type_id %></td>
+    <td><%= accommodation.accommodation_type.name %></td>
     <td><%= accommodation.count %></td>
     <td><%= accommodation.remarks %></td>
     <td><%= link_to 'Ändern', edit_accommodation_path(accommodation) %></td>

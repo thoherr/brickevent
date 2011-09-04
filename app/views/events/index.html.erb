@@ -1,41 +1,62 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
 <h1>Veranstaltungsübersicht</h1>
 
-<p>Hier findest Du unsere aktuellen Veranstaltungen, zu denen wir noch Aussteller und Helfer suchen.</p>
-<p>Um Dich für eine der Veranstaltungen anzumelden klicke einfach den entsprechenden Link bei der Veranstalung.</p>
-<p>Für die Erstanmeldung ist es notwendig, dass Du Dich mit Deiner Email-Adresse und Deinem Namen registrierst.
-  Beides benötigen wir, um mit Dir Kontakt aufnehmen zu können und in unserer Planung zu wissen, wer was ausstellen möchte.</p>
-<p>Zu Deiner Anmeldung kannst Du dann beliebig viele weitere Personen für die Teilnahme eintragen, uns mitteilen‚
-  ob wir Dich bei der Hotelresevierung unterstützen sollen und, ganz wichtig, welche MOCs Du bei der Veranstaltung zeigen möchtest!</p>
-<p>Natürlich kannst Du Deine Anmeldedaten für alle Veranstaltungen jederzeit erweitern und korrigieren.
-Dafür gibst Du bei Deiner Erstanmeldung ein Passwort ein, mit dem Du Dich später, zusammen mit Deiner Email-Adresse einloggen kannst.</p>
+<div class="RegistrationInfo">
+<h3>Die Anmeldung zur aktiven Teilnahme an einer unserer Veranstaltungen erfolgt in drei einfachen Schritten:</h3>
+<ul>
+  <li>
+    <% if user_signed_in? %>
+      Registriere Dich als Aussteller/Helfer
+    <% else %>
+      <%= link_to "Registriere Dich als Aussteller/Helfer",  new_user_registration_path %>
+    <% end %>
+bei Bricking Bavaria oder 
+    <% if user_signed_in? %>
+      melde Dich mit Deinen Redistrierungsdaten an.
+    <% else %>
+      <%= link_to "melde Dich mit Deinen Redistrierungsdaten an",  new_user_session_path %>.
+      <br/>
+      Wir benötigen zumindest Deinen Namen und Deine Mailadresse, um bei der Planung unserer Veranstaltungen
+      in Kontakt mit Dir treten zu können.
+    <% end %>
+  </li>
+  <li>Sobald Du Dich registriert hast, kannst Du Dich zur Teilnahme an einer unserer Veranstaltungen anmelden.<br/>
+      Klicke hierzu auf den entsprechenden Link bei der jeweiligen Veranstaltung<% if !user_signed_in? -%> der nach Deiner Registrierung erscheint<% end -%>.
+  </li>
+  <li>Bei der Anmeldung zu einzelnen Veranstaltungen kannst Du uns dann jeweils mitteilen,
+    <ul>
+      <li>mit wie vielen Personen Du an der Veranstaltung teilnehmen möchtest,</li>
+      <li>welche MOCs Du bei der Veranstaltung zeigen möchtest und</li>
+      <li>ob Du Unterstützung zu den Übernachtungsmöglichkeiten benötigst.</li>
+    </ul>
+  </li>
+</ul>
+</div>
 
-<% if !user_signed_in? %>
-    <p>Melde Dich also gleich <%= link_to "hier",  new_user_session_path %> an!</p>
-<% end %>
-
+<h2>Hier unsere aktuellen Veranstaltungen, zu denen wir noch Aussteller und Helfer suchen:</h2>
 
 <div class="EventList">
 <% @events.each do |event| %>
+  <div class="EventListEntry">
     <p><div class="EventTitle"><%= event.title %></div>
-       <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
-       <div class="EventUrl">Nähere Informationen unter <%= link_to event.url, event.url, :target => "_new" %></div></p>
+       <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div></p>
     <p class="EventDescription"><%= event.description %></p>
     <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
     <% if user_signed_in? %>
         <% if current_user.attends_event? event -%>
-            <p class="EventSignup">Du bist bereits für diese Veranstaltung angemeldet! <%= link_to "==> Anmeldung für '#{event.title}' bearbeiten",  attendance_path(current_user.attendance_for_event event) %></p>
+            <p class="EventSignup"><%= link_to "Teilnahme an '#{event.title}' bearbeiten",  attendance_path(current_user.attendance_for_event event) %></p>
         <% else -%>
-            <p class="EventSignup">Du möchtest bei <%= event.title %> mitmachen? <%= link_to "==> Zur Teilnahme an '#{event.title}' anmelden",  new_attendance_path(:user_id => current_user.id, :event_id => event.id)  %></p>
+            <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' anmelden",  new_attendance_path(:user_id => current_user.id, :event_id => event.id)  %></p>
         <% end -%>
+    <% else -%>
+        <p class="EventSignup">Um Deine Teilname an '<%= event.title %>' anzumelden, musst Du Dich zunächst <%= link_to "registrieren",  new_user_session_path %>
     <% end %>
+    <p><div class="EventUrl">Weitere Informationen zu '<%= event.title %>' gibt es unter <%= link_to event.url, event.url, :target => "_new" %></div></p>
+  </div>
 <% end %>
 </div>
 
-<br />
-
 <% if !user_signed_in? %>
-    <h3>Willst Du bei einer Bricking-Bavaria-Ausstellung teilnehmen?</h3>
-    <p>Dann registriere Dich bitte <%= link_to "hier",  new_user_session_path %> hier!</p>
+    <h2>Du willst bei einer Bricking-Bavaria-Ausstellung teilnehmen? <%= link_to "Melde Dich gleich an!",  new_user_session_path %></h2>
 <% end %>
 

@@ -11,23 +11,23 @@
     </div>
   <% end %>
 
+  <div class="InputForm">
+  <%= f.hidden_field :attendance_id %>
   <div class="field">
-    <%= f.label :attendance_id %><br />
-    <%= f.number_field :attendance_id %>
+    Zimmertyp<br />
+    <%= f.select :accommodation_type_id, AccommodationType.all.collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
-    <%= f.label :accommodation_type_id %><br />
-    <%= f.number_field :accommodation_type_id %>
-  </div>
-  <div class="field">
-    <%= f.label :count %><br />
+    Anzahl<br />
     <%= f.number_field :count %>
   </div>
   <div class="field">
-    <%= f.label :remarks %><br />
-    <%= f.text_field :remarks %>
+    Bemerkungen<br />
+    <%= f.text_area :remarks %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+  </div>
+
 <% end %>

@@ -3,7 +3,7 @@
 class SoftwareVersion
 
   def self.app_name
-    "Bricking Bavaria Veranstaltungen"
+    "Bricking Bavaria e.V. Veranstaltungen"
   end
 
   def self.release_number

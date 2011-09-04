@@ -1,3 +1,3 @@
 class AccommodationType < ActiveRecord::Base
-  has_many :attendees
+  has_many :accommodations
 end

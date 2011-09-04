@@ -1,6 +1,5 @@
-<h1>Editing accommodation</h1>
+<h1>Zimmeranfrage <%= @accommodation.attendance.event.title if @accommodation.attendance %> ändern</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @accommodation %> |
-<%= link_to 'Back', accommodations_path %>
+<%= link_to 'Zurück', attendance_path(@accommodation.attendance) %>

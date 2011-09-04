@@ -17,14 +17,16 @@ p {
 h1 {
     position: absolute;
     margin: 0;
-    top: 0px;
-    padding: 10px;
+    top: 33px;
+    padding-left: 200px;
     font-size: 24px;
-    color: #fff;
+    height: 25px;
+    color: #009;
 }
 
 h2 {
-	padding-top: 10px;
+    padding-left: 25px;
+    padding-top: 10px;
     font-size: 18px;
 }
 
@@ -38,21 +40,23 @@ a {
 }
 
 #mainTitle {
-    position: absolute;
+    background-image: url(../assets/bricking-bavaria.jpg);
+    background-repeat: no-repeat;
+    background-position: 30px 5px;    position: absolute;
     top: 0px;
     width: 100%;
     font-size: 20px;
     font-family: Verdana, sans-serif;
     text-align: right;
-    background: #005CB8;
-    color: #fff;
-    height: 45px;
+    color: #009;
+    height: 60px;
 }
 
 #mainTitle .TitleText {
     display: block;
     padding: 0px;
     padding-right: 30px;
+    font-weight: bold;
 }
 
 #mainTitle .VersionText {
@@ -64,46 +68,75 @@ a {
 
 #mainNavi {
     position: absolute;
-    top: 45px;
+    top: 65px;
     left: 0px;
     width: 100%;
     background-color: #E6F2FF;
+    border-top: 1px solid #005CB8;
     border-bottom: 1px solid #005CB8;
-    height: 22px;
+    height: 20px;
     text-align: center;
 }
 #mainNavi ul {
     list-style: none;
     margin: 0;
-    padding-left: 20px;
+    padding-left: 35px;
 }
 
 #mainNavi ul li {
     display: block;
     float: left;
-    height: 22px;
     padding-right: 30px;
 }
-#mainNavi ul li a,#mainNavi ul li a:visited {
+#mainNavi ul li a, #mainNavi ul li a:visited {
     display: block;
     float: left;
     text-decoration: none;
     font-weight: bold;
 }
 
-#mainNavi ul li#editUserLink {
-    float: right;
-}
-
-#mainNavi ul li#logoutLink {
+#mainNavi ul li#editUserLink, #mainNavi ul li#logoutLink, #mainNavi ul li#impressLink {
     float: right;
 }
 
 #mainContent {
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 100px;
+    margin-top: 120px;
     margin-bottom: 30px;
+}
+
+.RegistrationInfo {
+    border: 2px solid #ddd;
+    border-collapse: collapse;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.RegistrationInfo li {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.RegistrationInfo li ul li{
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.InputForm {
+    border: 2px solid #ddd;
+    border-collapse: collapse;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
 }
 
 .Event {
@@ -113,10 +146,20 @@ a {
 
 .EventList {
     font-size: 16px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.EventListEntry {
+    border: 2px solid #ddd;
+    border-collapse: collapse;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .EventTitle {
-    padding-top: 20px;
     font-size: 20px;
     font-weight: bold;
     color: #009;
@@ -128,28 +171,28 @@ a {
 }
 
 .EventDescription {
-    padding-left: 50px;
+    padding-left: 40px;
     font-size: 16px;
 }
 
 .EventInfo {
-    padding-left: 50px;
+    padding-left: 40px;
     font-size: 16px;
 }
 
 .EventUrl {
-    padding-top: 10px;
     font-size: 12px;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .EventSignup {
-    padding-left: 50px;
+    padding-left: 40px;
     font-size: 16px;
 }
 
 
 .FrontendTable {
+    margin-left: 25px;
     border: 2px solid #ddd;
     border-collapse: collapse;
     font-size: 13px;

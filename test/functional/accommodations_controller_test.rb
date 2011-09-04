@@ -3,8 +3,8 @@ require 'test_helper'
 class AccommodationsControllerTest < ActionController::TestCase
   setup do
     @accommodation = accommodations(:one)
-    attendance = attendances(:one)
-    @accommodation.attendance = attendance
+    @accommodation.attendance = attendances(:one)
+    @accommodation.accommodation_type = accommodation_types(:one)
   end
 
   test "should get index" do

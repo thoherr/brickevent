@@ -1,6 +1,7 @@
-<h1>Editing attendee</h1>
+<!-- Copyright 2011 by Thomas Herrmann -->
+
+<h1>Teilnehmerdaten für <%= @attendee.attendance.event.title %> ändern</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @attendee %> |
-<%= link_to 'Back', attendees_path %>
+<%= link_to 'Zurück', attendance_path(@attendee.attendance) %>

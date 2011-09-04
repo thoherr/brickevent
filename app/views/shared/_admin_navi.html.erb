@@ -22,7 +22,7 @@
             <%= link_to "Public Frontend", :controller => "/events" %>
         </li>
         <li id="logoutLink" class="mainNavi">
-            <%= link_to "Logout",  destroy_user_session_path, :method => :delete %>
+            <%= link_to "{current_user.email} ausloggen",  destroy_user_session_path, :method => :delete %>
         </li>
     <% end -%>
 </ul>

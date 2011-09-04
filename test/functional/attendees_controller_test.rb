@@ -3,8 +3,8 @@ require 'test_helper'
 class AttendeesControllerTest < ActionController::TestCase
   setup do
     @attendee = attendees(:one)
-    attendance = attendances(:one)
-    @attendee.attendance = attendance
+    @attendee.attendance = attendances(:one)
+    @attendee.attendee_type = attendee_types(:one)
   end
 
   test "should get index" do

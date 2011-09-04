@@ -3,6 +3,8 @@
 
 <h1>Anmeldung für <%= event_title %></h1>
 
+<div class="InputForm">
+
 <p>Vielen Dank, dass Du Dich zur Teilnahme an <%= event_title %> registrieren möchtest!</p>
 
 <p>Auf der nächsten Seite kannst Du alle Details zu Deiner Anmeldung erfassen.
@@ -10,4 +12,5 @@
 
 <%= render 'form' %>
 
+</div>
 <%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %>

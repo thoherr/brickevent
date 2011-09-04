@@ -11,11 +11,12 @@
     </div>
   <% end %>
 
+  <div class="InputForm">
   <%= f.hidden_field :attendance_id %>
 
   <div class="field">
     <%= f.label :attendee_type_id %><br />
-    <%= f.number_field :attendee_type_id %>
+    <%= f.select :attendee_type_id, AttendeeType.all.collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -39,5 +40,6 @@
   </div>
   <div class="actions">
     <%= f.submit %>
+  </div>
   </div>
 <% end %>

@@ -5,7 +5,7 @@
 
 <h1>Anmeldung für <%= event_title %></h1>
 
-<p><div class="EventTitle"><%= event_title %> - Deine Anmeldedaten</div></p>
+<p><div class="EventTitle">Anmeldung zu <%= event_title %></div></p>
 
 <p>Du hast bisher <%= @attendance.attendees.count %> Person angemeldet (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
 
@@ -15,7 +15,7 @@
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits %>
 
-<p>Deine Übernachtungswünsche (<%= link_to 'Weiteres Zimmer anfragen', new_attendee_path(:attendance_id => @attendance)%>):</p>
+<p>Deine Übernachtungswünsche (<%= link_to 'Weiterer Eintrag', new_accommodation_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'accommodations/table', :accommodations => @attendance.accommodations %>
 
