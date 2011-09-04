@@ -23,7 +23,7 @@ class AttendeesControllerTest < ActionController::TestCase
       post :create, :attendee => @attendee.attributes
     end
 
-    #assert_redirected_to attendances_path(assigns(:attendee).attendance)
+    assert_redirected_to attendance_path(assigns(:attendee).attendance)
   end
 
   test "should show attendee" do
@@ -38,7 +38,7 @@ class AttendeesControllerTest < ActionController::TestCase
 
   test "should update attendee" do
     put :update, :id => @attendee.to_param, :attendee => @attendee.attributes
-    #assert_redirected_to attendances_path(assigns(:attendee).attendance)
+    assert_redirected_to attendance_path(assigns(:attendee).attendance)
   end
 
   test "should destroy attendee" do
