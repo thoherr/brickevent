@@ -25,6 +25,7 @@ class AccommodationsController < ApplicationController
   # GET /accommodations/new.json
   def new
     @accommodation = Accommodation.new
+    @accommodation.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class AccommodationsController < ApplicationController
 
     respond_to do |format|
       if @accommodation.save
-        format.html { redirect_to @accommodation, :notice => 'Accommodation was successfully created.' }
+        format.html { redirect_to @accommodation.attendance, :notice => 'Der Hotelwunsch wurde aufgenommen.'}
         format.json { render :json => @accommodation, :status => :created, :location => @accommodation }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class AccommodationsController < ApplicationController
 
     respond_to do |format|
       if @accommodation.update_attributes(params[:accommodation])
-        format.html { redirect_to @accommodation, :notice => 'Accommodation was successfully updated.' }
+        format.html { redirect_to @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

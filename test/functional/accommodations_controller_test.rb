@@ -3,6 +3,8 @@ require 'test_helper'
 class AccommodationsControllerTest < ActionController::TestCase
   setup do
     @accommodation = accommodations(:one)
+    attendance = attendances(:one)
+    @accommodation.attendance = attendance
   end
 
   test "should get index" do
@@ -21,7 +23,7 @@ class AccommodationsControllerTest < ActionController::TestCase
       post :create, :accommodation => @accommodation.attributes
     end
 
-    assert_redirected_to accommodation_path(assigns(:accommodation))
+    assert_redirected_to attendance_path(assigns(:accommodation).attendance)
   end
 
   test "should show accommodation" do
@@ -36,7 +38,7 @@ class AccommodationsControllerTest < ActionController::TestCase
 
   test "should update accommodation" do
     put :update, :id => @accommodation.to_param, :accommodation => @accommodation.attributes
-    assert_redirected_to accommodation_path(assigns(:accommodation))
+    assert_redirected_to attendance_path(assigns(:accommodation).attendance)
   end
 
   test "should destroy accommodation" do

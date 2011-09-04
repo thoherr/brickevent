@@ -25,6 +25,7 @@ class ExhibitsController < ApplicationController
   # GET /exhibits/new.json
   def new
     @exhibit = Exhibit.new
+    @exhibit.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class ExhibitsController < ApplicationController
 
     respond_to do |format|
       if @exhibit.save
-        format.html { redirect_to @exhibit, :notice => 'Exhibit was successfully created.' }
+        format.html { redirect_to @exhibit.attendance, :notice => 'Das MOC wurde aufgenommen.'}
         format.json { render :json => @exhibit, :status => :created, :location => @exhibit }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class ExhibitsController < ApplicationController
 
     respond_to do |format|
       if @exhibit.update_attributes(params[:exhibit])
-        format.html { redirect_to @exhibit, :notice => 'Exhibit was successfully updated.' }
+        format.html { redirect_to @exhibit.attendance, :notice => 'Die MOC-Daten wurden geändert.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

@@ -3,6 +3,8 @@ require 'test_helper'
 class ExhibitsControllerTest < ActionController::TestCase
   setup do
     @exhibit = exhibits(:one)
+    attendance = attendances(:one)
+    @exhibit.attendance = attendance
   end
 
   test "should get index" do
@@ -21,7 +23,7 @@ class ExhibitsControllerTest < ActionController::TestCase
       post :create, :exhibit => @exhibit.attributes
     end
 
-    assert_redirected_to exhibit_path(assigns(:exhibit))
+    assert_redirected_to attendance_path(assigns(:exhibit).attendance)
   end
 
   test "should show exhibit" do
@@ -36,7 +38,7 @@ class ExhibitsControllerTest < ActionController::TestCase
 
   test "should update exhibit" do
     put :update, :id => @exhibit.to_param, :exhibit => @exhibit.attributes
-    assert_redirected_to exhibit_path(assigns(:exhibit))
+    assert_redirected_to attendance_path(assigns(:exhibit).attendance)
   end
 
   test "should destroy exhibit" do
