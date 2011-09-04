@@ -1,3 +1,4 @@
+<div class="InputForm">
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -12,26 +13,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    Name<br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :lug %><br />
+    LUG (z. B. Bricking Bavaria, 1000Steine, MBFR, SwissLUG, ...)<br />
     <%= f.text_field :lug %>
   </div>
   <div class="field">
-    <%= f.label :nickname %><br />
+    Nickname<br />
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
+    Adresse (optional)<br />
+    <%= f.text_area :address %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    Telefonnummer (optional)<br />
     <%= f.text_field :phone %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+</div>

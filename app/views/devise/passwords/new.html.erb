@@ -1,0 +1,19 @@
+<h1>Passwort vergessen?</h2>
+
+    <div class="InputForm">
+
+<p>Bitte gib zum Zurücksetzen des Passwortes Deine Email-Adresse an.<br/>
+Das System sendet Dir nach dem Abschicken dieses Formulars eine Mail mit den Anweisungen zur Erstellung eines neuen Passworts.</p>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field"><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div class="actions"><%= f.submit "Passwort zurücksetzen" %></div>
+<% end %>
+
+</div>
+
+<%= render :partial => "devise/shared/links" %>

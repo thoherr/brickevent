@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
 
+  validates_presence_of :name
+
   def attendance_for_event (event)
     attendances.each do |a|
       return a if a.event == event

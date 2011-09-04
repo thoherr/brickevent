@@ -1,0 +1,22 @@
+<h1>Anmeldung</h1>
+
+<div class="InputForm">
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div class="field"><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div class="field">Passwort<br />
+  <%= f.password_field :password %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field"><%= f.check_box :remember_me %>Auf diesem Computer angemeldet bleiben</div>
+  <% end -%>
+
+  <div class="actions">
+  <%= f.submit "Anmelden" %>
+  </div>
+<% end %>
+
+</div>
+<%= render :partial => "devise/shared/links" %>
