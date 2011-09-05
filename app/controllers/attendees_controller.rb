@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AttendeesController < ApplicationController
   # GET /attendees
   # GET /attendees.json

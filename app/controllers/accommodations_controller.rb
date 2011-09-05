@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AccommodationsController < ApplicationController
   # GET /accommodations
   # GET /accommodations.json

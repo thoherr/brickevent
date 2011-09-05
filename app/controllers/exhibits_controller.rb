@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ExhibitsController < ApplicationController
   # GET /exhibits
   # GET /exhibits.json
