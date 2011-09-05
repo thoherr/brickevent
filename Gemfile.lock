@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/vhochstein/active_scaffold.git
-  revision: c42ab09dad49bd54ff60ea5e36300f42409fc28f
+  revision: f701e9c9c7b712721e14481fcd7debe5a02e3ae4
   specs:
     active_scaffold_vho (3.1.0)
       rails (~> 3.1.0)
@@ -134,7 +134,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
-    uglifier (1.0.2)
+    uglifier (1.0.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     warden (1.0.5)
