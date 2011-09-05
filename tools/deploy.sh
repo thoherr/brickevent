@@ -117,6 +117,8 @@ ssh ${target_host} "mkdir -p $target_dir/log"
 ssh ${target_host} "chown passenger.passenger $target_dir/log"
 ssh ${target_host} "mkdir -p $target_dir/tmp"
 ssh ${target_host} "chown passenger.passenger $target_dir/tmp"
+ssh ${target_host} "mkdir -p $target_dir/public/assets"
+ssh ${target_host} "chown passenger.passenger $target_dir/public/assets"
 ssh ${target_host} "chown passenger.passenger $target_dir/config/environment.rb"
 ssh ${target_host} "chown passenger.passenger $target_dir/config.ru"
 
