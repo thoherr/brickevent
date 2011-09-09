@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110902161106) do
+ActiveRecord::Schema.define(:version => 20110909200006) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -24,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
     t.integer  "attendance_id"
     t.integer  "accommodation_type_id"
     t.integer  "count"
-    t.string   "remarks"
+    t.text     "remarks",               :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
     t.string   "nickname"
     t.string   "email"
     t.boolean  "afols_event"
-    t.string   "remarks"
+    t.text     "remarks",          :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,14 +69,14 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
   create_table "events", :force => true do |t|
     t.string   "name"
     t.string   "title"
-    t.string   "description"
+    t.text     "description",       :limit => 65384
     t.string   "location"
     t.string   "url"
     t.string   "lug"
     t.boolean  "registration_open"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "remarks"
+    t.text     "remarks",           :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
   create_table "exhibits", :force => true do |t|
     t.integer  "attendance_id"
     t.string   "name"
-    t.string   "description"
+    t.text     "description",             :limit => 65384
     t.string   "url"
     t.string   "size_studs"
     t.string   "size"
@@ -95,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20110902161106) do
     t.boolean  "is_installation"
     t.boolean  "is_part_of_installation"
     t.integer  "installation_exhibit_id"
-    t.string   "remarks"
+    t.text     "remarks",                 :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
   end
