@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/vhochstein/active_scaffold.git
-  revision: f701e9c9c7b712721e14481fcd7debe5a02e3ae4
+  revision: 9fb8ae29952a50ddf9cbc3b259565032fed03890
   specs:
     active_scaffold_vho (3.1.0)
       rails (~> 3.1.0)
@@ -63,7 +63,7 @@ GEM
     activesupport (3.1.0)
       multi_json (~> 1.0)
     arel (2.2.1)
-    bcrypt-ruby (3.0.0)
+    bcrypt-ruby (3.0.1)
     builder (3.0.0)
     coffee-rails (3.1.0)
       coffee-script (>= 2.2.0)
@@ -72,7 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
-    devise (1.4.4)
+    devise (1.4.5)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)

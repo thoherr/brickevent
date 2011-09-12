@@ -65,6 +65,7 @@
   </div>
   <div class="field">
     Gemeinschaftsprojekt, zu dem dieses MOC gehört<br />
+    <!-- %= f.select :installation_exhibit_id, @installations.collect {|i| [ i.name, i.id ] }, {:prompt => '- Bitte auswählen -' } %> -->
     <%= f.number_field :installation_exhibit_id %>
   </div>
   <div class="field">

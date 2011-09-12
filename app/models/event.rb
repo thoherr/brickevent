@@ -11,4 +11,8 @@ class Event < ActiveRecord::Base
     return exhibits.count
   end
 
+  def installations
+    return exhibits.select { |e| e.is_installation? } 
+  end
+
 end
