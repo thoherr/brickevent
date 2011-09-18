@@ -1,7 +1,7 @@
-<p>Hello <%= @resource.email %>!</p>
+<p>Hallo <%= @resource.email %>!</p>
 
-<p>Your account has been locked due to an excessive amount of unsuccessful sign in attempts.</p>
+<p>Dein Account für Bricking-Bavaria-Veranstaltungen wurde wegen zu vieler falscher Anmeldeversucht gesperrt.</p>
 
-<p>Click the link below to unlock your account:</p>
+<p>Zum Entsperren des Accounts klicke bitte auf den folgenden Link:</p>
 
-<p><%= link_to 'Unlock my account', unlock_url(@resource, :unlock_token => @resource.unlock_token) %></p>
+<p><%= link_to 'Account entsperren', unlock_url(@resource, :unlock_token => @resource.unlock_token) %></p>
