@@ -27,7 +27,6 @@ class ExhibitsController < ApplicationController
   def new
     @exhibit = Exhibit.new
     @exhibit.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
-#    @installations = @exhibit.attendance.event.installations if @exhibit.attendance.event
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +37,6 @@ class ExhibitsController < ApplicationController
   # GET /exhibits/1/edit
   def edit
     @exhibit = Exhibit.find(params[:id])
-#    @installations = @exhibit.attendance.event.installations if @exhibit.attendance.event
   end
 
   # POST /exhibits

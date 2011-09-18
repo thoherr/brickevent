@@ -14,6 +14,11 @@ class Attendance < ActiveRecord::Base
     end
   end
 
+  def event_installations
+    return event.installations if event
+    return []
+  end
+
   def event_title
     return event.title if event
     return "NO EVENT"

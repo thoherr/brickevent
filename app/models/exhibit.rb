@@ -7,6 +7,11 @@ class Exhibit < ActiveRecord::Base
     name
   end
 
+  def event_installations
+    return attendance.event_installations if attendance
+    return []
+  end
+
   def event_title
     return attendance.event_title if attendance
     return "NO ATTENDANCE"

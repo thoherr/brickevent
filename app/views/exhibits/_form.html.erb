@@ -12,71 +12,64 @@
   <% end %>
 
   <div class="InputForm">
-      <p>Bitte gib so viele Informationen wie möglich an.<br/>
-          Das erleichtert uns die Planung.</p>
+      <h3>Bitte gib so viele Informationen wie möglich an.
+          Das erleichtert uns die Planung!</h3>
   <%= f.hidden_field :attendance_id %>
   <div class="field">
-    Name des MOCs<br />
+    <%= f.label :name, 'Name des MOCs' %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    Beschreibung (für die MOC-Karte)<br />
+    <%= f.label :description, 'Beschreibung (für die MOC-Karte)' %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    URL mit Bildern, weiteren Infos etc.<br />
+    <%= f.label :url, 'URL mit Bildern, weiteren Infos etc.' %><br />
     <%= f.text_field :url %>
   </div>
   <div class="field">
-    Größe in Noppen<br />
+    <%= f.label :size_studs, 'Größe in Noppen' %><br />
     <%= f.text_field :size_studs %>
   </div>
   <div class="field">
-    Größe in Zentimetern<br />
+    <%= f.label :size, 'Größe in Zentimetern' %><br />
     <%= f.text_field :size %>
   </div>
   <div class="field">
-    Versicherungswert<br />
+    <%= f.label :value, 'Versicherungswert in Euro (ca.)' %><br />
     <%= f.number_field :value %>
   </div>
   <div class="field">
-    Anzahl der Baustunden<br />
+    <%= f.label :building_hours, 'Anzahl der Baustunden(ca.)' %><br />
     <%= f.number_field :building_hours %>
   </div>
   <div class="field">
-    Anzahl der Steine<br />
+    <%= f.label :brick_count, 'Anzahl der Steine (ca.)' %><br />
     <%= f.number_field :brick_count %>
   </div>
   <div class="field">
-    Stromversorgung benötigt?<br />
     <%= f.check_box :needs_power_supply %>
+    <%= f.label :needs_power_supply, 'Stromversorgung wird benötigt' %>
   </div>
   <div class="field">
-    Brauchst Du einen Sammeltransport?<br />
     <%= f.check_box :needs_transportation %>
+    <%= f.label :needs_transportation, 'Sammeltransport erwünscht (bitte nur mit vorheriger Rücksprache)?' %>
   </div>
   <div class="field">
-    Ist dieses MOC ein eigenes Gemeinschaftsprojekt?<br />
     <%= f.check_box :is_installation %>
+    <%= f.label :is_installation, 'Dieses MOC ist selbst ein Gemeinschaftsprojekt' %>
   </div>
   <div class="field">
-    Ist das MOC ein Teil eines Gemeinschaftsprojektes?<br />
     <%= f.check_box :is_part_of_installation %>
+    <%= f.label :is_part_of_installation, 'Dieses MOC ist Teil eines Gemeinschaftsprojektes, und zwar' %>
+    <%= f.select :installation_exhibit_id, @exhibit.event_installations.collect {|i| [ i.name, i.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
-    Gemeinschaftsprojekt, zu dem dieses MOC gehört<br />
-    <% if @installations.nil? -%>
-        <%= f.number_field :installation_exhibit_id %>
-    <% else -%>
-        <%= f.select :installation_exhibit_id, @installations.collect {|i| [ i.name, i.id ] }, {:prompt => '- Bitte auswählen -' } %>
-    <% end -%>
-  </div>
-  <div class="field">
-    Bemerkungen und Kommentare (für die Planung)<br />
+    <%= f.label :remarks, 'Bemerkungen und Kommentare (für unsere Planung)' %><br />
     <%= f.text_area :remarks %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Speichern" %>
   </div>
   </div>
 
