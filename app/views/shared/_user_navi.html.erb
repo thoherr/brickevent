@@ -24,8 +24,8 @@
             <%= link_to "Mein Profil", edit_user_path(:id => current_user) %>
         </li>
     <% else %>
-        <li id="logoutLink" class="mainNavi">
-            <%= link_to "Anmelden",  new_user_session_path %>
+        <li id="loginLink" class="mainNavi">
+            <%= link_to "Anmelden",  new_user_session_path, :id => :login %>
         </li>
     <% end %>
 
