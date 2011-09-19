@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   has_many :attendances
   has_many :attendees, :through => :attendances
+  has_many :accommodations, :through => :attendances
   has_many :exhibits, :through => :attendances
   
   def number_of_attendees
