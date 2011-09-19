@@ -1,7 +1,7 @@
 class Exhibit < ActiveRecord::Base
   belongs_to :attendance
-#  has_many :installation_parts, :class_name => "Exhibit"
-#  belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
+  has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
+  belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
 
   def event_installations
     return attendance.event_installations if attendance
