@@ -4,7 +4,7 @@ require 'capybara/rails'
 class UserSignupTest < ActionDispatch::IntegrationTest
   fixtures :all
 
-  include Capybara
+  include Capybara::DSL
 
   def login_dummy_user
     @user = User.create!(:email => "dummy@email.com",  
