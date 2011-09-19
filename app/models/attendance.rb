@@ -23,4 +23,9 @@ class Attendance < ActiveRecord::Base
     return event.title if event
     return "NO EVENT"
   end
+
+  def to_s
+    "#{user.to_s} @ #{event.to_s}"
+  end
+
 end

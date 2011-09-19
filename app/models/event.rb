@@ -15,4 +15,8 @@ class Event < ActiveRecord::Base
     return exhibits.select { |e| e.is_installation? } 
   end
 
+  def to_s
+    name
+  end
+
 end

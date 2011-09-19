@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     return !attendance_for_event(event).blank?
   end
 
+  def to_s
+    email
+  end
+
 end
