@@ -1,8 +1,8 @@
 .bundle
 db/*.sqlite3
 log/*.log
-tmp/
-.sass-cache/
+tmp
+.sass-cache
 .DS_Store
-public/assets/
-vendor/bundle/
+public/assets
+vendor/bundle
