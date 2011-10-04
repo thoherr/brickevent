@@ -29,6 +29,7 @@ end
 
 gem 'jquery-rails'
 gem 'active_scaffold'
+# gem 'active_scaffold', :git => 'git://github.com/activescaffold/active_scaffold.git'
 
 # include active_scaffold gems
 # gem 'jquery-rails_vho', :git => 'git://github.com/vhochstein/jquery-rails.git'
