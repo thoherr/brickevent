@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :attendances
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
+  has_many :accommodations, :through => :attendances
 
   validates_presence_of :name
 
