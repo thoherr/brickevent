@@ -55,12 +55,12 @@
     <%= f.check_box :needs_transportation %>
     <%= f.label :needs_transportation, 'Sammeltransport erwünscht (bitte nur mit Rücksprache!)' %>
   </div>
-  <% if current_user.is_admin? -%>
+  <!-- % if current_user.is_admin? -%> -->
     <div class="field">
       <%= f.check_box :is_installation %>
       <%= f.label :is_installation, 'Dieses MOC ist selbst ein Gemeinschaftsprojekt' %>
     </div>
-  <% end %>
+  <!-- % end %> -->
   <div class="field">
     <%= f.check_box :is_part_of_installation %>
     <%= f.label :is_part_of_installation, 'Dieses MOC ist Teil eines Gemeinschaftsprojektes, und zwar von' %>

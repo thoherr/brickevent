@@ -36,5 +36,6 @@ AccommodationType.create :name => 'Sonstiges (siehe Bemerkungen)', :description 
 AttendeeType.create :name => 'Aussteller', :description => 'Teilnehmer der ein oder mehrere MOCs auf dieser Veranstaltung zeigt'
 AttendeeType.create :name => 'Helfer', :description => 'Helfer, der kein eigenes MOC zeigt, aber an der Veranstaltung aktiv mitwirkt'
 AttendeeType.create :name => 'Begleitperson', :description => 'Begleitpersonen, die nicht bei der Veranstaltung aktiv sind'
+AttendeeType.create :name => 'Besucher', :description => 'Besucher, die nur vorbeischauen und am AFOLs-Event teilnehmen'
 
 User.create :email => 'mail@thoherr.de', :passwort => 'abc123', :is_admin => true, :name => 'Thomas Herrmann', :nickname => 'thoherr'
