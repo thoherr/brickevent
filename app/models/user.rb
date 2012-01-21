@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :exhibits, :through => :attendances
   has_many :accommodations, :through => :attendances
 
-  validates_presence_of :name
+  validates_presence_of :email, :name
 
   def attendance_for_event (event)
     attendances.each do |a|

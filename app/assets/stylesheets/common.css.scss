@@ -21,7 +21,7 @@ h1 {
     padding-left: 200px;
     font-size: 24px;
     height: 25px;
-    color: #009;
+    color: #333;
 }
 
 h2 {
@@ -35,7 +35,7 @@ img {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: bold;
 }
 
@@ -48,7 +48,7 @@ a {
     font-size: 20px;
     font-family: Verdana, sans-serif;
     text-align: right;
-    color: #009;
+    color: #333;
     height: 60px;
 }
 
@@ -150,7 +150,7 @@ a {
 
 .Event {
     font-weight: bold;
-    color: #009;
+    color: #333;
 }
 
 .EventList {
@@ -171,7 +171,7 @@ a {
 .EventTitle {
     font-size: 20px;
     font-weight: bold;
-    color: #009;
+    color: #333;
 }
 
 .EventTime {
@@ -210,8 +210,8 @@ a {
 
 .FrontendTable th {
    border: 1px solid #ddd;
-   /** background: #eee; **/
-   background: #E6F2FF;
+   background: #eee;
+   /* background: #E6F2FF; */
    text-align: left;
    padding: 5px;
 }

@@ -15,13 +15,13 @@
   <tr>
     <td><%= exhibit.name %></td>
     <td><%= exhibit.url %></td>
-    <td><%= exhibit.needs_power_supply %></td>
-    <td><%= exhibit.needs_transportation %></td>
+    <td><%= to_j_n(exhibit.needs_power_supply) %></td>
+    <td><%= to_j_n(exhibit.needs_transportation) %></td>
     <td><%= exhibit.installation_exhibit_id %></td>
     <td><%= exhibit.remarks %></td>
-    <td><%= link_to 'Ändern', edit_exhibit_path(exhibit) %></td>
-    <td><%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %></td>
-    <td><%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %></td>
+    <td colspan="3"><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
+    <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %>
+    <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> --></td>
   </tr>
 <% end %>
 </table>

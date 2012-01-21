@@ -6,27 +6,27 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-bb2011 =
-Event.create(:name => 'BB 2011',
-             :title => 'Bricking Bavaria 2011',
-             :description => 'Unsere Jahresausstellung 2011 als Teil der Messe "Freizeitspass hoch 3"',
-             :location => 'M,O,C, München',
-             :url => 'http://bricking-bavaria.de/2011/bb2011',
+bb2012 =
+Event.create(:name => 'BB 2012',
+             :title => 'Bricking Bavaria 2012',
+             :description => 'Unsere Jahresausstellung 2011 im Rahmen des "LEGO® KidsFest"',
+             :location => 'Event Arena im Olympiapark München',
+             :url => 'http://bricking-bavaria.de/2012/bb2012/legoae-kidsfest-bricking-bavaria-2012',
              :lug => 'Bricking Bavaria e.V.',
              :registration_open => true,
-             :start_date => '2011-11-04',
-             :end_date => '2011-11-06')
+             :start_date => '2012-04-12',
+             :end_date => '2012-04-15')
 
-ec_bamberg2011 =
-Event.create(:name => 'Bamberg 2011',
-             :title => 'Ausstellung im Einkaufcenter Bamberg',
-             :description => 'Eine Centerausstellung, bei der die Modelle zwei Wochen gezeigt werden',
-             :location => 'Einkaufcenter Bamberg',
-             :url => 'http://bricking-bavaria.de/2011/bamberg2011',
+ec_riemarcaden2012 =
+Event.create(:name => 'Center-Ausstellung in den Riem Arcaden 2012',
+             :title => 'Ausstellung im Einkaufcenter Riem Arcaden München',
+             :description => 'Eine Centerausstellung, bei der die Modelle drei Wochen gezeigt werden',
+             :location => 'Riem Arcaden München',
+             :url => nil,
              :lug => 'Bricking Bavaria e.V.',
-             :registration_open => true,
-             :start_date => '2011-09-26',
-             :end_date => '2011-10-08')
+             :registration_open => false,
+             :start_date => '2012-05-13',
+             :end_date => '2012-06-03')
 
 AccommodationType.create :name => 'Einzelzimmer', :description => 'Separates Einzelzimmer', :size => 1
 AccommodationType.create :name => 'Doppelzimmer', :description => 'Doppelzimmer für zwei Personen', :size => 2
@@ -38,4 +38,7 @@ AttendeeType.create :name => 'Helfer', :description => 'Helfer, der kein eigenes
 AttendeeType.create :name => 'Begleitperson', :description => 'Begleitpersonen, die nicht bei der Veranstaltung aktiv sind'
 AttendeeType.create :name => 'Besucher', :description => 'Besucher, die nur vorbeischauen und am AFOLs-Event teilnehmen'
 
-User.create :email => 'mail@thoherr.de', :passwort => 'abc123', :is_admin => true, :name => 'Thomas Herrmann', :nickname => 'thoherr'
+thomas = User.create :email => 'mail@thoherr.de', :name => 'Thomas Herrmann', :nickname => 'thoherr'
+thomas.password = 'abc123'
+thomas.is_admin = true
+thomas.save
