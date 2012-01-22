@@ -25,6 +25,7 @@ class AccommodationsController < ApplicationController
   # GET /accommodations/new
   # GET /accommodations/new.json
   def new
+    store_referrer
     @accommodation = Accommodation.new
     @accommodation.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
@@ -36,6 +37,7 @@ class AccommodationsController < ApplicationController
 
   # GET /accommodations/1/edit
   def edit
+    store_referrer
     @accommodation = Accommodation.find(params[:id])
   end
 
@@ -46,7 +48,7 @@ class AccommodationsController < ApplicationController
 
     respond_to do |format|
       if @accommodation.save
-        format.html { redirect_to @accommodation.attendance, :notice => 'Der Hotelwunsch wurde aufgenommen.'}
+        format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde aufgenommen.'}
         format.json { render :json => @accommodation, :status => :created, :location => @accommodation }
       else
         format.html { render :action => "new" }
@@ -62,7 +64,7 @@ class AccommodationsController < ApplicationController
 
     respond_to do |format|
       if @accommodation.update_attributes(params[:accommodation])
-        format.html { redirect_to @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
+        format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,12 +76,13 @@ class AccommodationsController < ApplicationController
   # DELETE /accommodations/1
   # DELETE /accommodations/1.json
   def destroy
+    store_referrer
     @accommodation = Accommodation.find(params[:id])
     @attendance_id = @accommodation.attendance_id
     @accommodation.destroy
 
     respond_to do |format|
-      format.html { redirect_to attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.' }
+      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.' }
       format.json { head :ok }
     end
   end

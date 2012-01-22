@@ -1,55 +1,22 @@
+<!-- Copyright 2011 by Thomas Herrmann -->
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @event.name %>
-</p>
+<h1>Übersicht Anmeldungen</h1>
 
-<p>
-  <b>Title:</b>
-  <%= @event.title %>
-</p>
+<p><div class="EventTitle">Alle Anmeldedaten für <%= @event.title %></div>
+   <div class="EventTime">von <%= @event.start_date %> bis <%= @event.end_date %></div></p>
+<p class="EventInfo">Für diese Veranstaltung sind bisher <%= @event.number_of_attendees %> Teilnehmer mit insgesamt <%= @event.number_of_exhibits %> MOCs angemeldet.</p>
 
-<p>
-  <b>Description:</b>
-  <%= @event.description %>
-</p>
+<% if current_user.is_admin? %>
+    <h2>Teilnehmer</h2>
+    <%= render 'attendees/table', :attendees => @event.attendees %>
 
-<p>
-  <b>Location:</b>
-  <%= @event.location %>
-</p>
+    <h2>MOCs</h2>
+    <%= render 'exhibits/table', :exhibits => @event.exhibits %>
 
-<p>
-  <b>Url:</b>
-  <%= @event.url %>
-</p>
+    <h2>Hotelwünsche</h2>
+    <%= render 'accommodations/table', :accommodations => @event.accommodations %>
+    
+<% end %>
 
-<p>
-  <b>Lug:</b>
-  <%= @event.lug %>
-</p>
-
-<p>
-  <b>Registration open:</b>
-  <%= @event.registration_open %>
-</p>
-
-<p>
-  <b>Start date:</b>
-  <%= @event.start_date %>
-</p>
-
-<p>
-  <b>End date:</b>
-  <%= @event.end_date %>
-</p>
-
-<p>
-  <b>Remarks:</b>
-  <%= @event.remarks %>
-</p>
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Zurück zur Startseite', events_path %>

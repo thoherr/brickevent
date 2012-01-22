@@ -48,6 +48,9 @@ bei Bricking Bavaria oder
         <% else -%>
             <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' anmelden",  new_attendance_path(:user_id => current_user.id, :event_id => event.id)  %></p>
         <% end -%>
+        <% if current_user.is_admin? %>
+            <p class="EventSignup"><%= link_to "Übersicht der Anmeldungen für '#{event.title}'",  event_path(event) %></p>
+        <% end %>
     <% else -%>
         <p class="EventSignup">Um Deine Teilname an '<%= event.title %>' anzumelden, musst Du Dich zunächst <%= link_to "registrieren",  new_user_session_path %>
     <% end %>

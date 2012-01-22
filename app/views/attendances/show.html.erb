@@ -2,10 +2,12 @@
 
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
+<% user_name = @attendance.user.name unless @attendance.user.nil? %>
+<% user_name = "<NO USER>" if user_name.nil? %>
 
 <h1>Anmeldung für <%= event_title %></h1>
 
-<p><div class="EventTitle">Anmeldung zu <%= event_title %></div></p>
+<p><div class="EventTitle">Anmeldung von <%= user_name %> zur Veranstaltung <%= event_title %></div></p>
 
 <p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person angemeldet (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
 

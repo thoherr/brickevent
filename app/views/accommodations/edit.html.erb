@@ -4,4 +4,4 @@
 
 <%= render 'form' %>
 
-<div class="OverviewLink"><%= link_to 'Zurück zur Übersichtsseite', attendance_path(@accommodation.attendance_id) %></div>
+<div class="OverviewLink"><%= link_to 'Zurück zur Übersichtsseite', session[:return_to] || attendance_path(@accommodation.attendance_id) %></div>

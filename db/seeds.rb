@@ -38,7 +38,28 @@ AttendeeType.create :name => 'Helfer', :description => 'Helfer, der kein eigenes
 AttendeeType.create :name => 'Begleitperson', :description => 'Begleitpersonen, die nicht bei der Veranstaltung aktiv sind'
 AttendeeType.create :name => 'Besucher', :description => 'Besucher, die nur vorbeischauen und am AFOLs-Event teilnehmen'
 
-thomas = User.create :email => 'mail@thoherr.de', :name => 'Thomas Herrmann', :nickname => 'thoherr'
-thomas.password = 'abc123'
-thomas.is_admin = true
-thomas.save
+thomasH = User.create :email => 'mail@thoherr.de', :name => 'Thomas Herrmann', :nickname => 'thoherr'
+thomasH.password = 'abc123'
+thomasH.is_admin = true
+thomasH.save
+
+thomasN = User.create :email => 'tom@tom-online.de', :name => 'Thomas Nickolaus'
+thomasN.password = 'bb2012'
+thomasN.is_admin = true
+thomasN.save
+
+juergen = User.create :email => 'juergen.bartosch@billing-components.de', :name => 'Juergen Bartosch'
+juergen.password = 'bb2012'
+juergen.is_admin = true
+juergen.save
+
+christina = User.create :email => 'ohyear@web.de', :name => 'Christina Iglhaut'
+christina.password = 'bb2012'
+christina.is_admin = true
+christina.save
+
+gerd = User.create :email => 'momkage-mb@t-online.de', :name => 'Gerd Mombrei'
+gerd.password = 'bb2012'
+gerd.is_admin = true
+gerd.save
+
