@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<% titleline = "#{SoftwareVersion.app_name} - ADMIN" %>
+<% titleline = "ADMINISTRATION - #{SoftwareVersion.app_name}" %>
 <html>
 <head>
     <title><%= titleline %></title>
@@ -10,7 +10,7 @@
 <body>
 
     <div id="mainTitle">
-        <span class="VersionText"><%= "Version #{SoftwareVersion.release_number} (#{SoftwareVersion.build_number})" %></span>
+        <span class="VersionText"><% if user_signed_in? %><%= "Angemeldet als #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.release_number} (#{SoftwareVersion.build_number})" %></span>
         <span class="TitleText"><%= titleline %></span>
     </div>
 
