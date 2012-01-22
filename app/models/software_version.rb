@@ -16,7 +16,7 @@ class SoftwareVersion
     if File.exist?(build_number_file_name)
       build_number = IO.read(build_number_file_name)
     end
-    build_number
+    build_number.strip
   end
 
 end
