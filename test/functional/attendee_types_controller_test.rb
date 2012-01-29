@@ -2,7 +2,9 @@ require 'test_helper'
 
 class AttendeeTypesControllerTest < ActionController::TestCase
   setup do
-    sign_in User.first
+    user = User.first
+    user.confirm!
+    sign_in user
     @attendee_type = attendee_types(:one)
   end
 

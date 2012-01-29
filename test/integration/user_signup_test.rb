@@ -11,6 +11,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
                 :password => "password",  
                 :password_confirmation => "password",
                 :name => "Dummy User")
+    @user.confirm!
     visit '/users/sign_in'
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => "password"
@@ -40,10 +41,11 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     fill_in 'user_name', :with => n
     click_on 'submit'
 
+    # because we are not confirmed, we should not be logged in
     assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
     assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
-    assert page.has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
-    assert page.has_content?('Ausloggen'), "Ausloggen"
+    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+    assert page.has_content?('Ausloggen') == false, "Ausloggen"
 
   end
 
@@ -52,6 +54,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
                 :password => "password",  
                 :password_confirmation => "password",
                 :name => "My Name")
+    @user.confirm!
     visit '/users/sign_in'
     fill_in 'user_email', :with => "email@email.com"
     fill_in 'user_password', :with => "password"

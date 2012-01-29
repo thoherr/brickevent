@@ -1,5 +1,5 @@
-<p>Welcome <%= @resource.email %>!</p>
+<p>Danke für Deine Registrierung für Bricking Bavaria Veranstaltungen mit der Mailadresse "<%= @resource.email %>"!</p>
 
-<p>You can confirm your account through the link below:</p>
+<p>Bitte bestätige Deine Anmeldung indem Du den folgenden Link anklickst:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to 'Meine Registrierung für Bricking Bavaria Veranstaltungen bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
