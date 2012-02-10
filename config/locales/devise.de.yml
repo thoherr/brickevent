@@ -43,7 +43,7 @@ en:
         locked: 'gesperrt'
     unlocks:
       send_instructions: 'Du erhältst in wenigen Minuten eine Email mit den Anweisungen zum Zurücksetzen Deines Passworts.'
-      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+      unlocked: 'Dein Account wurde entsperrt. Du bist jetzt eingeloggt.'
       send_paranoid_instructions: 'If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.'
     omniauth_callbacks:
       success: 'Successfully authorized from %{kind} account.'

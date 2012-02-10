@@ -3,7 +3,8 @@
 <div class="InputForm">
 
 <p>Zur Anmeldung musst Du mindestens Deine Email-Adresse, ein selbstgewähltes Passwort und Deinen Namen angeben.<br/>
-Alle anderen Angaben sind optional.</p>
+Alle anderen Angaben sind optional.<br/>
+Bitte gib trotzdem Deine Handynummer an, das erleichtert und die Kontaktaufnahme insbesondere w&auml;hrend der Veranstaltungen!</p>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -22,6 +23,10 @@ Alle anderen Angaben sind optional.</p>
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :phone, 'Telefonnummer (Bitte Handnummer angeben!)' %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
     <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, 1000Steine, MBFR, SwissLUG, ...; optional)' %><br />
     <%= f.text_field :lug %>
   </div>
@@ -32,10 +37,6 @@ Alle anderen Angaben sind optional.</p>
   <div class="field">
     <%= f.label :address, 'Adresse (optional)' %><br />
     <%= f.text_area :address %>
-  </div>
-  <div class="field">
-    <%= f.label :phone, 'Telefonnummer (optional)' %><br />
-    <%= f.text_field :phone %>
   </div>
 
   <div class="actions">
