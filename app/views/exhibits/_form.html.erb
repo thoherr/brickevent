@@ -20,7 +20,7 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description, 'Beschreibung (für die MOC-Karte)' %><br />
+    <%= f.label :description, 'Zusätzlicher Text für die MOC-Karte' %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
@@ -55,19 +55,19 @@
     <%= f.check_box :needs_transportation %>
     <%= f.label :needs_transportation, 'Sammeltransport erwünscht (bitte nur mit Rücksprache!)' %>
   </div>
-  <!-- % if current_user.is_admin? -%> -->
+  <% if current_user.is_admin? -%>
     <div class="field">
       <%= f.check_box :is_installation %>
       <%= f.label :is_installation, 'Dieses MOC ist selbst ein Gemeinschaftsprojekt' %>
     </div>
-  <!-- % end %> -->
+  <% end %>
   <div class="field">
     <%= f.check_box :is_part_of_installation %>
     <%= f.label :is_part_of_installation, 'Dieses MOC ist Teil eines Gemeinschaftsprojektes, und zwar von' %>
     <%= f.select :installation_exhibit_id, @exhibit.event_installations.collect {|i| [ i.name, i.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
-    <%= f.label :remarks, 'Bemerkungen und Kommentare (für unsere Planung)' %><br />
+    <%= f.label :remarks, 'Bemerkungen und Kommentare (intern für unsere Planung)' %><br />
     <%= f.text_area :remarks %>
   </div>
   <div class="actions">

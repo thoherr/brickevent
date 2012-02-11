@@ -13,8 +13,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, 'Name' %><br />
+    <%= f.label :name, 'Vollständiger Name' %><br />
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :phone, 'Telefonnummer (Bitte Handnummer angeben!)' %><br />
+    <%= f.text_field :phone %>
   </div>
   <div class="field">
     <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, 1000Steine, MBFR, SwissLUG, ...; optional)' %><br />
@@ -27,10 +31,6 @@
   <div class="field">
     <%= f.label :address, 'Adresse (optional)' %><br />
     <%= f.text_area :address %>
-  </div>
-  <div class="field">
-    <%= f.label :phone, 'Telefonnummer (optional)' %><br />
-    <%= f.text_field :phone %>
   </div>
   <div class="actions">
     <%= f.submit "Daten ändern" %>

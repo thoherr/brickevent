@@ -39,6 +39,47 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     fill_in 'user_password', :with => pw
     fill_in 'user_password_confirmation', :with => pw
     fill_in 'user_name', :with => n
+    check 'user_accept_data_storage'
+    click_on 'submit'
+
+    # because we are not confirmed, we should not be logged in
+    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
+    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+    assert page.has_content?('Ausloggen') == false, "Ausloggen"
+
+  end
+
+  test "sign up without accepting data storage" do
+
+    visit '/'
+    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
+    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+
+    click_on 'login'
+    assert page.has_content?('Anmeldung'), "Anmeldung"
+
+    click_on 'sign_up'
+    assert page.has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
+
+    m = "myname@mymail.com"
+    pw = "MySecret"
+    n = "Bugs Bunny"
+    fill_in 'user_email', :with => m
+    fill_in 'user_password', :with => pw
+    fill_in 'user_password_confirmation', :with => pw
+    fill_in 'user_name', :with => n
+    click_on 'submit'
+
+    # because we are not confirmed, we should not be logged in
+    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
+    # TODO assert error message!
+
+    fill_in 'user_password', :with => pw
+    fill_in 'user_password_confirmation', :with => pw
+    check 'user_accept_data_storage'
     click_on 'submit'
 
     # because we are not confirmed, we should not be logged in

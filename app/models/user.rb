@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :lug, :nickname, :address, :phone
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :lug, :nickname, :address, :phone, :accept_data_storage
 
   has_many :attendances
   has_many :attendees, :through => :attendances
@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :accommodations, :through => :attendances
 
   validates_presence_of :email, :name
+  validates_acceptance_of :accept_data_storage, :on => :create, :accept => true, :message => 'Du musst der Speicherung Deiner Daten zustimmen!'
 
   def attendance_for_event (event)
     attendances.each do |a|

@@ -2,9 +2,14 @@
 
 <div class="InputForm">
 
-<p>Zur Anmeldung musst Du mindestens Deine Email-Adresse, ein selbstgewähltes Passwort und Deinen Namen angeben.<br/>
-Alle anderen Angaben sind optional.<br/>
+<p>Zur Anmeldung musst Du mindestens Deine Email-Adresse, ein selbstgewähltes Passwort und Deinen Namen angeben.
+    Alle anderen Angaben sind optional.<br/>
 Bitte gib trotzdem Deine Handynummer an, das erleichtert und die Kontaktaufnahme insbesondere w&auml;hrend der Veranstaltungen!</p>
+
+<p>Deine Anmeldedaten werden von uns ausschlie&szlig;lich f&uuml;r die Vorbereitung und Durchführung unserer Veranstaltungen gespeichert
+    und k&ouml;nnen nur von den Organisatoren der jeweiligen Veranstaltung eingesehen werden.
+    Daher siehst Du auf diesen Seiten auch keine vollständige Teilnehmer- oder Modellliste.</br>
+WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durch Ankreuzen des entsprechenden K&auml;stchens im Formular geben!</p>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -38,7 +43,10 @@ Bitte gib trotzdem Deine Handynummer an, das erleichtert und die Kontaktaufnahme
     <%= f.label :address, 'Adresse (optional)' %><br />
     <%= f.text_area :address %>
   </div>
-
+  <div class="field">
+      <%= f.check_box :accept_data_storage %>
+      <%= f.label :accept_data_storage, 'Ich bin mit der Speicherung meiner Daten durch Bricking Bavaria e. V. im Rahmen der Vorbereitung und Durchführung von Veranstaltungen einverstanden.'%>
+  </div>
   <div class="actions">
   <%= f.submit "Als Benutzer registrieren", :id => 'submit' %>
   </div>

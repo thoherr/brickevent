@@ -7,7 +7,7 @@ class SoftwareVersion
   end
 
   def self.release_number
-    "0.1"
+    "1.0"
   end
 
   def self.build_number
