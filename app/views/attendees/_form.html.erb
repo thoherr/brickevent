@@ -1,7 +1,7 @@
 <%= form_for(@attendee) do |f| %>
   <% if @attendee.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@attendee.errors.count, "error") %> prohibited this attendee from being saved:</h2>
+      <h2><%= pluralize(@attendee.errors.count, "Fehler") %> haben die Speicherung verhindert:</h2>
 
       <ul>
       <% @attendee.errors.full_messages.each do |msg| %>
@@ -15,27 +15,27 @@
   <%= f.hidden_field :attendance_id %>
 
   <div class="field">
-    <%= f.label :attendee_type_id %><br />
+    <%= f.label :attendee_type_id, 'Teilnahme als (Aussteller, Helfer, ...)' %><br />
     <%= f.select :attendee_type_id, AttendeeType.all.collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, 'Vollständiger Name' %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :lug %><br />
+    <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, 1000Steine, MBFR, SwissLUG, ...; optional)'  %><br />
     <%= f.text_field :lug %>
   </div>
   <div class="field">
-    <%= f.label :nickname %><br />
+    <%= f.label :nickname, 'Nickname (optional)' %><br />
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :afols_event %><br />
+    <%= f.label :afols_event, 'Teilnahme am AFOLs Event' %><br />
     <%= f.check_box :afols_event %>
   </div>
   <div class="field">
-    <%= f.label :remarks %><br />
+    <%= f.label :remarks, 'Bemerkungen' %><br />
     <%= f.text_area :remarks %>
   </div>
   <div class="actions">
