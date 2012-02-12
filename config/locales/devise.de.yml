@@ -34,7 +34,7 @@ de:
       confirmed: 'Deine Anmeldung wurde erfolgreich bestätigt. Du bist jetzt eingeloggt.'
     registrations:
       signed_up: 'Herzlich Willkommen. Du hast Dich erfolgreich registriert und kannst Dich nun für Veranstaltungen anmelden.'
-      inactive_signed_up: 'Du hast Dich erfolgreich registriert, konntest aber noch nicht angemeldet werden, da Deine Anmeldung %{reason} ist.'
+      inactive_signed_up: 'Du hast Dich erfolgreich registriert, konntest aber noch nicht angemeldet werden, da Deine Anmeldung %{reason} ist. Bitte beachte die Bestätigungsmail in Deinem Posteingang.'
       updated: 'Du hast Deine Kontodaten erfolgreich geändert.'
       destroyed: 'Bye! Dein Konto wurde storniert. Wir hoffen, dass Du Dich bald wieder registrierst.'
       reasons:

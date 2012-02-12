@@ -1,0 +1,39 @@
+de:
+  activerecord:
+    errors:
+      template: 
+        body: Die folgenden Angaben sind nicht korrekt
+        header: 
+          one: "1 Fehler verhinderte die Speicherung von {{model}}"
+          other: "{{count}} Fehler verhinderten die Speicherung von {{model}}"
+      messages:
+        inclusion: "ist nicht in der Liste"
+        exclusion: "ist reserviert"
+        invalid: "ist ungültig"
+        confirmation: "stimmt nicht überein"
+        accepted: "muss akzeptiert werden"
+        empty: "darf nicht leer sein"
+        blank: "darf nicht leer sein"
+        too_long: "ist zu lang (Maximum ist {{count}} Zeichen)"
+        too_short: "ist zu kurz (Minimum is {{count}} Zeichen)"
+        wrong_length: "hat die falsche Länge (sollte {{count}} Zeichen lang sein)"
+        taken: "wird bereits verwendet"
+        not_a_number: "ist keine Zahl"
+        greater_than: "muss größer als {{count}} sein"
+        greater_than_or_equal_to: "muss größer oder gleich {{count}} sein"
+        equal_to: "muss gleich {{count}} sein"
+        less_than: "muss kleiner als {{count}} sein"
+        less_than_or_equal_to: "muss kleiner oder gleich {{count}} sein"
+        odd: "muss ungerade sein"
+        even: "muss gerade sein"
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Du musst eine Mailadresse angeben."
+              taken: "Diese Mailadresse ist schon registriert! Bitte wähle eine andere Adresse. Falls Du Dein Passwort vergessen hast, kannst Du es mit dem Link am Ende der Seite zurücksetzen."
+            name:
+              blank: "Bitte gib' Deinen Namen an."
+            password:
+              blank: "Du musst ein Passwort angeben."
+              confirmation: "Die beiden eingegebenen Passwörter stimmen nicht überein. Bitte korrigieren."
