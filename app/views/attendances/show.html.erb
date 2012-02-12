@@ -19,6 +19,9 @@
 
 <p class="Indented">Deine Übernachtungswünsche (<%= link_to 'Weiterer Eintrag', new_accommodation_path(:attendance_id => @attendance)%>):</p>
 
+<!-- TODO: Text for event hotel in database!!! -->
+<p class="Indented">Unser Hotel für BB2012 ist das Pullman Hotel München**** (<a href="www.pullman-hotel-muenchen.de">www.pullman-hotel-muenchen.de</a>). Wir haben hier bereits Zimmer reserviert. Der Preis beträgt 30 Euro pro Nacht inklusive Frühstück pro Nase bei Übernachtung in einem Doppelzimmer.</p>
+
 <%= render 'accommodations/table', :accommodations => @attendance.accommodations %>
 
 <div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %></div>
