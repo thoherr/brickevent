@@ -11,6 +11,16 @@ class Accommodation < ActiveRecord::Base
     return "NO ATTENDANCE"
   end
 
+  def user_name
+    return attendance.user_name if attendance
+    return "NO ATTENDANCE"
+  end
+
+  def accommodation_type_name
+    return accommodation_type.name if accommodation_type
+    return "NO ACCOMODATION_TYPE"
+  end
+
   def to_s
     "#{count} #{accommodation_type}"
   end

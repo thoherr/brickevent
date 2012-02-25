@@ -13,6 +13,23 @@ class Exhibit < ActiveRecord::Base
     return "NO ATTENDANCE"
   end
 
+  def user_name
+    return attendance.user_name if attendance
+    return "NO ATTENDANCE"
+  end
+
+  def installation_exhibit_name
+    return installation.name if installation
+    return "-"
+  end
+
+  def size_text
+    return "k.A." if size.blank? && size_studs.blank?
+    t1 = if size.blank? then "" else size + " cm" end
+    t2 = if size_studs.blank? then "" else size_studs + " Noppen" end
+    return t1 + if t1.blank? or t2.blank? then "" else ", " end + t2
+  end
+
   def to_s
     name
   end

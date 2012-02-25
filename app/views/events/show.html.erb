@@ -8,15 +8,19 @@
 <p class="EventInfo">Für diese Veranstaltung sind bisher <%= @event.number_of_attendees %> Teilnehmer mit insgesamt <%= @event.number_of_exhibits %> MOCs angemeldet.</p>
 
 <% if current_user.is_admin? %>
-    <h2>Teilnehmer</h2>
-    <%= render 'attendees/table', :attendees => @event.attendees %>
 
-    <h2>MOCs</h2>
-    <%= render 'exhibits/table', :exhibits => @event.exhibits %>
+    <h2>Anmeldeliste</h2>
+    <%= render 'attendances/exportlist', :attendances => @event.attendances %>
 
-    <h2>Hotelwünsche</h2>
-    <%= render 'accommodations/table', :accommodations => @event.accommodations %>
-    
+    <h2>Teilnehmerliste</h2>
+    <%= render 'attendees/exportlist', :attendees => @event.attendees %>
+
+    <h2>MOC-Liste</h2>
+    <%= render 'exhibits/exportlist', :exhibits => @event.exhibits %>
+
+    <h2>Hotelliste</h2>
+    <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
+
 <% end %>
 
 <%= link_to 'Zurück zur Startseite', events_path %>

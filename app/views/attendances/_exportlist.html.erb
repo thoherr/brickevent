@@ -1,0 +1,38 @@
+<!-- Copyright 2011 by Thomas Herrmann -->
+
+<table class="AttendeesTable FrontendTable">
+    <tr>
+      <th>Name</th>
+      <th>Nickname</th>
+      <th>E-Mail</th>
+      <th>Telefonnummer</th>
+      <th>Adresse</th>
+      <th>LUG</th>
+      <th>MOCs</th>
+      <th>Sammeltansport</th>
+    </tr>
+
+<% attendances.each do |attendance| %>
+  <% user = attendance.user %>
+  <% unless user.blank? then %>
+  <tr>
+      <td><%= user.name %></td>
+      <td><%= user.nickname %></td>
+      <td><%= user.email %></td>
+      <td><%= user.phone %></td>
+      <td><%= user.address %></td>
+      <td><%= user.lug %></td>
+      <td>
+          <% attendance.exhibits.each do | exhibit | %>
+          <%= exhibit.name %><br/>
+          <% end %>
+      </td>
+      <td>
+          <% c =  attendance.transportation_count %>
+          <%= "1 MOC" if c == 1 %>
+          <%= c.to_s + " MOCs" if c > 1 %>
+      </td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
