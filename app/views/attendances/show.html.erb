@@ -6,18 +6,30 @@
 <% user_name = "<NO USER>" if user_name.nil? %>
 
 <h1>Anmeldung für <%= event_title %></h1>
-
 <p><div class="EventTitle">Anmeldung von <%= user_name %> zur Veranstaltung <%= event_title %></div></p>
 
-<p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person angemeldet (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
+<hr/>
+
+<p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person angemeldet
+    (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees %>
 
-<p class="Indented">Du hast bisher <%= @attendance.exhibits.count %> MOCs angemeldet (<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented"><%= link_to 'Weitere Person (Aussteller/Helfer/Begleitperson) anmelden', new_attendee_path(:attendance_id => @attendance)%><br/>&nbsp;</p>
+
+<hr/>
+
+<p class="Indented">Du hast bisher <%= @attendance.exhibits.count %> MOCs angemeldet
+    (<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits %>
 
-<p class="Indented">Deine Übernachtungswünsche (<%= link_to 'Weiterer Eintrag', new_accommodation_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented"><%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%><br/>&nbsp;</p>
+
+<hr/>
+
+<p class="Indented">Deine Übernachtungswünsche
+    (<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%>):</p>
 
 <!-- TODO: Text for event hotel in database!!! -->
 <p class="Indented">
@@ -28,5 +40,9 @@ Bitte bucht die Zimmer ausschliesslich über dieses Anmeldeformular!</b>
 </p>
 
 <%= render 'accommodations/table', :accommodations => @attendance.accommodations %>
+
+<p class="Indented"><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%><br/>&nbsp;</p>
+
+<hr/>
 
 <div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %></div>

@@ -4,9 +4,13 @@
   <tr>
     <th>Anmeldername</th>
     <th>MOC</th>
+    <th>Text f&uuml;r MOC-Karte</th>
     <th>Maße</th>
     <th>Versicherungswert</th>
     <th>Stromversorgung</th>
+    <th>URL</th>
+    <th>Anzahl Baustunden</th>
+    <th>Anzahl Steine</th>
     <th>Gemeinschaftsprojekt</th>
     <th>Bemerkungen</th>
     <th colspan="3"></th>
@@ -16,9 +20,13 @@
   <tr>
     <td><%= exhibit.user_name %></td>
     <td><%= exhibit.name %></td>
+    <td><%= exhibit.description %></td>
     <td><%= exhibit.size_text %></td>
     <td><%= exhibit.value %></td>
     <td><%= to_j_n(exhibit.needs_power_supply) %></td>
+    <td><%= exhibit.url %></td>
+    <td><%= exhibit.building_hours %></td>
+    <td><%= exhibit.brick_count %></td>
     <td><%= exhibit.installation_exhibit_name %></td>
     <td><%= exhibit.remarks %></td>
     <td colspan="3"><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
