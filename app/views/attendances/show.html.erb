@@ -10,7 +10,7 @@
 
 <hr/>
 
-<p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person angemeldet
+<p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %> angemeldet
     (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees %>
@@ -19,7 +19,7 @@
 
 <hr/>
 
-<p class="Indented">Du hast bisher <%= @attendance.exhibits.count %> MOCs angemeldet
+<p class="Indented">Du hast bisher <%= @attendance.exhibits.count %> MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
     (<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>):</p>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits %>
