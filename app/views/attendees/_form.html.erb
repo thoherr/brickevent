@@ -37,7 +37,7 @@
 
   <div class="field">
       <%= f.label :shirt_size, 'Größe für das Event-T-Shirt' %>
-      <% [ 'XS', 'S', 'M', 'L', 'XL', 'XXL' ].each do |size| %>
+      <% [ 'S', 'M', 'L', 'XL', 'XXL' ].each do |size| %>
         <br/><%= f.radio_button :shirt_size, size %>
         <%= size %>
       <% end %>
