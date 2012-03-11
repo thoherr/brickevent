@@ -31,8 +31,18 @@ bei Bricking Bavaria oder
     </ul>
   </li>
 </ul>
+<p>Falls Du Fragen hast oder die Teilnahmefrist f&uuml; die Veranstaltung bereits abgelaufen ist, Du uns aber noch wichtige Informationen nachreichen
+    m&ouml;chtest, so sende uns bitte eine Mail an <a href="mailto:info@bricking-bavaria.de">info@bricking-bavaria.de</a>.</p>
 </div>
 
+<% if @events.length == 0 %>
+
+<h2>Zurzeit ist keine Veranstaltung zur Anmeldung freigegeben.</h2>
+
+<p class="Indented">Falls Du Daten zu einer Anmeldung nachreichen m&ouml;chtest, sende uns diese bitte per Mail
+     an <a href="mailto:info@bricking-bavaria.de">info@bricking-bavaria.de</a>.</p>
+
+<% else %>
 <h2>Hier unsere aktuellen Veranstaltungen, zu denen wir noch Aussteller und Helfer suchen:</h2>
 
 <div class="EventList">
@@ -63,3 +73,4 @@ bei Bricking Bavaria oder
     <h2>Du willst bei einer Bricking-Bavaria-Ausstellung teilnehmen? <%= link_to "Melde Dich gleich an!",  new_user_session_path %></h2>
 <% end %>
 
+<% end %>
