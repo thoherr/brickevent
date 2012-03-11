@@ -18,6 +18,11 @@ class Exhibit < ActiveRecord::Base
     return "NO ATTENDANCE"
   end
 
+  def user_lug
+    return attendance.user_lug if attendance
+    return "NO ATTENDANCE"
+  end
+
   def installation_exhibit_name
     return installation.name if installation
     return "-"

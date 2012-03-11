@@ -29,6 +29,11 @@ class Attendance < ActiveRecord::Base
     return "NO USER"
   end
 
+  def user_lug
+    return user.lug if user
+    return "NO USER"
+  end
+
   def transportation_count
     translist = exhibits.select { |e| e.needs_transportation? }
     return translist.length
