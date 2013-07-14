@@ -5,7 +5,7 @@ Overview
 --------
 
 This is a web registration application for the signup of exhibitors, staff and visitors at LUG events,
-i. e. LEGO &reg; User Group (LUG) exhibitions.
+i. e. LEGO&reg; User Group (LUG) exhibitions.
 
 The system was originally written for the registration of AFOLs (Adult Fans Of LEGO) for the LEGO KidsFest 2012
 in Munich. Currently far too much of the texts and structure is hard coded. Most texts are in german language.
