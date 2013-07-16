@@ -1,0 +1,8 @@
+name '42ways-sshkeys'
+version '0.1.0'
+source ''
+author '42ways UG'
+license 'Apache 2.0'
+summary 'common ssh keys'
+description '42ways and Teleteach known_hosts and ssh_keys'
+project_page ''

@@ -1,0 +1,21 @@
+<% if false %>
+<VirtualHost *:443>
+        ServerAlias <%= @servername %>
+        DocumentRoot /srv/www/rails/<%= @appname %>/current/public
+        Include /etc/apache2/sslhost.conf
+
+        <Directory /srv/www/rails/<%= @appname %>/current/public>
+                Allow from all
+                Options -MultiViews
+        </Directory>
+</VirtualHost>
+<% end %>
+
+<VirtualHost *:80>
+        ServerAlias <%= @servername %>
+        DocumentRoot /srv/www/rails/<%= @appname %>/current/public
+        <Directory /srv/www/rails/<%= @appname %>/current/public>
+                Allow from all
+                Options -MultiViews
+        </Directory>
+</VirtualHost>

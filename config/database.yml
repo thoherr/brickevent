@@ -17,9 +17,9 @@ test:
 
 production:
   adapter: mysql
-  database: rails_brick_event
-  username: brickevent
-  password: CHANGE_IN_DEPLOYMENT
+  database: brick_event_production
+  username: brick_event
+  password: brick_event
   pool: 5
   timeout: 5000
   encoding: utf8
