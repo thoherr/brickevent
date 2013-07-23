@@ -17,8 +17,11 @@ Help from other IT affine LEGO fans is very welcome ;-).
 System requirements
 -------------------
 
-Currently the app uses Rails 3.1.3 and Sqlite3/MySQL.
+Currently the app uses Rails 3.1.12 and Sqlite3/MySQL.
 
-It is planned to upgrade to the newest Rails 3 shortly and to incorporate bundler and a Capistrano deployment scheme.
+A Vagrantfile and puppet manifests are provided to set up a production ready environment with no pain.
+Deployment is done with tools/deploy.sh for now.
+
+It is planned to incorporate bundler and a Capistrano deployment scheme shortly and probably upgrade to Rails 3.2.
 
 
