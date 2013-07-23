@@ -47,7 +47,7 @@ fi
 repo_revision=$(git log | head -1 | cut -f 2 -d  ' ')
 short_repo_revision=$(echo $repo_revision | cut -c 1-6 )
 
-### Complain if we deploy from svn but there still are uncommitted changes
+### Complain if we deploy from git but there still are uncommitted changes
 REPO_PATH="$(readlink -f ..)/"
 set +e
 STATUS="`git status | grep "working directory clean"`"
@@ -73,7 +73,6 @@ while true; do
 	fi
 done	
 
-### Export the trunk from svn to a temp dir and deploy it
 ### Tag release and place it into the releases base
 git tag $release_tag
 
