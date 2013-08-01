@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(:version => 20130801203235) do
     t.text     "remarks",           :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "has_accomodation"
     t.boolean  "has_event_shirt"
     t.boolean  "has_accommodation"
   end
