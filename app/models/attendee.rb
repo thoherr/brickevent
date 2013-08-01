@@ -4,6 +4,11 @@ class Attendee < ActiveRecord::Base
   validates_presence_of :attendance
   validates_presence_of :attendee_type
 
+  def event
+    return attendance.event if attendance
+    return nil
+  end
+
   def event_title
     return attendance.event_title if attendance
     return "NO ATTENDANCE"

@@ -35,13 +35,15 @@
     <%= f.check_box :afols_event %>
   </div>
 
-  <div class="field">
-      <%= f.label :shirt_size, 'Größe für das Event-T-Shirt' %>
-      <% [ 'S', 'M', 'L', 'XL', 'XXL' ].each do |size| %>
-        <br/><%= f.radio_button :shirt_size, size %>
-        <%= size %>
-      <% end %>
-  </div>
+  <% if @attendee.event && @attendee.event.has_event_shirt  %>
+    <div class="field">
+        <%= f.label :shirt_size, 'Größe für das Event-T-Shirt' %>
+        <% [ 'S', 'M', 'L', 'XL', 'XXL' ].each do |size| %>
+            <br/><%= f.radio_button :shirt_size, size %>
+            <%= size %>
+        <% end %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :remarks, 'Bemerkungen' %><br />

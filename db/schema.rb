@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307165140) do
+ActiveRecord::Schema.define(:version => 20130801203235) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(:version => 20120307165140) do
     t.text     "remarks",           :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_accomodation"
+    t.boolean  "has_event_shirt"
+    t.boolean  "has_accommodation"
   end
 
   create_table "exhibits", :force => true do |t|
