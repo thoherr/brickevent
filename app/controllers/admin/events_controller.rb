@@ -1,10 +1,10 @@
-module Admin 
+module Admin
   class EventsController < AdminController
     active_scaffold :event do |config|
 #      list_columns = [:user_type, :email, :firstname, :lastname, :title, :salutation, :street_1, :street_2, :zipcode, :city, :tel, :institution, :sign_in_count, :last_sign_in_at, :tnc, :pp ]
 #      show_columns = list_columns
 #      update_columns = [:user_type, :email, :firstname, :lastname, :title, :salutation, :street_1, :street_2, :zipcode, :city, :tel, :institution, :sign_in_count, :tnc, :pp]
-      update_columns = [ :name, :title, :description, :location, :url, :lug, :has_event_shirt, :has_accommodation, :registration_open, :start_date, :end_date ]
+      update_columns = [ :name, :title, :description, :location, :url, :logo_url, :lug, :has_event_shirt, :has_accommodation, :has_moc_card_service, :registration_open, :start_date, :end_date ]
 #      create_columns = update_columns
 
 #     config.list.columns = list_columns

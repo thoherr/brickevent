@@ -24,4 +24,7 @@ Deployment is done with tools/deploy.sh for now.
 
 It is planned to incorporate bundler and a Capistrano deployment scheme shortly and probably upgrade to Rails 3.2.
 
+Known Flaws
+-----------
 
+The system is currently implemented with a german UI. Even the english local files contain german texts.

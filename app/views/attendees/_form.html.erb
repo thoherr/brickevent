@@ -16,7 +16,7 @@
 
   <div class="field">
     <%= f.label :attendee_type_id, 'Teilnahme als (Aussteller, Helfer, ...)' %><br />
-    <%= f.select :attendee_type_id, AttendeeType.all.collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
+    <%= f.select :attendee_type_id, AttendeeType.find_all_by_is_visible(true).collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
   </div>
   <div class="field">
     <%= f.label :name, 'Vollständiger Name' %><br />
@@ -31,7 +31,7 @@
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :afols_event, 'Teilnahme am AFOLs Event' %><br />
+    <%= f.label :afols_event, 'Teilnahme am AFOLs Abend' %><br />
     <%= f.check_box :afols_event %>
   </div>
 
@@ -50,7 +50,7 @@
     <%= f.text_area :remarks %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Speichern", :id => 'submit' %>
   </div>
   </div>
 <% end %>

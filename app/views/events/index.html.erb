@@ -10,7 +10,7 @@
     <% else %>
       <%= link_to "Registriere Dich als Aussteller/Helfer",  new_user_registration_path %>
     <% end %>
-bei Bricking Bavaria oder 
+bei Bricking Bavaria oder
     <% if user_signed_in? %>
       melde Dich mit Deinen Registrierungsdaten an.
     <% else %>
@@ -48,7 +48,7 @@ bei Bricking Bavaria oder
 <div class="EventList">
 <% @events.each do |event| %>
   <div class="EventListEntry">
-    <p><div class="EventTitle"><%= event.title %></div>
+    <p><% if event.logo_url %><img class="EventLogo" src="<%= event.logo_url %>"></img><% end %><div class="EventTitle"><%= event.title %></div>
        <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div></p>
     <p class="EventDescription"><%= event.description %></p>
     <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>

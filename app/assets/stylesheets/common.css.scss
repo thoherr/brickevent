@@ -17,8 +17,8 @@ p {
 h1 {
     position: absolute;
     margin: 0;
-    top: 33px;
-    padding-left: 200px;
+    top: 25px;
+    padding-left: 300px;
     font-size: 24px;
     height: 25px;
     color: #333;
@@ -168,6 +168,13 @@ a {
     margin-bottom: 25px;
     padding-left: 25px;
     padding-right: 25px;
+}
+
+.EventLogo {
+    display: block;
+    float: right;
+    max-width: 200px;
+    max-height: 150px;
 }
 
 .EventTitle {
