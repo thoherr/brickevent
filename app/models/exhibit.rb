@@ -39,4 +39,14 @@ class Exhibit < ActiveRecord::Base
     name
   end
 
+  # CSV Stuff
+  def Exhibit.csv_array_header
+       return ["Name", "MOC","Beschreibung","URL","Größe in Studs","Größe","Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemainschaftsprojekt"]
+  end
+  def csv_array
+      installation_exhibit_name = ""
+      installation_exhibit_name = installation_exhibit.name if installation_exhibit
+      return [ user_name, name, description, url, size_studs, size, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name ]
+  end
+
 end

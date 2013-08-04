@@ -12,10 +12,14 @@
     <h2>Anmeldeliste</h2>
     <%= render 'attendances/exportlist', :attendances => @event.attendances %>
 
-    <h2>Teilnehmerliste</h2>
+    <h2>Teilnehmerliste
+    <%= button_to 'CSV Datei der Teilnehmer exportieren', :action => 'export_attendees_csv', :id => @event, :filename => 'teilnehmer.csv' %>
+    </h2>
     <%= render 'attendees/exportlist', :attendees => @event.attendees %>
 
-    <h2>MOC-Liste</h2>
+    <h2>MOC-Liste
+    <%= button_to 'CSV Datei der MOCs exportieren', :action => 'export_exhibits_csv', :id => @event, :filename => 'mocliste.csv' %>
+    </h2>
     <%= render 'exhibits/exportlist', :exhibits => @event.exhibits, :event => @event %>
 
     <% if @event.has_accommodation %>
