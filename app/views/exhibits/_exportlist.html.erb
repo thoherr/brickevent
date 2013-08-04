@@ -6,8 +6,10 @@
     <th>MOC</th>
     <th>Text f&uuml;r MOC-Karte</th>
     <th>URL</th>
-    <th>Anzahl Baustunden</th>
-    <th>Anzahl Steine</th>
+    <% if event.has_moc_card_service %>
+        <th>Anzahl Baustunden</th>
+        <th>Anzahl Steine</th>
+    <% end %>
     <th>LUG</th>
     <th>Gemeinschaftsprojekt</th>
     <th>Bemerkungen</th>
@@ -23,8 +25,10 @@
     <td><%= exhibit.name %></td>
     <td><%= exhibit.description %></td>
     <td><%= exhibit.url %></td>
-    <td><%= exhibit.building_hours %></td>
-    <td><%= exhibit.brick_count %></td>
+    <% if event.has_moc_card_service %>
+        <td><%= exhibit.building_hours %></td>
+        <td><%= exhibit.brick_count %></td>
+    <% end %>
     <td><%= exhibit.user_lug %></td>
     <td><%= exhibit.installation_exhibit_name %></td>
     <td><%= exhibit.remarks %></td>

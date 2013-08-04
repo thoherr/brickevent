@@ -16,10 +16,12 @@
     <%= render 'attendees/exportlist', :attendees => @event.attendees %>
 
     <h2>MOC-Liste</h2>
-    <%= render 'exhibits/exportlist', :exhibits => @event.exhibits %>
+    <%= render 'exhibits/exportlist', :exhibits => @event.exhibits, :event => @event %>
 
-    <h2>Hotelliste</h2>
-    <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
+    <% if @event.has_accommodation %>
+        <h2>Hotelliste</h2>
+        <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
+    <% end %>
 
 <% end %>
 
