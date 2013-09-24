@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.find(:all, :conditions => ["registration_open = ?", true])
+    @events = Event.find(:all, :conditions => ["registration_open = ? or visible = ?", true, true])
 
     respond_to do |format|
       format.html # index.html.erb

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802202016) do
+ActiveRecord::Schema.define(:version => 20130924200607) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130802202016) do
     t.boolean  "has_accommodation"
     t.boolean  "has_moc_card_service"
     t.string   "logo_url"
+    t.boolean  "visible"
   end
 
   create_table "exhibits", :force => true do |t|
