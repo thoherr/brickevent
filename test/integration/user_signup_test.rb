@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'test_helper'
 require 'capybara/rails'
 
@@ -7,8 +8,8 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   include Capybara::DSL
 
   def login_dummy_user
-    @user = User.create!(:email => "dummy@email.com",  
-                :password => "password",  
+    @user = User.create!(:email => "dummy@email.com",
+                :password => "password",
                 :password_confirmation => "password",
                 :name => "Dummy User")
     @user.confirm!
@@ -16,7 +17,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => "password"
     click_on 'submit'
-    
+
   end
 
   test "sign up" do
@@ -91,8 +92,8 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "sign in" do
-    @user = User.create!(:email => "email@email.com",  
-                :password => "password",  
+    @user = User.create!(:email => "email@email.com",
+                :password => "password",
                 :password_confirmation => "password",
                 :name => "My Name")
     @user.confirm!

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Exhibit < ActiveRecord::Base
   belongs_to :attendance
   has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
