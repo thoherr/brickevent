@@ -19,8 +19,8 @@
     <td><%= to_j_n(exhibit.needs_transportation) %></td>
     <td><%= exhibit.installation_exhibit_id %></td>
     <td><%= exhibit.remarks %></td>
-    <td colspan="3"><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
-    <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %>
+    <td colspan="3"><% if @attendance.event.registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
+    <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %><% end -%>
     <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> --></td>
   </tr>
 <% end %>

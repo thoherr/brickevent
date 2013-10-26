@@ -1,7 +1,8 @@
-<!-- Copyright 2011 by Thomas Herrmann -->
+<!-- Copyright 2011, 2013 by Thomas Herrmann -->
 
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
+<% registration_open = @attendance.event && @attendance.event.registration_open? %>
 <% user_name = @attendance.user.name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
@@ -10,41 +11,31 @@
 
 <hr/>
 
-<p class="Indented">Du hast bisher <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %> angemeldet
-    (<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented">Du hast <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %> angemeldet
+  <% if registration_open -%>(<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>)<% end -%>:</p>
 
-<%= render 'attendees/table', :attendees => @attendance.attendees %>
+<%= render 'attendees/table', :attendees => @attendance.attendees, :event => @attendance.event %>
 
-<p class="Indented"><%= link_to 'Weitere Person (Aussteller/Helfer/Begleitperson) anmelden', new_attendee_path(:attendance_id => @attendance)%><br/>&nbsp;</p>
+<p class="Indented"><% if registration_open -%><%= link_to 'Weitere Person (Aussteller/Helfer/Begleitperson) anmelden', new_attendee_path(:attendance_id => @attendance)%><br/><% end -%>&nbsp;</p>
 
 <hr/>
 
-<p class="Indented">Du hast bisher <%= @attendance.exhibits.count %> MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
-    (<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>):</p>
+<p class="Indented">Du hast <%= @attendance.exhibits.count %> MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
+  <% if registration_open -%>(<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>)<% end -%>:</p>
 
-<%= render 'exhibits/table', :exhibits => @attendance.exhibits %>
+<%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
 
-<p class="Indented"><%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%><br/>&nbsp;</p>
+<p class="Indented"><% if registration_open -%><%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%><br/><% end -%>&nbsp;</p>
 
 <hr/>
 
 <% if @attendance.event && @attendance.event.has_accommodation %>
     <p class="Indented">Deine Übernachtungswünsche
-    (<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%>):</p>
+      <% if registration_open -%>(<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%>)<% end -%>:</p>
 
-    <!-- TODO: Text for event hotel in database!!! -->
-    <p class="Indented">
-    Unser Hotel für BB2012 ist das Pullman Hotel München**** (<a href="www.pullman-hotel-muenchen.de">www.pullman-hotel-muenchen.de</a>).
-    Wir haben hier bereits Zimmer von Mittwoch, 11.4. auf Montag, 16.4. reserviert. Buchungen können ausschliesslich über uns durchgeführt werden!<br/>
-    Der Preis wird von uns subventioniert und beträgt daher nur für Aussteller und Helfer 30 Euro pro Nacht inklusive Frühstück pro Nase bei
-    Übernachtung in einem Doppelzimmer.<br/>
-    <b>Dieser Preis gilt nicht für direkte Reservierungen im Hotel!
-        Bitte bucht die Zimmer ausschliesslich über dieses Anmeldeformular!</b>
-    </p>
+    <%= render 'accommodations/table', :accommodations => @attendance.accommodations, :event => @attendance.event %>
 
-    <%= render 'accommodations/table', :accommodations => @attendance.accommodations %>
-
-    <p class="Indented"><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%><br/>&nbsp;</p>
+    <p class="Indented"><% if registration_open -%><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%><br/><% end -%>&nbsp;</p>
 
     <hr/>
 <% end %>

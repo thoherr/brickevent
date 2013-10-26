@@ -20,8 +20,8 @@
       <td><%= to_j_n(attendee.afols_event) %></td>
       <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
-      <td colspan="2"><%= link_to 'Ändern', edit_attendee_path(attendee) %>
-      <%= link_to 'Löschen', attendee, :confirm => 'Bist Du sicher?', :method => :delete %></td>
+      <td colspan="2"><% if @attendance.event.registration_open? -%><%= link_to 'Ändern', edit_attendee_path(attendee) %>
+      <%= link_to 'Löschen', attendee, :confirm => 'Bist Du sicher?', :method => :delete %><% end -%></td>
   </tr>
 <% end %>
 </table>
