@@ -44,6 +44,8 @@ class Attendance < ActiveRecord::Base
       other_attendance.exhibits.each do |other|
         new_exhibit = other.dup
         new_exhibit.attendance_id = nil
+        new_exhibit.is_part_of_installation = false
+        new_exhibit.installation = nil
         self.exhibits << new_exhibit
       end
       self
