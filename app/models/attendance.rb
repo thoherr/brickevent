@@ -39,6 +39,19 @@ class Attendance < ActiveRecord::Base
     return translist.length
   end
 
+  def copy_exhibits!(other_attendance)
+    if other_attendance.exhibits
+      other_attendance.exhibits.each do |other|
+        new_exhibit = other.dup
+        new_exhibit.attendance_id = nil
+        self.exhibits << new_exhibit
+      end
+      self
+    else
+      nil
+    end
+  end
+
   def to_s
     "#{user.to_s} @ #{event.to_s}"
   end

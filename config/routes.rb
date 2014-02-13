@@ -3,7 +3,11 @@ BrickEvent::Application.routes.draw do
   devise_for :users
 
   resources :accommodations
-  resources :attendances
+  resources :attendances do
+    member do
+      post 'copy_exhibits/:other_attendance_id', :action => :copy_exhibits, :as => :copy_exhibits
+    end
+  end
   resources :attendees
   resources :events
   resources :exhibits

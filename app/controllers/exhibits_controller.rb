@@ -76,13 +76,12 @@ class ExhibitsController < ApplicationController
   # DELETE /exhibits/1
   # DELETE /exhibits/1.json
   def destroy
-    store_referrer
     @exhibit = Exhibit.find(params[:id])
     @attendance_id = @exhibit.attendance_id
     @exhibit.destroy
 
     respond_to do |format|
-      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Das MOC wurde gelöscht.' }
+      format.html { redirect_to attendance_path(@attendance_id), :notice => 'Das MOC wurde gelöscht.' }
       format.json { head :ok }
     end
   end

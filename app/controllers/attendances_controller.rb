@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.json
@@ -14,6 +15,7 @@ class AttendancesController < ApplicationController
   # GET /attendances/1.json
   def show
     @attendance = Attendance.find(params[:id])
+    @other_attendances = @attendance.user.attendances.select {|att| att != @attendance and att.exhibits.count > 0  } if @attendance.user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -51,6 +53,22 @@ class AttendancesController < ApplicationController
         format.json { render :json => @attendance, :status => :created, :location => @attendance }
       else
         format.html { render :action => "new" }
+        format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /attendances/copy_exhibits/:other_attendance_id
+  def copy_exhibits
+    @attendance = Attendance.find(params[:id])
+    @other_attendance = Attendance.find(params[:other_attendance_id])
+
+    respond_to do |format|
+      if @attendance.copy_exhibits! @other_attendance
+        format.html { redirect_to @attendance, :notice => 'Einträge wurden kopiert.' }
+        format.json { head :ok }
+      else
+        format.html { render :action => "show" }
         format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
     end

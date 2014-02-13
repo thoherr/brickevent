@@ -7,35 +7,62 @@
 <% user_name = "<NO USER>" if user_name.nil? %>
 
 <h1>Anmeldung für <%= event_title %></h1>
-<p><div class="EventTitle">Anmeldung von <%= user_name %> zur Veranstaltung <%= event_title %></div></p>
+<p>
+<div class="EventTitle">Anmeldung von <%= user_name %> zur Veranstaltung <%= event_title %></div></p>
 
 <hr/>
 
-<p class="Indented">Du hast <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %> angemeldet
-  <% if registration_open -%>(<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance)%>)<% end -%>:</p>
+<p class="Indented">Du hast <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %>
+  angemeldet
+  <% if registration_open -%>(<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance) %>
+      )
+  <% end -%>:</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees, :event => @attendance.event %>
 
-<p class="Indented"><% if registration_open -%><%= link_to 'Weitere Person (Aussteller/Helfer/Begleitperson) anmelden', new_attendee_path(:attendance_id => @attendance)%><br/><% end -%>&nbsp;</p>
+<p class="Indented">
+  <% if registration_open -%><%= link_to 'Weitere Person (Aussteller/Helfer/Begleitperson) anmelden', new_attendee_path(:attendance_id => @attendance) %>
+      <br/>
+  <% end -%>&nbsp;</p>
 
 <hr/>
 
-<p class="Indented">Du hast <%= @attendance.exhibits.count %> MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
-  <% if registration_open -%>(<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%>)<% end -%>:</p>
+<p class="Indented">Du hast <%= @attendance.exhibits.count %>
+  MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
+  <% if registration_open -%>(<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance) %>)
+  <% end -%>:</p>
+
+<% if @attendance.exhibits.count == 0 and @other_attendances and @other_attendances.count > 0 %>
+    <p class="Indented">Falls Du Deine MOCs einer früheren Veranstaltung für <%= event_title %> kopieren möchtest,
+      klicke bitte auf die entsprechende Veranstaltung:</p>
+    <% @other_attendances.each do |other_attendance|
+      if other_attendance.event %>
+            <p class="Indented"><%= link_to other_attendance.event_title, copy_exhibits_attendance_path(:other_attendance_id => other_attendance.id), method: :post %></p>
+        <% end %>
+    <% end %>
+<% end %>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
 
-<p class="Indented"><% if registration_open -%><%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance)%><br/><% end -%>&nbsp;</p>
+<p class="Indented">
+  <% if registration_open -%><%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance) %>
+      <br/>
+  <% end -%>&nbsp;</p>
 
 <hr/>
 
 <% if @attendance.event && @attendance.event.has_accommodation %>
     <p class="Indented">Deine Übernachtungswünsche
-      <% if registration_open -%>(<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%>)<% end -%>:</p>
+      <% if registration_open -%>
+          (<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>)
+      <% end -%>:</p>
 
     <%= render 'accommodations/table', :accommodations => @attendance.accommodations, :event => @attendance.event %>
 
-    <p class="Indented"><% if registration_open -%><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance)%><br/><% end -%>&nbsp;</p>
+    <p class="Indented">
+      <% if registration_open -%><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>
+          <br/>
+      <% end -%>&nbsp;</p>
 
     <hr/>
 <% end %>
