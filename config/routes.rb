@@ -14,8 +14,8 @@ BrickEvent::Application.routes.draw do
   resources :users
 
   # special data export routes
-  match 'events/:id/export_attendees_csv' => 'events#export_attendees_csv'
-  match 'events/:id/export_exhibits_csv' => 'events#export_exhibits_csv'
+  match 'events/:id/attendees_as_csv' => 'events#attendees_as_csv'
+  match 'events/:id/exhibits_as_csv' => 'events#exhibits_as_csv'
 
   resources :accommodation_types
   resources :attendee_types

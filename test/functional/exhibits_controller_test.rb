@@ -48,6 +48,6 @@ class ExhibitsControllerTest < ActionController::TestCase
       delete :destroy, :id => @exhibit.to_param
     end
 
-    assert_redirected_to attendance_path(1)
+    assert_redirected_to attendance_path attendances(:one)
   end
 end

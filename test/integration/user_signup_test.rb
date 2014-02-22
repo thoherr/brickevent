@@ -113,7 +113,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
     assert page.has_content?('Ausloggen'), "Ausloggen"
 
-    visit new_attendance_path(:event => events(:one).id, :user_id => @user.id)
+    visit new_attendance_path(:event_id => events(:one).id, :user_id => @user.id)
     assert page.has_content?('Anmeldung für'), "Anmeldung für"
     assert page.has_content?('Vielen Dank, dass Du Dich zur Teilnahme an'), "Vielen Dank, dass Du Dich zur Teilnahme an"
 

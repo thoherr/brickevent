@@ -1,9 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  user_id: 1
-  event_id: 1
+  user: one
+  event: three
 
 two:
-  user_id: 1
-  event_id: 2
+  user: two
+  event: three
+
+three:
+  user: thoherr
+  event: three
+

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'test_helper'
 
 class EventsControllerTest < ActionController::TestCase
@@ -30,6 +32,18 @@ class EventsControllerTest < ActionController::TestCase
   test "should show event" do
     get :show, :id => @event.to_param
     assert_response :success
+  end
+
+  test "should get attendees as csv for event" do
+    get :attendees_as_csv, :id => events(:three).to_param
+    assert_response :success
+    assert_equal "Typ;Name;LUG;Nickname;EMail;AFOLs-Abend;Bemerkungen;T-Shirt-Größe\nHelfer;Attendee3;LUG2;Nick3;;true;None;\nAussteller;Attendee2;LUG1;Nick2;;false;Hi, there;\nAussteller;Attendee1;LUG1;Nick1;;true;Glad to see you;\n", response.body
+  end
+
+  test "should get exhibits as csv for event" do
+    get :exhibits_as_csv, :id => events(:three).to_param
+    assert_response :success
+    assert_equal "Name;MOC;Beschreibung;URL;Größe in Studs;Größe;Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemainschaftsprojekt\nMyString;Another great MOC;Even more awesome;MyString;2400 * 6400;Huge;10;10.0;1;false;true;false;false;-\nMyString;My first extraordinary MOC;Very awesome;MyString;160 by 240;MyString;1000;1;1;false;false;false;false;-\n", response.body
   end
 
   test "should get edit" do

@@ -21,7 +21,7 @@ class AttendancesControllerTest < ActionController::TestCase
 
   test "should create attendance" do
     assert_difference('Attendance.count') do
-      @attendance.event_id = 42  # avoid to break uniqueness
+      @attendance.event = events(:fourty_two)  # avoid to break uniqueness
       post :create, :attendance => @attendance.attributes
     end
 

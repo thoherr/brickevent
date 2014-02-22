@@ -2,12 +2,12 @@
 
 one:
   name: Bricking Bavaria 2011
-  title: MyString
+  title: BB2011
   description: MyString
   location: MyString
   url: MyString
-  lug: MyString
-  registration_open: false
+  lug: LUG1
+  registration_open: true
   start_date: 2011-09-01
   end_date: 2011-09-01
   remarks: MyString
@@ -18,8 +18,32 @@ two:
   description: MyString
   location: MyString
   url: MyString
-  lug: MyString
+  lug: LUG2
   registration_open: false
+  start_date: 2011-09-01
+  end_date: 2011-09-01
+  remarks: MyString
+
+three:
+  name: Third Event
+  title: Number 3
+  description: MyString
+  location: MyString
+  url: MyString
+  lug: LUG1
+  registration_open: false
+  start_date: 2011-09-01
+  end_date: 2011-09-01
+  remarks: MyString
+
+fourty_two:
+  name: The Answer
+  title: Number 42
+  description: MyString
+  location: MyString
+  url: MyString
+  lug: LUG1
+  registration_open: true
   start_date: 2011-09-01
   end_date: 2011-09-01
   remarks: MyString

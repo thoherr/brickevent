@@ -24,24 +24,24 @@ class EventsController < ApplicationController
     end
   end
 
-  def export_attendees_csv
+  def attendees_as_csv
     @event = Event.find(params[:id])
-    op = StringIO.new("", "w")
-    @event.export_attendees_csv(op)
-    csv_string = op.string
-    csv_string.gsub!("\n","\r\n")
-    # According to RFC 4180 the MIME type for our csv data is text/csv
-    send_data(csv_string, :type => "text/csv", :filename => params[:filename])
+    if @event
+      # According to RFC 4180 the MIME type for our csv data is text/csv
+      send_data(@event.attendees_as_csv, :type => "text/csv", :filename => params[:filename])
+    else
+      redirect_to events_url
+    end
   end
 
-  def export_exhibits_csv
+  def exhibits_as_csv
     @event = Event.find(params[:id])
-    op = StringIO.new("", "w")
-    @event.export_exhibits_csv(op)
-    csv_string = op.string
-    csv_string.gsub!("\n","\r\n")
-    # According to RFC 4180 the MIME type for our csv data is text/csv
-    send_data(csv_string, :type => "text/csv", :filename => params[:filename])
+    if @event
+      # According to RFC 4180 the MIME type for our csv data is text/csv
+      send_data(@event.exhibits_as_csv, :type => "text/csv", :filename => params[:filename])
+    else
+      redirect_to events_url
+    end
   end
 
   # GET /events/new

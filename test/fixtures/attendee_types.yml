@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: Aussteller
   description: MyString
 
 two:
-  name: MyString
+  name: Helfer
   description: MyString

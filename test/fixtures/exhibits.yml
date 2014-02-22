@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  attendance_id: 1
-  name: MyString
-  description: MyString
+  attendance: one
+  name: My first extraordinary MOC
+  description: Very awesome
   url: MyString
-  size_studs: MyString
+  size_studs: 160 by 240
   size: MyString
-  value: 1
+  value: 1000
   building_hours: 1
   brick_count: 1
   needs_power_supply: false
@@ -18,17 +18,17 @@ one:
   remarks: MyString
 
 two:
-  attendance_id: 1
-  name: MyString
-  description: MyString
+  attendance: two
+  name: Another great MOC
+  description: Even more awesome
   url: MyString
-  size_studs: MyString
-  size: MyString
-  value: 1
-  building_hours: 1
-  brick_count: 1
+  size_studs: 2400 * 6400
+  size: Huge
+  value: 10.000.000
+  building_hours: 10.000
+  brick_count: 1.000.000
   needs_power_supply: false
-  needs_transportation: false
+  needs_transportation: true
   is_installation: false
   is_part_of_installation: false
   installation_exhibit_id: 1

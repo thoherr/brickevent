@@ -22,8 +22,8 @@ class Event < ActiveRecord::Base
     name
   end
 
-  def export_attendees_csv(stream)
-    CSV::Writer.generate(stream, ';') do |csv|
+  def attendees_as_csv
+    CSV.generate({ :col_sep => ';', :quote_char => '"' }) do |csv|
        csv << Attendee.csv_array_header
        self.attendees.each do |item|
           csv << item.csv_array
@@ -31,8 +31,8 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def export_exhibits_csv(stream)
-    CSV::Writer.generate(stream, ';') do |csv|
+  def exhibits_as_csv
+    CSV.generate({ :col_sep => ';', :quote_char => '"' }) do |csv|
        csv << Exhibit.csv_array_header
        self.exhibits.each do |item|
           csv << item.csv_array
