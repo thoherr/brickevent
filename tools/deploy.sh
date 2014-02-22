@@ -11,14 +11,14 @@ if [ ! "$target_host" ]; then
     exit 1
 fi
 
-if [ ! "$app_name" ]; then
+if [ ! "$appname" ]; then
     echo "No app name given in config!"
     exit 1
 fi
 
 src_dir=$(readlink -f "$(dirname "$(readlink -f "$0")")/..")
-archive=/srv/www/rails-archive/${app_name}
-target_dir="/srv/www/rails/${app_name}"
+archive=/srv/www/rails-archive/${appname}
+target_dir="/srv/www/rails/${appname}"
 
 work_branch=$(git branch --no-color | grep '^\*' | cut -d ' ' -f 2-)
 echo "Current work branch: '$work_branch'"
@@ -53,13 +53,13 @@ set +e
 STATUS="`git status | grep "working directory clean"`"
 if [ ! "$STATUS" ]; then
 		echo "------------------------------------------------------------"
-		echo "There are uncommitted changes in \"$REPO_PATH\". 
+		echo "There are uncommitted changes in \"$REPO_PATH\".
 Please use \"git status $REPO_PATH\" to check what has changed and commit!"
 		echo "------------------------------------------------------------"
 		exit 1
 fi
 set -e
-release_qualifier=0 
+release_qualifier=0
 while true; do
 	release_tag="release_$(date +'%Y-%m-%d')_b-${build_number}_git-${short_repo_revision}"
 	if [ $release_qualifier -gt 0 ]; then
@@ -71,12 +71,12 @@ while true; do
 	else
 			break
 	fi
-done	
+done
 
 ### Tag release and place it into the releases base
 git tag $release_tag
 
-tmp_dir=$(mktemp -d)/$app_name
+tmp_dir=$(mktemp -d)/$appname
 if [ $? -gt 0 ]; then
 		echo "Could not create temp dir: $!" >&2
 		exit 1
@@ -88,19 +88,19 @@ cd $tmp_dir
 
 echo $release_tag > release-tag
 
-### Backup the previously deployed instance to 
+### Backup the previously deployed instance to
 arch_dir=${archive}/$(date +"%Y-%m-%d")
 ssh $target_host "
 		set +x
 		mkdir -p $archive
 		ext="1"
-		while true; do 
+		while true; do
 			arch_dir=${arch_dir}_\$ext
 			if [ \! -e \$arch_dir ]; then
 				break
 			fi
 			(( ext++ ))
-		done	
+		done
 		echo \"Archive Dir: \$arch_dir\"
 		rsync -av $target_dir/ \$arch_dir/
 		"
@@ -108,9 +108,9 @@ ssh $target_host "
 ### Deploy the files onto the target_host
 rsync -rtv --delete --exclude .git/ $tmp_dir/ ${target_host}:${target_dir}/
 
-ssh ${target_host} "for i in /etc/rails/${app_name}/*; do x=\$(basename \$i); ln -sf \$i ${target_dir}/config/$x; done"
+ssh ${target_host} "for i in /etc/rails/${appname}/*; do x=\$(basename \$i); ln -sf \$i ${target_dir}/config/$x; done"
 
-set -e 
+set -e
 # chown environment.rb and config.ru here -- passenger will run as the user that owns this file
 ssh ${target_host} "mkdir -p $target_dir/log"
 ssh ${target_host} "chown passenger.passenger $target_dir/log"
@@ -125,7 +125,7 @@ ssh ${target_host} "chown passenger.passenger $target_dir/config.ru"
 ssh ${target_host} /etc/init.d/apache2 restart
 
 cd $REPO_PATH
-git push --tags 
+git push --tags
 git checkout $work_branch
 if [ $build_number != "DEV" ]; then
     git branch -D tmp-deploy
