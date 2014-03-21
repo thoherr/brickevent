@@ -52,6 +52,6 @@ de:
       confirmation_instructions:
         subject: 'Passwort bestätigen'
       reset_password_instructions:
-        subject: 'Passowrt zurücksetzen'
+        subject: 'Passwort zurücksetzen'
       unlock_instructions:
         subject: 'Unlock Instructions'
