@@ -10,3 +10,4 @@ config/database.yml
 public/assets
 vendor/bundle
 BUILDNUMBER
+REVISION

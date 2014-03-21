@@ -30,15 +30,15 @@ if [[ $work_branch =~ no\ branch ]]; then
     work_branch="integration_work"
 fi
 
-if [ -e ../build_number ]; then
-    build_number=$(cat ../build_number)
+if [ -e ../BUILDNUMBER ]; then
+    build_number=$(cat ../BUILDNUMBER)
 
     if [ $(git branch --no-color | grep "tmp_deploy" | wc -l) -gt 0 ]; then
         git branch -D tmp_deploy
     fi
     git branch -f tmp-deploy
     git checkout tmp-deploy
-    git add ../build_number
+    git add ../BUILDNUMBER
     git commit -m "added build number"
 else
     build_number="DEV"
@@ -46,6 +46,7 @@ fi
 
 repo_revision=$(git log | head -1 | cut -f 2 -d  ' ')
 short_repo_revision=$(echo $repo_revision | cut -c 1-6 )
+echo $short_repo_revision > ../REVISION
 
 ### Complain if we deploy from git but there still are uncommitted changes
 REPO_PATH="$(readlink -f ..)/"
