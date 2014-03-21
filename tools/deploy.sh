@@ -39,14 +39,16 @@ if [ -e ../BUILDNUMBER ]; then
     git branch -f tmp-deploy
     git checkout tmp-deploy
     git add -f ../BUILDNUMBER
-    git commit -m "added build number"
 else
     build_number="DEV"
 fi
 
 repo_revision=$(git log | head -1 | cut -f 2 -d  ' ')
 short_repo_revision=$(echo $repo_revision | cut -c 1-6 )
+
 echo $short_repo_revision > ../REVISION
+git add -f ../REVISION
+git commit -m "added build number and revision"
 
 ### Complain if we deploy from git but there still are uncommitted changes
 REPO_PATH="$(readlink -f ..)/"
