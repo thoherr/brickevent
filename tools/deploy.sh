@@ -38,7 +38,7 @@ if [ -e ../BUILDNUMBER ]; then
     fi
     git branch -f tmp-deploy
     git checkout tmp-deploy
-    git add ../BUILDNUMBER
+    git add -f ../BUILDNUMBER
     git commit -m "added build number"
 else
     build_number="DEV"
