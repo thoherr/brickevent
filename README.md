@@ -14,15 +14,40 @@ However, it is planned to generalize this rails app in order to use it for sever
 
 Help from other IT affine LEGO fans is very welcome ;-).
 
+Setup
+-----
+
+After cloning this repository do
+
+    bundle
+
+to get all required gems.
+
+The repository contains a template for the database configuration file, so you have to do
+
+    cp config/database.yml.template config/database.yml
+
+and optionally edit `config/database.yml` to meet your DB preference (the template uses `sqlite3`).
+
+Then
+
+    rake db:migrate
+    rake test
+
+If you want to use the provided `Vagrantfile` resp. the puppet scripts, you have to update the git submodules with
+
+    git submodule init
+    git submodule update
+
 System requirements
 -------------------
 
 Currently the app uses Rails 3.1.12 and Sqlite3/MySQL.
 
-A Vagrantfile and puppet manifests are provided to set up a production ready environment with no pain.
-Deployment is done with tools/deploy.sh for now.
+A `Vagrantfile` and puppet manifests are provided to set up a production ready environment with no pain.
+Deployment is done with `tools/deploy.sh` for now.
 
-It is planned to incorporate bundler and a Capistrano deployment scheme shortly and probably upgrade to Rails 3.2.
+It is planned to incorporate a Capistrano deployment scheme and probably upgrade to Rails 3.2 or even Rails 4.2.
 
 Known Flaws
 -----------
