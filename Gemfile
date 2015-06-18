@@ -19,6 +19,8 @@ gem 'therubyracer'
 
 gem 'capybara'
 
+gem "kramdown" # our markdown library, see http://kramdown.rubyforge.org/
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -58,7 +58,7 @@
               <div class="EventTitle"><%= event.title %></div>
               <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
               </p>
-              <p class="EventDescription"><%= event.description %></p>
+              <p class="EventDescription"><%= convert_markdown(event.description) %></p>
               <% if event.registration_open? %>
                   <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer
                     mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
