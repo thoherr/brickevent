@@ -1,0 +1,1 @@
+- has_transportation in event as flag; don't show flag if false

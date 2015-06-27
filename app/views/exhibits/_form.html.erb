@@ -17,23 +17,23 @@
   <%= f.hidden_field :attendance_id %>
   <div class="field">
     <%= f.label :name, 'Name des MOCs' %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: 80 %>
   </div>
   <div class="field">
     <%= f.label :description, 'Beschreibung des MOCs' %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, cols: 80 %>
   </div>
   <div class="field">
     <%= f.label :url, 'URL mit Bildern, weiteren Infos etc.' %><br />
-    <%= f.text_field :url %>
+    <%= f.text_field :url, size: 80 %>
   </div>
   <div class="field">
     <%= f.label :size_studs, 'Größe in Noppen (z.B. 96x48)' %><br />
-    <%= f.text_field :size_studs %>
+    <%= f.text_field :size_studs, size: 40 %>
   </div>
   <div class="field">
     <%= f.label :size, 'Größe in Zentimetern (z.B. 100x120)' %><br />
-    <%= f.text_field :size %>
+    <%= f.text_field :size, size: 40 %>
   </div>
   <div class="field">
     <%= f.label :value, 'Versicherungswert in Euro (ca.)' %><br />
@@ -43,11 +43,11 @@
   <% if @exhibit.attendance && @exhibit.attendance.event && @exhibit.attendance.event.has_moc_card_service %>
     <div class="field">
       <%= f.label :building_hours, 'Anzahl der Baustunden(ca.)' %><br />
-      <%= f.text_field :building_hours %>
+      <%= f.text_field :building_hours, size: 40 %>
     </div>
     <div class="field">
       <%= f.label :brick_count, 'Anzahl der Steine (ca.)' %><br />
-      <%= f.number_field :brick_count %>
+      <%= f.number_field :brick_count, size: 40 %>
     </div>
   <% end %>
 
@@ -74,7 +74,7 @@
   </div>
   <div class="field">
     <%= f.label :remarks, 'Weitere Bemerkungen und Kommentare (intern für unsere Planung)' %><br />
-    <%= f.text_area :remarks %>
+    <%= f.text_area :remarks, cols: 80, rows: 10 %>
   </div>
   <div class="actions">
     <%= f.submit "Speichern", :id => 'submit' %>

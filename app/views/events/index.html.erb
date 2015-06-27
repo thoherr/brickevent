@@ -52,13 +52,14 @@
     <div class="EventList">
       <% @events.each do |event| %>
           <div class="EventListEntry">
+            <% if event.logo_url %><div><img class="EventLogo" src="<%= event.logo_url %>"></img></div>
+            <% end %>
             <p>
-              <% if event.logo_url %><img class="EventLogo" src="<%= event.logo_url %>"></img>
-              <% end %>
               <div class="EventTitle"><%= event.title %></div>
               <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
               </p>
               <p class="EventDescription"><%= convert_markdown(event.description) %></p>
+              <% unless event.url.nil? -%><p><div class="EventUrl">Weitere Informationen zu '<%= event.title %>' gibt es unter <%= link_to event.url, event.url, :target => "_new" %></div></p><% end -%>
               <% if event.registration_open? %>
                   <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer
                     mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
@@ -83,7 +84,6 @@
               <% if user_signed_in? && current_user.is_admin? -%>
                   <p class="EventSignup"><%= link_to "Übersicht der Anmeldungen für '#{event.title}'", event_path(event) %></p>
               <% end %>
-              <% unless event.url.nil? -%><p><div class="EventUrl">Weitere Informationen zu '<%= event.title %>' gibt es unter <%= link_to event.url, event.url, :target => "_new" %></div></p><% end -%>
               </div>
       <% end %>
     </div>
