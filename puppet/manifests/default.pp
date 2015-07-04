@@ -86,7 +86,7 @@ class { 'sshkeys' :
 
 class { 'railsapp' :
     appname => "BrickEvent",
-    servername => "bb2013.de",
+    servername => "bricking-bavaria.de",
     rubyversion => 'ruby-1.8.7-p352'
 }
 
