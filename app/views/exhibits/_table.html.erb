@@ -17,7 +17,7 @@
     <td><%= exhibit.url %></td>
     <td><%= to_j_n(exhibit.needs_power_supply) %></td>
     <td><%= to_j_n(exhibit.needs_transportation) %></td>
-    <td><%= exhibit.installation_exhibit unless exhibit.installation_exhibit.nil? %></td>
+    <td><%= exhibit.installation unless exhibit.installation.nil? %></td>
     <td><%= exhibit.remarks %></td>
     <td colspan="3"><% if @attendance.event.registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
     <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %><% end -%>
