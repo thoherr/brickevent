@@ -3,19 +3,19 @@
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Neu registrieren", new_registration_path(resource_name), :id => 'sign_up' %><br />
+  <%= link_to "Du hast noch keine Benutzerkennung?", new_registration_path(resource_name), :id => 'sign_up' %><br />
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-  <%= link_to "Passwort vergessen?", new_password_path(resource_name), :id => 'forgot_password' %><br />
+  <%= link_to "Du hast Dein Passwort vergessen?", new_password_path(resource_name), :id => 'forgot_password' %><br />
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Keine Bestätigungsmail erhalten?", new_confirmation_path(resource_name), :id => 'confirm' %><br />
+  <%= link_to "Du hast keine Bestätigungsmail erhalten?", new_confirmation_path(resource_name), :id => 'confirm' %><br />
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Account gesperrt?", new_unlock_path(resource_name), :id => 'unlock' %><br />
+  <%= link_to "Dein Account ist gesperrt?", new_unlock_path(resource_name), :id => 'unlock' %><br />
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
