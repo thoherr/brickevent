@@ -23,9 +23,9 @@ en:
       signed_in: 'Du wurdest erfolgreich eingeloggt.'
       signed_out: 'Du wurdest erfolgreich ausgeloggt.'
     passwords:
-      send_instructions: 'Du erhältst in Kürze eine Mail mit den Angaben zum Zurücksetzen Seines Passworts.'
+      send_instructions: 'Du erhältst in Kürze eine Mail mit den Angaben zum Zurücksetzen Deines Passworts.'
       updated: 'Dein Passwort wurde erfolgreich geändert. Du bist nun eingeloggt.'
-      send_paranoid_instructions: "Wenn Deine Email-Adresse in unserer Datenbank vorhanden ist erhältst Du in Kürze einen Link per Mail, mit dem Du Dein Passwort wieder erhalten kannst."
+      send_paranoid_instructions: "Wenn Deine Email-Adresse in unserer Datenbank vorhanden ist erhältst Du in Kürze einen Link per Mail, mit dem Du Dein Passwort zurücksetzen kannst."
     confirmations:
       send_instructions: 'Du hast eine Bestätigungs-Email erhalten. Bitte bestätige Deine Emailadresse wie in dieser Mail beschrieben.'
       send_paranoid_instructions: 'Wenn Deine Email-Adresse in unserer Datenbank vorhanden ist, erhälst Du in den nächsten Minuten eine Mail mit weiteren Anweisungen.'
@@ -50,6 +50,6 @@ en:
       confirmation_instructions:
         subject: 'Passwort bestätigen'
       reset_password_instructions:
-        subject: 'Passowrt zurücksetzen'
+        subject: 'Passwort zurücksetzen'
       unlock_instructions:
         subject: 'Unlock Instructions'
