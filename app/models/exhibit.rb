@@ -1,8 +1,30 @@
 # encoding: UTF-8
 class Exhibit < ActiveRecord::Base
   belongs_to :attendance
+  belongs_to :unit
   has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
   belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
+
+  before_save :calculate_size_in_meters
+
+  def calculate_size_in_meters
+    factor = if unit then unit.factor else 0.01 end # assume cm if not known
+    if size_x.blank?
+      self.size_x_meter = nil
+    else
+      self.size_x_meter = size_x * factor
+    end
+    if size_y.blank?
+      self.size_y_meter = nil
+    else
+      self.size_y_meter = size_y * factor
+    end
+    if size_z.blank?
+      self.size_z_meter = nil
+    else
+      self.size_z_meter = size_z * factor
+    end
+  end
 
   def event_installations
     return attendance.event_installations if attendance
@@ -42,10 +64,10 @@ class Exhibit < ActiveRecord::Base
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return ["Name", "MOC","Beschreibung","URL","Größe in Studs","Größe","Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemainschaftsprojekt"]
+       return ["Name", "MOC","Beschreibung","URL","Größe in Studs","Größe", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemainschaftsprojekt"]
   end
   def csv_array
-      return [ user_name, name, description, url, size_studs, size, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name ]
+      return [ user_name, name, description, url, size_studs, size, size_x, size_y, size_z, (unit.nil? ? 'cm' : unit.name), size_x_meter, size_y_meter, size_z_meter, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name ]
   end
 
 end

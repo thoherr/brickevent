@@ -5,8 +5,11 @@
     <th>Name</th>
     <th>URL</th>
     <th>Stromversorgung</th>
-    <th>Sammeltransport</th>
+    <% if @attendance && @attendance.event && @attendance.event.has_moc_transport %>
+        <th>Sammeltransport</th>
+    <% end %>
     <th>Gemeinschaftsprojekt</th>
+    <th>Größe (m)</th>
     <th>Bemerkungen</th>
     <th colspan="3"></th>
   </tr>
@@ -16,8 +19,11 @@
     <td><%= exhibit.name %></td>
     <td><%= exhibit.url %></td>
     <td><%= to_j_n(exhibit.needs_power_supply) %></td>
-    <td><%= to_j_n(exhibit.needs_transportation) %></td>
+    <% if @attendance && @attendance.event && @attendance.event.has_moc_transport %>
+        <td><%= to_j_n(exhibit.needs_transportation) %></td>
+    <% end %>
     <td><%= exhibit.installation_exhibit_name %></td>
+    <td><% unless exhibit.size_x_meter.blank? %> <%= exhibit.size_x_meter %> <% unless exhibit.size_y_meter.blank? %> x <%= exhibit.size_y_meter %> <% end %><% unless exhibit.size_z_meter.blank? %> x <%= exhibit.size_z_meter %> <% end %><% end %></td>
     <td><%= exhibit.remarks %></td>
     <td colspan="3"><% if @attendance.event.registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
     <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %><% end -%>

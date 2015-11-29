@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130924200607) do
+ActiveRecord::Schema.define(:version => 20151129131817) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130924200607) do
     t.boolean  "has_moc_card_service"
     t.string   "logo_url"
     t.boolean  "visible"
+    t.boolean  "has_moc_transport"
   end
 
   create_table "exhibits", :force => true do |t|
@@ -104,6 +105,21 @@ ActiveRecord::Schema.define(:version => 20130924200607) do
     t.boolean  "is_part_of_installation"
     t.integer  "installation_exhibit_id"
     t.text     "remarks",                 :limit => 65384
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "size_x"
+    t.integer  "size_y"
+    t.integer  "size_z"
+    t.integer  "unit_id"
+    t.decimal  "size_x_meter"
+    t.decimal  "size_y_meter"
+    t.decimal  "size_z_meter"
+  end
+
+  create_table "units", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.decimal  "factor"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
