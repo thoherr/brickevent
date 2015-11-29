@@ -7,6 +7,9 @@ one:
   url: MyString
   size_studs: 160 by 240
   size: MyString
+  size_x: 160
+  size_y: 240
+  unit: studs
   value: 1000
   building_hours: 1
   brick_count: 1
@@ -24,6 +27,9 @@ two:
   url: MyString
   size_studs: 2400 * 6400
   size: Huge
+  size_x: 2400
+  size_y: 6400
+  unit: studs
   value: 10.000.000
   building_hours: 10.000
   brick_count: 1.000.000

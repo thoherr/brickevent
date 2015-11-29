@@ -7,3 +7,13 @@ one:
 two:
   name: MyString
   factor: 9.99
+
+m:
+  name: m
+  description: Meter
+  factor: 1.00
+
+studs:
+  name: studs
+  description: Noppen
+  factor: 0.008
