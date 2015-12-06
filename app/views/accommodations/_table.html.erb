@@ -13,7 +13,7 @@
     <td><%= accommodation.accommodation_type.name %></td>
     <td><%= accommodation.count %></td>
     <td><%= accommodation.remarks %></td>
-    <td colspan="2"><% if @attendance.event.registration_open? -%><%= link_to 'Ändern', edit_accommodation_path(accommodation) %>
+    <td colspan="2"><% if @attendance.event_registration_open? -%><%= link_to 'Ändern', edit_accommodation_path(accommodation) %>
     <%= link_to 'Löschen', accommodation, :confirm => 'Bist Du sicher?', :method => :delete %><% end -%></td>
   </tr>
 <% end %>

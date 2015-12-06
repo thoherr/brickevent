@@ -6,6 +6,12 @@ class Event < ActiveRecord::Base
   has_many :accommodations, :through => :attendances
   has_many :exhibits, :through => :attendances
 
+  default_scope order('start_date desc')
+
+  def self.open_events
+    Event.find_all_by_registration_open(true)
+  end
+
   def number_of_attendees
     return attendees.count
   end

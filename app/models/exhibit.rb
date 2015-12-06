@@ -4,6 +4,8 @@ class Exhibit < ActiveRecord::Base
   belongs_to :unit
   has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
   belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
+  has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id"
+  belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id"
 
   before_save :calculate_size_in_meters
 
@@ -24,6 +26,15 @@ class Exhibit < ActiveRecord::Base
     else
       self.size_z_meter = size_z * factor
     end
+  end
+
+  def copy_for_new_attendance
+    new_exhibit = self.dup
+    new_exhibit.attendance_id = nil
+    new_exhibit.is_part_of_installation = false
+    new_exhibit.installation = nil
+    new_exhibit.former_exhibit_id = self.id
+    new_exhibit
   end
 
   def event_installations

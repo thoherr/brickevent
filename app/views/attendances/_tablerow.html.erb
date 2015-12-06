@@ -1,0 +1,32 @@
+<tr>
+  <td><%= link_to attendance.event_title, attendance %><br/>
+    <span class="EventTime">von <%= attendance.event.start_date %> bis <%= attendance.event.end_date %></span><br/>
+
+    <% if attendance.attendees.count > 0 %>
+        <p>
+          <% attendance.attendees.each do |attendee| %>
+              <%= attendee.name %> (<%= attendee.attendee_type -%>)<br/>
+          <% end %>
+        </p>
+    <% end %>
+
+  </td>
+  <td>
+    <% if attendance.exhibits.count > 0 %>
+          <% attendance.exhibits.each do |exhibit| %>
+              <p>
+
+              <%= exhibit.name %>
+              <% attendance.other_open_attendances.each do |to_attendance| %>
+                  <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), method: :post %>
+              <% end %>
+              </p>
+          <% end %>
+        <p>
+          <% attendance.other_open_attendances.each do |to_attendance| %>
+              <%= link_to "Alle MOCs --> #{to_attendance.event_title}", copy_exhibits_attendance_path(:id => to_attendance.id, :other_attendance_id => attendance.id), method: :post %><br/>
+          <% end %>
+        </p>
+  <% end %>
+  </td>
+</tr>

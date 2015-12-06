@@ -6,6 +6,8 @@ BrickEvent::Application.routes.draw do
   resources :attendances do
     member do
       post 'copy_exhibits/:other_attendance_id', :action => :copy_exhibits, :as => :copy_exhibits
+      post 'add_former_exhibit/:former_exhibit_id', :action => :add_former_exhibit, :as => :add_former_exhibit
+      get 'former_exhibits'
     end
   end
   resources :attendees

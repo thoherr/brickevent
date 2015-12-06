@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151129131817) do
+ActiveRecord::Schema.define(:version => 20151129150738) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20151129131817) do
     t.decimal  "size_x_meter"
     t.decimal  "size_y_meter"
     t.decimal  "size_z_meter"
+    t.integer  "former_exhibit_id"
   end
 
   create_table "units", :force => true do |t|

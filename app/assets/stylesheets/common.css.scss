@@ -35,7 +35,7 @@ img {
 }
 
 a {
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: bold;
 }
 
@@ -211,7 +211,7 @@ a {
 .FrontendTable {
     margin-left: 25px;
     margin-bottom: 25px;
-    border: 2px solid #ddd;
+/*    border: 2px solid #ddd; */
     border-collapse: collapse;
     font-size: 13px;
 }
@@ -224,11 +224,22 @@ a {
    padding: 5px;
 }
 
-.FrontendTable td {
-   border: 1px solid #ddd;
-   padding: 5px;
+.FrontendTable th.open {
+  background: #efe;
 }
 
+.FrontendTable th.closed {
+  background: #fee;
+}
+
+.FrontendTable td {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+.FrontendTable .whitespace {
+  border: none;
+}
 
 .Flash {
     background-color: #eee;

@@ -25,9 +25,15 @@
     <td><%= exhibit.installation_exhibit_name %></td>
     <td><% unless exhibit.size_x_meter.blank? %> <%= exhibit.size_x_meter %> <% unless exhibit.size_y_meter.blank? %> x <%= exhibit.size_y_meter %> <% end %><% unless exhibit.size_z_meter.blank? %> x <%= exhibit.size_z_meter %> <% end %><% end %></td>
     <td><%= exhibit.remarks %></td>
-    <td colspan="3"><% if @attendance.event.registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
+    <td colspan="3"><% if @attendance.event_registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
     <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %><% end -%>
-    <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> --></td>
+    <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> -->
+      <% Event.open_events.each do |e| %>
+        <% if e != @attendance.event && current_user.attends_event?(e) %>
+              <%= link_to "--> #{e.title}", add_former_exhibit_attendance_path(:id => current_user.attendance_for_event(e), :former_exhibit_id => exhibit.id), method: :post %><br/>
+          <% end %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

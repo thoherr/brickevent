@@ -14,6 +14,24 @@ class Attendance < ActiveRecord::Base
     end
   end
 
+  def other_open_attendances
+    return user.open_attendances.select {|att| att != self } if user
+    return []
+  end
+
+  def other_attendances_with_exhibits
+    return user.attendances.select {|att| att != self && att.exhibits.count > 0  } if user
+    return []
+  end
+
+  def has_former_exhibits?
+    return !other_attendances_with_exhibits.empty?
+  end
+
+  def event_registration_open?
+    event && event.registration_open?
+  end
+
   def event_installations
     return event.installations if event
     return []
@@ -39,14 +57,15 @@ class Attendance < ActiveRecord::Base
     return translist.length
   end
 
+  def add_former_exhibit!(exhibit)
+    new_exhibit = exhibit.copy_for_new_attendance
+    self.exhibits << new_exhibit
+  end
+
   def copy_exhibits!(other_attendance)
     if other_attendance.exhibits
-      other_attendance.exhibits.each do |other|
-        new_exhibit = other.dup
-        new_exhibit.attendance_id = nil
-        new_exhibit.is_part_of_installation = false
-        new_exhibit.installation = nil
-        self.exhibits << new_exhibit
+      other_attendance.exhibits.each do |exhibit|
+        self.add_former_exhibit! exhibit
       end
       self
     else

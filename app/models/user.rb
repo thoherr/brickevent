@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :lug, :nickname, :address, :phone, :accept_data_storage
 
-  has_many :attendances
+  has_many :attendances, :order => 'id desc'
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
   has_many :accommodations, :through => :attendances
@@ -24,6 +24,14 @@ class User < ActiveRecord::Base
 
   def attends_event? (event)
     return !attendance_for_event(event).blank?
+  end
+
+  def open_attendances
+    return attendances.select {|att| att.event_registration_open? }
+  end
+
+  def has_open_attendances?
+    ! open_attendances.empty?
   end
 
   def to_s

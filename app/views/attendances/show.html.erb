@@ -2,7 +2,7 @@
 
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
-<% registration_open = @attendance.event && @attendance.event.registration_open? %>
+<% registration_open = @attendance.event && @attendance.event_registration_open? %>
 <% user_name = @attendance.user.name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
@@ -14,40 +14,23 @@
 
 <p class="Indented">Du hast <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %>
   angemeldet
-  <% if registration_open -%>(<%= link_to 'Weitere Person anmelden', new_attendee_path(:attendance_id => @attendance) %>
-      )
+  <% if registration_open -%>(<%= link_to "#{@attendance.attendees.count == 0 ? 'Erste' : 'Weitere'} Person anmelden", new_attendee_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees, :event => @attendance.event %>
-
-<p class="Indented">
-  <% if registration_open -%><%= link_to 'Weitere Person (Aussteller/Helfer/Begleitperson) anmelden', new_attendee_path(:attendance_id => @attendance) %>
-      <br/>
-  <% end -%>&nbsp;</p>
 
 <hr/>
 
 <p class="Indented">Du hast <%= @attendance.exhibits.count %>
   MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
-  <% if registration_open -%>(<%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance) %>)
+  <% if registration_open -%>(<%= link_to "#{@attendance.exhibits.count == 0 ? 'Erstes' : 'Weiteres'} MOC anmelden", new_exhibit_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
-
-<% if @attendance.exhibits.count == 0 and @other_attendances and @other_attendances.count > 0 %>
-    <p class="Indented">Falls Du Deine MOCs einer früheren Veranstaltung für <%= event_title %> kopieren möchtest,
-      klicke bitte auf die entsprechende Veranstaltung:</p>
-    <% @other_attendances.each do |other_attendance|
-      if other_attendance.event %>
-            <p class="Indented"><%= link_to other_attendance.event_title, copy_exhibits_attendance_path(:other_attendance_id => other_attendance.id), method: :post %></p>
-        <% end %>
-    <% end %>
-<% end %>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
 
-<p class="Indented">
-  <% if registration_open -%><%= link_to 'Weiteres MOC anmelden', new_exhibit_path(:attendance_id => @attendance) %>
-      <br/>
-  <% end -%>&nbsp;</p>
+<% if @attendance.event_registration_open? and @attendance.has_former_exhibits? %>
+    <p class="Indented"><b>Hinweis:</b> Unter <%= link_to 'Meine Anmeldungen', attendances_path %> kannst Du die Daten von früheren MOCs nach '<%= event_title %>' kopieren!</p>
+<% end %>
 
 <hr/>
 

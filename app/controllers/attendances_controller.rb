@@ -3,7 +3,9 @@ class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.json
   def index
-    @attendances = Attendance.where(:user_id => current_user.id)
+    @attendances = Attendance.where(:user_id => current_user.id).order('id desc')
+    @past_attendances = @attendances.select { |att| !att.event.start_date.nil? and att.event.start_date <= Date.today }
+    @future_attendances = @attendances.select { |att| att.event.start_date.nil? or att.event.start_date > Date.today }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +17,6 @@ class AttendancesController < ApplicationController
   # GET /attendances/1.json
   def show
     @attendance = Attendance.find(params[:id])
-    @other_attendances = @attendance.user.attendances.select {|att| att != @attendance and att.exhibits.count > 0  } if @attendance.user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -65,12 +66,39 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.copy_exhibits! @other_attendance
-        format.html { redirect_to @attendance, :notice => 'Einträge wurden kopiert.' }
+        format.html { redirect_to attendances_url, :notice => 'Einträge wurden kopiert.' }
         format.json { head :ok }
       else
         format.html { render :action => "show" }
         format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /attendances/add_former_exhibit/:former_exhibit_id
+  def add_former_exhibit
+    @attendance = Attendance.find(params[:id])
+    # TODO
+    @former_exhibit = Exhibit.find(params[:former_exhibit_id])
+    respond_to do |format|
+      if @attendance.add_former_exhibit! @former_exhibit
+        format.html { redirect_to attendances_url, :notice => 'Eintrag wurde kopiert.' }
+        format.json { head :ok }
+      else
+        format.html { render :action => "show" }
+        format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /attendances/former_exhibits
+  def former_exhibits
+    @attendance = Attendance.find(params[:id])
+    # TODO
+    # @former_exhibits =
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @attendance }
     end
   end
 

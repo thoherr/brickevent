@@ -1,23 +1,31 @@
 <h1>Meine Anmeldungen</h1>
 
-<h2>Du hast Dich für die folgenden Veranstaltungen angemeldet:</h2>
-
-<table class="FrontendTable">
-  <tr>
-    <th>Veranstaltung</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @attendances.each do |attendance| %>
-  <tr>
-    <td><%= attendance.event.title %></td>
-    <td><%= attendance.attendees.count %> Teilnehmer, <%= attendance.exhibits.count %> MOCs</td>
-    <td>
-        <% if attendance.event.registration_open? %>
-          <%= link_to 'Details zu dieser Anmeldung', attendance %>
+<% if @attendances.empty? %>
+    <h2>Du hast Dich bisher noch zu keiner Veranstaltung angemeldet.</h2>
+<% else %>
+    <% if current_user.has_open_attendances? %>
+    <p class="Indented"><b>Hinweis:</b> Mit Hilfe der Links bei den MOCs kannst Du deren Daten für aktuelle Veranstaltungen kopieren.</p>
+    <% end %>
+    <% unless @future_attendances.empty? %>
+        <table class="FrontendTable">
+          <tr>
+            <th colspan="2" class="open">Zukünftige Veranstaltungen, zu denen Du Dich angemeldet hast</th>
+          </tr>
+          <% @future_attendances.each do |attendance| %>
+              <%= render 'tablerow', :attendance => attendance %>
+          <% end %>
+    <% end %>
+    <tr class="whitespace">
+      <td colspan="2" class="whitespace">&nbsp;</td>
+    </tr>
+    <% unless @past_attendances.empty? %>
+        <tr>
+          <th colspan="2" class="closed">Frühere Veranstaltungen, an denen Du teilgenommen hast</th>
+        </tr>
+        <% @past_attendances.each do |attendance| %>
+            <%= render 'tablerow', :attendance => attendance %>
         <% end %>
-    </td>
-  </tr>
+    <% end %>
+    </table>
+
 <% end %>
-</table>
