@@ -6,8 +6,8 @@
     <% if current_user.has_open_attendances? %>
     <p class="Indented"><b>Hinweis:</b> Mit Hilfe der Links bei den MOCs kannst Du deren Daten für aktuelle Veranstaltungen kopieren.</p>
     <% end %>
+    <table class="FrontendTable">
     <% unless @future_attendances.empty? %>
-        <table class="FrontendTable">
           <tr>
             <th colspan="2" class="open">Zukünftige Veranstaltungen, zu denen Du Dich angemeldet hast</th>
           </tr>

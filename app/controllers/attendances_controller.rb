@@ -46,7 +46,6 @@ class AttendancesController < ApplicationController
   # POST /attendances.json
   def create
     @attendance = Attendance.new(params[:attendance])
-    @attendance.create_user_as_first_attendee
 
     respond_to do |format|
       if @attendance.save

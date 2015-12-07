@@ -52,39 +52,45 @@
     <div class="EventList">
       <% @events.each do |event| %>
           <div class="EventListEntry">
-            <% if event.logo_url %><div><img class="EventLogo" src="<%= event.logo_url %>"></img></div>
+            <% if event.logo_url %>
+                <div><img class="EventLogo" src="<%= event.logo_url %>"></img></div>
             <% end %>
             <p>
-              <div class="EventTitle"><%= event.title %></div>
-              <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
-              </p>
-              <p class="EventDescription"><%= convert_markdown(event.description) %></p>
-              <% unless event.url.nil? -%><p><div class="EventUrl">Weitere Informationen zu '<%= event.title %>' gibt es unter <%= link_to event.url, event.url, :target => "_new" %></div></p><% end -%>
-              <% if event.registration_open? %>
-                  <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer
-                    mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
-                  <% if user_signed_in? %>
-                      <% if current_user.attends_event? event -%>
-                          <p class="EventSignup"><%= link_to "Teilnahme an '#{event.title}' bearbeiten", attendance_path(current_user.attendance_for_event event) %></p>
-                      <% else -%>
-                          <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' anmelden", new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
-                      <% end -%>
-                  <% else -%>
-                      <p class="EventSignup">Um Deine Teilname an '<%= event.title %>' anzumelden, musst Du Dich
-                        zunächst <%= link_to "registrieren", new_user_session_path %>
-                  <% end %>
-              <% else %>
-                  <p class="EventInfo">Die Anmeldung für diese Veranstaltung ist geschlossen! Es
-                    sind <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs
-                    angemeldet.</p>
-                  <% if user_signed_in? && current_user.attends_event?(event) -%>
-                      <p class="EventSignup"><%= link_to "Meine Teilnahmedaten für '#{event.title}' anzeigen", attendance_path(current_user.attendance_for_event event) %></p>
-                  <% end %>
-              <% end %>
-              <% if user_signed_in? && current_user.is_admin? -%>
-                  <p class="EventSignup"><%= link_to "Übersicht der Anmeldungen für '#{event.title}'", event_path(event) %></p>
-              <% end %>
-              </div>
+
+            <div class="EventTitle"><%= event.title %></div>
+            <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
+            </p>
+            <% unless event.description.nil? || event.description.empty? -%><p class="EventDescription"><%= convert_markdown(event.description) %></p><% end %>
+            <% unless event.url.nil? || event.url.empty? -%><p>
+                <div class="EventUrl">Weitere Informationen zu '<%= event.title %>' gibt es
+                  unter <%= link_to event.url, event.url, :target => "_new" %></div>
+                </p>
+            <% end -%>
+            <% if event.registration_open? %>
+                <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer
+                  mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
+                <% if user_signed_in? %>
+                    <% if current_user.attends_event? event -%>
+                        <p class="EventSignup"><%= link_to "Teilnahme an '#{event.title}' bearbeiten", attendance_path(current_user.attendance_for_event event) %></p>
+                    <% else -%>
+                        <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' anmelden", new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
+                    <% end -%>
+                <% else -%>
+                    <p class="EventSignup">Um Deine Teilname an '<%= event.title %>' anzumelden, musst Du Dich
+                      zunächst <%= link_to "registrieren", new_user_session_path %>
+                <% end %>
+            <% else %>
+                <p class="EventInfo">Die Anmeldung für diese Veranstaltung ist geschlossen! Es
+                  sind <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs
+                  angemeldet.</p>
+                <% if user_signed_in? && current_user.attends_event?(event) -%>
+                    <p class="EventSignup"><%= link_to "Meine Teilnahmedaten für '#{event.title}' anzeigen", attendance_path(current_user.attendance_for_event event) %></p>
+                <% end %>
+            <% end %>
+            <% if user_signed_in? && current_user.is_admin? -%>
+                <p class="EventSignup"><%= link_to "Übersicht der Anmeldungen für '#{event.title}'", event_path(event) %></p>
+            <% end %>
+          </div>
       <% end %>
     </div>
 

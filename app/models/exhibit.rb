@@ -4,7 +4,7 @@ class Exhibit < ActiveRecord::Base
   belongs_to :unit
   has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
   belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
-  has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id"
+  has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", :dependent => :nullify
   belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id"
 
   before_save :calculate_size_in_meters
@@ -26,6 +26,25 @@ class Exhibit < ActiveRecord::Base
     else
       self.size_z_meter = size_z * factor
     end
+  end
+
+  def get_ancestor
+    return self if former_exhibit.nil?
+    return former_exhibit.get_ancestor
+  end
+
+  def is_first?
+    former_exhibit.nil?
+  end
+
+  def is_latest?
+    subsequent_exhibits.empty?
+  end
+
+  def is_version_of?(other)
+    return true if other == self
+    return false if self.is_first? && other.is_first?
+    return self.get_ancestor.is_version_of?(other.get_ancestor)
   end
 
   def copy_for_new_attendance

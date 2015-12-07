@@ -19,10 +19,14 @@ two:
   is_admin: false
 
 thoherr:
-    email: mail@thoher.de
+    email: mail@thoherr.de
+    # test123
+    encrypted_password: $2a$10$vAt64bXkDXHsAuhcBbACXur3Bvqsq.t7b0Z9Ectq42EXtIvmkoo8W
     name: Thomas Herrmann
     lug: Bricking Bavaria e. V.
     nickname: thoherr
     address: Jeschenstr. 49
     phone: +49 171 5715348
-    is_admin: false
+    is_admin: true
+    confirmed_at: 2015-12-01
+    accept_data_storage: true
