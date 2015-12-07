@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151129150738) do
+ActiveRecord::Schema.define(:version => 20151207174802) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"

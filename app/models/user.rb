@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :lug, :nickname, :address, :phone, :accept_data_storage
 
-  has_many :attendances, :order => 'id desc'
+  has_many :attendances, :order => 'created_at desc'
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
   has_many :accommodations, :through => :attendances
