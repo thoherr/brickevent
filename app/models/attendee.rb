@@ -15,6 +15,12 @@ class Attendee < ActiveRecord::Base
     return "NO ATTENDANCE"
   end
 
+  def attendee_email
+    return self.email unless self.email.blank?
+    return attendance.user.email unless attendance.blank? or attendance.user.blank?
+    return ""
+  end
+
   def phone
     return attendance.user.phone unless attendance.blank? or attendance.user.blank?
     return ""

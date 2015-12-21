@@ -28,6 +28,14 @@ class Event < ActiveRecord::Base
     name
   end
 
+  def attendees_mails
+    mails = Set.new
+    self.attendees.each do |a|
+       mails << a.attendee_email unless a.attendee_email.blank?
+    end
+    mails.to_a.join(',')
+  end
+
   def attendees_as_csv
     CSV.generate({ :col_sep => ';', :quote_char => '"' }) do |csv|
        csv << Attendee.csv_array_header

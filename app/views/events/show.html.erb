@@ -13,12 +13,15 @@
     <%= render 'attendances/exportlist', :attendances => @event.attendances %>
 
     <h2>Teilnehmerliste
-    <%= button_to 'CSV Datei der Teilnehmer exportieren', :action => 'attendees_as_csv', :id => @event, :filename => 'teilnehmer.csv' %>
+            <%= button_to 'CSV Datei der Teilnehmer exportieren', :action => 'attendees_as_csv', :id => @event, :filename => 'teilnehmer.csv' %>
     </h2>
+    <p class="Indented">
+    <%= mail_to 'info@bricking-bavaria.de', 'Mail an alle Teilnehmer', bcc: @event.attendees_mails %>
+    </p>
     <%= render 'attendees/exportlist', :attendees => @event.attendees %>
 
     <h2>MOC-Liste
-    <%= button_to 'CSV Datei der MOCs exportieren', :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
+            <%= button_to 'CSV Datei der MOCs exportieren', :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
     </h2>
     <%= render 'exhibits/exportlist', :exhibits => @event.exhibits, :event => @event %>
 
