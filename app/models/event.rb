@@ -42,13 +42,13 @@ class Event < ActiveRecord::Base
 
   def required_space_square_meters_registered
     square_meters = 0.0
-    exhibits.each { |e| square_meters += e.required_space_in_square_meters}
+    exhibits.each { |e| square_meters += e.required_space_in_square_meters unless e.is_part_of_installation? }
     square_meters
   end
 
   def required_space_square_meters_approved
     square_meters = 0.0
-    exhibits.each { |e| square_meters += e.required_space_in_square_meters if e.is_approved? }
+    exhibits.each { |e| square_meters += e.required_space_in_square_meters if e.is_approved? && ! e.is_part_of_installation? }
     square_meters
   end
 
