@@ -2,6 +2,7 @@
 
 <table class="AttendeesTable FrontendTable">
     <tr>
+      <th>Bestätigt</th>
       <th>Name</th>
       <th>Nickname</th>
       <th>E-Mail</th>
@@ -16,6 +17,7 @@
   <% user = attendance.user %>
   <% unless user.blank? then %>
   <tr>
+    <td><%= to_j_n(attendance.is_approved?) %></td>
       <td><%= user.name %></td>
       <td><%= user.nickname %></td>
       <td><%= user.email %></td>

@@ -7,7 +7,14 @@ class Attendance < ActiveRecord::Base
 
   after_create :create_user_as_first_attendee
 
+  before_update :approve_dependents, :if => :is_approved_changed?
+
   validates_uniqueness_of :event_id, :scope => :user_id
+
+  def approve_dependents
+    attendees.each { |a| a.is_approved = is_approved }
+    exhibits.each { |e| e.is_approved = is_approved }
+  end
 
   def create_user_as_first_attendee
     if user

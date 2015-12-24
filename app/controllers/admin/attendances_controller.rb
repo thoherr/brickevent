@@ -1,7 +1,7 @@
 module Admin 
   class AttendancesController < AdminController
     active_scaffold :attendance do |config|
-      list_columns = [:user, :event]
+      list_columns = [:user, :event, :is_approved]
       show_columns = list_columns
 #      update_columns = [:user_type, :email, :firstname, :lastname, :title, :salutation, :street_1, :street_2, :zipcode, :city, :tel, :institution, :sign_in_count, :tnc, :pp]
 #      create_columns = update_columns

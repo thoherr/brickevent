@@ -2,6 +2,7 @@
 
 <table class="AttendeesTable FrontendTable">
     <tr>
+      <th>Bestätigt</th>
       <th></th>
       <th>Name</th>
       <th>Nickname</th>
@@ -16,6 +17,7 @@
 
 <% attendees.each do |attendee| %>
   <tr>
+    <td><%= to_j_n(attendee.is_approved?) %></td>
       <td><%= attendee.attendee_type %></td>
       <td><%= attendee.name %></td>
       <td><%= attendee.nickname %></td>

@@ -2,6 +2,7 @@
 
 <table class="ExhibitsTable FrontendTable">
   <tr>
+    <th>Bestätigt</th>
     <th>Anmeldername</th>
     <th>MOC</th>
     <th>Text f&uuml;r MOC-Karte</th>
@@ -21,6 +22,7 @@
 
 <% exhibits.each do |exhibit| %>
   <tr>
+    <td><%= to_j_n(exhibit.is_approved?) %></td>
     <td><%= exhibit.user_name %></td>
     <td><%= exhibit.name %></td>
     <td><%= exhibit.description %></td>

@@ -37,10 +37,10 @@ class Attendee < ActiveRecord::Base
 
   # CSV Stuff
   def Attendee.csv_array_header
-       return ["Typ","Name","LUG","Nickname","EMail","AFOLs-Abend","Bemerkungen","T-Shirt-Größe"]
+       return ["Typ","Bestätigt","Name","LUG","Nickname","EMail","AFOLs-Abend","Bemerkungen","T-Shirt-Größe"]
   end
   def csv_array
-      return [ attendee_type.name, name, lug, nickname, email, afols_event, remarks, shirt_size ]
+      return [ attendee_type.name, is_approved?, name, lug, nickname, email, afols_event, remarks, shirt_size ]
   end
 
 end

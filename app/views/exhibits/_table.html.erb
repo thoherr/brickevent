@@ -2,6 +2,7 @@
 
 <table class="ExhibitsTable FrontendTable">
   <tr>
+    <th>Bestätigt</th>
     <th>Name</th>
     <th>URL</th>
     <th>Stromversorgung</th>
@@ -16,6 +17,7 @@
 
   <% exhibits.each do |exhibit| %>
       <tr>
+        <td><%= to_j_n(exhibit.is_approved?) %></td>
         <td><%= exhibit.name %></td>
         <td><%= exhibit.url %></td>
         <td><%= to_j_n(exhibit.needs_power_supply) %></td>

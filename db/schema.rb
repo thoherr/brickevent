@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151214143554) do
+ActiveRecord::Schema.define(:version => 20151224143246) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20151214143554) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_approved"
   end
 
   add_index "attendances", ["user_id", "event_id"], :name => "index_attendances_on_user_id_and_event_id", :unique => true
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20151214143554) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "shirt_size"
+    t.boolean  "is_approved"
   end
 
   create_table "builders", :force => true do |t|
@@ -115,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20151214143554) do
     t.decimal  "size_y_meter"
     t.decimal  "size_z_meter"
     t.integer  "former_exhibit_id"
+    t.boolean  "is_approved"
   end
 
   create_table "units", :force => true do |t|
