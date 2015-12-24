@@ -85,7 +85,23 @@ class Exhibit < ActiveRecord::Base
     return size_x_meter * size_y_meter unless size_x_meter.blank? or size_y_meter.blank?
     return size_y_meter * size_z_meter unless size_y_meter.blank? or size_z_meter.blank?
     return size_z_meter * size_x_meter unless size_z_meter.blank? or size_x_meter.blank?
-    return 0.0
+    0.0
+  end
+
+  def required_space_in_square_meters
+    required_space=size_in_square_meters
+    if required_space <= 0.25
+      return 0.25
+    elsif required_space <= 0.5
+      return 0.50
+    elsif required_space <= 1.0
+      return 1.00
+    else
+      return (size_x_meter * size_y_meter).ceil unless size_x_meter.blank? or size_y_meter.blank?
+      return (size_y_meter * size_z_meter).ceil unless size_y_meter.blank? or size_z_meter.blank?
+      return (size_z_meter * size_x_meter).ceil unless size_z_meter.blank? or size_x_meter.blank?
+    end
+    0.0
   end
 
   def size_text
@@ -97,7 +113,7 @@ class Exhibit < ActiveRecord::Base
     return "k.A." if size.blank? && size_studs.blank?
     t1 = if size.blank? then "" else size + " cm" end
     t2 = if size_studs.blank? then "" else size_studs + " Noppen" end
-    return t1 + if t1.blank? or t2.blank? then "" else ", " end + t2
+    t1 + if t1.blank? or t2.blank? then "" else ", " end + t2
   end
 
   def to_s

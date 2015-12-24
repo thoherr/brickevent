@@ -23,10 +23,23 @@
     <h2>MOC-Liste
             <%= button_to 'CSV Datei der MOCs exportieren', :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
     </h2>
-    <p class="Indented">
-      Angemeldete Gesamtgröße: <%= @event.square_meters_registered.round(2)  %> qm<br/>
-      Bestätigte Gesamtgröße: <%= @event.square_meters_approved.round(2) %> qm
-    </p>
+    <table class="ExhibitsTable FrontendTable">
+      <tr>
+        <th>Größe in qm</th>
+        <th>MOC-Größe</th>
+        <th>Aufgerundet</th>
+      </tr>
+      <tr>
+        <td>angemeldet</td>
+        <td><%= @event.size_square_meters_registered.round(2) %></td>
+        <td><%= @event.required_space_square_meters_registered.round(2) %></td>
+      </tr>
+      <tr>
+        <td>bestätigt</td>
+        <td><%= @event.size_square_meters_approved.round(2) %></td>
+        <td><%= @event.required_space_square_meters_approved.round(2) %> </td>
+      </tr>
+    </table>
     <%= render 'exhibits/exportlist', :exhibits => @event.exhibits, :event => @event %>
 
     <% if @event.has_accommodation %>
