@@ -35,6 +35,22 @@ class ExhibitsController < ApplicationController
     end
   end
 
+  def approve
+    @exhibit = Exhibit.find(params[:id])
+    if @exhibit
+      @exhibit.is_approved=!@exhibit.is_approved
+      respond_to do |format|
+        if @exhibit.save
+          format.html { redirect_to @exhibit.attendance.event, :notice => 'MOC-Bestätigung geändert.' }
+          format.json { render :json => @exhibit.attendance.event, :status => :updated, :location => @event }
+        else
+          format.html { render :action => "show" }
+          format.json { render :json => @exhibit.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   # GET /exhibits/1/edit
   def edit
     store_referrer

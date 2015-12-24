@@ -12,8 +12,8 @@ class Attendance < ActiveRecord::Base
   validates_uniqueness_of :event_id, :scope => :user_id
 
   def approve_dependents
-    attendees.each { |a| a.is_approved = is_approved }
-    exhibits.each { |e| e.is_approved = is_approved }
+    self.attendees.each { |a| a.is_approved = is_approved; a.save }
+    self.exhibits.each { |e| e.is_approved = is_approved; e.save }
   end
 
   def create_user_as_first_attendee

@@ -28,6 +28,18 @@ class Event < ActiveRecord::Base
     name
   end
 
+  def square_meters_registered
+    square_meters = 0.0
+    exhibits.each { |e| square_meters += e.size_in_square_meters}
+    square_meters
+  end
+
+  def square_meters_approved
+    square_meters = 0.0
+    exhibits.each { |e| square_meters += e.size_in_square_meters if e.is_approved? }
+    square_meters
+  end
+
   def attendees_mails
     mails = Set.new
     self.attendees.each do |a|

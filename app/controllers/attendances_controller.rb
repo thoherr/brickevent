@@ -58,6 +58,22 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def approve
+    @attendance = Attendance.find(params[:id])
+    if @attendance
+      @attendance.is_approved=!@attendance.is_approved
+      respond_to do |format|
+        if @attendance.save
+          format.html { redirect_to @attendance.event, :notice => 'Anmeldebestätigung geändert.' }
+          format.json { render :json => @attendance.event, :status => :updated, :location => @event }
+        else
+          format.html { render :action => "show" }
+          format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   # POST /attendances/copy_exhibits/:other_attendance_id
   def copy_exhibits
     @attendance = Attendance.find(params[:id])

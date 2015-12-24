@@ -35,6 +35,22 @@ class AttendeesController < ApplicationController
     end
   end
 
+  def approve
+    @attendee = Attendee.find(params[:id])
+    if @attendee
+      @attendee.is_approved=!@attendee.is_approved
+      respond_to do |format|
+        if @attendee.save
+          format.html { redirect_to @attendee.event, :notice => 'Teilnahmebestätigung geändert.' }
+          format.json { render :json => @attendee.event, :status => :updated, :location => @event }
+        else
+          format.html { render :action => "show" }
+          format.json { render :json => @attendee.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   # GET /attendees/1/edit
   def edit
     store_referrer

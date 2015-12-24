@@ -22,7 +22,7 @@
 
 <% exhibits.each do |exhibit| %>
   <tr>
-    <td><%= to_j_n(exhibit.is_approved?) %></td>
+    <td><%= link_to to_j_n(exhibit.is_approved?), approve_exhibit_path(exhibit), :method => :post %></td>
     <td><%= exhibit.user_name %></td>
     <td><%= exhibit.name %></td>
     <td><%= exhibit.description %></td>

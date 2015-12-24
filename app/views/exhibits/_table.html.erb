@@ -25,13 +25,7 @@
             <td><%= to_j_n(exhibit.needs_transportation) %></td>
         <% end %>
         <td><%= exhibit.installation_exhibit_name %></td>
-        <td>
-          <% unless exhibit.size_x_meter.blank? %> <%= exhibit.size_x_meter %>
-              <% unless exhibit.size_y_meter.blank? %> x <%= exhibit.size_y_meter %>
-                  <% end %>
-              <% unless exhibit.size_z_meter.blank? %> x <%= exhibit.size_z_meter %>
-                  <% end %>
-          <% end %></td>
+        <td><%= exhibit.size_text %></td>
         <td><%= exhibit.remarks %></td>
         <td colspan="3">
           <% if @attendance.event_registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>

@@ -29,7 +29,7 @@
       </div>
 
       <div class="field">
-        <%= f.label :unit_id, 'Ungefähre Größe (ggf. aufrunden) des MOCs in ' %>
+        <%= f.label :unit_id, 'Platzbedarf / Ungefähre Größe (ggf. bitte aufrunden) des MOCs in ' %>
         <%= f.select :unit_id, Unit.all.collect { |i| [i.description, i.id] } %><br/>
         <%= f.number_field :size_x, size: 10 %>
         <%= f.label :size_x, 'lang' %><br/>
