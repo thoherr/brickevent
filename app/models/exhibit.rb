@@ -88,8 +88,8 @@ class Exhibit < ActiveRecord::Base
 
   def required_space_in_square_meters
     return 1.0 if size_x_meter.blank? or size_y_meter.blank?
-    size_x_with_buffer = if size_x_meter < 0.4 then 0.5 elsif size_x_meter < 0.65 then Math.sqrt(0.5) else size_x_meter.ceil end
-    size_y_with_buffer = if size_y_meter < 0.4 then 0.5 elsif size_y_meter < 0.65 then Math.sqrt(0.5) else size_y_meter.ceil end
+    size_x_with_buffer = if size_x_meter < 0.4 then 0.5 elsif size_x_meter < 0.65 then Math.sqrt(0.5) elsif size_x_meter > 1.00 && size_x_meter < 1.40 then 1.5 else size_x_meter.ceil end
+    size_y_with_buffer = if size_y_meter < 0.4 then 0.5 elsif size_y_meter < 0.65 then Math.sqrt(0.5) elsif size_y_meter > 1.00 && size_y_meter < 1.40 then 1.5 else size_y_meter.ceil end
     return size_x_with_buffer * size_y_with_buffer
   end
 
