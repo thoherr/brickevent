@@ -23,9 +23,9 @@ class EventTest < ActiveSupport::TestCase
   test "calculate total size" do
     event3 = events(:three)
     assert_equal 1539.84, event3.size_square_meters_registered
-    assert_equal 1540.00, event3.required_space_square_meters_registered
+    assert_equal 1542.00, event3.required_space_square_meters_registered
     assert_equal 3.84, event3.size_square_meters_approved
-    assert_equal 4.00, event3.required_space_square_meters_approved
+    assert_equal 6.00, event3.required_space_square_meters_approved
   end
 
 end

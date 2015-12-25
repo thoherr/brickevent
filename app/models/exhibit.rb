@@ -83,25 +83,14 @@ class Exhibit < ActiveRecord::Base
 
   def size_in_square_meters
     return size_x_meter * size_y_meter unless size_x_meter.blank? or size_y_meter.blank?
-    return size_y_meter * size_z_meter unless size_y_meter.blank? or size_z_meter.blank?
-    return size_z_meter * size_x_meter unless size_z_meter.blank? or size_x_meter.blank?
     0.0
   end
 
   def required_space_in_square_meters
-    required_space=size_in_square_meters
-    if required_space <= 0.25
-      return 0.25
-    elsif required_space <= 0.5
-      return 0.50
-    elsif required_space <= 1.0
-      return 1.00
-    else
-      return (size_x_meter * size_y_meter).ceil unless size_x_meter.blank? or size_y_meter.blank?
-      return (size_y_meter * size_z_meter).ceil unless size_y_meter.blank? or size_z_meter.blank?
-      return (size_z_meter * size_x_meter).ceil unless size_z_meter.blank? or size_x_meter.blank?
-    end
-    0.0
+    return 1.0 if size_x_meter.blank? or size_y_meter.blank?
+    size_x_with_buffer = if size_x_meter < 0.4 then 0.5 elsif size_x_meter < 0.65 then Math.sqrt(0.5) else size_x_meter.ceil end
+    size_y_with_buffer = if size_y_meter < 0.4 then 0.5 elsif size_y_meter < 0.65 then Math.sqrt(0.5) else size_y_meter.ceil end
+    return size_x_with_buffer * size_y_with_buffer
   end
 
   def size_text
