@@ -10,6 +10,15 @@
 <% if current_user.is_admin? %>
 
     <h2>Anmeldeliste</h2>
+    <div class="Indented">
+      <% @new_attendance = Attendance.new
+         @new_attendance.event_id = @event.id %>
+      <%= form_for(@new_attendance) do |f| %>
+        <%= f.submit "Weitere Anmeldung manuell erstellen (User-ID eingeben)", :id => 'submit' %>
+        <%= f.text_field :user_id %>
+        <%= f.hidden_field :event_id %>
+      <% end %>
+    </div>
     <%= render 'attendances/exportlist', :attendances => @event.attendances %>
 
     <h2>Teilnehmerliste
