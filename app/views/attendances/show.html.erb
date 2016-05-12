@@ -2,7 +2,7 @@
 
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
-<% registration_open = (@attendance.event && @attendance.event_registration_open?) || (user_signed_in? && current_user.is_admin?) %>
+<% @registration_open = @attendance.event_registration_open? || (user_signed_in? && current_user.is_admin?) %>
 <% user_name = @attendance.user.name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
@@ -14,7 +14,7 @@
 
 <p class="Indented">Du hast <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %>
   angemeldet
-  <% if registration_open -%>(<%= link_to "#{@attendance.attendees.count == 0 ? 'Erste' : 'Weitere'} Person anmelden", new_attendee_path(:attendance_id => @attendance) -%>)
+  <% if @registration_open -%>(<%= link_to "#{@attendance.attendees.count == 0 ? 'Erste' : 'Weitere'} Person anmelden", new_attendee_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
 
 <%= render 'attendees/table', :attendees => @attendance.attendees, :event => @attendance.event %>
@@ -23,7 +23,7 @@
 
 <p class="Indented">Du hast <%= @attendance.exhibits.count %>
   MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
-  <% if registration_open -%>(<%= link_to "#{@attendance.exhibits.count == 0 ? 'Erstes' : 'Weiteres'} MOC anmelden", new_exhibit_path(:attendance_id => @attendance) -%>)
+  <% if @registration_open -%>(<%= link_to "#{@attendance.exhibits.count == 0 ? 'Erstes' : 'Weiteres'} MOC anmelden", new_exhibit_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
@@ -36,14 +36,14 @@
 
 <% if @attendance.event && @attendance.event.has_accommodation %>
     <p class="Indented">Deine Übernachtungswünsche
-      <% if registration_open -%>
+      <% if @registration_open -%>
           (<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>)
       <% end -%>:</p>
 
     <%= render 'accommodations/table', :accommodations => @attendance.accommodations, :event => @attendance.event %>
 
     <p class="Indented">
-      <% if registration_open -%><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>
+      <% if @registration_open -%><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>
           <br/>
       <% end -%>&nbsp;</p>
 

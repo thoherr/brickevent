@@ -28,7 +28,7 @@
         <td><%= exhibit.size_text %></td>
         <td><%= exhibit.remarks %></td>
         <td colspan="3">
-          <% if @attendance.event_registration_open? -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
+          <% if @registration_open -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
               <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %>
           <% end -%>
           <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> -->
