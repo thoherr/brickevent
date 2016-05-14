@@ -20,6 +20,9 @@ class Event < ActiveRecord::Base
     return attendees.select { |a| a.is_approved? }
   end
 
+  def number_of_attendees_at_afols_event
+  end
+
   def number_of_approved_attendees
     return approved_attendees.count
   end
@@ -33,7 +36,7 @@ class Event < ActiveRecord::Base
   end
 
   def tickets
-    return approved_attendees.select { a.needs_ticket? }
+    return approved_attendees.select { |a| a.needs_ticket? }
   end
 
   def number_of_tickets
@@ -41,7 +44,7 @@ class Event < ActiveRecord::Base
   end
 
   def attendees_at_afols_event
-    return approved_attendees.select { a.afols_event? }
+    return approved_attendees.select { |a| a.afols_event? }
   end
 
   def number_of_attendees_at_afols_event
