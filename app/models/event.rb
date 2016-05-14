@@ -24,6 +24,22 @@ class Event < ActiveRecord::Base
     return exhibits.select { |e| e.is_installation? }
   end
 
+  def tickets
+    return attendees.select { |a| a.needs_ticket? }
+  end
+
+  def number_of_tickets
+    return tickets.count
+  end
+
+  def attendees_at_afols_event
+    return attendees.select { |a| a.afols_event? }
+  end
+
+  def number_of_attendees_at_afols_event
+    return attendees_at_afols_event.count
+  end
+
   def to_s
     name
   end

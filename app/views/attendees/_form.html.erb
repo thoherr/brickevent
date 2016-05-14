@@ -38,6 +38,10 @@
     <%= f.label :afols_event, 'Teilnahme am AFOLs Abend' %><br />
     <%= f.check_box :afols_event %>
   </div>
+  <div class="field">
+    <%= f.label :needs_ticket, 'Eintrittskarte / Ausstellerausweis' %><br />
+    <%= f.check_box :needs_ticket %>
+  </div>
 
   <% if @attendee.event && @attendee.event.has_event_shirt  %>
     <div class="field">

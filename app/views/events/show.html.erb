@@ -5,7 +5,9 @@
 
 <p><div class="EventTitle">Alle Anmeldedaten für <%= @event.title %></div>
    <div class="EventTime">von <%= @event.start_date %> bis <%= @event.end_date %></div></p>
-<p class="EventInfo">Für diese Veranstaltung sind bisher <%= @event.number_of_attendees %> Teilnehmer mit insgesamt <%= @event.number_of_exhibits %> MOCs angemeldet.</p>
+   <p class="EventInfo">Für diese Veranstaltung sind bisher <%= @event.number_of_attendees %> Teilnehmer mit insgesamt <%= @event.number_of_exhibits %> MOCs angemeldet.<br/>
+           Teilnehmer am AFOLs-Abend: <%= @event.number_of_attendees_at_afols_event %><br/>
+           Benötigte Eintrittskarten: <%= @event.number_of_tickets %></p>
 
 <% if current_user.is_admin? %>
 

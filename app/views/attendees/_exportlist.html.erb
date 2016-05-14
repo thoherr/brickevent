@@ -11,6 +11,7 @@
       <th>Adresse</th>
       <th>LUG</th>
       <th>AFOLS-Event</th>
+      <th>Ticket</th>
       <th>Bemerkungen</th>
       <th colspan="2"></th>
     </tr>
@@ -26,6 +27,7 @@
       <td><%= attendee.address %></td>
       <td><%= attendee.lug %></td>
       <td><%= to_j_n(attendee.afols_event) %></td>
+      <td><%= to_j_n(attendee.needs_ticket) %></td>
       <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
       <td colspan="2"><%= link_to 'Ändern', edit_attendee_path(attendee) %>

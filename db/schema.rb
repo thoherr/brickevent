@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151224143246) do
+ActiveRecord::Schema.define(:version => 20160514130927) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20151224143246) do
     t.datetime "updated_at"
     t.string   "shirt_size"
     t.boolean  "is_approved"
+    t.boolean  "needs_ticket",                      :default => true
   end
 
   create_table "builders", :force => true do |t|

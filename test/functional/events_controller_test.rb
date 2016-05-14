@@ -37,7 +37,7 @@ class EventsControllerTest < ActionController::TestCase
   test "should get attendees as csv for event" do
     get :attendees_as_csv, :id => events(:three).to_param
     assert_response :success
-    assert_equal "Typ;Bestätigt;Name;LUG;Nickname;EMail;AFOLs-Abend;Bemerkungen;T-Shirt-Größe\nHelfer;false;Attendee3;LUG2;Nick3;;true;None;\nAussteller;false;Attendee2;LUG1;Nick2;;false;Hi, there;\nAussteller;false;Attendee1;LUG1;Nick1;;true;Glad to see you;\n", response.body
+    assert_equal "Typ;Bestätigt;Name;LUG;Nickname;EMail;AFOLs-Abend;Ticket;Bemerkungen;T-Shirt-Größe\nHelfer;false;Attendee3;LUG2;Nick3;;true;true;None;\nAussteller;false;Attendee2;LUG1;Nick2;;false;false;Hi, there;\nAussteller;false;Attendee1;LUG1;Nick1;;true;true;Glad to see you;\n", response.body
   end
 
   test "should get exhibits as csv for event" do

@@ -5,6 +5,7 @@ one:
   lug: LUG1
   nickname: Nick1
   afols_event: true
+  needs_ticket: true
   remarks: Glad to see you
   attendance: one
   attendee_type: one
@@ -14,6 +15,7 @@ two:
   lug: LUG1
   nickname: Nick2
   afols_event: false
+  needs_ticket: false
   remarks: Hi, there
   attendance: two
   attendee_type: one
