@@ -49,6 +49,6 @@ class AttendeesControllerTest < ActionController::TestCase
       delete :destroy, :id => @attendee.to_param
     end
 
-    assert_redirected_to attendance_path(@attendee.attendance)
+    assert_redirected_to attendance_path(assigns(:attendee).attendance)
   end
 end

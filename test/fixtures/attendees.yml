@@ -9,6 +9,7 @@ one:
   remarks: Glad to see you
   attendance: one
   attendee_type: one
+  attendance: three
 
 two:
   name: Attendee2
