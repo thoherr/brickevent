@@ -9,7 +9,7 @@ class SoftwareVersion
   @@buildnumber_filename = "BUILDNUMBER"
   @@revision_filename = "REVISION"
 
-  @@appname_default = "MyApp"
+  @@appname_default = "BrickEvent"
   @@release_default = "0.0"
   @@buildnumber_default = "developer build"
   @@revision_default = "dirty"

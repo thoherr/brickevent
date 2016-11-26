@@ -1,8 +1,11 @@
 <ul>
 	<% if user_signed_in? && current_user.is_admin? %>
-        <li>
-            <%= link_to "Veranstaltungen", :controller => "/admin/events" %>
-        </li>
+      <li>
+        <%= link_to "LUGs", :controller => "/admin/lugs" %>
+      </li>
+      <li>
+        <%= link_to "Veranstaltungen", :controller => "/admin/events" %>
+      </li>
         <li>
             <%= link_to "Teilnehmer", :controller => "/admin/attendees" %>
         </li>

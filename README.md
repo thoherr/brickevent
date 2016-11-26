@@ -12,6 +12,9 @@ in Munich. Currently far too much of the texts and structure is hard coded. Most
 
 However, it is planned to generalize this rails app in order to use it for several of the many AFOLs events in Germany, Europe and Worldwide.
 
+In November 2016, Schwabenstein 2*4 e.V. joined the club and we introduced the LUG as Entity to this application.
+Therefore, some of the UI is now dependent on the name this app is accessed (e. g. the logo).
+
 Help from other IT affine LEGO fans is very welcome ;-).
 
 Setup

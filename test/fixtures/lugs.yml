@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+lugone:
+  name: LUG1 (auch BB)
+  description: BB (dummy)
+  logo_url: /assets/bricking-bavaria.jpg
+  url: http://bricking-bavaria.de
+  info_mail: info@bricking-bavaria.de
+  request_pattern: localhost
+
+lugtwo:
+  name: Schwabenstein 2*4 e. V.
+  description: Schwabenstein
+  logo_url: /assets/schwabenstein.png
+  url: http://www.schwabenstein.com
+  info_mail: info@schwabenstein.com
+  request_pattern: 127.0.0.1
+
+bb:
+  name: Bricking Bavaria e. V.
+  description: BB
+  logo_url: /assets/bricking-bavaria.jpg
+  url: http://bricking-bavaria.de
+  info_mail: info@bricking-bavaria.de
+  request_pattern: bricking-bavaria.de

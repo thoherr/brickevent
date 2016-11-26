@@ -1,6 +1,7 @@
 require 'csv'
 
 class Event < ActiveRecord::Base
+  belongs_to :lug
   has_many :attendances
   has_many :attendees, :through => :attendances
   has_many :accommodations, :through => :attendances

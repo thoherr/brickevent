@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160514130927) do
+ActiveRecord::Schema.define(:version => 20161126132633) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20160514130927) do
     t.text     "description",          :limit => 65384
     t.string   "location"
     t.string   "url"
-    t.string   "lug"
+    t.string   "lugname"
     t.boolean  "registration_open"
     t.date     "start_date"
     t.date     "end_date"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20160514130927) do
     t.string   "logo_url"
     t.boolean  "visible"
     t.boolean  "has_moc_transport"
+    t.integer  "lug_id"
   end
 
   create_table "exhibits", :force => true do |t|
@@ -119,6 +120,17 @@ ActiveRecord::Schema.define(:version => 20160514130927) do
     t.decimal  "size_z_meter"
     t.integer  "former_exhibit_id"
     t.boolean  "is_approved"
+  end
+
+  create_table "lugs", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "url"
+    t.string   "logo_url"
+    t.string   "info_mail"
+    t.string   "request_pattern"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "units", :force => true do |t|

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<% titleline = "#{SoftwareVersion.appname}" %>
+<% titleline = "#{SoftwareVersion.appname} #{@lug.name}" %>
 <html>
 <head>
     <title><%= titleline %></title>
-    <meta name="application-name" content="#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}">
-    <meta name="description" content="Veranstaltungsverwaltung von Bricking Bavaria e. V.">
+    <meta name="application-name" content="<%= "#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
+    <meta name="description" content="<%= "#{@lug.name} Veranstaltungsverwaltung" %>">
     <%= render :partial => "shared/meta_includes" %>
 </head>
 <body>
 
     <div id="mainTitle">
+        <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
         <span class="VersionText"><% if user_signed_in? %><%= "Angemeldet als #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
         <span class="TitleText"><%= titleline %></span>
     </div>

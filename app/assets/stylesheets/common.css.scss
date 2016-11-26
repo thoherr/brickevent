@@ -18,7 +18,7 @@ h1 {
     position: absolute;
     margin: 0;
     top: 25px;
-    padding-left: 300px;
+    padding-left: 310px;
     font-size: 24px;
     height: 25px;
     color: #333;
@@ -40,9 +40,10 @@ a {
 }
 
 #mainTitle {
-    background-image: url(../assets/bricking-bavaria.jpg);
-    background-repeat: no-repeat;
-    background-position: 30px 5px;    position: absolute;
+//    background-image: url(../assets/bricking-bavaria.jpg);
+//    background-repeat: no-repeat;
+    background-position: 30px 5px;
+    position: absolute;
     top: 0px;
     width: 100%;
     font-size: 20px;
@@ -50,6 +51,12 @@ a {
     text-align: right;
     color: #333;
     height: 60px;
+}
+
+#mainTitle .LugLogo {
+  left: 30px;
+  top: 5px;
+  position: absolute;
 }
 
 #mainTitle .TitleText {

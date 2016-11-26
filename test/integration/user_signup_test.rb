@@ -23,7 +23,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   test "sign up" do
 
     visit '/'
-    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('BrickEvent'), "BrickEvent"
     assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
@@ -44,7 +44,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     click_on 'submit'
 
     # because we are not confirmed, we should not be logged in
-    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('BrickEvent'), "BrickEvent"
     assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
     assert page.has_content?('Ausloggen') == false, "Ausloggen"
@@ -54,7 +54,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   test "sign up without accepting data storage" do
 
     visit '/'
-    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('BrickEvent'), "BrickEvent"
     assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
@@ -74,7 +74,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     click_on 'submit'
 
     # because we are not confirmed, we should not be logged in
-    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('BrickEvent'), "BrickEvent"
     assert page.has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
     # TODO assert error message!
 
@@ -84,7 +84,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     click_on 'submit'
 
     # because we are not confirmed, we should not be logged in
-    assert page.has_content?('Bricking Bavaria e.V.'), "Bricking Bavaria e.V."
+    assert page.has_content?('BrickEvent'), "BrickEvent"
     assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
     assert page.has_content?('Ausloggen') == false, "Ausloggen"
