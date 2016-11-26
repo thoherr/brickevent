@@ -36,15 +36,15 @@
   <p>Falls Du Fragen hast oder die Teilnahmefrist f&uuml;r die Veranstaltung bereits abgelaufen ist, Du uns aber noch
     wichtige Informationen nachreichen
     m&ouml;chtest, so sende uns bitte eine Mail an
-    <a href="mailto:info@bricking-bavaria.de"><%= @lug.info_mail %></a>.</p>
+    <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
 </div>
 
 <% if @events.length == 0 %>
 
     <h2>Zurzeit ist keine Veranstaltung zur Anmeldung freigegeben.</h2>
 
-    <p class="Indented">Falls Du Daten zu einer Anmeldung nachreichen m&ouml;chtest, sende uns diese bitte per Mail
-      an <a href="mailto:#{@lug.info_mail}"><%= @lug.info_mail %></a>.</p>
+    <p class="Indented">Falls Du Daten zu einer Anmeldung nachreichen m&ouml;chtest, sende uns diese bitte per Mail an
+      <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
 
 <% else %>
     <h2>Unsere aktuellen Veranstaltungen</h2>
