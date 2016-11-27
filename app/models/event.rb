@@ -7,12 +7,20 @@ class Event < ActiveRecord::Base
   has_many :accommodations, :through => :attendances
   has_many :exhibits, :through => :attendances
   has_many :event_managers
-  has_many :managers, :class_name => "User", :through => :event_managers
+  has_many :managers, :source => :user, :through => :event_managers
 
   default_scope order('start_date desc')
 
   def self.open_events
     Event.find_all_by_registration_open(true)
+  end
+
+  def is_managed_by?(user)
+    return false if user.nil?
+    managers.each do |m|
+      return true if m == user
+    end
+    return false
   end
 
   def number_of_attendees

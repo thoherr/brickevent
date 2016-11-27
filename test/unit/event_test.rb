@@ -28,4 +28,13 @@ class EventTest < ActiveSupport::TestCase
     assert_equal 6.00, event3.required_space_square_meters_approved
   end
 
+  test "check event manager" do
+    event = events(:one)
+    user1 = users(:one)
+    user2 = users(:thoherr)
+    assert_equal false, event.is_managed_by?(user1)
+    assert_equal true, event.is_managed_by?(user2)
+    assert_equal false, event.is_managed_by?(nil)
+  end
+
 end
