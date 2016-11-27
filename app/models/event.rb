@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
   has_many :attendees, :through => :attendances
   has_many :accommodations, :through => :attendances
   has_many :exhibits, :through => :attendances
+  has_many :event_managers
+  has_many :managers, :class_name => "User", :through => :event_managers
 
   default_scope order('start_date desc')
 

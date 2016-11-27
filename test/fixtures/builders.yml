@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  exhibit_id: 1
-  attendee_id: 1
-
-two:
-  exhibit_id: 1
-  attendee_id: 1

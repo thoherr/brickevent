@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  event_id: one
+  user_id: thoherr
+
+two:
+  event_id: two
+  user_id: thoherr
+
+three:
+  event_id: three
+  user_id: thoherr

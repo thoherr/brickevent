@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
   has_many :accommodations, :through => :attendances
+  has_many :event_managers
+  has_many :events, :through => :event_managers
 
   validates_presence_of :email, :name
   validates_acceptance_of :accept_data_storage, :on => :create, :accept => true, :message => 'Du musst der Speicherung Deiner Daten zustimmen!'
