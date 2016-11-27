@@ -66,9 +66,9 @@
                   unter <%= link_to event.url, event.url, :target => "_new" %></div>
                 </p>
             <% end -%>
+            <p class="EventInfo">Für diese Veranstaltung sind <%= event.number_of_attendees %> Teilnehmer
+              mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
             <% if event.registration_open? %>
-                <p class="EventInfo">Für diese Veranstaltung sind bisher <%= event.number_of_attendees %> Teilnehmer
-                  mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
                 <% if user_signed_in? %>
                     <% if current_user.attends_event? event -%>
                         <p class="EventSignup"><%= link_to "Teilnahme an '#{event.title}' bearbeiten", attendance_path(current_user.attendance_for_event event) %></p>
@@ -80,9 +80,7 @@
                       zunächst <%= link_to "registrieren", new_user_session_path %>
                 <% end %>
             <% else %>
-                <p class="EventInfo">Die Anmeldung für diese Veranstaltung ist geschlossen! Es
-                  sind <%= event.number_of_attendees %> Teilnehmer mit insgesamt <%= event.number_of_exhibits %> MOCs
-                  angemeldet.</p>
+                <p class="EventInfo">Die Anmeldung für diese Veranstaltung ist zurzeit geschlossen!</p>
                 <% if user_signed_in? && current_user.attends_event?(event) -%>
                     <p class="EventSignup"><%= link_to "Meine Teilnahmedaten für '#{event.title}' anzeigen", attendance_path(current_user.attendance_for_event event) %></p>
                 <% end %>
