@@ -34,14 +34,20 @@
     <%= f.label :email, 'Email (falls abweichend vom Haupt-Anmelder)' %><br />
     <%= f.text_field :email %>
   </div>
+
+    <% if @attendee.event && @attendee.event.has_afols_event  %>
   <div class="field">
     <%= f.label :afols_event, 'Teilnahme am AFOLs Abend' %><br />
     <%= f.check_box :afols_event %>
   </div>
-  <div class="field">
-    <%= f.label :needs_ticket, 'Eintrittskarte / Ausstellerausweis' %><br />
-    <%= f.check_box :needs_ticket %>
-  </div>
+    <% end %>
+
+    <% if @attendee.event && @attendee.event.has_tickets  %>
+    <div class="field">
+      <%= f.label :needs_ticket, 'Eintrittskarte / Ausstellerausweis' %><br />
+      <%= f.check_box :needs_ticket %>
+    </div>
+    <% end %>
 
   <% if @attendee.event && @attendee.event.has_event_shirt  %>
     <div class="field">
