@@ -80,7 +80,7 @@
           </div>
       <% end %>
 
-      <% if current_user.is_admin? -%>
+      <% if user_is_admin? -%>
           <div class="field">
             <%= f.check_box :is_installation %>
             <%= f.label :is_installation, 'Dieses MOC ist selbst ein Gemeinschaftsprojekt' %>

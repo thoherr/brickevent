@@ -87,7 +87,7 @@
                     <p class="EventSignup"><%= link_to "Meine Teilnahmedaten für '#{event.title}' anzeigen", attendance_path(current_user.attendance_for_event event) %></p>
                 <% end %>
             <% end %>
-            <% if user_signed_in? && current_user.is_admin? -%>
+            <% if user_is_admin? -%>
                 <p class="EventSignup"><%= link_to "Übersicht der Anmeldungen für '#{event.title}'", event_path(event) %></p>
             <% end %>
           </div>

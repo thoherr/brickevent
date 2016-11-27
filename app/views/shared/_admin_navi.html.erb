@@ -1,5 +1,5 @@
 <ul>
-	<% if user_signed_in? && current_user.is_admin? %>
+	<% if user_is_admin? %>
       <li>
         <%= link_to "LUGs", :controller => "/admin/lugs" %>
       </li>
