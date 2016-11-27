@@ -9,7 +9,7 @@
            Bestätigte Teilnehmer am AFOLs-Abend: <%= @event.number_of_attendees_at_afols_event %><br/>
            Benötigte Eintrittskarten für bestätigte Teilnehmer: <%= @event.number_of_tickets %></p>
 
-<% if user_is_admin? %>
+<% if user_is_admin? ||@event.is_managed_by?(current_user)%>
 
     <h2>Anmeldeliste</h2>
     <div class="Indented">

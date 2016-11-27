@@ -2,7 +2,7 @@
 
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
-<% @registration_open = @attendance.event_registration_open? || user_is_admin? %>
+<% @registration_open = @attendance.event_registration_open? || user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) %>
 <% user_name = @attendance.user.name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
@@ -51,7 +51,7 @@
 <% end %>
 
 <div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %></div>
-<% if user_is_admin? -%>
+<% if user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) -%>
     <div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltung', event_path(@attendance.event) unless @attendance.event.nil? %></div>
 <% end %>
 

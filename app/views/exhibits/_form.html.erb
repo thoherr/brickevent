@@ -80,7 +80,7 @@
           </div>
       <% end %>
 
-      <% if user_is_admin? -%>
+      <% if user_is_admin? || (@exhibit.attendance && @exhibit.attendance.event && @exhibit.attendance.event.is_managed_by?(current_user)) -%>
           <div class="field">
             <%= f.check_box :is_installation %>
             <%= f.label :is_installation, 'Dieses MOC ist selbst ein Gemeinschaftsprojekt' %>
