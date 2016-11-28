@@ -15,7 +15,7 @@ lugtwo:
   logo_url: /assets/schwabenstein.png
   url: http://www.schwabenstein.com
   info_mail: info@schwabenstein.com
-  impress_url: http://bricking-bavaria.de/m-impressum.html
+  impress_url: https://www.schwabenstein.com/impressum/
   request_pattern: 127.0.0.1
 
 bb:
