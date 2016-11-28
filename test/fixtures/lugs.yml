@@ -6,6 +6,7 @@ lugone:
   logo_url: /assets/bricking-bavaria.jpg
   url: http://bricking-bavaria.de
   info_mail: info@bricking-bavaria.de
+  impress_url: http://bricking-bavaria.de/m-impressum.html
   request_pattern: localhost
 
 lugtwo:
@@ -14,6 +15,7 @@ lugtwo:
   logo_url: /assets/schwabenstein.png
   url: http://www.schwabenstein.com
   info_mail: info@schwabenstein.com
+  impress_url: https://www.schwabenstein.com/impressum/
   request_pattern: 127.0.0.1
 
 bb:
@@ -22,4 +24,5 @@ bb:
   logo_url: /assets/bricking-bavaria.jpg
   url: http://bricking-bavaria.de
   info_mail: info@bricking-bavaria.de
+  impress_url: http://bricking-bavaria.de/m-impressum.html
   request_pattern: bricking-bavaria.de

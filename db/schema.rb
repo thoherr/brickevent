@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161127230748) do
+ActiveRecord::Schema.define(:version => 20161128121141) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20161127230748) do
     t.string   "request_pattern"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "impress_url"
   end
 
   create_table "units", :force => true do |t|

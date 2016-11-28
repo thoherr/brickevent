@@ -1,6 +1,6 @@
 <ul>
     <li id="impressLink" class="mainNavi">
-        <%= link_to "Impressum",  'http://bricking-bavaria.de/m-impressum.html' %>
+        <%= link_to "Impressum",  "#{@lug.impress_url}" %>
     </li>
     <% if user_signed_in? %>
         <li>
