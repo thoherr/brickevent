@@ -32,7 +32,7 @@ WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durc
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, 1000Steine, MBFR, SwissLUG, ...; optional)' %><br />
+    <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, Schwabenstein 2x4, SwissLUG, 1000Steine, MBFR, ...; optional)' %><br />
     <%= f.text_field :lug %>
   </div>
   <div class="field">
@@ -45,7 +45,7 @@ WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durc
   </div>
   <div class="field">
       <%= f.check_box :accept_data_storage %>
-      <%= f.label :accept_data_storage, 'Ich bin mit der Speicherung meiner Daten durch Bricking Bavaria e. V. im Rahmen der Vorbereitung und Durchführung von Veranstaltungen einverstanden.'%>
+      <%= f.label :accept_data_storage, "Ich bin mit der Speicherung meiner Daten durch #{@lug.name} im Rahmen der Vorbereitung und Durchführung von Veranstaltungen einverstanden."%>
   </div>
   <div class="actions">
   <%= f.submit "Als Benutzer registrieren", :id => 'submit' %>
