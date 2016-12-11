@@ -4,10 +4,10 @@
         <%= link_to "LUGs", :controller => "/admin/lugs" %>
       </li>
       <li>
-        <%= link_to "Veranstaltungen", :controller => "/admin/events" %>
+        <%= link_to "Events", :controller => "/admin/events" %>
       </li>
         <li>
-            <%= link_to "Teilnehmer", :controller => "/admin/attendees" %>
+            <%= link_to "Attendees", :controller => "/admin/attendees" %>
         </li>
         <li>
             <%= link_to "Attendances", :controller => "/admin/attendances" %>
@@ -16,19 +16,19 @@
             <%= link_to "MOCs", :controller => "/admin/exhibits" %>
         </li>
         <li>
-            <%= link_to "Benutzer", :controller => "/admin/users" %>
+            <%= link_to "Users", :controller => "/admin/users" %>
         </li>
         <li>
-            <%= link_to "Teilnehmertypen", :controller => "/admin/attendee_types" %>
+            <%= link_to "Attendee Types", :controller => "/admin/attendee_types" %>
         </li>
         <li>
-            <%= link_to "Übernachtungsoptionen", :controller => "/admin/accommodation_types" %>
+            <%= link_to "Accommodation Types", :controller => "/admin/accommodation_types" %>
         </li>
     <% end -%>
     <li>
         <%= link_to "Public Frontend", :controller => "/events" %>
     </li>
     <li id="logoutLink" class="mainNavi">
-        <%= link_to "Ausloggen",  destroy_user_session_path, :method => :delete %>
+        <%= link_to "Logout",  destroy_user_session_path, :method => :delete %>
     </li>
 </ul>
