@@ -1,4 +1,5 @@
 - introduce I18n for name and description of type objects, lugs, events (and units?)
 - drop lugname in events (and elsewhere), use only lug_id
 - drop old and deprecated size and size_studs attributes?
+- cleanup unused views and controllers
 - manage MOCs as first level citizen, not dependent on attendance

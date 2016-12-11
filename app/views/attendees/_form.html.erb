@@ -1,7 +1,7 @@
 <%= form_for(@attendee) do |f| %>
   <% if @attendee.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@attendee.errors.count, "Fehler") %> haben die Speicherung verhindert:</h2>
+      <h2><%= pluralize(@attendee.errors.count, t('error')) + " " + t('prevented_saving') %> </h2>
 
       <ul>
       <% @attendee.errors.full_messages.each do |msg| %>
@@ -15,43 +15,43 @@
   <%= f.hidden_field :attendance_id %>
 
   <div class="field">
-    <%= f.label :attendee_type_id, 'Teilnahme als (Aussteller, Helfer, ...)' %><br />
-    <%= f.select :attendee_type_id, AttendeeType.find_all_by_is_visible(true).collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
+    <%= f.label :attendee_type_id, t('label_attendee_type') %><br />
+    <%= f.select :attendee_type_id, AttendeeType.find_all_by_is_visible(true).collect {|at| [ at.name, at.id ] }, {:prompt => t('please_choose')} %>
   </div>
   <div class="field">
-    <%= f.label :name, 'Vollständiger Name' %><br />
+    <%= f.label :name, t('label_name') %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, Schwabenstein 2x4, SwissLUG, 1000Steine, MBFR, ...; optional)'  %><br />
+    <%= f.label :lug, t('label_lug') %><br />
     <%= f.text_field :lug %>
   </div>
   <div class="field">
-    <%= f.label :nickname, 'Nickname (optional)' %><br />
+    <%= f.label :nickname, t('label_nickname') %><br />
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :email, 'Email (falls abweichend vom Haupt-Anmelder)' %><br />
+    <%= f.label :email, t('label_email') + " " + t('label_other_than_main_attendee') %><br />
     <%= f.text_field :email %>
   </div>
 
     <% if @attendee.event && @attendee.event.has_afols_event  %>
   <div class="field">
-    <%= f.label :afols_event, 'Teilnahme am AFOLs Abend' %><br />
+    <%= f.label :afols_event, t('label_afols_event') %><br />
     <%= f.check_box :afols_event %>
   </div>
     <% end %>
 
     <% if @attendee.event && @attendee.event.has_tickets  %>
     <div class="field">
-      <%= f.label :needs_ticket, 'Eintrittskarte / Ausstellerausweis' %><br />
+      <%= f.label :needs_ticket, t('label_ticket') %><br />
       <%= f.check_box :needs_ticket %>
     </div>
     <% end %>
 
   <% if @attendee.event && @attendee.event.has_event_shirt  %>
     <div class="field">
-        <%= f.label :shirt_size, 'Größe für das Event-T-Shirt' %>
+        <%= f.label :shirt_size, t('label_t_shirt_size') %>
         <% [ 'S', 'M', 'L', 'XL', 'XXL' ].each do |size| %>
             <br/><%= f.radio_button :shirt_size, size %>
             <%= size %>
@@ -60,11 +60,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :remarks, 'Bemerkungen' %><br />
+    <%= f.label :remarks, t('label_remarks') %><br />
     <%= f.text_area :remarks %>
   </div>
   <div class="actions">
-    <%= f.submit "Speichern", :id => 'submit' %>
+    <%= f.submit t('save'), :id => 'submit' %>
   </div>
   </div>
 <% end %>

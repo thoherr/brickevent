@@ -14,3 +14,8 @@ en:
   logged_in_as: "Logged in as"
   or: "or"
   and: "and"
+  from: "from"
+  until: "until"
+  error: "error"
+  save: "Save"
+  occured: "occured:"

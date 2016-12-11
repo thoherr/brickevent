@@ -6,14 +6,14 @@
 <% user_name = @attendance.user.name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
-<h1>Anmeldung für <%= event_title %></h1>
+<h1><%= t('attendance_for') + " " + event_title %></h1>
 <p>
-<div class="EventTitle">Anmeldung von <%= user_name %> zur Veranstaltung <%= event_title %></div></p>
+<div class="EventTitle"><%= t('registration_of') + " " + user_name + " " + t('for_event') + event_title %></div></p>
 
 <hr/>
 
-<p class="Indented">Du hast <%= @attendance.attendees.count %> Person<%= "en" if @attendance.attendees.count > 1 %>
-  angemeldet
+<p class="Indented"><%= t(:you_registered1) + " " + @attendance.attendees.count.to_s %> Person<%= "en" if @attendance.attendees.count > 1 %>
+  <%= t(:you_registered2) %>
   <% if @registration_open -%>(<%= link_to "#{@attendance.attendees.count == 0 ? 'Erste' : 'Weitere'} Person anmelden", new_attendee_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
 
@@ -21,15 +21,15 @@
 
 <hr/>
 
-<p class="Indented">Du hast <%= @attendance.exhibits.count %>
-  MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> angemeldet
+<p class="Indented"><%= t('you_registered1') + " " + @attendance.exhibits.count.to_s %>
+  MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> <%= t('you_registered2') %>
   <% if @registration_open -%>(<%= link_to "#{@attendance.exhibits.count == 0 ? 'Erstes' : 'Weiteres'} MOC anmelden", new_exhibit_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
 
 <% if @attendance.event_registration_open? and @attendance.has_former_exhibits? %>
-    <p class="Indented"><b>Hinweis:</b> Unter <%= link_to 'Meine Anmeldungen', attendances_path %> kannst Du die Daten von früheren MOCs nach '<%= event_title %>' kopieren!</p>
+    <p class="Indented"><b>Hinweis:</b> Unter <%= link_to t(:my_attendances), attendances_path %> kannst Du die Daten von früheren MOCs nach '<%= event_title %>' kopieren!</p>
 <% end %>
 
 <hr/>
@@ -50,9 +50,9 @@
     <hr/>
 <% end %>
 
-<div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %></div>
+<div class="OverviewLink"><%= link_to t(:back_to_overview), events_path %></div>
 <% if user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) -%>
-    <div class="OverviewLink"><%= link_to 'Zurück zur Veranstaltung', event_path(@attendance.event) unless @attendance.event.nil? %></div>
+    <div class="OverviewLink"><%= link_to t('back_to_event'), event_path(@attendance.event) unless @attendance.event.nil? %></div>
 <% end %>
 
 
