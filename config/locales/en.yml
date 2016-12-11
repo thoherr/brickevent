@@ -5,7 +5,7 @@ en:
   activerecord:
     errors:
       template: 
-        body: Die folgenden Angaben sind nicht korrekt
+        body: "The following inputs are incorrect"
         header: 
           one: "1 error prevented saving of {{model}}"
           other: "{{count}} errors prevented saving of {{model}}"

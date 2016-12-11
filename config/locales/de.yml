@@ -2,7 +2,7 @@ de:
   activerecord:
     errors:
       template: 
-        body: Die folgenden Angaben sind nicht korrekt
+        body: "Die folgenden Angaben sind nicht korrekt"
         header: 
           one: "1 Fehler verhinderte die Speicherung von {{model}}"
           other: "{{count}} Fehler verhinderten die Speicherung von {{model}}"

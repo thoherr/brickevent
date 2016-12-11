@@ -1,53 +1,47 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
-<h1>Veranstaltungsübersicht</h1>
+<h1><%= t(:event_overview)%></h1>
 
 <div class="RegistrationInfo">
-  <h3>Die Anmeldung zur aktiven Teilnahme an einer unserer Veranstaltungen erfolgt in drei einfachen Schritten:</h3>
+  <h3><%= t('registration_in_three_steps')%></h3>
   <ul>
     <li>
       <% if user_signed_in? %>
-          Registriere Dich als Aussteller/Helfer
+          <%= t('register_as_exhibitor_or_assistant') %>
       <% else %>
-          <%= link_to "Registriere Dich als Aussteller/Helfer", new_user_registration_path %>
+          <%= link_to t('register_as_exhibitor_or_assistant'), new_user_registration_path %>
       <% end %>
-      oder
+      <%= t('or') %>
       <% if user_signed_in? %>
-          melde Dich mit Deinen Registrierungsdaten an.
+          <%= t('login_with_your_account') %>
       <% else %>
-          <%= link_to "melde Dich mit Deinen Registrierungsdaten an", new_user_session_path %>.
-          <br/>
-          Wir benötigen zumindest Deinen Namen und Deine Mailadresse, um bei der Planung unserer Veranstaltungen
-          in Kontakt mit Dir treten zu können.
+          <%= link_to t('login_with_your_account'), new_user_session_path %>.
+          <br/><%= t('need_your_name_and_mail')%>
       <% end %>
     </li>
-    <li>Sobald Du Dich registriert hast, kannst Du Dich zur Teilnahme an einer unserer Veranstaltungen anmelden.<br/>
-      Klicke hierzu auf den entsprechenden Link bei der jeweiligen Veranstaltung
-      <% if !user_signed_in? -%> der nach Deiner Registrierung erscheint
-      <% end -%>.
+    <li><%= t('register2a')%><br/>
+      <%= t('register2b') -%><% if !user_signed_in? -%><%= t('register2c')%><% end -%>.
     </li>
-    <li>Bei der Anmeldung zu einzelnen Veranstaltungen kannst Du uns dann jeweils mitteilen,
+    <li><%= t('register3')%>
       <ul>
-        <li>mit wie vielen Personen Du an der Veranstaltung teilnehmen möchtest,</li>
-        <li>welche MOCs Du bei der Veranstaltung zeigen möchtest und</li>
-        <li>ob Du Unterstützung zu den Übernachtungsmöglichkeiten benötigst.</li>
+        <li><%= t('register3a')%></li>
+        <li><%= t('register3b')%></li>
+        <li><%= t('register3c')%></li>
       </ul>
     </li>
   </ul>
-  <p>Falls Du Fragen hast oder die Teilnahmefrist f&uuml;r die Veranstaltung bereits abgelaufen ist, Du uns aber noch
-    wichtige Informationen nachreichen
-    m&ouml;chtest, so sende uns bitte eine Mail an
+  <p><%= t('register_questions_and_contact') %>
     <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
 </div>
 
 <% if @events.length == 0 %>
 
-    <h2>Zurzeit ist keine Veranstaltung zur Anmeldung freigegeben.</h2>
+    <h2><%= t('no_event_visible')%></h2>
 
-    <p class="Indented">Falls Du Daten zu einer Anmeldung nachreichen m&ouml;chtest, sende uns diese bitte per Mail an
+    <p class="Indented"><%= t('submit_data_after_registration_closed')%>
       <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
 
 <% else %>
-    <h2>Unsere aktuellen Veranstaltungen</h2>
+    <h2><%= t('current_events')%></h2>
 
     <div class="EventList">
       <% @events.each do |event| %>
@@ -58,35 +52,36 @@
             <p>
 
             <div class="EventTitle"><%= event.title %></div>
-            <div class="EventTime">von <%= event.start_date %> bis <%= event.end_date %></div>
+            <div class="EventTime"><%= t('from') + " #{event.start_date} " + t('until') %> <%= event.end_date %></div>
             </p>
             <% unless event.description.nil? || event.description.empty? -%><p class="EventDescription"><%= convert_markdown(event.description) %></p><% end %>
             <% unless event.url.nil? || event.url.empty? -%><p>
-                <div class="EventUrl">Weitere Informationen zu '<%= event.title %>' gibt es
-                  unter <%= link_to event.url, event.url, :target => "_new" %></div>
+                <div class="EventUrl"><%= t('more_information_on') + event.title + t('is_available_at') %> <%= link_to event.url, event.url, :target => "_new" %></div>
                 </p>
             <% end -%>
-            <p class="EventInfo">Für diese Veranstaltung sind <%= event.number_of_attendees %> Teilnehmer
-              mit insgesamt <%= event.number_of_exhibits %> MOCs angemeldet.</p>
+            <p class="EventInfo"><%= t('for_this_event') + " " + event.number_of_attendees.to_s + " " +
+                                         t('participants_with') + " " + event.number_of_exhibits.to_s + " " +
+                                         t('mocs_registered') %></p>
             <% if event.registration_open? %>
                 <% if user_signed_in? %>
                     <% if current_user.attends_event? event -%>
-                        <p class="EventSignup"><%= link_to "Teilnahme an '#{event.title}' bearbeiten", attendance_path(current_user.attendance_for_event event) %></p>
+                        <p class="EventSignup"><%= link_to (t('edit_attendance1') + event.title + t('edit_attendance2')), attendance_path(current_user.attendance_for_event event) %></p>
                     <% else -%>
-                        <p class="EventSignup"><%= link_to "Zur Teilnahme an '#{event.title}' anmelden", new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
+                        <p class="EventSignup"><%= link_to (t('register_attendance1') + event.title + t('register_attendance2')), new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
                     <% end -%>
                 <% else -%>
-                    <p class="EventSignup">Um Deine Teilname an '<%= event.title %>' anzumelden, musst Du Dich
-                      zunächst <%= link_to "registrieren", new_user_session_path %>
+                    <p class="EventSignup"><%= t('signup_for_attendance1') + event.title + t('signup_for_attendance2') %>
+                      <%= link_to t('signup_for_attendance3'), new_user_session_path %>
                 <% end %>
             <% else %>
-                <p class="EventInfo">Die Anmeldung für diese Veranstaltung ist zurzeit geschlossen!</p>
+                <p class="EventInfo"><%= t('registration_closed')%></p>
                 <% if user_signed_in? && current_user.attends_event?(event) -%>
-                    <p class="EventSignup"><%= link_to "Meine Teilnahmedaten für '#{event.title}' anzeigen", attendance_path(current_user.attendance_for_event event) %></p>
+                    <p class="EventSignup">
+                      <%= link_to (t('show_attendance_link1') + event.title + t('show_attendance_link2')), attendance_path(current_user.attendance_for_event event) %></p>
                 <% end %>
             <% end %>
             <% if user_is_admin? || event.is_managed_by?(current_user) -%>
-                <p class="EventSignup"><%= link_to "Übersicht der Anmeldungen für '#{event.title}'", event_path(event) %></p>
+                <p class="EventSignup"><%= link_to (t('attendance_overview') + " '#{event.title}'"), event_path(event) %></p>
             <% end %>
           </div>
       <% end %>
@@ -95,5 +90,6 @@
 <% end %>
 
 <% if !user_signed_in? %>
-    <h2>Du willst bei einer <%= @lug.name %> Ausstellung teilnehmen? <%= link_to "Melde Dich gleich an!", new_user_session_path %></h2>
+    <h2><%= t('like_to_participate1') + " " + @lug.name + " " + t('like_to_participate2') %>
+      <%= link_to t('like_to_participate3'), new_user_session_path %></h2>
 <% end %>

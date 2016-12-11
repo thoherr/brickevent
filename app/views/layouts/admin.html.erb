@@ -10,7 +10,7 @@
 <body>
 
     <div id="mainTitle">
-        <span class="VersionText"><% if user_signed_in? %><%= "Angemeldet als #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
+        <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
         <span class="TitleText"><%= titleline %></span>
     </div>
 
