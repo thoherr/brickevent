@@ -5,7 +5,8 @@
     <title><%= titleline %></title>
     <%= favicon_link_tag "#{@lug.favicon_url}" %>
     <meta name="application-name" content="<%= "#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
-    <meta name="description" content="<%= "#{@lug.name} Veranstaltungsverwaltung" %>">
+    <meta name="description" content="<%= "#{@lug.name} event management" %>">
+    <meta name="copyright" content="(c) 2010-2016 Thomas Herrmann <mail@thoherr.de>">
     <%= render :partial => "shared/meta_includes" %>
 </head>
 <body>
