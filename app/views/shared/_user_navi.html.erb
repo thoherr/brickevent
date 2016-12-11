@@ -1,7 +1,13 @@
 <ul>
-    <li id="impressLink" class="mainNavi">
-        <%= link_to t('impress'), "#{@lug.impress_url}" %>
-    </li>
+  <li id="englishLink" class="mainNavi">
+    <%= link_to image_tag('english.png', :alt => t('english'), :width => 15, :height => 10), "?locale=en" %>
+  </li>
+  <li id="germanLink" class="mainNavi">
+    <%= link_to image_tag('german.png', :alt => t('german'), :width => 15, :height => 10), "?locale=de" %>
+  </li>
+  <li id="impressLink" class="mainNavi">
+    <%= link_to t('impress'), "#{@lug.impress_url}" %>
+  </li>
     <% if user_signed_in? %>
         <li>
             <%= link_to t(:event_overview), :controller => "/events" %>
