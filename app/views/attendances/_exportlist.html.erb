@@ -2,15 +2,15 @@
 
 <table class="AttendeesTable FrontendTable">
     <tr>
-      <th>Bestätigt</th>
-      <th>Name</th>
-      <th>Nickname</th>
-      <th>E-Mail</th>
-      <th>Telefonnummer</th>
-      <th>Adresse</th>
-      <th>LUG</th>
-      <th>MOCs</th>
-      <th>Sammeltansport</th>
+      <th><%= t('heading_confirmed')%></th>
+      <th><%= t('heading_name')%></th>
+      <th><%= t('heading_nickname')%></th>
+      <th><%= t('heading_email')%></th>
+      <th><%= t('heading_phone')%></th>
+      <th><%= t('heading_address')%></th>
+      <th><%= t('heading_lug')%></th>
+      <th><%= t('heading_mocs')%></th>
+      <th><%= t('heading_transportation')%></th>
     </tr>
 
 <% attendances.each do |attendance| %>

@@ -1,6 +1,6 @@
 <tr>
   <td><%= link_to attendance.event_title, attendance %><br/>
-    <span class="EventTime">von <%= attendance.event.start_date %> bis <%= attendance.event.end_date %></span><br/>
+    <span class="EventTime"><%= t('from') + " " + attendance.event.start_date.to_s + " " + t('until') + " " + attendance.event.end_date.to_s %></span><br/>
 
     <% if attendance.attendees.count > 0 %>
         <p>

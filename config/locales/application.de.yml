@@ -106,3 +106,7 @@ de:
   heading_name: "Name"
   heading_confirmed: "Bestätigt"
   back_to_event_overview: "Zurück zur Veranstaltungsübersicht"
+  heading_mocs: "MOCs"
+  heading_transportation: "Sammeltansport"
+  confirm_attendance: "Anmeldung bestätigen"
+  attendance_save_error: "verhinderten eine Speicherung der Anmeldung"
