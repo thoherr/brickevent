@@ -24,7 +24,7 @@ WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durc
   <%= f.password_field :password_confirmation %></div>
 
   <div class="field">
-    <%= f.label :name, 'Vollständiger Name' %><br />
+    <%= f.label :name, t('label_name') %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
@@ -32,7 +32,7 @@ WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durc
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :lug, 'LUG (z. B. Bricking Bavaria, Schwabenstein 2x4, SwissLUG, 1000Steine, MBFR, ...; optional)' %><br />
+    <%= f.label :lug, t('label_lug') %><br />
     <%= f.text_field :lug %>
   </div>
   <div class="field">

@@ -28,8 +28,8 @@
         <td><%= exhibit.size_text %></td>
         <td><%= exhibit.remarks %></td>
         <td colspan="3">
-          <% if @registration_open -%><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
-              <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %>
+          <% if @registration_open -%><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
+              <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
           <% end -%>
           <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> -->
           <% @attendance.other_open_attendances.each do |to_attendance| %>

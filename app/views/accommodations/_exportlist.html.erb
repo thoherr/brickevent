@@ -15,8 +15,8 @@
     <td><%= accommodation.accommodation_type_name %></td>
     <td><%= accommodation.count %></td>
     <td><%= accommodation.remarks %></td>
-    <td><%= link_to 'Ändern', edit_accommodation_path(accommodation) %></td>
-    <td><%= link_to 'Löschen', accommodation, :confirm => 'Bist Du sicher?', :method => :delete %></td>
+    <td><%= link_to t('edit'), edit_accommodation_path(accommodation) %></td>
+    <td><%= link_to t('delete'), accommodation, :confirm => t('are_you_sure'), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

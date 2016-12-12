@@ -30,8 +30,8 @@
       <td><%= to_j_n(attendee.needs_ticket) %></td>
       <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
-      <td colspan="2"><%= link_to 'Ändern', edit_attendee_path(attendee) %>
-      <%= link_to 'Löschen', attendee, :confirm => 'Bist Du sicher?', :method => :delete %></td>
+      <td colspan="2"><%= link_to t('edit'), edit_attendee_path(attendee) %>
+      <%= link_to t('delete'), attendee, :confirm => t('are_you_sure'), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

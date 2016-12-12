@@ -37,8 +37,8 @@
     <td><%= exhibit.size_text %></td>
     <td><%= exhibit.value %></td>
     <td><%= to_j_n(exhibit.needs_power_supply) %></td>
-    <td colspan="3"><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
-    <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %>
+    <td colspan="3"><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
+    <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
     <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> --></td>
   </tr>
 <% end %>
