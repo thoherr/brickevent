@@ -9,12 +9,6 @@ class ExhibitsControllerTest < ActionController::TestCase
     @exhibit.attendance = attendances(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:exhibits)
-  end
-
   test "should get new" do
     get :new, :attendance_id => @exhibit.attendance_id
     assert_response :success
@@ -26,11 +20,6 @@ class ExhibitsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to attendance_path(assigns(:exhibit).attendance)
-  end
-
-  test "should show exhibit" do
-    get :show, :id => @exhibit.to_param
-    assert_response :success
   end
 
   test "should get edit" do

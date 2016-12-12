@@ -86,3 +86,7 @@ de:
   you_can_copy_mocs: "Mit Hilfe der Links bei den MOCs kannst Du deren Daten für aktuelle Veranstaltungen kopieren."
   former_events_you_participated: "Frühere Veranstaltungen, an denen Du teilgenommen hast"
   profile_changed: "Benutzerdaten wurden erfolgreich geändert."
+  moc_deleted: "Das MOC wurde gelöscht."
+  moc_updated: "Die MOC-Daten wurden geändert."
+  moc_created: "Das MOC wurde aufgenommen."
+  moc_confirmation_changed: "MOC-Bestätigung geändert."

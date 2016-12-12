@@ -1,27 +1,5 @@
 # encoding: UTF-8
 class ExhibitsController < ApplicationController
-  # GET /exhibits
-  # GET /exhibits.json
-  def index
-    @exhibits = Exhibit.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @exhibits }
-    end
-  end
-
-  # GET /exhibits/1
-  # GET /exhibits/1.json
-  def show
-    @exhibit = Exhibit.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @exhibit }
-    end
-  end
-
   # GET /exhibits/new
   # GET /exhibits/new.json
   def new
@@ -41,7 +19,7 @@ class ExhibitsController < ApplicationController
       @exhibit.is_approved=!@exhibit.is_approved
       respond_to do |format|
         if @exhibit.save
-          format.html { redirect_to @exhibit.attendance.event, :notice => 'MOC-Bestätigung geändert.' }
+          format.html { redirect_to @exhibit.attendance.event, :notice => t('moc_confirmation_changed') }
           format.json { render :json => @exhibit.attendance.event, :status => :updated, :location => @event }
         else
           format.html { render :action => "show" }
@@ -64,7 +42,7 @@ class ExhibitsController < ApplicationController
 
     respond_to do |format|
       if @exhibit.save
-        format.html { redirect_back_or_default @exhibit.attendance, :notice => 'Das MOC wurde aufgenommen.'}
+        format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_created') }
         format.json { render :json => @exhibit, :status => :created, :location => @exhibit }
       else
         format.html { render :action => "new" }
@@ -80,7 +58,7 @@ class ExhibitsController < ApplicationController
 
     respond_to do |format|
       if @exhibit.update_attributes(params[:exhibit])
-        format.html { redirect_back_or_default @exhibit.attendance, :notice => 'Die MOC-Daten wurden geändert.' }
+        format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated') }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -97,7 +75,7 @@ class ExhibitsController < ApplicationController
     @exhibit.destroy
 
     respond_to do |format|
-      format.html { redirect_to attendance_path(@attendance_id), :notice => 'Das MOC wurde gelöscht.' }
+      format.html { redirect_to attendance_path(@attendance_id), :notice => t('moc_deleted') }
       format.json { head :ok }
     end
   end
