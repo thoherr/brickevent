@@ -2,16 +2,16 @@
 
 <table class="ExhibitsTable FrontendTable">
   <tr>
-    <th><%= t('heading_confirmed')%></th>
-    <th><%= t('heading_name')%></th>
-    <th><%= t('heading_url')%></th>
-    <th><%= t('heading_power_supply')%></th>
+    <th><%= t('heading_confirmed') %></th>
+    <th><%= t('heading_name') %></th>
+    <th><%= t('heading_url') %></th>
+    <th><%= t('heading_power_supply') %></th>
     <% if @attendance && @attendance.event && @attendance.event.has_moc_transport %>
-        <th><%= t('heading_transportation')%></th>
+        <th><%= t('heading_transportation') %></th>
     <% end %>
-    <th><%= t('heading_joint_project')%></th>
-    <th><%= t('heading_size_m')%></th>
-    <th><%= t('heading_remarks')%></th>
+    <th><%= t('heading_joint_project') %></th>
+    <th><%= t('heading_size_m') %></th>
+    <th><%= t('heading_remarks') %></th>
     <th colspan="3"></th>
   </tr>
 

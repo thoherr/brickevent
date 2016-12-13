@@ -1,5 +1,3 @@
 <h1><%= t('add_attendee_for_event') + " " + @attendee.event_title %></h1>
-
 <%= render 'form' %>
-
 <div class="OverviewLink"><%= link_to t('back_to_overview'), attendance_path(@attendee.attendance_id) %></div>

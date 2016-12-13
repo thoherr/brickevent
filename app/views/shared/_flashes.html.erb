@@ -1,9 +1,12 @@
-
-<% if (alert) -%><div class="Flash FlashAlert"><%= alert %></div><% end -%>
-<% if(flash[:error]) -%>
-  <div class="Flash FlashError"><%= flash[:error] %></div>
+<% if (alert) -%>
+    <div class="Flash FlashAlert"><%= alert %></div>
 <% end -%>
-<% if(flash[:warn]) -%>
-  <div class="Flash FlashWarn"><%= flash[:warn] %></div>
-<% end -%>  
-<% if (notice) -%><div class="Flash FlashNotice"><%= notice %></div><% end -%>
+<% if (flash[:error]) -%>
+    <div class="Flash FlashError"><%= flash[:error] %></div>
+<% end -%>
+<% if (flash[:warn]) -%>
+    <div class="Flash FlashWarn"><%= flash[:warn] %></div>
+<% end -%>
+<% if (notice) -%>
+    <div class="Flash FlashNotice"><%= notice %></div>
+<% end -%>

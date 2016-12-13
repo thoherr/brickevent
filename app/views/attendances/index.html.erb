@@ -1,31 +1,29 @@
-<h1><%= t(:my_attendances)%></h1>
-
+<h1><%= t(:my_attendances) %></h1>
 <% if @attendances.empty? %>
-    <h2><%= t('you_did_not_register_to_any_event')%></h2>
+    <h2><%= t('you_did_not_register_to_any_event') %></h2>
 <% else %>
     <% if current_user.has_open_attendances? %>
-    <p class="Indented"><b><%= t('hint')%>:</b> <%= t('you_can_copy_mocs')%></p>
+        <p class="Indented"><b><%= t('hint') %>:</b> <%= t('you_can_copy_mocs') %></p>
     <% end %>
     <table class="FrontendTable">
-    <% unless @future_attendances.empty? %>
+      <% unless @future_attendances.empty? %>
           <tr>
-            <th colspan="2" class="open"><%= t('events_you_will_participate')%></th>
+            <th colspan="2" class="open"><%= t('events_you_will_participate') %></th>
           </tr>
           <% @future_attendances.each do |attendance| %>
               <%= render 'tablerow', :attendance => attendance %>
           <% end %>
-    <% end %>
-    <tr class="whitespace">
-      <td colspan="2" class="whitespace">&nbsp;</td>
-    </tr>
-    <% unless @past_attendances.empty? %>
-        <tr>
-          <th colspan="2" class="closed"><%= t('former_events_you_participated')%></th>
-        </tr>
-        <% @past_attendances.each do |attendance| %>
-            <%= render 'tablerow', :attendance => attendance %>
-        <% end %>
-    <% end %>
+      <% end %>
+      <tr class="whitespace">
+        <td colspan="2" class="whitespace">&nbsp;</td>
+      </tr>
+      <% unless @past_attendances.empty? %>
+          <tr>
+            <th colspan="2" class="closed"><%= t('former_events_you_participated') %></th>
+          </tr>
+          <% @past_attendances.each do |attendance| %>
+              <%= render 'tablerow', :attendance => attendance %>
+          <% end %>
+      <% end %>
     </table>
-
 <% end %>

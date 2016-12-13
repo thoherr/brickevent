@@ -1,7 +1,5 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
 
-<h1><%= t('edit_attendee1') + " " + @attendee.event_title  + " " + t('edit_attendee2')%></h1>
-
+<h1><%= t('edit_attendee1') + " " + @attendee.event_title + " " + t('edit_attendee2') %></h1>
 <%= render 'form' %>
-
 <div class="OverviewLink"><%= link_to t('back_to_overview'), session[:return_to] || attendance_path(@attendee.attendance_id) %></div>

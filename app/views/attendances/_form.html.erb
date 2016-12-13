@@ -1,11 +1,11 @@
 <%= form_for(@attendance) do |f| %>
-  <div class="field">
-    <%= f.hidden_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :event_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit t('confirm_attendance'), :id => 'submit' %>
-  </div>
+    <div class="field">
+      <%= f.hidden_field :user_id %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :event_id %>
+    </div>
+    <div class="actions">
+      <%= f.submit t('confirm_attendance'), :id => 'submit' %>
+    </div>
 <% end %>

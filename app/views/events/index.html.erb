@@ -1,8 +1,8 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
-<h1><%= t(:event_overview)%></h1>
+<h1><%= t(:event_overview) %></h1>
 
 <div class="RegistrationInfo">
-  <h3><%= t('registration_in_three_steps')%></h3>
+  <h3><%= t('registration_in_three_steps') %></h3>
   <ul>
     <li>
       <% if user_signed_in? %>
@@ -15,17 +15,19 @@
           <%= t('login_with_your_account') %>
       <% else %>
           <%= link_to t('login_with_your_account'), new_user_session_path %>.
-          <br/><%= t('need_your_name_and_mail')%>
+          <br/><%= t('need_your_name_and_mail') %>
       <% end %>
     </li>
-    <li><%= t('register2a')%><br/>
-      <%= t('register2b') -%><% if !user_signed_in? -%><%= t('register2c')%><% end -%>.
+    <li><%= t('register2a') %><br/>
+      <%= t('register2b') -%>
+      <% if !user_signed_in? -%><%= t('register2c') %>
+      <% end -%>.
     </li>
-    <li><%= t('register3')%>
+    <li><%= t('register3') %>
       <ul>
-        <li><%= t('register3a')%></li>
-        <li><%= t('register3b')%></li>
-        <li><%= t('register3c')%></li>
+        <li><%= t('register3a') %></li>
+        <li><%= t('register3b') %></li>
+        <li><%= t('register3c') %></li>
       </ul>
     </li>
   </ul>
@@ -35,13 +37,14 @@
 
 <% if @events.length == 0 %>
 
-    <h2><%= t('no_event_visible')%></h2>
+    <h2><%= t('no_event_visible') %></h2>
 
-    <p class="Indented"><%= t('submit_data_after_registration_closed')%>
+    <p class="Indented"><%= t('submit_data_after_registration_closed') %>
       <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
 
 <% else %>
-    <h2><%= t('current_events')%></h2>
+
+    <h2><%= t('current_events') %></h2>
 
     <div class="EventList">
       <% @events.each do |event| %>
@@ -54,7 +57,9 @@
             <div class="EventTitle"><%= event.title %></div>
             <div class="EventTime"><%= t('from') + " #{event.start_date} " + t('until') %> <%= event.end_date %></div>
             </p>
-            <% unless event.description.nil? || event.description.empty? -%><p class="EventDescription"><%= convert_markdown(event.description) %></p><% end %>
+            <% unless event.description.nil? || event.description.empty? -%>
+                <p class="EventDescription"><%= convert_markdown(event.description) %></p>
+            <% end %>
             <% unless event.url.nil? || event.url.empty? -%><p>
                 <div class="EventUrl"><%= t('more_information_on') + " " + event.title + " " + t('is_available_at') %> <%= link_to event.url, event.url, :target => "_new" %></div>
                 </p>
@@ -74,7 +79,7 @@
                       <%= link_to t('signup_for_attendance3'), new_user_session_path %>
                 <% end %>
             <% else %>
-                <p class="EventInfo"><%= t('registration_closed')%></p>
+                <p class="EventInfo"><%= t('registration_closed') %></p>
                 <% if user_signed_in? && current_user.attends_event?(event) -%>
                     <p class="EventSignup">
                       <%= link_to (t('show_attendance_link1') + event.title + t('show_attendance_link2')), attendance_path(current_user.attendance_for_event event) %></p>

@@ -8,31 +8,31 @@
   <li id="impressLink" class="mainNavi">
     <%= link_to t('impress'), "#{@lug.impress_url}" %>
   </li>
-    <% if user_signed_in? %>
-        <li>
-            <%= link_to t(:event_overview), :controller => "/events" %>
-        </li>
-        <li>
-            <%= link_to t('my_attendances'), :controller => "/attendances" %>
-        </li>
-        <% if user_is_admin? %>
-            <li>
-                <%= link_to t('administration'), :controller => "/admin/events" %>
-            </li>
-        <% end %>
-        <li id="logoutLink" class="mainNavi">
-            <%= link_to t('logout'), destroy_user_session_path, :method => :delete %>
-        </li>
-        <li id="editUserLink" class="mainNavi">
-            <%= link_to t('change_password'), edit_user_registration_path %>
-        </li>
-        <li id="editUserLink" class="mainNavi">
-            <%= link_to t('my_profile'), edit_user_path(:id => current_user) %>
-        </li>
-    <% else %>
-        <li id="loginLink" class="mainNavi">
-            <%= link_to t('login'), new_user_session_path, :id => :login %>
-        </li>
-    <% end %>
+  <% if user_signed_in? %>
+      <li>
+        <%= link_to t(:event_overview), :controller => "/events" %>
+      </li>
+      <li>
+        <%= link_to t('my_attendances'), :controller => "/attendances" %>
+      </li>
+      <% if user_is_admin? %>
+          <li>
+            <%= link_to t('administration'), :controller => "/admin/events" %>
+          </li>
+      <% end %>
+      <li id="logoutLink" class="mainNavi">
+        <%= link_to t('logout'), destroy_user_session_path, :method => :delete %>
+      </li>
+      <li id="editUserLink" class="mainNavi">
+        <%= link_to t('change_password'), edit_user_registration_path %>
+      </li>
+      <li id="editUserLink" class="mainNavi">
+        <%= link_to t('my_profile'), edit_user_path(:id => current_user) %>
+      </li>
+  <% else %>
+      <li id="loginLink" class="mainNavi">
+        <%= link_to t('login'), new_user_session_path, :id => :login %>
+      </li>
+  <% end %>
 
 </ul>

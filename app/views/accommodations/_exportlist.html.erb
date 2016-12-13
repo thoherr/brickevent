@@ -2,21 +2,21 @@
 
 <table class="AccommodationsTable FrontendTable">
   <tr>
-    <th><%= t('heading_name_of_guest')%></th>
-    <th><%= t('heading_room_class')%></th>
-    <th><%= t('heading_number_of_rooms')%></th>
-    <th><%= t('heading_remarks')%></th>
+    <th><%= t('heading_name_of_guest') %></th>
+    <th><%= t('heading_room_class') %></th>
+    <th><%= t('heading_number_of_rooms') %></th>
+    <th><%= t('heading_remarks') %></th>
     <th colspan="2"></th>
   </tr>
 
-<% accommodations.each do |accommodation| %>
-  <tr>
-    <td><%= accommodation.user_name %></td>
-    <td><%= accommodation.accommodation_type_name %></td>
-    <td><%= accommodation.count %></td>
-    <td><%= accommodation.remarks %></td>
-    <td><%= link_to t('edit'), edit_accommodation_path(accommodation) %></td>
-    <td><%= link_to t('delete'), accommodation, :confirm => t('are_you_sure'), :method => :delete %></td>
-  </tr>
-<% end %>
+  <% accommodations.each do |accommodation| %>
+      <tr>
+        <td><%= accommodation.user_name %></td>
+        <td><%= accommodation.accommodation_type_name %></td>
+        <td><%= accommodation.count %></td>
+        <td><%= accommodation.remarks %></td>
+        <td><%= link_to t('edit'), edit_accommodation_path(accommodation) %></td>
+        <td><%= link_to t('delete'), accommodation, :confirm => t('are_you_sure'), :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
