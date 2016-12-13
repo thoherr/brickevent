@@ -67,7 +67,7 @@
                     <% if current_user.attends_event? event -%>
                         <p class="EventSignup"><%= link_to (t('edit_attendance1') + " " + event.title + " " + t('edit_attendance2')), attendance_path(current_user.attendance_for_event event) %></p>
                     <% else -%>
-                        <p class="EventSignup"><%= link_to (t('register_attendance1') + event.title + t('register_attendance2')), new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
+                        <p class="EventSignup"><%= link_to (t('register_attendance1') + " " + event.title + " " + t('register_attendance2')), new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
                     <% end -%>
                 <% else -%>
                     <p class="EventSignup"><%= t('signup_for_attendance1') + event.title + t('signup_for_attendance2') %>

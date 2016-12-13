@@ -1,24 +1,24 @@
-<h2>Anmeldedaten ändern</h2>
+<h2><%= t('update_account_data') %></h2>
 
 <div class="InputForm">
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field"><%= f.label :email, 'Email (gleichzeitig Dein Login)' %><br />
+  <div class="field"><%= f.label :email, t('label_email_login') %><br />
   <%= f.email_field :email %></div>
 
-  <div class="field"><%= f.label :password, 'Neues Passwort' %> <i>(leerlassen, wenn Du Dein Passwort nicht ändern möchtest)</i><br />
+  <div class="field"><%= f.label :password, t('label_new_password') %> <i><%= t('leave_empty_if_no_pw_update') %></i><br />
   <%= f.password_field :password %></div>
 
-  <div class="field"><%= f.label :password_confirmation, 'Neues Passwort bitte wiederholen' %><br />
+  <div class="field"><%= f.label :password_confirmation, t('label_password_confirmation') %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div class="field"><%= f.label :current_password, 'Dein aktuelles Passwort' %> <i>(um die Änderung zu bestätigen)</i><br />
+  <div class="field"><%= f.label :current_password, t('label_current_password') %> <i><%= t('to_confirm_update') %></i><br />
   <%= f.password_field :current_password %></div>
 
   <div class="actions">
-    <%= f.submit "Anmeldedaten ändern", :id => 'submit' %>
+    <%= f.submit t('update_account_data'), :id => 'submit' %>
   </div>
 <% end %>
 

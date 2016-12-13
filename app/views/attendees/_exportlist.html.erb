@@ -18,7 +18,7 @@
 
 <% attendees.each do |attendee| %>
   <tr>
-    <td><%= link_to to_j_n(attendee.is_approved?), approve_attendee_path(attendee), :method => :post %></td>
+    <td><%= link_to to_yes_no(attendee.is_approved?), approve_attendee_path(attendee), :method => :post %></td>
       <td><%= attendee.attendee_type %></td>
       <td><%= attendee.name %></td>
       <td><%= attendee.nickname %></td>
@@ -26,8 +26,8 @@
       <td><%= attendee.phone %></td>
       <td><%= attendee.address %></td>
       <td><%= attendee.lug %></td>
-      <td><%= to_j_n(attendee.afols_event) %></td>
-      <td><%= to_j_n(attendee.needs_ticket) %></td>
+      <td><%= to_yes_no(attendee.afols_event) %></td>
+      <td><%= to_yes_no(attendee.needs_ticket) %></td>
       <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
       <td colspan="2"><%= link_to t('edit'), edit_attendee_path(attendee) %>

@@ -11,12 +11,6 @@ class AccommodationsControllerTest < ActionController::TestCase
     @accommodation.accommodation_type = accommodation_types(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:accommodations)
-  end
-
   test "should get new" do
     get :new, :attendance_id => @accommodation.attendance_id
     assert_response :success
@@ -28,11 +22,6 @@ class AccommodationsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to attendance_path(assigns(:accommodation).attendance)
-  end
-
-  test "should show accommodation" do
-    get :show, :id => @accommodation.to_param
-    assert_response :success
   end
 
   test "should get edit" do

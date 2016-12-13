@@ -16,14 +16,14 @@
 
 <% attendees.each do |attendee| %>
   <tr>
-    <td><%= to_j_n(attendee.is_approved?) %></td>
+    <td><%= to_yes_no(attendee.is_approved?) %></td>
       <td><%= attendee.attendee_type %></td>
       <td><%= attendee.name %></td>
       <td><%= attendee.lug %></td>
       <td><%= attendee.email %></td>
       <td><%= attendee.nickname %></td>
-      <td><%= to_j_n(attendee.afols_event) %></td>
-      <td><%= to_j_n(attendee.needs_ticket) %></td>
+      <td><%= to_yes_no(attendee.afols_event) %></td>
+      <td><%= to_yes_no(attendee.needs_ticket) %></td>
       <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
       <td colspan="2"><% if @registration_open -%><%= link_to t('edit'), edit_attendee_path(attendee) %>

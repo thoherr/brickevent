@@ -17,7 +17,7 @@
   <% user = attendance.user %>
   <% unless user.blank? then %>
   <tr>
-    <td><%= link_to to_j_n(attendance.is_approved?), approve_attendance_path(attendance), :method => :post %></td>
+    <td><%= link_to to_yes_no(attendance.is_approved?), approve_attendance_path(attendance), :method => :post %></td>
       <td><%= link_to user.name, attendance_path(attendance) %></td>
       <td><%= user.nickname %></td>
       <td><%= user.email %></td>

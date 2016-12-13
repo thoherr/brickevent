@@ -12,92 +12,91 @@
     <% end %>
 
     <div class="InputForm">
-      <h3>Bitte gib so viele Informationen wie möglich an.
-        Das erleichtert uns die Planung!</h3>
+      <h3><%= t('supply_maximum_information') + " " + t('will_easy_our_planing')%></h3>
       <%= f.hidden_field :attendance_id %>
       <div class="field">
-        <%= f.label :name, 'Name des MOCs' %><br/>
+        <%= f.label :name, t('lebal_moc_name') %><br/>
         <%= f.text_field :name, size: 80 %>
       </div>
       <div class="field">
-        <%= f.label :description, 'Beschreibung des MOCs' %><br/>
+        <%= f.label :description, t('label_moc_desctiption') %><br/>
         <%= f.text_area :description, cols: 80 %>
       </div>
       <div class="field">
-        <%= f.label :url, 'URL mit Bildern, weiteren Infos etc.' %><br/>
+        <%= f.label :url, t('label_moc_url') %><br/>
         <%= f.text_field :url, size: 80 %>
       </div>
 
       <div class="field">
-        <%= f.label :unit_id, 'Platzbedarf / Ungefähre Größe (ggf. bitte aufrunden) des MOCs in ' %>
+        <%= f.label :unit_id, t('label_moc_size') %>
         <%= f.select :unit_id, Unit.all.collect { |i| [i.description, i.id] } %><br/>
         <%= f.number_field :size_x, size: 10 %>
-        <%= f.label :size_x, 'lang' %><br/>
+        <%= f.label :size_x, t('long') %><br/>
         <%= f.number_field :size_y, size: 10 %>
-        <%= f.label :size_y, 'breit' %><br/>
+        <%= f.label :size_y, t('wide') %><br/>
         <%= f.number_field :size_z, size: 10 %>
-        <%= f.label :size_y, 'hoch (bitte angeben falls mehr als 50 cm)' %><br/>
+        <%= f.label :size_y, t('high_if_higher_than_50_cm') %><br/>
       </div>
 
       <% unless @exhibit.size_studs.blank? %>
           <div class="field">
-            <%= f.label :size_studs, 'Größe in Noppen (z.B. 96x48)' %><br/>
+            <%= f.label :size_studs, t('label_size_in_studs') %><br/>
             <%= f.text_field :size_studs, size: 40 %>
           </div>
       <% end %>
       <% unless @exhibit.size.blank? %>
           <div class="field">
-            <%= f.label :size, 'Größe in Zentimetern (z.B. 100x120)' %><br/>
+            <%= f.label :size, t('label_size_in_cm') %><br/>
             <%= f.text_field :size, size: 40 %>
           </div>
       <% end %>
 
       <div class="field">
-        <%= f.label :value, 'Versicherungswert in Euro (ca.)' %><br/>
+        <%= f.label :value, t('label_insurrance_value') %><br/>
         <%= f.number_field :value %>
       </div>
 
       <% if @exhibit.attendance && @exhibit.attendance.event && @exhibit.attendance.event.has_moc_card_service %>
           <div class="field">
-            <%= f.label :building_hours, 'Anzahl der Baustunden(ca.)' %><br/>
+            <%= f.label :building_hours, t('label_building_hours') %><br/>
             <%= f.text_field :building_hours, size: 40 %>
           </div>
           <div class="field">
-            <%= f.label :brick_count, 'Anzahl der Steine (ca.)' %><br/>
+            <%= f.label :brick_count, t('label_number_of_bricks') %><br/>
             <%= f.number_field :brick_count, size: 40 %>
           </div>
       <% end %>
 
       <div class="field">
         <%= f.check_box :needs_power_supply %>
-        <%= f.label :needs_power_supply, 'Stromversorgung wird benötigt' %>
+        <%= f.label :needs_power_supply, t('label_needs_power_supply') %>
       </div>
 
       <% if @exhibit.attendance && @exhibit.attendance.event && @exhibit.attendance.event.has_moc_transport %>
           <div class="field">
             <%= f.check_box :needs_transportation %>
-            <%= f.label :needs_transportation, 'Sammeltransport erwünscht (bitte nur mit Rücksprache!)' %>
+            <%= f.label :needs_transportation, t('label_moc_needs_transportation') %>
           </div>
       <% end %>
 
       <% if user_is_admin? || (@exhibit.attendance && @exhibit.attendance.event && @exhibit.attendance.event.is_managed_by?(current_user)) -%>
           <div class="field">
             <%= f.check_box :is_installation %>
-            <%= f.label :is_installation, 'Dieses MOC ist selbst ein Gemeinschaftsprojekt' %>
+            <%= f.label :is_installation, t('label_moc_is_joint_project') %>
           </div>
       <% end %>
 
       <div class="field">
         <%= f.check_box :is_part_of_installation %>
-        <%= f.label :is_part_of_installation, 'Dieses MOC ist Teil eines Gemeinschaftsprojektes, und zwar von' %>
-        <%= f.select :installation_exhibit_id, @exhibit.event_installations.collect { |i| [i.name, i.id] }, {:prompt => '- Bitte auswählen -'} %>
+        <%= f.label :is_part_of_installation, t('label_moc_is_part_of_joint_project') %>
+        <%= f.select :installation_exhibit_id, @exhibit.event_installations.collect { |i| [i.name, i.id] }, {:prompt => t('please_choose')} %>
       </div>
       <div class="field">
-        <%= f.label :remarks, 'Weitere Bemerkungen und Kommentare (intern für unsere Planung)' %><br/>
+        <%= f.label :remarks, t('label_further_remarks') %><br/>
         <%= f.text_area :remarks, cols: 80, rows: 10 %>
       </div>
       <div class="actions">
-        <%= f.submit "Speichern", :id => 'submit' %>
+        <%= f.submit t('save'), :id => 'submit' %>
       </div>
     </div>
 

@@ -7,8 +7,8 @@ module ApplicationHelper
     return raw markdown.to_html
   end
 
-  def to_j_n(value)
-    if value then 'Ja' else 'Nein' end
+  def to_yes_no(value)
+    if value then t('yes') else t('no') end
   end
 
   def user_is_admin?

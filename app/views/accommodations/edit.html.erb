@@ -1,7 +1,7 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
 
-<h1>Zimmeranfrage für <%= @accommodation.event_title %> ändern</h1>
+<h1><%= t('room_request_for') + " " + @accommodation.event_title %></h1>
 
 <%= render 'form' %>
 
-<div class="OverviewLink"><%= link_to 'Zurück zur Übersichtsseite', session[:return_to] || attendance_path(@accommodation.attendance_id) %></div>
+<div class="OverviewLink"><%= link_to t('back_to_overview'), session[:return_to] || attendance_path(@accommodation.attendance_id) %></div>
