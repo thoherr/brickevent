@@ -1,16 +1,4 @@
 <%= form_for(@exhibit) do |f| %>
-    <% if @exhibit.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@exhibit.errors.count, "Fehler") %> sind aufgetreten:</h2>
-
-          <ul>
-            <% @exhibit.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
     <div class="InputForm">
       <h3><%= t('supply_maximum_information') + " " + t('will_easy_our_planing')%></h3>
       <%= f.hidden_field :attendance_id %>
