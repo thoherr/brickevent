@@ -36,6 +36,7 @@ BrickEvent::Application.routes.draw do
     resources :attendances do as_routes end
     resources :attendees do as_routes end
     resources :events do as_routes end
+    resources :event_managers do as_routes end
     resources :exhibits do as_routes end
     resources :lugs do as_routes end
     resources :users do as_routes end
