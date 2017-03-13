@@ -1,34 +1,20 @@
 <%= form_for(@accommodation) do |f| %>
-  <% if @accommodation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@accommodation.errors.count, "error") %> prohibited this accommodation from being saved:</h2>
-
-      <ul>
-      <% @accommodation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="InputForm">
+      <%= f.hidden_field :attendance_id %>
+      <div class="field">
+        <%= t('label_accommodation_type') %><br/>
+        <%= f.select :accommodation_type_id, AccommodationType.all.collect { |at| [at.name, at.id] }, {:prompt => '- Bitte auswählen -'} %>
+      </div>
+      <div class="field">
+        <%= t('label_number_of_rooms') %><br/>
+        <%= f.number_field :count %>
+      </div>
+      <div class="field">
+        <%= t('label_room_remarks') %><br/>
+        <%= f.text_area :remarks %>
+      </div>
+      <div class="actions">
+        <%= f.submit t('save'), :id => 'submit' %>
+      </div>
     </div>
-  <% end %>
-
-  <p><strong>Hinweis:</strong> Die Zimmer werden standardm&auml;&szlig;ig von Mittwoch, 11.4. auf Montag, 16.4. reserviert</p>
-  <div class="InputForm">
-  <%= f.hidden_field :attendance_id %>
-  <div class="field">
-    Zimmertyp<br />
-    <%= f.select :accommodation_type_id, AccommodationType.all.collect {|at| [ at.name, at.id ] }, {:prompt => '- Bitte auswählen -' } %>
-  </div>
-  <div class="field">
-    Benötgte Anzahl dieses Zimmertyps<br />
-    <%= f.number_field :count %>
-  </div>
-  <div class="field">
-    Bemerkungen/Sonderw&uuml;nsche (z. B. verschobene An-/Abreise, Doppelzimmer mit Anderen etc.)<br />
-    <%= f.text_area :remarks %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Speichern", :id => 'submit' %>
-  </div>
-  </div>
-
 <% end %>

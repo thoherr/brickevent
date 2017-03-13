@@ -1,18 +1,11 @@
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
-
-<h1>Anmeldung für <%= event_title %></h1>
-
+<h1><%= t('attendance_for') + " " +event_title %></h1>
 <div class="InputForm">
-
-<p>Vielen Dank, dass Du Dich zur Teilnahme an <%= event_title %> registrieren möchtest!</p>
-
-<p>Auf der nächsten Seite kannst Du alle Details zu Deiner Anmeldung erfassen.<br/>
-  Natürlich hast Du später jederzeit die Möglichkeit, Deine Daten zu korrigieren und Ergänzungen vorzunehmen.</p>
-
-<p>Bitte bestätige Deine Anmeldung durch den folgenden Link.</p>
-
-<%= render 'form' %>
-
+  <p><%= t('new_attendance1') + " " + event_title + " " + t('new_attendance2') %></p>
+  <p><%= t('new_attendance3') %><br/>
+    <%= t('new_attendance4') %></p>
+  <p><%= t('new_attendance5') %></p>
+  <%= render 'form' %>
 </div>
-<%= link_to 'Zurück zur Veranstaltungsübersicht', events_path %>
+<%= link_to t('back_to_event_overview'), events_path %>

@@ -1,5 +1,3 @@
 <h1>MOC-Daten für <%= @exhibit.event_title %> ändern</h1>
-
 <%= render 'form' %>
-
-<div class="OverviewLink"><%= link_to 'Zurück zur Übersichtsseite', session[:return_to] || attendance_path(@exhibit.attendance_id) %></div>
+<div class="OverviewLink"><%= link_to t('back_to_overview'), session[:return_to] || attendance_path(@exhibit.attendance_id) %></div>

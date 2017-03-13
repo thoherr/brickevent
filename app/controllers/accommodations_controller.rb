@@ -1,26 +1,5 @@
 # encoding: UTF-8
 class AccommodationsController < ApplicationController
-  # GET /accommodations
-  # GET /accommodations.json
-  def index
-    @accommodations = Accommodation.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @accommodations }
-    end
-  end
-
-  # GET /accommodations/1
-  # GET /accommodations/1.json
-  def show
-    @accommodation = Accommodation.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @accommodation }
-    end
-  end
 
   # GET /accommodations/new
   # GET /accommodations/new.json

@@ -32,22 +32,4 @@ class AttendancesControllerTest < ActionController::TestCase
     get :show, :id => @attendance.to_param
     assert_response :success
   end
-
-  test "should get edit" do
-    get :edit, :id => @attendance.to_param
-    assert_response :success
-  end
-
-  test "should update attendance" do
-    put :update, :id => @attendance.to_param, :attendance => @attendance.attributes
-    assert_redirected_to attendance_path(assigns(:attendance))
-  end
-
-  test "should destroy attendance" do
-    assert_difference('Attendance.count', -1) do
-      delete :destroy, :id => @attendance.to_param
-    end
-
-    assert_redirected_to attendances_path
-  end
 end

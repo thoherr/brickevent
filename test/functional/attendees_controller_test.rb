@@ -10,12 +10,6 @@ class AttendeesControllerTest < ActionController::TestCase
     @attendee.attendee_type = attendee_types(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:attendees)
-  end
-
   test "should get new" do
     get :new, :attendance_id => @attendee.attendance_id
     assert_response :success
@@ -27,11 +21,6 @@ class AttendeesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to attendance_path(assigns(:attendee).attendance)
-  end
-
-  test "should show attendee" do
-    get :show, :id => @attendee.to_param
-    assert_response :success
   end
 
   test "should get edit" do

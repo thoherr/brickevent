@@ -1,23 +1,11 @@
 <%= form_for(@attendance) do |f| %>
-  <% if @attendance.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
-
-      <ul>
-      <% @attendance.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="field">
+      <%= f.hidden_field :user_id %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.hidden_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :event_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Anmeldung bestätigen", :id => 'submit' %>
-  </div>
+    <div class="field">
+      <%= f.hidden_field :event_id %>
+    </div>
+    <div class="actions">
+      <%= f.submit t('confirm_attendance'), :id => 'submit' %>
+    </div>
 <% end %>

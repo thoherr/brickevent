@@ -2,26 +2,26 @@
 <% titleline = "ADMINISTRATION - #{SoftwareVersion.appname}" %>
 <html>
 <head>
-    <title><%= titleline %></title>
-    <meta name="application-name" content="ADMINISTRATION - #{SoftwareVersion.appname}">
-    <meta name="description" content="Veranstaltungen von <%= @lug.name %>">
-    <%= render :partial => "shared/meta_includes" %>
+  <title><%= titleline %></title>
+  <meta name="application-name" content="ADMINISTRATION - #{SoftwareVersion.appname}">
+  <meta name="description" content="Veranstaltungen von <%= @lug.name %>">
+  <%= render :partial => "shared/meta_includes" %>
 </head>
 <body>
 
-    <div id="mainTitle">
-        <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
-        <span class="TitleText"><%= titleline %></span>
-    </div>
+<div id="mainTitle">
+  <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
+  <span class="TitleText"><%= titleline %></span>
+</div>
 
-    <div id="mainNavi">
-        <%= render :partial => "shared/admin_navi" %>
-    </div>
+<div id="mainNavi">
+  <%= render :partial => "shared/admin_navi" %>
+</div>
 
-    <div id="mainContent">
-        <%= render :partial => "shared/flashes" %>
-        <%= yield %>
-    </div>
+<div id="mainContent">
+  <%= render :partial => "shared/flashes" %>
+  <%= yield %>
+</div>
 
 </body>
 </html>

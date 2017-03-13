@@ -2,44 +2,44 @@
 
 <table class="ExhibitsTable FrontendTable">
   <tr>
-    <th>Bestätigt</th>
-    <th>Anmeldername</th>
-    <th>MOC</th>
-    <th>Text f&uuml;r MOC-Karte</th>
-    <th>URL</th>
+    <th><%= t('heading_confirmed') %></th>
+    <th><%= t('heading_name_of_guest') %></th>
+    <th><%= t('heading_moc') %></th>
+    <th><%= t('heading_moc_card_text') %></th>
+    <th><%= t('heading_url') %></th>
     <% if event.has_moc_card_service %>
-        <th>Anzahl Baustunden</th>
-        <th>Anzahl Steine</th>
+        <th><%= t('heading_build_time') %></th>
+        <th><%= t('heading_number_of_bricks') %></th>
     <% end %>
-    <th>LUG</th>
-    <th>Gemeinschaftsprojekt</th>
-    <th>Bemerkungen</th>
-    <th>Maße</th>
-    <th>Versicherungswert</th>
-    <th>Stromversorgung</th>
+    <th><%= t('heading_lug') %></th>
+    <th><%= t('heading_joint_project') %></th>
+    <th><%= t('heading_remarks') %></th>
+    <th><%= t('heading_size') %></th>
+    <th><%= t('heading_insurrance_value') %></th>
+    <th><%= t('heading_power_supply') %></th>
     <th colspan="3"></th>
   </tr>
 
-<% exhibits.each do |exhibit| %>
-  <tr>
-    <td><%= link_to to_j_n(exhibit.is_approved?), approve_exhibit_path(exhibit), :method => :post %></td>
-    <td><%= exhibit.user_name %></td>
-    <td><%= exhibit.name %></td>
-    <td><%= exhibit.description %></td>
-    <td><%= exhibit.url %></td>
-    <% if event.has_moc_card_service %>
-        <td><%= exhibit.building_hours %></td>
-        <td><%= exhibit.brick_count %></td>
-    <% end %>
-    <td><%= exhibit.user_lug %></td>
-    <td><%= exhibit.installation_exhibit_name %></td>
-    <td><%= exhibit.remarks %></td>
-    <td><%= exhibit.size_text %></td>
-    <td><%= exhibit.value %></td>
-    <td><%= to_j_n(exhibit.needs_power_supply) %></td>
-    <td colspan="3"><%= link_to 'Ändern', edit_exhibit_path(exhibit) %>
-    <%= link_to 'Löschen', exhibit, :confirm => 'Bist Du sicher?', :method => :delete %>
-    <!-- <%= link_to 'MOC-Karte erzeugen', edit_exhibit_path(exhibit) %> --></td>
-  </tr>
-<% end %>
+  <% exhibits.each do |exhibit| %>
+      <tr>
+        <td><%= link_to to_yes_no(exhibit.is_approved?), approve_exhibit_path(exhibit), :method => :post %></td>
+        <td><%= exhibit.user_name %></td>
+        <td><%= exhibit.name %></td>
+        <td><%= exhibit.description %></td>
+        <td><%= exhibit.url %></td>
+        <% if event.has_moc_card_service %>
+            <td><%= exhibit.building_hours %></td>
+            <td><%= exhibit.brick_count %></td>
+        <% end %>
+        <td><%= exhibit.user_lug %></td>
+        <td><%= exhibit.installation_exhibit_name %></td>
+        <td><%= exhibit.remarks %></td>
+        <td><%= exhibit.size_text %></td>
+        <td><%= exhibit.value %></td>
+        <td><%= to_yes_no(exhibit.needs_power_supply) %></td>
+        <td colspan="3"><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
+          <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
+          <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> --></td>
+      </tr>
+  <% end %>
 </table>

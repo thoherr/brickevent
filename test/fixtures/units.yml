@@ -2,10 +2,12 @@
 
 one:
   name: MyString
+  description: MyString1
   factor: 9.99
 
 two:
   name: MyString
+  description: MyString2
   factor: 9.99
 
 m:

@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if @event
       # According to RFC 4180 the MIME type for our csv data is text/csv
-      send_data(@event.attendees_as_csv, :type => "text/csv", :filename => params[:filename])
+      send_data(@event.attendees_as_csv.encode(Encoding::ISO_8859_15), :type => "text/csv", :filename => params[:filename])
     else
       redirect_to events_url
     end
@@ -39,7 +39,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if @event
       # According to RFC 4180 the MIME type for our csv data is text/csv
-      send_data(@event.exhibits_as_csv, :type => "text/csv", :filename => params[:filename])
+      send_data(@event.exhibits_as_csv.encode(Encoding::ISO_8859_15), :type => "text/csv", :filename => params[:filename])
     else
       redirect_to events_url
     end

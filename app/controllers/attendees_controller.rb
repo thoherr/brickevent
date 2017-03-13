@@ -1,27 +1,5 @@
 # encoding: UTF-8
 class AttendeesController < ApplicationController
-  # GET /attendees
-  # GET /attendees.json
-  def index
-    @attendees = Attendee.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @attendees }
-    end
-  end
-
-  # GET /attendees/1
-  # GET /attendees/1.json
-  def show
-    @attendee = Attendee.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @attendee }
-    end
-  end
-
   # GET /attendees/new
   # GET /attendees/new.json
   def new
@@ -41,7 +19,7 @@ class AttendeesController < ApplicationController
       @attendee.is_approved=!@attendee.is_approved
       respond_to do |format|
         if @attendee.save
-          format.html { redirect_to @attendee.event, :notice => 'Teilnahmebestätigung geändert.' }
+          format.html { redirect_to @attendee.event, :notice => t('attendee_confirmation_changed') }
           format.json { render :json => @attendee.event, :status => :updated, :location => @event }
         else
           format.html { render :action => "show" }
@@ -64,7 +42,7 @@ class AttendeesController < ApplicationController
 
     respond_to do |format|
       if @attendee.save
-        format.html { redirect_back_or_default @attendee.attendance, :notice => 'Neuer Teilnehmer wurde hinzugefügt.' }
+        format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_added') }
         format.json { render :json => @attendee, :status => :created, :location => @attendee }
       else
         format.html { render :action => "new" }
@@ -80,7 +58,7 @@ class AttendeesController < ApplicationController
 
     respond_to do |format|
       if @attendee.update_attributes(params[:attendee])
-        format.html { redirect_back_or_default @attendee.attendance, :notice => 'Die Teilnehmerdaten wurden geändert.' }
+        format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated') }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -98,7 +76,7 @@ class AttendeesController < ApplicationController
     @attendee.destroy
 
     respond_to do |format|
-      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Der Teilnehmer wurde gelöscht.' }
+      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => t('attendee_deleted') }
       format.json { head :ok }
     end
   end

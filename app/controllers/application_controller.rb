@@ -5,8 +5,13 @@ class ApplicationController < ActionController::Base
   before_filter :get_lug
   before_filter :set_locale
 
+  def supported_locales
+    [ :de, :en ]
+  end
+
   def set_locale
     I18n.locale = params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
+    I18n.locale = I18n.default_locale unless supported_locales.include? I18n.locale
   end
 
   def default_url_options

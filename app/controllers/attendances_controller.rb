@@ -37,11 +37,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # GET /attendances/1/edit
-  def edit
-    @attendance = Attendance.find(params[:id])
-  end
-
   # POST /attendances
   # POST /attendances.json
   def create
@@ -117,31 +112,4 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # PUT /attendances/1
-  # PUT /attendances/1.json
-  def update
-    @attendance = Attendance.find(params[:id])
-
-    respond_to do |format|
-      if @attendance.update_attributes(params[:attendance])
-        format.html { redirect_to @attendance, :notice => 'Attendance was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /attendances/1
-  # DELETE /attendances/1.json
-  def destroy
-    @attendance = Attendance.find(params[:id])
-    @attendance.destroy
-
-    respond_to do |format|
-      format.html { redirect_to attendances_url }
-      format.json { head :ok }
-    end
-  end
 end
