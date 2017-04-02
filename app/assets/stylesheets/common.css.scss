@@ -106,11 +106,11 @@ a {
     font-weight: bold;
 }
 
-#mainNavi ul li#germanLink, #mainNavi ul li#englishLink, #mainNavi ul li#editUserLink, #mainNavi ul li#loginLink, #mainNavi ul li#logoutLink, #mainNavi ul li#impressLink {
+#mainNavi ul li.languageLink, #mainNavi ul li#editUserLink, #mainNavi ul li#loginLink, #mainNavi ul li#logoutLink, #mainNavi ul li#impressLink {
     float: right;
 }
 
-#mainNavi ul li#germanLink {
+#mainNavi ul li.subsequentLink {
   padding-right: 5px;
 }
 

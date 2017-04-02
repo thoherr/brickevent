@@ -15,4 +15,7 @@ module ApplicationHelper
     user_signed_in? && current_user.is_admin?
   end
 
+  def is_locale_supported?(locale)
+    ApplicationController.supported_locales.include? locale
+  end
 end

@@ -1,10 +1,25 @@
 <ul>
-  <li id="englishLink" class="mainNavi">
-    <%= link_to image_tag('english.png', :alt => t('english'), :width => 15, :height => 10), "?locale=en" %>
-  </li>
-  <li id="germanLink" class="mainNavi">
-    <%= link_to image_tag('german.png', :alt => t('german'), :width => 15, :height => 10), "?locale=de" %>
-  </li>
+  <% firstLink = true -%>
+  <% if is_locale_supported? :en -%>
+      <% if firstLink
+           firstLink = false -%>
+        <li id="englishLink" class="mainNavi languageLink">
+      <% else -%>
+        <li id="englishLink" class="mainNavi languageLink subsequentLink">
+      <% end -%>
+        <%= link_to image_tag('english.png', :alt => t('english'), :width => 15, :height => 10), "?locale=en" %>
+      </li>
+  <% end -%>
+  <% if is_locale_supported? :de -%>
+      <% if firstLink
+           firstLink = false -%>
+          <li id="germanLink" class="mainNavi languageLink">
+      <% else -%>
+          <li id="germanLink" class="mainNavi languageLink subsequentLink">
+      <% end -%>
+        <%= link_to image_tag('german.png', :alt => t('german'), :width => 15, :height => 10), "?locale=de" %>
+      </li>
+  <% end -%>
   <li id="impressLink" class="mainNavi">
     <%= link_to t('impress'), "#{@lug.impress_url}" %>
   </li>
