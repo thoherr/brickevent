@@ -1,4 +1,13 @@
 de:
+  date:
+    formats:
+      default: ""
+      long: ""
+      short: ""
+    order:
+      - :year
+      - :month
+      - :day
   activerecord:
     errors:
       template: 
