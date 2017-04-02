@@ -6,10 +6,10 @@ class EventTest < ActiveSupport::TestCase
 
   test "generate attendees csv" do
     event1 = events(:one)
-    assert_equal "Typ;Bestätigt;Name;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Bemerkungen;T-Shirt-Größe\n", event1.attendees_as_csv
+    assert_equal "Typ;Bestätigt;Name;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;;;;Bemerkungen;T-Shirt-Größe\n", event1.attendees_as_csv
     event3 = events(:three)
     assert_equal 3, event3.number_of_attendees
-    assert_equal "Typ;Bestätigt;Name;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Bemerkungen;T-Shirt-Größe\nHelfer;false;Attendee3;LUG2;Nick3;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;None;\nAussteller;false;Attendee2;LUG1;Nick2;;MyString;MyString;false;false;Hi, there;\nAussteller;false;Attendee1;LUG1;Nick1;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;Glad to see you;\n", event3.attendees_as_csv
+    assert_equal "Typ;Bestätigt;Name;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Our wonderful first option;;Some weird thing;Bemerkungen;T-Shirt-Größe\nHelfer;false;Attendee3;LUG2;Nick3;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;true;false;None;\nAussteller;false;Attendee2;LUG1;Nick2;;MyString;MyString;false;false;true;false;false;Hi, there;\nAussteller;false;Attendee1;LUG1;Nick1;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;false;false;Glad to see you;\n", event3.attendees_as_csv
   end
 
   test "generate exhibits csv" do

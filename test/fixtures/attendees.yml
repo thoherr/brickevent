@@ -17,6 +17,7 @@ two:
   nickname: Nick2
   afols_event: false
   needs_ticket: false
+  option_1: true
   remarks: Hi, there
   attendance: two
   attendee_type: one
@@ -26,6 +27,7 @@ three:
   lug: LUG2
   nickname: Nick3
   afols_event: true
+  option_2: true
   remarks: None
   attendance: three
   attendee_type: two
