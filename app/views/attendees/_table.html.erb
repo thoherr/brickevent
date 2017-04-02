@@ -10,6 +10,9 @@
     <th><%= t('heading_nickname') %></th>
     <th><%= t('neading_afols_event') %></th>
     <th><%= t('heading_ticket') %></th>
+    <th><%= t('heading_option_1') %></th>
+    <th><%= t('heading_option_2') %></th>
+    <th><%= t('heading_option_3') %></th>
     <th><%= t('heading_remarks') %></th>
     <th colspan="2"></th>
   </tr>
@@ -24,6 +27,9 @@
         <td><%= attendee.nickname %></td>
         <td><%= to_yes_no(attendee.afols_event) %></td>
         <td><%= to_yes_no(attendee.needs_ticket) %></td>
+        <td><%= to_yes_no(attendee.option_1) %></td>
+        <td><%= to_yes_no(attendee.option_2) %></td>
+        <td><%= to_yes_no(attendee.option_3) %></td>
         <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
         <td colspan="2">

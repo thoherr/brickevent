@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161128235633) do
+ActiveRecord::Schema.define(:version => 20170402204150) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(:version => 20161128235633) do
     t.string   "shirt_size"
     t.boolean  "is_approved"
     t.boolean  "needs_ticket",                      :default => true
+    t.boolean  "option_1",                          :default => false
+    t.boolean  "option_2",                          :default => false
+    t.boolean  "option_3",                          :default => false
   end
 
   create_table "builders", :force => true do |t|
@@ -100,6 +103,12 @@ ActiveRecord::Schema.define(:version => 20161128235633) do
     t.integer  "lug_id"
     t.boolean  "has_afols_event",                       :default => true
     t.boolean  "has_tickets",                           :default => true
+    t.boolean  "has_option_1"
+    t.string   "label_option_1"
+    t.boolean  "has_option_2"
+    t.string   "label_option_2"
+    t.boolean  "has_option_3"
+    t.string   "label_option_3"
   end
 
   create_table "exhibits", :force => true do |t|
