@@ -8,6 +8,13 @@ de:
       - :year
       - :month
       - :day
+  time:
+    am: a.m.
+    formats:
+      default: ""
+      long: ""
+      short: ""
+    pm: p.m.
   activerecord:
     errors:
       template: 
