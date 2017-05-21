@@ -92,6 +92,8 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "sign in" do
+    # needed by User.create! and normally done by before_filter in app controller
+    ActionMailer::Base.default_url_options[:host] = "localhost:3000"
     @user = User.create!(:email => "email@email.com",
                 :password => "password",
                 :password_confirmation => "password",

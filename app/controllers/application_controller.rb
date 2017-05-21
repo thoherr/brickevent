@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :get_lug
   before_filter :set_locale
+  before_filter :mailer_set_url_options
 
   def self.supported_locales
 #    [ :de, :en ]
@@ -36,6 +37,12 @@ class ApplicationController < ActionController::Base
     end
     # stupid default, just for test purposes
     @lug = Lug.first
+  end
+
+  def mailer_set_url_options
+    # the URLs in our (confirmation) mails should link to the current instance, which can (will) differ for different LUGs
+    # see http://stackoverflow.com/questions/3432712/how-to-set-the-actionmailer-default-url-optionss-host-dynamically-to-the-reque
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 
   private
