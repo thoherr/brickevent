@@ -6,9 +6,9 @@
     Alle anderen Angaben sind optional.<br/>
 Bitte gib trotzdem Deine Handynummer an, das erleichtert und die Kontaktaufnahme insbesondere w&auml;hrend der Veranstaltungen!</p>
 
-<p>Deine Anmeldedaten werden von uns ausschlie&szlig;lich f&uuml;r die Vorbereitung und Durchführung unserer Veranstaltungen gespeichert
-    und k&ouml;nnen nur von den Organisatoren der jeweiligen Veranstaltung eingesehen werden.
-    Daher siehst Du auf diesen Seiten auch keine vollständige Teilnehmer- oder Modellliste.</br>
+<p>Deine Anmeldedaten werden von uns ausschlie&szlig;lich f&uuml;r die Vorbereitung und Durchführung von Veranstaltungen gespeichert
+    und k&ouml;nnen nur von den Organisatoren der jeweiligen Veranstaltungen eingesehen werden.
+    Daher siehst Du auf diesen Seiten auch keine vollständige Teilnehmer- oder MOC-Liste.</br>
 WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durch Ankreuzen des entsprechenden K&auml;stchens im Formular geben!</p>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
@@ -45,7 +45,7 @@ WICHTIG: Du musst uns Dein Einverst&auml;ndnis zur Speicherung Deiner Daten durc
   </div>
   <div class="field">
       <%= f.check_box :accept_data_storage %>
-      <%= f.label :accept_data_storage, "Ich bin mit der Speicherung meiner Daten durch #{@lug.name} im Rahmen der Vorbereitung und Durchführung von Veranstaltungen einverstanden."%>
+      <%= f.label :accept_data_storage, "Ich bin mit der Speicherung meiner Daten im Rahmen der Vorbereitung und Durchführung von Veranstaltungen einverstanden."%>
   </div>
   <div class="actions">
   <%= f.submit "Als Benutzer registrieren", :id => 'submit' %>
