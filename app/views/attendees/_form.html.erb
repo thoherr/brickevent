@@ -61,7 +61,7 @@
       <% if @attendee.event && @attendee.event.has_event_shirt %>
           <div class="field">
             <%= f.label :shirt_size, t('label_t_shirt_size') %>
-            <% ['S', 'M', 'L', 'XL', 'XXL'].each do |size| %>
+            <% ['kein Shirt', 'S', 'M', 'L', 'XL', 'XXL'].each do |size| %>
                 <br/><%= f.radio_button :shirt_size, size %>
                 <%= size %>
             <% end %>
