@@ -23,42 +23,42 @@
         <%= f.text_field :email %>
       </div>
 
-      <% if @attendee.event && @attendee.event.has_afols_event %>
+      <% if @attendee.event && @attendee.event.has_afols_event? %>
           <div class="field">
             <%= f.label :afols_event, t('label_afols_event') %><br/>
             <%= f.check_box :afols_event %>
           </div>
       <% end %>
 
-      <% if @attendee.event && @attendee.event.has_tickets %>
+      <% if @attendee.event && @attendee.event.has_tickets? %>
           <div class="field">
             <%= f.label :needs_ticket, t('label_ticket') %><br/>
             <%= f.check_box :needs_ticket %>
           </div>
       <% end %>
 
-      <% if @attendee.event && @attendee.event.has_option_1 %>
+      <% if @attendee.event && @attendee.event.has_option_1? %>
           <div class="field">
             <%= f.label :option_1, "#{@attendee.event.label_option_1}" %><br/>
             <%= f.check_box :option_1 %>
           </div>
       <% end %>
 
-      <% if @attendee.event && @attendee.event.has_option_2 %>
+      <% if @attendee.event && @attendee.event.has_option_2? %>
           <div class="field">
             <%= f.label :option_2, "#{@attendee.event.label_option_2}" %><br/>
             <%= f.check_box :option_2 %>
           </div>
       <% end %>
 
-      <% if @attendee.event && @attendee.event.has_option_3 %>
+      <% if @attendee.event && @attendee.event.has_option_3? %>
           <div class="field">
             <%= f.label :option_3, "#{@attendee.event.label_option_3}" %><br/>
             <%= f.check_box :option_3 %>
           </div>
       <% end %>
 
-      <% if @attendee.event && @attendee.event.has_event_shirt %>
+      <% if @attendee.event && @attendee.event.has_event_shirt? %>
           <div class="field">
             <%= f.label :shirt_size, t('label_t_shirt_size') %>
             <% ['', 'kein Shirt', 'S', 'M', 'L', 'XL', 'XXL'].each do |size| %>

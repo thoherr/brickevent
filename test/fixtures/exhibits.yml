@@ -5,8 +5,6 @@ one:
   name: My first extraordinary MOC
   description: Very awesome
   url: MyString
-  size_studs: 160 by 240
-  size: MyString
   size_x: 1.6
   size_y: 2.4
   unit: meters
@@ -28,8 +26,6 @@ two:
   name: Another great MOC
   description: Even more awesome
   url: MyString
-  size_studs: 2400 * 6400
-  size: Huge
   size_x: 24
   size_y: 64
   unit: meters

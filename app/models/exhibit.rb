@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 class Exhibit < ActiveRecord::Base
   belongs_to :attendance
   belongs_to :unit
@@ -99,10 +99,7 @@ class Exhibit < ActiveRecord::Base
           if size_y_meter.blank? then "" else " x " + size_y_meter.to_s end +
           if size_z_meter.blank? then "" else " x " + size_z_meter.to_s end
     end
-    return "k.A." if size.blank? && size_studs.blank?
-    t1 = if size.blank? then "" else size + " cm" end
-    t2 = if size_studs.blank? then "" else size_studs + " Noppen" end
-    t1 + if t1.blank? or t2.blank? then "" else ", " end + t2
+    "k.A."
   end
 
   def to_s
@@ -111,10 +108,10 @@ class Exhibit < ActiveRecord::Base
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "Bestätigt", "Name", "MOC","Beschreibung","URL","Größe in Studs","Größe", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt" ]
+       return [ "Bestätigt", "Name", "MOC","Beschreibung","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt" ]
   end
   def csv_array
-      return [ is_approved?, user_name, name, description, url, size_studs, size, size_x, size_y, size_z, (unit.nil? ? 'cm' : unit.name), size_x_meter, size_y_meter, size_z_meter, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name ]
+      return [ is_approved?, user_name, name, description, url, size_x, size_y, size_z, (unit.nil? ? 'cm' : unit.name), size_x_meter, size_y_meter, size_z_meter, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name ]
   end
 
 end

@@ -26,19 +26,6 @@
         <%= f.label :size_y, t('high_if_higher_than_50_cm') %><br/>
       </div>
 
-      <% unless @exhibit.size_studs.blank? %>
-          <div class="field">
-            <%= f.label :size_studs, t('label_size_in_studs') %><br/>
-            <%= f.text_field :size_studs, size: 40 %>
-          </div>
-      <% end %>
-      <% unless @exhibit.size.blank? %>
-          <div class="field">
-            <%= f.label :size, t('label_size_in_cm') %><br/>
-            <%= f.text_field :size, size: 40 %>
-          </div>
-      <% end %>
-
       <div class="field">
         <%= f.label :value, t('label_insurrance_value') %><br/>
         <%= f.number_field :value %>
