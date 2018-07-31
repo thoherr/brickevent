@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 
 require 'test_helper'
 
@@ -14,10 +14,10 @@ class EventTest < ActiveSupport::TestCase
 
   test "generate exhibits csv" do
     event1 = events(:one)
-    assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe in Studs;Größe;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt\n", event1.exhibits_as_csv
+    assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt\n", event1.exhibits_as_csv
     event3 = events(:three)
     assert_equal 2, event3.number_of_exhibits
-    assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe in Studs;Größe;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt\nfalse;MyString;Another great MOC;Even more awesome;MyString;2400 * 6400;Huge;24;64;;cm;24.0;64.0;;10;10.0;1;false;true;false;false;-\ntrue;MyString;My first extraordinary MOC;Very awesome;MyString;160 by 240;MyString;1;2;;cm;1.6;2.4;;1000;1;1;false;false;false;false;-\n", event3.exhibits_as_csv
+    assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt\nfalse;MyString;Another great MOC;Even more awesome;MyString;24;64;;cm;24.0;64.0;;10;10.0;1;false;true;false;false;-\ntrue;MyString;My first extraordinary MOC;Very awesome;MyString;1;2;;cm;1.6;2.4;;1000;1;1;false;false;false;false;-\n", event3.exhibits_as_csv
   end
 
   test "calculate total size" do
