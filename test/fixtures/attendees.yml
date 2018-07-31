@@ -10,6 +10,7 @@ one:
   attendance: one
   attendee_type: one
   attendance: three
+  updated_at: 2018-07-30
 
 two:
   name: Attendee2
@@ -21,6 +22,7 @@ two:
   remarks: Hi, there
   attendance: two
   attendee_type: one
+  updated_at: 2018-07-20
 
 three:
   name: Attendee3
@@ -31,3 +33,4 @@ three:
   remarks: None
   attendance: three
   attendee_type: two
+  updated_at: 2018-06-21

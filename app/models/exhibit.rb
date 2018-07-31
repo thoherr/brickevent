@@ -108,10 +108,10 @@ class Exhibit < ActiveRecord::Base
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "Bestätigt", "Name", "MOC","Beschreibung","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt" ]
+       return [ "Bestätigt", "Name", "MOC","Beschreibung","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
   end
   def csv_array
-      return [ is_approved?, user_name, name, description, url, size_x, size_y, size_z, (unit.nil? ? 'cm' : unit.name), size_x_meter, size_y_meter, size_z_meter, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name ]
+      return [ is_approved?, user_name, name, description, url, size_x, size_y, size_z, (unit.nil? ? 'cm' : unit.name), size_x_meter, size_y_meter, size_z_meter, value, building_hours, brick_count, needs_power_supply, needs_transportation, is_installation, is_part_of_installation, installation_exhibit_name, updated_at.strftime("%F %T") ]
   end
 
 end

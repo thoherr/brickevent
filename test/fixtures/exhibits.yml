@@ -20,6 +20,7 @@ one:
   is_approved: true
   installation_exhibit_id: 1
   remarks: MyString
+  updated_at: 2018-06-15
 
 two:
   attendance: two
@@ -40,3 +41,4 @@ two:
   is_part_of_installation: false
   installation_exhibit_id: 1
   remarks: MyString
+  updated_at: 2018-07-10
