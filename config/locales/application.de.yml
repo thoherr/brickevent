@@ -178,3 +178,4 @@ de:
   label_accommodation_type: "Zimmertyp"
   label_number_of_rooms: "Benötgte Anzahl dieses Zimmertyps"
   label_room_remarks: "Bemerkungen/Sonderwünsche (z. B. verschobene An-/Abreise, Doppelzimmer mit Anderen etc.)"
+  exhibit_size_missing: "MOC-Größe fehlt!"

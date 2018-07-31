@@ -99,7 +99,7 @@ class Exhibit < ActiveRecord::Base
           if size_y_meter.blank? then "" else " x " + size_y_meter.to_s end +
           if size_z_meter.blank? then "" else " x " + size_z_meter.to_s end
     end
-    "k.A."
+    "MISSING"
   end
 
   def to_s

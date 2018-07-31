@@ -64,3 +64,4 @@ en:
   register_questions_and_contact: "If you have any questions or if the deadline for the event has already expired, but you would like to provide us with further important information, please send us an e-mail to"
   no_event_visible: "There are no events open for registration at the moment."
   current_events: "Our upcoming events"
+  exhibit_size_missing: "size of MOC missing!"
