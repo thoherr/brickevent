@@ -40,7 +40,16 @@ class Attendee < ActiveRecord::Base
        return ["Typ","Bestätigt","Name","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,"Bemerkungen","T-Shirt-Größe","Zuletzt geändert"]
   end
   def csv_array
-      return [ attendee_type.name, is_approved?, name, lug, nickname, email, phone, address, afols_event, needs_ticket, option_1, option_2, option_3, remarks, shirt_size, updated_at.strftime("%F %T") ]
+    return [ attendee_type.name, is_approved?,
+             StringSanitizer.sanitize_encoding(name),
+             StringSanitizer.sanitize_encoding(lug),
+             StringSanitizer.sanitize_encoding(nickname),
+             email, phone,
+             StringSanitizer.sanitize_encoding(address),
+             afols_event, needs_ticket, option_1, option_2, option_3,
+             StringSanitizer.sanitize_encoding(remarks),
+             shirt_size,
+             updated_at.strftime("%F %T") ]
   end
 
 end
