@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   before_filter :mailer_set_url_options
 
   def self.supported_locales
-#    [ :de, :en ]
-    [ :de ]
+    [ :de, :en ]
+#    [ :de ]
   end
 
   def set_locale
