@@ -17,7 +17,7 @@ class EventTest < ActiveSupport::TestCase
     assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\n", event1.exhibits_as_csv
     event3 = events(:three)
     assert_equal 2, event3.number_of_exhibits
-    assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\nfalse;MyString;Another great MOC;Even more awesome 'the - killer' MOC;MyString;24;64;;cm;24.0;64.0;;10;10.0;1;false;true;false;false;-;2018-07-10 00:00:00\ntrue;MyString;My first extraordinary MOC;Very awesome;MyString;1;2;;cm;1.6;2.4;;1000;1;1;false;false;false;false;-;2018-06-15 00:00:00\n", event3.exhibits_as_csv
+    assert_equal "Bestätigt;Name;MOC;Beschreibung;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (m);Größe y (m);Größe z (m);Versicherungswert;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\nfalse;MyString;Another great MOC;Even more awesome 'the - killer, bla bla bla...' MOC;MyString;24;64;;cm;24.0;64.0;;10;10.0;1;false;true;false;false;-;2018-07-10 00:00:00\ntrue;MyString;My first extraordinary MOC;Very awesome;MyString;1;2;;cm;1.6;2.4;;1000;1;1;false;false;false;false;-;2018-06-15 00:00:00\n", event3.exhibits_as_csv
   end
 
   test "calculate total size" do
