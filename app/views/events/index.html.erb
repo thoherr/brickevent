@@ -57,6 +57,11 @@
             </p>
             <% unless event.description.nil? || event.description.empty? -%>
                 <p class="EventDescription"><%= convert_markdown(event.description) %></p>
+	    <% end %>
+            <% if user_signed_in? && current_user.attends_event?(event) -%>
+                <% unless event.additional_information.nil? || event.additional_information.empty? -%>
+                    <p class="EventDescription"><%= convert_markdown(event.additional_information) %></p>
+                <% end %>
             <% end %>
             <% unless event.url.nil? || event.url.empty? -%><p>
                 <div class="EventUrl"><%= t('more_information_on') + " " + event.title + " " + t('is_available_at') %> <%= link_to event.url, event.url, :target => "_new" %></div>

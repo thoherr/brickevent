@@ -2,6 +2,7 @@
 
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
+<% event_additional_information = @attendance.event.additional_information unless @attendance.event.nil? %>
 <% @registration_open = @attendance.event_registration_open? || user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) %>
 <% user_name = @attendance.user.name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
@@ -9,6 +10,12 @@
 <h1><%= t('attendance_for') + " " + event_title %></h1>
 <p>
 <div class="EventTitle"><%= t('registration_of') + " " + user_name + " " + t('for_event') + " " + event_title %></div></p>
+
+<p>
+    <% unless event_additional_information.nil? || event_additional_information.empty? -%>
+        <p class="EventDescription"><%= convert_markdown(event_additional_information) %></p>
+    <% end %>
+</p>
 
 <hr/>
 
