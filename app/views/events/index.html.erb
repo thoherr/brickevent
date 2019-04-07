@@ -18,17 +18,15 @@
           <br/><%= t('need_your_name_and_mail') %>
       <% end %>
     </li>
-    <li><%= t('register2a') %><br/>
+    <li><%= t('register2a') %>
       <%= t('register2b') -%>
       <% if !user_signed_in? -%><%= t('register2c') %>
-      <% end -%>.
+      <% end -%>
     </li>
     <li><%= t('register3') %>
-      <ul>
-        <li><%= t('register3a') %></li>
-        <li><%= t('register3b') %></li>
-        <li><%= t('register3c') %></li>
-      </ul>
+        <%= t('register3a') %>
+        <%= t('register3b') %>
+        <%= t('register3c') %>
     </li>
   </ul>
   <p><%= t('register_questions_and_contact') %>
