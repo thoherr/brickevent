@@ -56,4 +56,4 @@ It is planned to incorporate a Capistrano deployment scheme and probably upgrade
 Known Flaws
 -----------
 
-The system is currently implemented with a german UI. Even the english local files contain german texts.
+The application is multi-lingual (german/english at the moment), but texts in the content (e.g. event descriptions) only have a single field.
