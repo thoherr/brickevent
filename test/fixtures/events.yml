@@ -42,6 +42,8 @@ three:
   label_option_1: Our wonderful first option
   has_option_3: true
   label_option_3: Some weird thing
+  has_option_4: true
+  label_option_4: Another weird thing
   start_date: 2011-09-01
   end_date: 2011-09-01
   remarks: MyString

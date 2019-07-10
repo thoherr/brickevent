@@ -58,6 +58,20 @@
           </div>
       <% end %>
 
+      <% if @attendee.event && @attendee.event.has_option_4? %>
+          <div class="field">
+            <%= f.label :option_4, "#{@attendee.event.label_option_4}" %><br/>
+            <%= f.check_box :option_4 %>
+          </div>
+      <% end %>
+
+      <% if @attendee.event && @attendee.event.has_option_5? %>
+          <div class="field">
+            <%= f.label :option_5, "#{@attendee.event.label_option_5}" %><br/>
+            <%= f.check_box :option_5 %>
+          </div>
+      <% end %>
+
       <% if @attendee.event && @attendee.event.has_event_shirt? %>
           <div class="field">
             <%= f.label :shirt_size, t('label_t_shirt_size') %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190407143243) do
+ActiveRecord::Schema.define(:version => 20190710195537) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20190407143243) do
     t.boolean  "option_1",                          :default => false
     t.boolean  "option_2",                          :default => false
     t.boolean  "option_3",                          :default => false
+    t.boolean  "option_4",                          :default => false
+    t.boolean  "option_5",                          :default => false
   end
 
   create_table "builders", :force => true do |t|
@@ -110,6 +112,10 @@ ActiveRecord::Schema.define(:version => 20190407143243) do
     t.boolean  "has_option_3"
     t.string   "label_option_3"
     t.text     "additional_information", :limit => 65384
+    t.boolean  "has_option_4"
+    t.string   "label_option_4"
+    t.boolean  "has_option_5"
+    t.string   "label_option_5"
   end
 
   create_table "exhibits", :force => true do |t|
