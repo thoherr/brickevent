@@ -19,7 +19,7 @@ one:
   is_part_of_installation: false
   is_approved: true
   installation_exhibit_id: 1
-  remarks: MyString
+  remarks: Very important remark
   updated_at: 2018-06-15
 
 two:
@@ -40,5 +40,5 @@ two:
   is_installation: false
   is_part_of_installation: false
   installation_exhibit_id: 1
-  remarks: MyString
+  remarks: Need my own exhibit hall
   updated_at: 2018-07-10

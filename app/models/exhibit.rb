@@ -108,11 +108,13 @@ class Exhibit < ActiveRecord::Base
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "Bestätigt", "Name", "MOC","Beschreibung","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
+       return [ "Bestätigt", "Name", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
   end
   def csv_array
     return [ is_approved?, StringSanitizer.sanitize_encoding(user_name),
-             StringSanitizer.sanitize_encoding(name), StringSanitizer.sanitize_encoding(description),
+             StringSanitizer.sanitize_encoding(name),
+             StringSanitizer.sanitize_encoding(description),
+             StringSanitizer.sanitize_encoding(remarks),
              url, size_x, size_y, size_z,
              (unit.nil? ? 'cm' : unit.name),
              size_x_meter, size_y_meter, size_z_meter,
