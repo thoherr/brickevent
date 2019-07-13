@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20190713192809) do
     t.boolean  "has_option_5"
     t.string   "label_option_5"
     t.boolean  "edit_of_attendees_allowed",                  :default => false
-    t.boolean  "edit_of_mocs_allowed",                       :default => false
+    t.boolean  "edit_of_exhibits_allowed",                   :default => false
   end
 
   create_table "exhibits", :force => true do |t|

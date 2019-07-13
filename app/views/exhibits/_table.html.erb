@@ -33,8 +33,11 @@
 	</td>
         <td><%= exhibit.remarks %></td>
         <td colspan="3">
-          <% if @registration_open -%><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
-              <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
+          <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
+            <%= link_to t('edit'), edit_exhibit_path(exhibit) %>
+          <% end -%>
+          <% if @registration_open -%>
+            <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
           <% end -%>
           <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
           <% @attendance.other_open_attendances.each do |to_attendance| %>

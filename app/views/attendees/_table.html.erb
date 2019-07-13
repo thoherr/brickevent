@@ -65,9 +65,13 @@
         <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->
         <td colspan="2">
-          <% if @registration_open -%><%= link_to t('edit'), edit_attendee_path(attendee) %>
-              <%= link_to t('delete'), attendee, :confirm => t('are_you_sure'), :method => :delete %>
-          <% end -%></td>
+          <% if @registration_open || (event && event.edit_of_attendees_allowed?) -%>
+            <%= link_to t('edit'), edit_attendee_path(attendee) %>
+          <% end -%>
+          <% if @registration_open -%>
+            <%= link_to t('delete'), attendee, :confirm => t('are_you_sure'), :method => :delete %>
+          <% end -%>
+        </td>
       </tr>
   <% end %>
 </table>
