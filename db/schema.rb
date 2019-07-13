@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190710195537) do
+ActiveRecord::Schema.define(:version => 20190713192809) do
 
   create_table "accommodation_types", :force => true do |t|
     t.string   "name"
@@ -86,14 +86,14 @@ ActiveRecord::Schema.define(:version => 20190710195537) do
   create_table "events", :force => true do |t|
     t.string   "name"
     t.string   "title"
-    t.text     "description",            :limit => 65384
+    t.text     "description",               :limit => 65384
     t.string   "location"
     t.string   "url"
     t.string   "lugname"
     t.boolean  "registration_open"
     t.date     "start_date"
     t.date     "end_date"
-    t.text     "remarks",                :limit => 65384
+    t.text     "remarks",                   :limit => 65384
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "has_event_shirt"
@@ -103,19 +103,21 @@ ActiveRecord::Schema.define(:version => 20190710195537) do
     t.boolean  "visible"
     t.boolean  "has_moc_transport"
     t.integer  "lug_id"
-    t.boolean  "has_afols_event",                         :default => true
-    t.boolean  "has_tickets",                             :default => true
+    t.boolean  "has_afols_event",                            :default => true
+    t.boolean  "has_tickets",                                :default => true
     t.boolean  "has_option_1"
     t.string   "label_option_1"
     t.boolean  "has_option_2"
     t.string   "label_option_2"
     t.boolean  "has_option_3"
     t.string   "label_option_3"
-    t.text     "additional_information", :limit => 65384
+    t.text     "additional_information",    :limit => 65384
     t.boolean  "has_option_4"
     t.string   "label_option_4"
     t.boolean  "has_option_5"
     t.string   "label_option_5"
+    t.boolean  "edit_of_attendees_allowed",                  :default => false
+    t.boolean  "edit_of_mocs_allowed",                       :default => false
   end
 
   create_table "exhibits", :force => true do |t|
