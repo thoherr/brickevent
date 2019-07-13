@@ -37,10 +37,11 @@ class Attendee < ActiveRecord::Base
 
   # CSV Stuff
   def Attendee.csv_array_header(event)
-       return ["Typ","Bestätigt","Name","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","T-Shirt-Größe","Zuletzt geändert"]
+       return ["ID","Typ","Bestätigt","Name","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","T-Shirt-Größe","Zuletzt geändert"]
   end
   def csv_array
-    return [ attendee_type.name, is_approved?,
+    return [ id,
+             attendee_type.name, is_approved?,
              StringSanitizer.sanitize_encoding(name),
              StringSanitizer.sanitize_encoding(lug),
              StringSanitizer.sanitize_encoding(nickname),

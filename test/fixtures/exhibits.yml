@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 41
   attendance: one
   name: My first extraordinary MOC
   description: Very awesome
@@ -23,6 +24,7 @@ one:
   updated_at: 2018-06-15
 
 two:
+  id: 42
   attendance: two
   name: Another great MOC
   description: Even more awesome `the — killer, bla bla bla…´ MOC

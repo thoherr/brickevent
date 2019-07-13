@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 101
   name: Attendee1
   lug: LUG1
   nickname: Nick1
@@ -13,6 +14,7 @@ one:
   updated_at: 2018-07-30
 
 two:
+  id: 102
   name: Attendee2
   lug: LUG1
   nickname: Nick2
@@ -26,6 +28,7 @@ two:
   updated_at: 2018-07-20
 
 three:
+  id: 103
   name: Attendee3
   lug: LUG2
   nickname: Nick3
