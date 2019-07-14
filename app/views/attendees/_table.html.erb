@@ -29,6 +29,9 @@
     <% if event && event.has_option_5? %>
         <th><%= event.label_option_5 %></th>
     <% end %>
+    <% if event && event.has_event_shirt? %>
+      <th><%= t('heading_event_shirt') %></th>
+    <% end %>
     <th><%= t('heading_remarks') %></th>
     <th colspan="2"></th>
   </tr>
@@ -61,6 +64,9 @@
         <% end %>
         <% if event && event.has_option_5? %>
           <td><%= to_yes_no(attendee.option_5?) %></td>
+        <% end %>
+        <% if event && event.has_event_shirt? %>
+          <td><%= attendee.number_of_shirts %><%= attendee.shirt_size %></td>
         <% end %>
         <td><%= attendee.remarks %></td>
         <!-- TODO: Sollen hier wirklich links sein?? -->

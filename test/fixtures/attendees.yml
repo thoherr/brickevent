@@ -22,6 +22,8 @@ two:
   needs_ticket: false
   option_1: true
   option_4: true
+  number_of_shirts: 2
+  shirt_size: 2XL
   remarks: Hi, there
   attendance: two
   attendee_type: one
