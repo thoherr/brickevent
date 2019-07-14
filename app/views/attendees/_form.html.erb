@@ -79,9 +79,9 @@
           </div>
           <div class="field">
             <%= f.label :shirt_size, t('label_t_shirt_size') %>
-            <% ['', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'].each do |size| %>
-                <br/><%= f.radio_button :shirt_size, size %>
-                <%= size %>
+                <br/><%= f.radio_button :shirt_size, '' %><br/>
+            <% ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'].each do |size| %>
+                <%= f.radio_button :shirt_size, size %> <%= size %> &nbsp;&nbsp;
             <% end %>
           </div>
       <% end %>
