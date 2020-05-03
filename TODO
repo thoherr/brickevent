@@ -1,6 +1,8 @@
+- create docker-compose.yml for out-of-the-box usage
+- decribe installation/deployment via docker container
+- declare Vagrant and Puppet obsolete
 - management of installations by the owner of the installation exhibit object (at least show the installation parts)
 - introduce I18n for name and description of type objects, lugs, events (and units?)
 - drop lugname in events (and elsewhere), use only lug_id
 - cleanup unused views and controllers
 - manage MOCs as first level citizen, not dependent on attendance
-- Dockerize it!
