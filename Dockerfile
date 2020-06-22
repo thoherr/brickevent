@@ -1,20 +1,19 @@
 # Dockerfile for BrickEvent
 
-FROM ruby:1.9.3 as brick-event
+FROM ruby:1.9.3 as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
-ARG APPUSER=brick-event
-ARG APPBASEDIR=/brick-event
+# Install netcat for our startup script
+RUN apt-get update && apt-get -y install netcat && apt-get clean
+
+ARG APPUSER=brickevent
+ARG APPBASEDIR=/brickevent
 
 RUN useradd -U -m $APPUSER
 
 # Prepare Application directory
 RUN mkdir $APPBASEDIR
-RUN mkdir -p $APPBASEDIR/tmp
-
-RUN mkdir -p /log && chown -R $APPUSER:$APPUSER /log && ln -sf /log $APPBASEDIR
-VOLUME /log
 
 WORKDIR $APPBASEDIR
 
@@ -27,11 +26,15 @@ RUN bundle install --system
 
 # Copy Application
 COPY . $APPBASEDIR/
+
+# create tmp and log dirs if neccessary
+RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
+
+# adjust permissions
 RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
 
 # Switch to application user
 USER $APPUSER
 
 EXPOSE 3000
-# ENTRYPOINT /bin/bash -l -c "RAILS_ENV=production rake db:migrate && rails server -b 0.0.0.0 Puma"
-ENTRYPOINT /bin/bash -l -c "rake db:migrate && script/rails server -b 0.0.0.0"
+ENTRYPOINT /bin/bash -l -c startup/startup.sh

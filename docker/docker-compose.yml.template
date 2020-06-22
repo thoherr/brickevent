@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  brickevent_db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: DB_ROOT_PASSWORD_PLACEHOLDER
+      MYSQL_DATABASE: brickevent
+      MYSQL_USER: brickevent
+      MYSQL_PASSWORD: DB_PASSWORD_PLACEHOLDER
+    expose:
+      - '3306'
+    volumes:
+      - "$PWD/mysql/data:/var/lib/mysql"
+      - "$PWD/mysql/my.cnf:/root/.my.cnf:ro"
+    container_name: brickevent_db
+
+  brickevent:
+    image: brickevent:latest
+    environment:
+      UID: 1000
+      GID: 1000
+      DATABASE_HOST: brickevent_db
+      DATABASE_NAME: brickevent
+      DATABASE_USERNAME: brickevent
+      DATABASE_PASSWORD: DB_PASSWORD_PLACEHOLDER
+      RAILS_ENV: 'production'
+    ports:
+        - 3000:3000
+    volumes:
+      - "$PWD/log:/brickevent/log"
+    depends_on:
+      - brickevent_db
+    container_name: brickevent
+

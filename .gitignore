@@ -2,11 +2,15 @@
 .idea
 .vagrant
 db/*.sqlite3
+docker/mysql/data
+docker/mysql/backup
+docker/mysql/my.cnf
+docker/log
 log/*.log
 tmp
 .sass-cache
 .DS_Store
-config/database.yml
+docker-compose.yml
 public/assets
 vendor/bundle
 BUILDNUMBER

@@ -1,5 +1,5 @@
-brick-event
-===========
+BRICKEVENT
+==========
 
 Overview
 --------
@@ -27,16 +27,30 @@ After cloning this repository do
 
 to get all required gems.
 
-The repository contains a template for the database configuration file, so you have to do
+The database configuration file config/database.yml includes the variables
 
-    cp config/database.yml.template config/database.yml
+  DATABASE_NAME
+  DATABASE_USERNAME
+  DATABASE_PASSWORD
 
-and optionally edit `config/database.yml` to meet your DB preference (the template uses `sqlite3`).
+which you have to set in your environment for production.
 
 Then
 
     rake db:migrate
     rake test
+
+There is a Dockerfile provided for building a docker container for the App. The container cat be build with
+
+    docker build -t brickevent .
+
+in the root directory of the project.
+
+The filed docker/docker-compose.yml.template and docker/mysql/my.cnf.template can be used to setup a complete distribution on a docker host.
+
+You can use the simple script tools/generate_config.sh to create the configuration files with generated passwords from these templates. The script takes the docker directory as parameter.
+
+NOTICE: The Vagrentfile and Puppet configuration is our of date and deprecated. I recommend to use the provided Docker files!
 
 If you want to use the provided `Vagrantfile` resp. the puppet scripts, you have to update the git submodules with
 
@@ -48,6 +62,7 @@ System requirements
 
 Currently the app uses Rails 3.1.12 and Sqlite3/MySQL.
 
+NOTICE: The Vagrentfile and Puppet configuration is our of date and deprecated. I recommend to use the provided Docker files!
 A `Vagrantfile` and puppet manifests are provided to set up a production ready environment with no pain.
 Deployment is done with `tools/deploy.sh` for now.
 

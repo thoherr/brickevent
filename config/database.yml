@@ -16,10 +16,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql
-  database: brick_event_production
-  username: brick_event
-  password: brick_event
+  adapter: mysql2
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   pool: 5
   timeout: 5000
   encoding: utf8
