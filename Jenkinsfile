@@ -51,8 +51,8 @@ pipeline {
             }
             steps {
                 sh """
-                    rake db:migrate
-                    rake test
+                    bundle exec rake db:migrate
+                    bundle exec rake test
                 """
             }
         }
