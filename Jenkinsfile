@@ -9,6 +9,7 @@ if(env.JOB_BASE_NAME == "master") {
     revision="${env.JOB_BASE_NAME}-b-${env.BUILD_NUMBER}"
 }
 
+dockerImageName = "brickevent:${revision}"
 dockerImage = null
 
 pipeline {
@@ -36,14 +37,25 @@ pipeline {
         stage("Build docker container") {
             steps {
                 script {
-                    dockerImage = docker.build("brickevent:${revision}")
+                    dockerImage = docker.build(dockerImageName)
                 }
             }
         }
 
-        // /TODO: Test container
+        stage("Test container") {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh """
+                            rake db:migrate
+                            rake test
+                        """
+                    }
+                }
+            }
+        }
 
-        stage("Push docker container") {
+        stage("Push container") {
             steps {
                 script {
                     docker.withRegistry("${DOCKER_REGISTRY_URL}") {
