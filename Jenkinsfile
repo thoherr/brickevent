@@ -43,15 +43,17 @@ pipeline {
         }
 
         stage("Test container") {
-            steps {
-                script {
-                    dockerImage.inside {
-                        sh """
-                            rake db:migrate
-                            rake test
-                        """
-                    }
+            agent {
+                docker {
+                    image dockerImageName
+                    args "--entrypoint ''"
                 }
+            }
+            steps {
+                sh """
+                    rake db:migrate
+                    rake test
+                """
             }
         }
 
