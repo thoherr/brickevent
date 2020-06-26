@@ -15,6 +15,10 @@ pipeline {
 
     agent any
 
+    environment {
+        DOCKER_REGISTRY_URL = credentials("DOCKER_REGISTRY_URL")
+    }
+
     triggers {
         cron('H 3 * * 2')
     }
@@ -39,7 +43,15 @@ pipeline {
 
         // /TODO: Test container
 
-        // TODO: Push container to registry
+        stage("Push docker container") {
+            steps {
+                script {
+                    docker.withRegistry("${DOCKER_REGISTRY_URL}") {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
     }
 }
 
