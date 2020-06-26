@@ -9,9 +9,16 @@ if(env.JOB_BASE_NAME == "master") {
     revision="${env.JOB_BASE_NAME}-b-${env.BUILD_NUMBER}"
 }
 
+dockerImageName = "brickevent:${revision}"
 dockerImage = null
 
 pipeline {
+
+    agent any
+
+    environment {
+        DOCKER_REGISTRY_URL = credentials("DOCKER_REGISTRY_URL")
+    }
 
     triggers {
         cron('H 3 * * 2')
@@ -30,14 +37,35 @@ pipeline {
         stage("Build docker container") {
             steps {
                 script {
-                    dockerImage = docker.build("brickevent:${revision}")
+                    dockerImage = docker.build(dockerImageName)
                 }
             }
         }
 
-        // /TODO: Test container
+        stage("Test container") {
+            agent {
+                docker {
+                    image dockerImageName
+                    args "--entrypoint ''"
+                }
+            }
+            steps {
+                sh """
+                    bundle exec rake db:migrate
+                    bundle exec rake test
+                """
+            }
+        }
 
-        // TODO: Push container to registry
+        stage("Push container") {
+            steps {
+                script {
+                    docker.withRegistry("${DOCKER_REGISTRY_URL}") {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
     }
 }
 

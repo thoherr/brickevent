@@ -1,4 +1,0 @@
-database:
-  override:
-    - cp config/database.yml.template config/database.yml
-    - bundle exec rake db:create db:schema:load --trace
