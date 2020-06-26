@@ -13,6 +13,8 @@ dockerImage = null
 
 pipeline {
 
+    agent any
+
     triggers {
         cron('H 3 * * 2')
     }
