@@ -48,6 +48,8 @@ in the root directory of the project.
 
 The filed docker/docker-compose.yml.template and docker/mysql/my.cnf.template can be used to setup a complete distribution on a docker host.
 
+You also have to configure the file config/environments/production.rb for your installation. You probably want this file to be mapped via a docker volume mount, see docker/docker-compose.yml.template.
+
 You can use the simple script tools/generate_config.sh to create the configuration files with generated passwords from these templates. The script takes the docker directory as parameter.
 
 NOTICE: The Vagrentfile and Puppet configuration is our of date and deprecated. I recommend to use the provided Docker files!

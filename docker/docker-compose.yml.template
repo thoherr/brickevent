@@ -28,6 +28,7 @@ services:
         - 3000:3000
     volumes:
       - "$PWD/log:/brickevent/log"
+      - "$PWD/config/production.rb:/brickevent/config/environments/production.rb:ro"
     depends_on:
       - brickevent_db
     container_name: brickevent
