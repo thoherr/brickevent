@@ -5,7 +5,7 @@ FROM ruby:1.9.3 as brickevent
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
 # Install netcat for our startup script
-RUN apt-get update && apt-get -y install netcat && apt-get clean
+RUN apt-get update && apt-get -y install netcat sendmail && apt-get clean
 
 ARG APPUSER=brickevent
 ARG APPBASEDIR=/brickevent
