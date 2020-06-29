@@ -32,7 +32,7 @@ en:
       confirmed: 'Your account is confirmed. You are logged in.'
     registrations:
       signed_up: 'Welcome! You are registered successfully and can now sign up for events.'
-      inactive_signed_up: 'You registered successfully but could not been logged in becasuse your account is %{reason}. Please read the confirmation mail in your inbox.'
+      inactive_signed_up: 'You registered successfully but could not been logged in because your account is %{reason}. Please read the confirmation mail in your inbox.'
       updated: 'Your account has been updated.'
       destroyed: 'Bye! Your account is deleted. We hope you re-register soon.'
       reasons:
