@@ -6,6 +6,8 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = "brickevent@thoherr.de"
 
+  config.secret_key = '541df8ad5fc776935215acbabca6359ca83ba5462504611b8f465ef77c72867420e31c827318b02b38740d0152973a14ef507f90672d060ee7ad00665fee708b'
+
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
 
@@ -95,7 +97,8 @@ Devise.setup do |config|
 
   # If true, uses the password salt as remember token. This should be turned
   # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
+  # Obsolete with current version of devise
+  # config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
