@@ -1,6 +1,6 @@
 # Dockerfile for BrickEvent
 
-FROM ruby:1.9.3 as brickevent
+FROM ruby:2.2 as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
@@ -22,7 +22,7 @@ WORKDIR $APPBASEDIR
 # so that normal changes to the app do not trigger re-installations
 # of the entire Gemset
 COPY .ruby-gemset .ruby-version Gemfile Gemfile.lock $APPBASEDIR/
-RUN bundle install --system
+RUN bundle install
 
 # Copy Application
 COPY . $APPBASEDIR/

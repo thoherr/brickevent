@@ -29,6 +29,8 @@ services:
     volumes:
       - "$PWD/log:/brickevent/log"
       - "$PWD/config/production.rb:/brickevent/config/environments/production.rb:ro"
+      - "$PWD/config/initializers/devise.rb:/brickevent/config/initializers/devise.rb:ro"
+      - "$PWD/config/initializers/secret_token.rb:/brickevent/config/initializers/secret_token.rb:ro"
     depends_on:
       - brickevent_db
     container_name: brickevent
