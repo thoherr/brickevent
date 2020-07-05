@@ -22,12 +22,15 @@ WORKDIR $APPBASEDIR
 # so that normal changes to the app do not trigger re-installations
 # of the entire Gemset
 COPY Gemfile Gemfile.lock $APPBASEDIR/
-RUN bundle install
+RUN bundle install --system
 
 # Copy Application
 COPY . $APPBASEDIR/
 
-# create tmp and log dirs if neccessary
+# do some cleanup
+RUN rm -rf $APPBASEDIR/.git $APPBASEDIR/tmp $APPBASEDIR/log
+
+# recreate tmp and log dirs
 RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
 
 # adjust permissions
