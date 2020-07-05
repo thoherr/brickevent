@@ -1,6 +1,7 @@
 require 'csv'
 
 class Event < ActiveRecord::Base
+  attr_protected :id
   belongs_to :lug
   has_many :attendances
   has_many :attendees, :through => :attendances

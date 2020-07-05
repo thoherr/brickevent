@@ -1,4 +1,5 @@
 class Accommodation < ActiveRecord::Base
+  attr_protected :id
   belongs_to :attendance
   belongs_to :accommodation_type
 

@@ -1,4 +1,5 @@
 class Attendance < ActiveRecord::Base
+  attr_protected :id
   belongs_to :user
   belongs_to :event
   has_many :attendees
