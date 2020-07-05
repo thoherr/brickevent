@@ -3,7 +3,7 @@ require 'test_helper'
 class AccommodationsControllerTest < ActionController::TestCase
   setup do
     user = User.first
-    user.confirm!
+    user.confirm
     sign_in user
     @accommodation = accommodations(:one)
     @attendance = attendances(:one)

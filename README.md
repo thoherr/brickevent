@@ -52,23 +52,13 @@ You also have to configure the file config/environments/production.rb for your i
 
 You can use the simple script tools/generate_config.sh to create the configuration files with generated passwords from these templates. The script takes the docker directory as parameter.
 
-NOTICE: The Vagrentfile and Puppet configuration is our of date and deprecated. I recommend to use the provided Docker files!
-
-If you want to use the provided `Vagrantfile` resp. the puppet scripts, you have to update the git submodules with
-
-    git submodule init
-    git submodule update
 
 System requirements
 -------------------
 
-Currently the app uses Rails 3.1.12 and Sqlite3/MySQL.
+Currently the app uses Rails 3.2.21 and Sqlite3/MySQL.
 
-NOTICE: The Vagrentfile and Puppet configuration is our of date and deprecated. I recommend to use the provided Docker files!
-A `Vagrantfile` and puppet manifests are provided to set up a production ready environment with no pain.
-Deployment is done with `tools/deploy.sh` for now.
-
-It is planned to incorporate a Capistrano deployment scheme and probably upgrade to Rails 3.2 or even Rails 4.2.
+It is planned to at least upgrade to Rails 5.
 
 Known Flaws
 -----------

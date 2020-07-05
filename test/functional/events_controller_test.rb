@@ -5,7 +5,7 @@ require 'test_helper'
 class EventsControllerTest < ActionController::TestCase
   setup do
     user = User.first
-    user.confirm!
+    user.confirm
     sign_in user
     @event = events(:one)
   end

@@ -5,6 +5,9 @@ db/*.sqlite3
 docker/mysql/data
 docker/mysql/backup
 docker/mysql/my.cnf
+docker/config/devise.rb
+docker/config/production.rb
+docker/config/secret_token.rb
 docker/log
 log/*.log
 tmp

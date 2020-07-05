@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.string   "name"
     t.string   "description"
     t.integer  "size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "accommodations", :force => true do |t|
@@ -26,15 +26,15 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.integer  "accommodation_type_id"
     t.integer  "count"
     t.text     "remarks",               :limit => 65384
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "attendances", :force => true do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.boolean  "is_approved"
   end
 
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
   create_table "attendee_types", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.boolean  "is_visible"
   end
 
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.string   "email"
     t.boolean  "afols_event"
     t.text     "remarks",          :limit => 65384
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "shirt_size"
     t.boolean  "is_approved"
     t.boolean  "needs_ticket",                      :default => true
@@ -73,15 +73,15 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
   create_table "builders", :force => true do |t|
     t.integer  "exhibit_id"
     t.integer  "attendee_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "event_managers", :force => true do |t|
     t.integer  "event_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "events", :force => true do |t|
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "remarks",                   :limit => 65384
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
     t.boolean  "has_event_shirt"
     t.boolean  "has_accommodation"
     t.boolean  "has_moc_card_service"
@@ -137,15 +137,15 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.boolean  "is_part_of_installation"
     t.integer  "installation_exhibit_id"
     t.text     "remarks",                 :limit => 65384
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
     t.integer  "size_x"
     t.integer  "size_y"
     t.integer  "size_z"
     t.integer  "unit_id"
-    t.decimal  "size_x_meter"
-    t.decimal  "size_y_meter"
-    t.decimal  "size_z_meter"
+    t.decimal  "size_x_meter",                             :precision => 7, :scale => 2
+    t.decimal  "size_y_meter",                             :precision => 7, :scale => 2
+    t.decimal  "size_z_meter",                             :precision => 7, :scale => 2
     t.integer  "former_exhibit_id"
     t.boolean  "is_approved"
   end
@@ -157,8 +157,8 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.string   "logo_url"
     t.string   "info_mail"
     t.string   "request_pattern"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "impress_url"
     t.string   "favicon_url"
   end
@@ -166,9 +166,9 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
   create_table "units", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.decimal  "factor"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.decimal  "factor",      :precision => 7, :scale => 5
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -188,8 +188,8 @@ ActiveRecord::Schema.define(:version => 20190714160744) do
     t.string   "address"
     t.string   "phone"
     t.boolean  "is_admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
