@@ -8,7 +8,7 @@ gem 'rack-cache', '1.2'
 gem 'rake', '10.1.0'
 gem 'thor', '0.18.1'
 gem 'public_suffix', '1.3.3'
-gem 'nokogiri', '1.6.1'
+gem 'nokogiri', '1.10.8'
 gem 'ffi', '1.3.1'
 gem 'rb-inotify', '0.9.5'
 
