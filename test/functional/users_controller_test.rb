@@ -2,10 +2,9 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    user = User.first
-    user.confirm
-    sign_in user
-    @user = users(:one)
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
   end
 
   test "should get edit" do
