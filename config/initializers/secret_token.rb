@@ -7,4 +7,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-BrickEvent::Application.config.secret_token = 'SOME_VERY_SECRET_TOKEN'
+BrickEvent::Application.config.secret_token = 'SOME_VERY_SECRET_TOKEN_LIKE_de3a820121cb7cd126a5644c7304dfc3'
