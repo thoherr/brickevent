@@ -12,7 +12,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
                 :password => "password",
                 :password_confirmation => "password",
                 :name => "Dummy User")
-    @user.confirm!
+    @user.confirm
     visit '/users/sign_in'
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => "password"
@@ -98,7 +98,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
                 :password => "password",
                 :password_confirmation => "password",
                 :name => "My Name")
-    @user.confirm!
+    @user.confirm
     visit '/users/sign_in'
     fill_in 'user_email', :with => "email@email.com"
     fill_in 'user_password', :with => "password"
