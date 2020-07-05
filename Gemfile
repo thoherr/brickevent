@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.21'
+gem 'rails', '5.2.0'
 
 # these temporary version pins are due to the ruby version 1.9.3 we are still using...
-gem 'rack', '1.4.5'
-gem 'rack-cache', '1.2'
+gem 'rack', '2.2.3'
+gem 'rack-cache', '1.12.0'
 gem 'rake', '10.1.0'
 gem 'thor', '0.18.1'
 gem 'public_suffix', '1.3.3'
@@ -31,8 +31,8 @@ gem 'kramdown', '1.7.0' # our markdown library, see http://kramdown.rubyforge.or
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.2.6"
-  gem 'coffee-rails', "~> 3.2.2"
+  gem 'sass-rails', "~> 5.1.0"
+  gem 'coffee-rails', "~> 5.0.0"
   gem 'uglifier',     '>= 1.0.3'
 end
 
