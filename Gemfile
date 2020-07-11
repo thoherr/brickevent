@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0'
+gem 'rails', '4.2'
 
 # these temporary version pins are due to the ruby version 1.9.3 we are still using...
 #gem 'rack-cache', '1.2'
