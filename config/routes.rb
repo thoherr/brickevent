@@ -1,4 +1,8 @@
 BrickEvent::Application.routes.draw do
+
+  concern :active_scaffold_association, ActiveScaffold::Routing::Association.new
+  concern :active_scaffold, ActiveScaffold::Routing::Basic.new(association: true)
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -86,16 +90,16 @@ BrickEvent::Application.routes.draw do
   resources :attendee_types
 
   namespace :admin do
-    resources :accommodations do as_routes end
-    resources :attendances do as_routes end
-    resources :attendees do as_routes end
-    resources :events do as_routes end
-    resources :event_managers do as_routes end
-    resources :exhibits do as_routes end
-    resources :lugs do as_routes end
-    resources :users do as_routes end
-    resources :accommodation_types do as_routes end
-    resources :attendee_types do as_routes end
+    resources :accommodations, concerns: :active_scaffold
+    resources :attendances, concerns: :active_scaffold
+    resources :attendees, concerns: :active_scaffold
+    resources :events, concerns: :active_scaffold
+    resources :event_managers, concerns: :active_scaffold
+    resources :exhibits, concerns: :active_scaffold
+    resources :lugs, concerns: :active_scaffold
+    resources :users, concerns: :active_scaffold
+    resources :accommodation_types, concerns: :active_scaffold
+    resources :attendee_types, concerns: :active_scaffold
   end
 
   root :to => "events#index"
