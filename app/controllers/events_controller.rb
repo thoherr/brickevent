@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all(:conditions => ["lug_id = ? and (registration_open = ? or visible = ?)", @lug.id, true, true])
+    @events = Event.where("lug_id = ? and (registration_open = ? or visible = ?)", @lug.id, true, true).load
 
     respond_to do |format|
       format.html # index.html.erb

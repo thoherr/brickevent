@@ -23,6 +23,7 @@ WORKDIR $APPBASEDIR
 # of the entire Gemset
 COPY Gemfile Gemfile.lock $APPBASEDIR/
 RUN bundle install --system
+RUN cp $APPBASEDIR/Gemfile.lock $APPBASEDIR/Gemfile.lock.new
 
 # Copy Application
 COPY . $APPBASEDIR/

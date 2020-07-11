@@ -38,7 +38,7 @@ class AttendeesController < ApplicationController
   # POST /attendees
   # POST /attendees.json
   def create
-    @attendee = Attendee.new(params[:attendee])
+    @attendee = Attendee.new(attendee_params)
 
     respond_to do |format|
       if @attendee.save
@@ -57,7 +57,7 @@ class AttendeesController < ApplicationController
     @attendee = Attendee.find(params[:id])
 
     respond_to do |format|
-      if @attendee.update_attributes(params[:attendee])
+      if @attendee.update_attributes(attendee_params)
         format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated') }
         format.json { head :ok }
       else
@@ -79,5 +79,11 @@ class AttendeesController < ApplicationController
       format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => t('attendee_deleted') }
       format.json { head :ok }
     end
+  end
+
+  private
+  def attendee_params
+    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
+    params.require(:attendee).permit!
   end
 end

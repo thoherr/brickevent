@@ -40,7 +40,7 @@ class AttendancesController < ApplicationController
   # POST /attendances
   # POST /attendances.json
   def create
-    @attendance = Attendance.new(params[:attendance])
+    @attendance = Attendance.new(attendance_params)
 
     respond_to do |format|
       if @attendance.save
@@ -112,4 +112,8 @@ class AttendancesController < ApplicationController
     end
   end
 
+  private
+  def attendance_params
+    params.require(:attendance).permit(:user_id, :event_id, :is_approved)
+  end
 end

@@ -4,7 +4,7 @@
 
       <div class="field">
         <%= f.label :attendee_type_id, t('label_attendee_type') %><br/>
-        <%= f.select :attendee_type_id, AttendeeType.find_all_by_is_visible(true).collect { |at| [at.name, at.id] }, {:prompt => t('please_choose')} %>
+        <%= f.select :attendee_type_id, AttendeeType.where(is_visible: true).load.collect { |at| [at.name, at.id] }, {:prompt => t('please_choose')} %>
       </div>
       <div class="field">
         <%= f.label :name, t('label_name') %><br/>

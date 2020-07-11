@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
-  attr_protected :id
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :attendances, :order => 'created_at desc'
+  has_many :attendances, -> { order "created_at desc" }
   has_many :attendees, :through => :attendances
   has_many :exhibits, :through => :attendances
   has_many :accommodations, :through => :attendances

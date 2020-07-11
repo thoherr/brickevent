@@ -75,7 +75,7 @@
             <%= link_to t('edit'), edit_attendee_path(attendee) %>
           <% end -%>
           <% if @registration_open -%>
-            <%= link_to t('delete'), attendee, :confirm => t('are_you_sure'), :method => :delete %>
+            <%= link_to t('delete'), attendee, data: { confirm: t('are_you_sure') }, :method => :delete %>
           <% end -%>
         </td>
       </tr>

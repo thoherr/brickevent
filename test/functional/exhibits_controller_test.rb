@@ -16,7 +16,7 @@ class ExhibitsControllerTest < ActionController::TestCase
 
   test "should create exhibit" do
     assert_difference('Exhibit.count') do
-      post :create, :exhibit => @exhibit.attributes
+      post :create, :exhibit => @exhibit.attributes.except('id')
     end
 
     assert_redirected_to attendance_path(assigns(:exhibit).attendance)

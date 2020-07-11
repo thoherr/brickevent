@@ -23,71 +23,71 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   test "sign up" do
 
     visit '/'
-    assert page.has_content?('BrickEvent'), "BrickEvent"
-    assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
-    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+    assert has_content?('BrickEvent'), "BrickEvent"
+    assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
+    assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
     click_on 'login'
-    assert page.has_content?('Anmeldung'), "Anmeldung"
+    assert has_content?('Anmeldung'), "Anmeldung"
 
     click_on 'sign_up'
-    assert page.has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
+    assert has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
 
-    m = "myname@mymail.com"
-    pw = "MySecret"
-    n = "Bugs Bunny"
-    fill_in 'user_email', :with => m
-    fill_in 'user_password', :with => pw
-    fill_in 'user_password_confirmation', :with => pw
-    fill_in 'user_name', :with => n
+    mail = "myname@mymail.com"
+    password = "MySecret"
+    name = "Bugs Bunny"
+    fill_in 'user_email', :with => mail
+    fill_in 'user_password', :with => password
+    fill_in 'user_password_confirmation', :with => password
+    fill_in 'user_name', :with => name
     check 'user_accept_data_storage'
     click_on 'submit'
 
     # because we are not confirmed, we should not be logged in
-    assert page.has_content?('BrickEvent'), "BrickEvent"
-    assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
-    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
-    assert page.has_content?('Ausloggen') == false, "Ausloggen"
+    assert has_content?('BrickEvent'), "BrickEvent"
+    assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
+    assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+    assert has_content?('Ausloggen') == false, "Ausloggen"
 
   end
 
   test "sign up without accepting data storage" do
 
     visit '/'
-    assert page.has_content?('BrickEvent'), "BrickEvent"
-    assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
-    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+    assert has_content?('BrickEvent'), "BrickEvent"
+    assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
+    assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
     click_on 'login'
-    assert page.has_content?('Anmeldung'), "Anmeldung"
+    assert has_content?('Anmeldung'), "Anmeldung"
 
     click_on 'sign_up'
-    assert page.has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
+    assert has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
 
-    m = "myname@mymail.com"
-    pw = "MySecret"
-    n = "Bugs Bunny"
-    fill_in 'user_email', :with => m
-    fill_in 'user_password', :with => pw
-    fill_in 'user_password_confirmation', :with => pw
-    fill_in 'user_name', :with => n
+    mail = "myname@mymail.com"
+    password = "MySecret"
+    name = "Bugs Bunny"
+    fill_in 'user_email', :with => mail
+    fill_in 'user_password', :with => password
+    fill_in 'user_password_confirmation', :with => password
+    fill_in 'user_name', :with => name
     click_on 'submit'
 
-    # because we are not confirmed, we should not be logged in
-    assert page.has_content?('BrickEvent'), "BrickEvent"
-    assert page.has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
-    # TODO assert error message!
+    # because we didn't accept data storage we are still on the form
+    assert has_content?('BrickEvent'), "BrickEvent"
+    assert has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
+    assert has_content?('Accept data storage Du musst der Speicherung Deiner Daten zustimmen!'), "Accept data storage Du musst der Speicherung Deiner Daten zustimmen!"
 
-    fill_in 'user_password', :with => pw
-    fill_in 'user_password_confirmation', :with => pw
+    fill_in 'user_password', :with => password
+    fill_in 'user_password_confirmation', :with => password
     check 'user_accept_data_storage'
     click_on 'submit'
 
     # because we are not confirmed, we should not be logged in
-    assert page.has_content?('BrickEvent'), "BrickEvent"
-    assert page.has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
-    assert page.has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
-    assert page.has_content?('Ausloggen') == false, "Ausloggen"
+    assert has_content?('BrickEvent'), "BrickEvent"
+    assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
+    assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
+    assert has_content?('Ausloggen') == false, "Ausloggen"
 
   end
 
@@ -104,26 +104,24 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     fill_in 'user_password', :with => "password"
     click_on 'submit'
 
-    assert page.has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
-    assert page.has_content?('Ausloggen'), "Ausloggen"
+    assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
+    assert has_content?('Ausloggen'), "Ausloggen"
 
   end
 
   test "sign up for event" do
 
     login_dummy_user
-    assert page.has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
-    assert page.has_content?('Ausloggen'), "Ausloggen"
+    assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
+    assert has_content?('Ausloggen'), "Ausloggen"
 
     visit new_attendance_path(:event_id => events(:one).id, :user_id => @user.id)
-    assert page.has_content?('Anmeldung für'), "Anmeldung für"
-    assert page.has_content?('Vielen Dank, dass Du Dich zur Teilnahme an'), "Vielen Dank, dass Du Dich zur Teilnahme an"
+    assert has_content?('Anmeldung für'), "Anmeldung für"
+    assert has_content?('Vielen Dank, dass Du Dich zur Teilnahme an'), "Vielen Dank, dass Du Dich zur Teilnahme an"
 
     click_on 'submit'
-    assert page.has_content?('Anmeldung für'), "Anmeldung für"
-    # TODO: This should be true, but it isn't.....
-    # CHECK
-    #assert page.has_content?('Du hast bisher 1 Person angemeldet'), "Du hast bisher 1 Person angemeldet"
+    assert has_content?('Anmeldung für'), "Anmeldung für"
+    assert has_content?('Du hast 1 Teilnehmer angemeldet'), "Du hast 1 Teilnehmer angemeldet"
 
   end
 
