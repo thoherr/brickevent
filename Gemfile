@@ -3,9 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '4.2'
 
 # these temporary version pins are due to the ruby version 1.9.3 we are still using...
-#gem 'rack-cache', '1.2'
-gem 'rake', '11.3.0'
-#gem 'thor', '0.18.1'
 gem 'public_suffix', '1.5.3'
 gem 'nokogiri', '1.6.8'
 gem 'ffi', '1.9.25'
