@@ -26,7 +26,7 @@ gem 'therubyracer'
 
 gem 'capybara'
 
-gem 'kramdown', '1.7.0' # our markdown library, see http://kramdown.rubyforge.org/
+gem 'kramdown', '2.3.0' # our markdown library, see http://kramdown.rubyforge.org/
 
 # Gems used only for assets and not required
 # in production environments by default.
