@@ -32,7 +32,7 @@ COPY . $APPBASEDIR/
 RUN cp $APPBASEDIR/Gemfile.lock.new $APPBASEDIR/Gemfile.lock
 
 # do some cleanup
-RUN rm -rf $APPBASEDIR/.git $APPBASEDIR/tmp $APPBASEDIR/log
+RUN rm -rf $APPBASEDIR/.git $APPBASEDIR/tmp $APPBASEDIR/log $APPBASEDIR/docker
 
 # recreate tmp and log dirs
 RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
