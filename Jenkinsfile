@@ -20,10 +20,6 @@ pipeline {
         DOCKER_REGISTRY_URL = credentials("DOCKER_REGISTRY_URL")
     }
 
-    triggers {
-        cron('H 3 * * 2')
-    }
-
     stages {
         stage("Tag with build number") {
             steps {
