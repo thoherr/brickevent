@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.2'
+gem 'rails', '4.2.11'
 
 group :development, :test do
     gem 'sqlite3', '~> 1.3.6', '< 1.4'
 end
 
 group :production do
-    gem 'mysql2', '< 0.4'
+    gem 'mysql2'
 end
 
 gem 'json'
