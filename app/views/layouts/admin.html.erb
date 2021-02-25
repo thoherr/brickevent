@@ -9,7 +9,7 @@
   <meta name="copyright" content="(c) 2010-2020 Thomas Herrmann <mail@thoherr.de>">
   <%= render :partial => "shared/meta_includes" %>
 </head>
-<body>
+<body class="<%= @stage%> <%= I18n.locale%>">
 
 <div id="mainTitle">
   <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
