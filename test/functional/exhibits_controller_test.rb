@@ -10,31 +10,31 @@ class ExhibitsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, :attendance_id => @exhibit.attendance_id
+    get :new, params: { attendance_id: @exhibit.attendance_id }
     assert_response :success
   end
 
   test "should create exhibit" do
     assert_difference('Exhibit.count') do
-      post :create, :exhibit => @exhibit.attributes.except('id')
+      post :create, params: { exhibit: @exhibit.attributes.except('id') }
     end
 
     assert_redirected_to attendance_path(assigns(:exhibit).attendance)
   end
 
   test "should get edit" do
-    get :edit, :id => @exhibit.to_param
+    get :edit, params: { id: @exhibit.to_param }
     assert_response :success
   end
 
   test "should update exhibit" do
-    put :update, :id => @exhibit.to_param, :exhibit => @exhibit.attributes
+    put :update, params: { id: @exhibit.to_param, exhibit: @exhibit.attributes }
     assert_redirected_to attendance_path(assigns(:exhibit).attendance)
   end
 
   test "should destroy exhibit" do
     assert_difference('Exhibit.count', -1) do
-      delete :destroy, :id => @exhibit.to_param
+      delete :destroy, params: { id: @exhibit.to_param }
     end
 
     assert_redirected_to attendance_path attendances(:one)

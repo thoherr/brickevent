@@ -1,4 +1,4 @@
-BrickEvent::Application.routes.draw do
+Rails.application.routes.draw do
 
   concern :active_scaffold_association, ActiveScaffold::Routing::Association.new
   concern :active_scaffold, ActiveScaffold::Routing::Basic.new(association: true)

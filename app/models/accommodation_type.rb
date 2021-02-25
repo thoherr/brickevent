@@ -1,4 +1,4 @@
-class AccommodationType < ActiveRecord::Base
+class AccommodationType < ApplicationRecord
   has_many :accommodations
 
   def to_s

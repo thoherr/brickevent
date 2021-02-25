@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 class EventsController < ApplicationController
 
-  skip_before_filter :authenticate_user!, :only => :index
+  skip_before_action :authenticate_user!, :only => :index
 
   # GET /events
   # GET /events.json
