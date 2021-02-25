@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Attendee < ActiveRecord::Base
-  attr_protected :id
   belongs_to :attendance
   belongs_to :attendee_type
   validates_presence_of :attendance

@@ -3,13 +3,18 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   before_filter :get_lug
-  before_filter :set_locale
+  before_filter :set_context
   before_filter :mailer_set_url_options
+  before_filter :configure_permitted_user_parameters, if: :devise_controller?
 
   def self.supported_locales
     [ :de, :en ]
-#    [ :de ]
   end
+
+  def set_context
+    set_locale
+    @stage = ENV["STAGE"] || "prod"
+  end 
 
   def set_locale
     I18n.locale = params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
@@ -43,6 +48,12 @@ class ApplicationController < ActionController::Base
     # the URLs in our (confirmation) mails should link to the current instance, which can (will) differ for different LUGs
     # see http://stackoverflow.com/questions/3432712/how-to-set-the-actionmailer-default-url-optionss-host-dynamically-to-the-reque
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
+  protected
+
+  def configure_permitted_user_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone, :lug, :nickname, :address, :accept_data_storage])
   end
 
   private

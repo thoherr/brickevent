@@ -37,7 +37,7 @@
             <%= link_to t('edit'), edit_exhibit_path(exhibit) %>
           <% end -%>
           <% if @registration_open -%>
-            <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
+            <%= link_to t('delete'), exhibit, data: { confirm: t('are_you_sure') }, :method => :delete %>
           <% end -%>
           <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
           <% @attendance.other_open_attendances.each do |to_attendance| %>

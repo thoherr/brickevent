@@ -38,7 +38,7 @@ class ExhibitsController < ApplicationController
   # POST /exhibits
   # POST /exhibits.json
   def create
-    @exhibit = Exhibit.new(params[:exhibit])
+    @exhibit = Exhibit.new(exhibit_params)
 
     respond_to do |format|
       if @exhibit.save
@@ -57,7 +57,7 @@ class ExhibitsController < ApplicationController
     @exhibit = Exhibit.find(params[:id])
 
     respond_to do |format|
-      if @exhibit.update_attributes(params[:exhibit])
+      if @exhibit.update_attributes(exhibit_params)
         format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated') }
         format.json { head :ok }
       else
@@ -78,5 +78,11 @@ class ExhibitsController < ApplicationController
       format.html { redirect_to attendance_path(@attendance_id), :notice => t('moc_deleted') }
       format.json { head :ok }
     end
+  end
+
+  private
+  def exhibit_params
+    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
+    params.require(:exhibit).permit!
   end
 end

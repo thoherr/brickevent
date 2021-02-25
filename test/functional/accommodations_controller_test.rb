@@ -18,7 +18,7 @@ class AccommodationsControllerTest < ActionController::TestCase
 
   test "should create accommodation" do
     assert_difference('Accommodation.count') do
-      post :create, :accommodation => @accommodation.attributes
+      post :create, :accommodation => @accommodation.attributes.except('id')
     end
 
     assert_redirected_to attendance_path(assigns(:accommodation).attendance)

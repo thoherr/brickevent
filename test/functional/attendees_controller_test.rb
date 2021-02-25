@@ -17,7 +17,7 @@ class AttendeesControllerTest < ActionController::TestCase
 
   test "should create attendee" do
     assert_difference('Attendee.count') do
-      post :create, :attendee => @attendee.attributes
+      post :create, :attendee => @attendee.attributes.except('id')
     end
 
     assert_redirected_to attendance_path(assigns(:attendee).attendance)

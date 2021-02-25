@@ -6,12 +6,13 @@
   <%= favicon_link_tag "#{@lug.favicon_url}" %>
   <meta name="application-name" content="<%= "ADMINISTRATION - #{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
   <meta name="description" content="<%= "#{@lug.name} event management admin area" %>">
-  <meta name="copyright" content="(c) 2010-2020 Thomas Herrmann <mail@thoherr.de>">
+  <meta name="copyright" content="(c) 2010-2021 Thomas Herrmann <mail@thoherr.de>">
   <%= render :partial => "shared/meta_includes" %>
 </head>
-<body>
+<body class="<%= @stage%> <%= I18n.locale%>">
 
 <div id="mainTitle">
+  <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
   <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
   <span class="TitleText"><%= titleline %></span>
 </div>
@@ -22,6 +23,7 @@
 
 <div id="mainContent">
   <%= render :partial => "shared/flashes" %>
+  <h1><%= @stage %></h1>
   <%= yield %>
 </div>
 

@@ -1,7 +1,6 @@
 require 'csv'
 
 class Event < ActiveRecord::Base
-  attr_protected :id
   belongs_to :lug
   has_many :attendances
   has_many :attendees, :through => :attendances
@@ -10,7 +9,7 @@ class Event < ActiveRecord::Base
   has_many :event_managers
   has_many :managers, :source => :user, :through => :event_managers
 
-  default_scope order('start_date desc')
+  default_scope { order('start_date desc') }
 
   def self.open_events
     Event.find_all_by_registration_open(true)

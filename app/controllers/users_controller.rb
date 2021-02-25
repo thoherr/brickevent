@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         format.html { redirect_to events_path, :notice => t('profile_changed') }
         format.json { head :ok }
       else
@@ -19,5 +19,11 @@ class UsersController < ApplicationController
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  private
+  def user_params
+    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
+    params.require(:user).permit!
   end
 end

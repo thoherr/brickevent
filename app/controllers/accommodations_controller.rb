@@ -23,7 +23,7 @@ class AccommodationsController < ApplicationController
   # POST /accommodations
   # POST /accommodations.json
   def create
-    @accommodation = Accommodation.new(params[:accommodation])
+    @accommodation = Accommodation.new(accommodation_params)
 
     respond_to do |format|
       if @accommodation.save
@@ -42,7 +42,7 @@ class AccommodationsController < ApplicationController
     @accommodation = Accommodation.find(params[:id])
 
     respond_to do |format|
-      if @accommodation.update_attributes(params[:accommodation])
+      if @accommodation.update_attributes(accommodation_params)
         format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
         format.json { head :ok }
       else
@@ -64,5 +64,11 @@ class AccommodationsController < ApplicationController
       format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.' }
       format.json { head :ok }
     end
+  end
+
+  private
+  def accommodation_params
+    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
+    params.require(:accommodation).permit!
   end
 end
