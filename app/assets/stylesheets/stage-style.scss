@@ -1,0 +1,46 @@
+//place stage specific styles here
+.prod{
+  //probably empty
+}
+
+body::before{
+  position: fixed;
+  display: none;
+  top: 50%;
+  height: 0;
+  width: 0;
+  content: "";
+  font-size: 90px;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  opacity: .3;
+  background-color: #565656;
+  color: transparent;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  transform: rotate(-25deg);
+  z-index: -10;
+}
+
+.dev{
+  z-index: 0;
+  &::before{
+    display: block;
+    content: "DEVELOPMENT";
+    height: 110px;
+    width: 100%;
+  }
+}
+
+.rc{
+  z-index: 0;
+  &::before {
+    display: block;
+    content: "RELEASE CANDIDATE";
+    height: 110px;
+    width: 100%;
+  }
+}

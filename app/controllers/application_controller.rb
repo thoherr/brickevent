@@ -3,13 +3,18 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   before_filter :get_lug
-  before_filter :set_locale
+  before_filter :set_context
   before_filter :mailer_set_url_options
   before_filter :configure_permitted_user_parameters, if: :devise_controller?
 
   def self.supported_locales
     [ :de, :en ]
   end
+
+  def set_context
+    set_locale
+    @stage = ENV["STAGE"] || "prod"
+  end 
 
   def set_locale
     I18n.locale = params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale

@@ -9,7 +9,7 @@
   <meta name="copyright" content="(c) 2010-2020 Thomas Herrmann <mail@thoherr.de>">
   <%= render :partial => "shared/meta_includes" %>
 </head>
-<body>
+<body class="<%= @stage%> <%= I18n.locale%>">
 
 <div id="mainTitle">
   <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
