@@ -7,6 +7,7 @@ gem 'bootsnap'
 
 group :development, :test do
     gem 'sqlite3', '~> 1.3.6', '< 1.4'
+    gem 'listen'
 end
 
 group :production do

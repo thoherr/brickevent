@@ -1,4 +1,4 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+class DeviseCreateUsers < ActiveRecord::Migration[3.1]
   def self.up
     create_table(:users) do |t|
       t.string   :email

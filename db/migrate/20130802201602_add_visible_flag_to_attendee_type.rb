@@ -1,4 +1,4 @@
-class AddVisibleFlagToAttendeeType < ActiveRecord::Migration
+class AddVisibleFlagToAttendeeType < ActiveRecord::Migration[3.1]
   def up
     change_table(:attendee_types) do |t|
       t.boolean :is_visible

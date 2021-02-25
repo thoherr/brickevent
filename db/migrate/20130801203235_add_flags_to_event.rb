@@ -1,4 +1,4 @@
-class AddFlagsToEvent < ActiveRecord::Migration
+class AddFlagsToEvent < ActiveRecord::Migration[3.1]
   def up
     change_table(:events) do |t|
       t.boolean :has_event_shirt

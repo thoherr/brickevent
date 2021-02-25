@@ -1,4 +1,4 @@
-class ChangeStringToText < ActiveRecord::Migration
+class ChangeStringToText < ActiveRecord::Migration[3.1]
   def up
     change_column :accommodations, :remarks, :text, :limit => 65384
     change_column :attendees, :remarks, :text, :limit => 65384

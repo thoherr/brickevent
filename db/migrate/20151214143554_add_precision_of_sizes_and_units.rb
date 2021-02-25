@@ -1,4 +1,4 @@
-class AddPrecisionOfSizesAndUnits < ActiveRecord::Migration
+class AddPrecisionOfSizesAndUnits < ActiveRecord::Migration[3.1]
   def up
     change_column :exhibits, :size_x_meter, :decimal, :precision => 7, :scale => 2
     change_column :exhibits, :size_y_meter, :decimal, :precision => 7, :scale => 2

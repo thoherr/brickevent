@@ -1,4 +1,4 @@
-class CreateUnits < ActiveRecord::Migration
+class CreateUnits < ActiveRecord::Migration[3.1]
   def change
     create_table :units do |t|
       t.string :name

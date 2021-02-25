@@ -1,4 +1,4 @@
-class AddAcceptDataStorageForUser < ActiveRecord::Migration
+class AddAcceptDataStorageForUser < ActiveRecord::Migration[3.1]
   def up
     change_table(:users) do |t|
       t.boolean :accept_data_storage
