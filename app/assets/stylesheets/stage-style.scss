@@ -30,6 +30,7 @@ body::before{
   &::before{
     display: block;
     content: "DEVELOPMENT";
+    color: #aaa;
     height: 110px;
     width: 100%;
   }
@@ -40,6 +41,7 @@ body::before{
   &::before {
     display: block;
     content: "RELEASE CANDIDATE";
+    color: #aaa;
     height: 110px;
     width: 100%;
   }
