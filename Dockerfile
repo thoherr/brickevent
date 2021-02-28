@@ -1,6 +1,6 @@
 # Dockerfile for BrickEvent
 
-FROM ruby:2.6 as brickevent
+FROM ruby:2.7 as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
@@ -23,7 +23,8 @@ WORKDIR $APPBASEDIR
 # of the entire Gemset
 COPY Gemfile Gemfile.lock $APPBASEDIR/
 # RUN bundle update
-RUN bundle install --system
+RUN bundle config set system 'true'
+RUN bundle install
 RUN cp $APPBASEDIR/Gemfile.lock $APPBASEDIR/Gemfile.lock.new
 
 # Copy Application
