@@ -81,6 +81,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    childprocess (3.0.0)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -136,6 +137,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     public_suffix (4.0.6)
+    puma (5.2.1)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-proxy (0.6.5)
@@ -184,6 +187,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -194,6 +198,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     semantic_range (2.3.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -215,6 +222,10 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.9)
       rack (>= 2.0.9)
+    webdrivers (4.6.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
     webpacker (5.2.1)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
@@ -233,7 +244,7 @@ PLATFORMS
 DEPENDENCIES
   active_scaffold!
   bootsnap
-  capybara
+  capybara (>= 3.26)
   coffee-rails
   devise
   jquery-rails
@@ -241,12 +252,15 @@ DEPENDENCIES
   kramdown
   listen
   mysql2
+  puma (~> 5.0)
   rails (= 6.0.3.5)
   rails-controller-testing
   sass-rails
+  selenium-webdriver
   sqlite3
   therubyracer
   uglifier
+  webdrivers
   webpacker
 
 BUNDLED WITH
