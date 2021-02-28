@@ -13,7 +13,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
                 :password_confirmation => "password",
                 :name => "Dummy User")
     @user.confirm
-    visit '/users/sign_in'
+    visit '/users/sign_in?locale=de'
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => "password"
     click_on 'submit'
@@ -22,7 +22,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 
   test "sign up" do
 
-    visit '/'
+    visit '/?locale=de'
     assert has_content?('BrickEvent'), "BrickEvent"
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
@@ -53,7 +53,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 
   test "sign up without accepting data storage" do
 
-    visit '/'
+    visit '/?locale=de'
     assert has_content?('BrickEvent'), "BrickEvent"
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
@@ -99,7 +99,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
                 :password_confirmation => "password",
                 :name => "My Name")
     @user.confirm
-    visit '/users/sign_in'
+    visit '/users/sign_in?locale=de'
     fill_in 'user_email', :with => "email@email.com"
     fill_in 'user_password', :with => "password"
     click_on 'submit'
@@ -112,6 +112,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   test "sign up for event" do
 
     login_dummy_user
+
     assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
     assert has_content?('Ausloggen'), "Ausloggen"
 

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '6.0.3.5'
+gem 'rails', '6.1.3'
 gem 'rails-controller-testing'
 
 gem 'bootsnap'

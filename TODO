@@ -1,3 +1,4 @@
+- CLEAN UP TESTS
 - management of installations by the owner of the installation exhibit object (at least show the installation parts)
 - introduce I18n for name and description of type objects, lugs, events (and units?)
 - drop lugname in events (and elsewhere), use only lug_id
