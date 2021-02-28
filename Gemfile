@@ -29,7 +29,11 @@ gem 'coffee-rails'
 gem 'uglifier'
 
 gem 'jquery-rails'
-gem 'active_scaffold'
+
+# See https://github.com/activescaffold/active_scaffold/issues/651
+# FIXME use officially released version as soon as they support Rails 6
+# gem 'active_scaffold'
+gem 'active_scaffold', github: 'activescaffold/active_scaffold', branch: 'master'
 
 # use devise for user auth
 gem 'devise'

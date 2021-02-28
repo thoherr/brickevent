@@ -19,7 +19,6 @@ one:
   is_installation: false
   is_part_of_installation: false
   is_approved: true
-  installation_exhibit_id: 1
   remarks: Very important remark
   updated_at: 2018-06-15
 

@@ -7,7 +7,7 @@
   <meta name="application-name" content="<%= "ADMINISTRATION - #{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
   <meta name="description" content="<%= "#{@lug.name} event management admin area" %>">
   <meta name="copyright" content="(c) 2010-2021 Thomas Herrmann <mail@thoherr.de>">
-  <%= render :partial => "shared/meta_includes" %>
+  <%= render "shared/meta_includes" %>
 </head>
 <body class="<%= @stage%> <%= I18n.locale%>">
 
@@ -18,11 +18,11 @@
 </div>
 
 <div id="mainNavi">
-  <%= render :partial => "shared/admin_navi" %>
+  <%= render "shared/admin_navi" %>
 </div>
 
 <div id="mainContent">
-  <%= render :partial => "shared/flashes" %>
+  <%= render "shared/flashes" %>
   <%= yield %>
 </div>
 

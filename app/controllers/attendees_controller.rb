@@ -57,7 +57,7 @@ class AttendeesController < ApplicationController
     @attendee = Attendee.find(params[:id])
 
     respond_to do |format|
-      if @attendee.update_attributes(attendee_params)
+      if @attendee.update(attendee_params)
         format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated') }
         format.json { head :ok }
       else

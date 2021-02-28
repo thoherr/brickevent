@@ -8,6 +8,7 @@ class AttendanceTest < ActiveSupport::TestCase
     @event2 = events(:two)
     @user = users(:one)
     @attendee_type = attendee_types(:one)
+    @unit = units(:cm)
   end
 
   # test "the truth" do
@@ -29,15 +30,21 @@ class AttendanceTest < ActiveSupport::TestCase
 
   test "add exhibits" do
     @myattendance = Attendance.create(:user => @user, :event => @event)
+    expected_messages = {}
+    assert_equal expected_messages, @myattendance.errors.messages
     assert_difference('@myattendance.exhibits.count') do
-      @myattendance.exhibits << Exhibit.create( :name => "My MOC" )
+      @myattendance.exhibits.create( :name => "My MOC", :unit => @unit, :size_x => 20, :size_y => 30 )
+      expected_messages = {}
+      assert_equal expected_messages, @myattendance.errors.messages
+      assert @myattendance.errors.empty?
+      assert @myattendance.valid?, 'Attendance should be valid'
     end
   end
 
   test "copy exhibits" do
     @firstattendance = Attendance.create(:user => @user, :event => @event)
     assert_difference('@firstattendance.exhibits.count') do
-      @firstattendance.exhibits << Exhibit.create( :name => "My MOC" )
+      @firstattendance.exhibits << Exhibit.create( :name => "My MOC", :unit => @unit, :size_x => 50, :size_y => 25 )
     end
     @secondattendance = Attendance.create(:user => @user, :event => @event2)
     assert_difference('@secondattendance.exhibits.count') do
