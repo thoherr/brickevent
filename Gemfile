@@ -1,9 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '5.2.4.5'
+gem 'rails', '6.0.3.5'
 gem 'rails-controller-testing'
 
 gem 'bootsnap'
+
+gem 'webpacker'
 
 group :development, :test do
     gem 'sqlite3'
