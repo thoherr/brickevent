@@ -57,7 +57,7 @@ class ExhibitsController < ApplicationController
     @exhibit = Exhibit.find(params[:id])
 
     respond_to do |format|
-      if @exhibit.update_attributes(exhibit_params)
+      if @exhibit.update(exhibit_params)
         format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated') }
         format.json { head :ok }
       else

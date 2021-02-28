@@ -47,8 +47,41 @@ pipeline {
             }
             steps {
                 sh """
+                    echo "############################################################"
+                    id
+                    pwd
+                    ls -la
+                    ls -ls /brickevent
+                    env
+                    echo "############################################################"
+                    rm -r /brickevent/log
+                    rm -f log/*.log
+                    ln -s \$(pwd)/log /brickevent/log
+                    mkdir -p tmp/screenshots
+                    rm -f tmp/screenshots/*
+                    ln -s \$(pwd)/tmp/screenshots /brickevent/tmp/screenshots
+                """
+                sh """
+                    cd /brickevent
+                    bundle config
+                    bundle list
+                """
+                sh """
+                    cd /brickevent
                     bundle exec rails test
                 """
+                sh """
+                    cd /brickevent
+                    bundle exec rails test:system
+                """
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'log/*.log', fingerprint: true, allowEmptyArchive: true
+                    dir('tmp/') {
+                        archiveArtifacts artifacts: 'screenshots/', fingerprint: true, allowEmptyArchive: true
+                    }
+                }
             }
         }
 

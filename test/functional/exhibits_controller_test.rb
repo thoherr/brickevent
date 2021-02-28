@@ -7,6 +7,7 @@ class ExhibitsControllerTest < ActionController::TestCase
     sign_in user
     @exhibit = exhibits(:one)
     @exhibit.attendance = attendances(:one)
+    @exhibit.unit = units(:studs)
   end
 
   test "should get new" do

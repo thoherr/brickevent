@@ -15,6 +15,11 @@ m:
   description: Meter
   factor: 1.00
 
+cm:
+  name: cm
+  description: Centimeter
+  factor: 0.01
+
 studs:
   name: studs
   description: Noppen

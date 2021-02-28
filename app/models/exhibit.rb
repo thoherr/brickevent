@@ -3,9 +3,9 @@ class Exhibit < ApplicationRecord
   belongs_to :attendance
   belongs_to :unit
   has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
-  belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
+  belongs_to :installation, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id", optional: true
   has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", :dependent => :nullify
-  belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id"
+  belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", optional: true
 
   before_save :calculate_size_in_meters
 
