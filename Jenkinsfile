@@ -47,8 +47,26 @@ pipeline {
             }
             steps {
                 sh """
+                    rm -f log/*.log
+                    ln -s \$(pwd)/log /brickevent/log
+                    mkdir -p tmp/screenshots
+                    rm -f tmp/screenshots/*
+                    ln -s \$(pwd)/tmp/screenshots /brickevent/tmp/screenshots
+                """
+                sh """
                     bundle exec rails test
                 """
+                sh """
+                    bundle exec rails test:system
+                """
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'log/*.log', fingerprint: true, allowEmptyArchive: true
+                    dir('tmp/') {
+                        archiveArtifacts artifacts: 'screenshots/', fingerprint: true, allowEmptyArchive: true
+                    }
+                }
             }
         }
 
