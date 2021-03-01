@@ -1,3 +1,3 @@
-class Unit < ActiveRecord::Base
+class Unit < ApplicationRecord
   has_many :exhibits
 end

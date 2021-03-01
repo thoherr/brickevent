@@ -2,8 +2,8 @@ module Admin
   class AdminController < ApplicationController
     layout "admin"
 
-    before_filter :authenticate_user!
-    before_filter :redirect_non_admins_to_frontend!
+    before_action :authenticate_user!
+    before_action :redirect_non_admins_to_frontend!
 
     ActiveScaffold.set_defaults do |config| 
       config.ignore_columns.add [:created_at, :updated_at, :lock_version]

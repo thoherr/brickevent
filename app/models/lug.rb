@@ -1,3 +1,3 @@
-class Lug < ActiveRecord::Base
+class Lug < ApplicationRecord
   has_many :events
 end

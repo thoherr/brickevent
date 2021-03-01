@@ -1,9 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.2.11'
+gem 'rails', '5.2.4.5'
+gem 'rails-controller-testing'
+
+gem 'bootsnap'
 
 group :development, :test do
     gem 'sqlite3', '~> 1.3.6', '< 1.4'
+    gem 'listen'
 end
 
 group :production do

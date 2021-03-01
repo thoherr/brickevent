@@ -1,4 +1,4 @@
-class Accommodation < ActiveRecord::Base
+class Accommodation < ApplicationRecord
   belongs_to :attendance
   belongs_to :accommodation_type
 

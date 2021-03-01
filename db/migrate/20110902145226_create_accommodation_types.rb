@@ -1,4 +1,4 @@
-class CreateAccommodationTypes < ActiveRecord::Migration
+class CreateAccommodationTypes < ActiveRecord::Migration[3.1]
   def change
     create_table :accommodation_types do |t|
       t.string :name

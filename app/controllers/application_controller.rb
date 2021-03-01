@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :authenticate_user!
-  before_filter :get_lug
-  before_filter :set_context
-  before_filter :mailer_set_url_options
-  before_filter :configure_permitted_user_parameters, if: :devise_controller?
+  before_action :authenticate_user!
+  before_action :get_lug
+  before_action :set_context
+  before_action :mailer_set_url_options
+  before_action :configure_permitted_user_parameters, if: :devise_controller?
 
   def self.supported_locales
     [ :de, :en ]

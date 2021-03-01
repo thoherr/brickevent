@@ -1,4 +1,4 @@
-class CreateLugEntries < ActiveRecord::Migration
+class CreateLugEntries < ActiveRecord::Migration[3.1]
   def up
     Event.find_each do |ev|
       lug = Lug.find_by_name(ev.lugname)

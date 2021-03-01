@@ -13,7 +13,7 @@
 
 <div id="mainTitle">
   <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
-  <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring}" %></span>
+  <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring} #{@stage}" %></span>
   <span class="TitleText"><%= titleline %></span>
 </div>
 
@@ -23,7 +23,6 @@
 
 <div id="mainContent">
   <%= render :partial => "shared/flashes" %>
-  <h1><%= @stage %></h1>
   <%= yield %>
 </div>
 

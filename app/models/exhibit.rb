@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Exhibit < ActiveRecord::Base
+class Exhibit < ApplicationRecord
   belongs_to :attendance
   belongs_to :unit
   has_many :installation_parts, :class_name => "Exhibit", :foreign_key => "installation_exhibit_id"
