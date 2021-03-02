@@ -42,7 +42,7 @@ pipeline {
             agent {
                 docker {
                     image dockerImageName
-                    args "--entrypoint ''"
+                    args "--entrypoint '' --user brickevent"
                 }
             }
             steps {
@@ -51,7 +51,8 @@ pipeline {
                     id
                     pwd
                     ls -la
-                    end
+                    ls -ls /brickevent
+                    env
                     echo "############################################################"
                     rm -r /brickevent/log
                     rm -f log/*.log
