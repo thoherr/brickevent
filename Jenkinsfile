@@ -47,16 +47,6 @@ pipeline {
             }
             steps {
                 sh """
-                    mkdir -p log
-                    rm -f log/*.log
-                    rm -rf /brickevent/log
-                    ln -s \$(pwd)/log /brickevent/log
-                    mkdir -p tmp/screenshots
-                    rm -f tmp/screenshots/*
-                    rm -rf /brickevent/tmp/screenshots
-                    ln -s \$(pwd)/tmp/screenshots /brickevent/tmp/screenshots
-                """
-                sh """
                     bundle exec rails test
                 """
                 sh """
