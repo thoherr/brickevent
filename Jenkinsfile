@@ -47,6 +47,12 @@ pipeline {
             }
             steps {
                 sh """
+                    echo "############################################################"
+                    id
+                    pwd
+                    ls -la
+                    end
+                    echo "############################################################"
                     rm -r /brickevent/log
                     rm -f log/*.log
                     ln -s \$(pwd)/log /brickevent/log
