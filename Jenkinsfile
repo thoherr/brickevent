@@ -42,7 +42,7 @@ pipeline {
             agent {
                 docker {
                     image dockerImageName
-                    args "--entrypoint '' --user brickevent"
+                    args "--user brickevent:brickevent --entrypoint ''"
                 }
             }
             steps {
