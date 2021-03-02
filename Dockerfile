@@ -49,5 +49,8 @@ RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
 # Switch to application user
 USER $APPUSER
 
+# Set bundle path for app user (otherwise the gems would not be found)
+RUN bundle config set path '/usr/local/bundle'
+
 EXPOSE 3000
 ENTRYPOINT /bin/bash -l -c startup/startup.sh
