@@ -18,6 +18,9 @@ ARG APPBASEDIR=/brickevent
 
 RUN useradd -U -m $APPUSER
 
+# groups for using chrome (not really sure if this is neccessary, but it doesn't hurt)
+RUN usermod -G audio,video $APPUSER
+
 # Prepare Application directory
 RUN mkdir $APPBASEDIR
 
@@ -28,15 +31,11 @@ WORKDIR $APPBASEDIR
 # so that normal changes to the app do not trigger re-installations
 # of the entire Gemset
 COPY Gemfile Gemfile.lock $APPBASEDIR/
-# RUN bundle update
-RUN bundle config set system 'true'
+RUN bundle config set path '/usr/local/bundle'
 RUN bundle install
-RUN cp $APPBASEDIR/Gemfile.lock $APPBASEDIR/Gemfile.lock.new
 
 # Copy Application
 COPY . $APPBASEDIR/
-
-RUN cp $APPBASEDIR/Gemfile.lock.new $APPBASEDIR/Gemfile.lock
 
 # do some cleanup
 RUN rm -rf $APPBASEDIR/.git $APPBASEDIR/tmp $APPBASEDIR/log $APPBASEDIR/docker

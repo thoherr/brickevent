@@ -47,10 +47,25 @@ pipeline {
             }
             steps {
                 sh """
-                    rails test
+                    rm -r /brickevent/log
+                    rm -f log/*.log
+                    ln -s \$(pwd)/log /brickevent/log
+                    mkdir -p tmp/screenshots
+                    rm -f tmp/screenshots/*
+                    ln -s \$(pwd)/tmp/screenshots /brickevent/tmp/screenshots
                 """
                 sh """
-                    rails test:system
+                    cd /brickevent
+                    bundle config
+                    bundle list
+                """
+                sh """
+                    cd /brickevent
+                    bundle exec rails test
+                """
+                sh """
+                    cd /brickevent
+                    bundle exec rails test:system
                 """
             }
             post {
