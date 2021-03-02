@@ -47,10 +47,10 @@ pipeline {
             }
             steps {
                 sh """
-                    bundle exec rails test
+                    rails test
                 """
                 sh """
-                    bundle exec rails test:system
+                    rails test:system
                 """
             }
             post {
