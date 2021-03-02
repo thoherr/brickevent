@@ -16,7 +16,7 @@ RUN apt-get update \
 ARG APPUSER=brickevent
 ARG APPBASEDIR=/brickevent
 
-RUN useradd -U -m $APPUSER
+RUN useradd -u 300 -U -m $APPUSER
 
 # groups for using chrome (not really sure if this is neccessary, but it doesn't hurt)
 RUN usermod -G audio,video $APPUSER
