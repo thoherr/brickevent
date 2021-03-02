@@ -46,6 +46,11 @@ RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
 # adjust permissions
 RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
 
+# Set options for chrome via wrapper script to make Rails system test setup easier
+RUN rm /usr/bin/google-chrome \
+ && echo "/usr/bin/google-chrome-stable --headless --disable-gpu --no-sandbox \$@" > /usr/bin/google-chrome \
+ && chmod +x /usr/bin/google-chrome
+
 # Switch to application user
 USER $APPUSER
 
