@@ -29,9 +29,9 @@ to get all required gems.
 
 The database configuration file config/database.yml includes the variables
 
-  DATABASE_NAME
-  DATABASE_USERNAME
-  DATABASE_PASSWORD
+    DATABASE_NAME
+    DATABASE_USERNAME
+    DATABASE_PASSWORD
 
 which you have to set in your environment for production.
 
