@@ -73,6 +73,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    apparition (0.6.0)
+      capybara (~> 3.13, < 4)
+      websocket-driver (>= 0.6.5)
     bcrypt (3.1.16)
     bootsnap (1.7.3)
       msgpack (~> 1.0)
@@ -244,6 +247,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_scaffold!
+  apparition
   bootsnap
   capybara (>= 3.26)
   coffee-rails
