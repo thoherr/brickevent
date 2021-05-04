@@ -1,30 +1,22 @@
 # Dockerfile for BrickEvent
 
-FROM ruby:2.7 as brickevent
+# TODO: This should not require our proprietary base image, we use it just to get container up and running
+FROM docker-reg-muc.teleteach.de:5000/tt-ubuntu20-ruby as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
-# Install google chrome for system tests and netcat for our startup script
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN curl -sS https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update \
- && apt-get install -y google-chrome-stable --no-install-recommends \
- && apt-get install -y netcat \
- && apt-get install -yqq unzip \
+ && apt-get install -y libsqlite3-dev nodejs yarn google-chrome-stable --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# install chromedriver
-RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
-RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
-
-ARG APPUSER=brickevent
+# user "rails" comes with base image
+ARG APPUSER=rails
 ARG APPBASEDIR=/brickevent
-
-RUN useradd -u 300 -U -m $APPUSER
-
-# groups for using chrome (not really sure if this is neccessary, but it doesn't hurt)
-RUN usermod -G audio,video $APPUSER
 
 # Prepare Application directory
 RUN mkdir $APPBASEDIR
@@ -43,13 +35,15 @@ RUN bundle install
 COPY . $APPBASEDIR/
 
 # do some cleanup
-RUN rm -rf $APPBASEDIR/.git $APPBASEDIR/tmp $APPBASEDIR/log $APPBASEDIR/docker
+RUN rm -rf $APPBASEDIR/.git* $APPBASEDIR/.idea $APPBASEDIR/tmp $APPBASEDIR/log
 
 # recreate tmp and log dirs
 RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
 
-# adjust permissions
 RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
+
+# groups for using chrome (not really sure if this is neccessary, but it doesn't hurt)
+RUN usermod -G audio,video rails
 
 # Set options for chrome via wrapper script to make Rails system test setup easier
 RUN rm /usr/bin/google-chrome \
@@ -62,8 +56,8 @@ USER $APPUSER
 # Set bundle path for app user (otherwise the gems would not be found)
 RUN bundle config set path '/usr/local/bundle'
 
-# set display port to avoid crash
-ENV DISPLAY=:99
+# Install yarn packages for app user
+RUN yarn install --check-files
 
 EXPOSE 3000
 ENTRYPOINT /bin/bash -l -c startup/startup.sh
