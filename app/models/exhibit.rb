@@ -44,7 +44,7 @@ class Exhibit < ApplicationRecord
   def is_version_of?(other)
     return true if other == self
     return false if self.is_first? && other.is_first?
-    return self.get_ancestor.is_version_of?(other.get_ancestor)
+    self.get_ancestor.is_version_of?(other.get_ancestor)
   end
 
   def copy_for_new_attendance
@@ -57,28 +57,27 @@ class Exhibit < ApplicationRecord
   end
 
   def event_installations
-    return attendance.event_installations if attendance
-    return []
+    attendance&.event_installations || []
   end
 
   def event_title
-    return attendance.event_title if attendance
-    return "NO ATTENDANCE"
+    attendance&.event_title || "NO ATTENDANCE"
   end
 
   def user_name
-    return attendance.user_name if attendance
-    return "NO ATTENDANCE"
+    attendance&.user_name || "NO ATTENDANCE"
+  end
+
+  def user_email
+    attendance&.user_email || "NO ATTENDANCE"
   end
 
   def user_lug
-    return attendance.user_lug if attendance
-    return "NO ATTENDANCE"
+    attendance&.user_lug || "NO ATTENDANCE"
   end
 
   def installation_exhibit_name
-    return installation.name if installation
-    return "-"
+    installation&.name|| "-"
   end
 
   def size_in_square_meters
@@ -90,7 +89,7 @@ class Exhibit < ApplicationRecord
     return 1.0 if size_x_meter.blank? or size_y_meter.blank?
     size_x_with_buffer = if size_x_meter < 0.4 then 0.5 elsif size_x_meter < 0.65 then Math.sqrt(0.5) elsif size_x_meter > 1.00 && size_x_meter < 1.40 then 1.5 else size_x_meter.ceil end
     size_y_with_buffer = if size_y_meter < 0.4 then 0.5 elsif size_y_meter < 0.65 then Math.sqrt(0.5) elsif size_y_meter > 1.00 && size_y_meter < 1.40 then 1.5 else size_y_meter.ceil end
-    return size_x_with_buffer * size_y_with_buffer
+    size_x_with_buffer * size_y_with_buffer
   end
 
   def size_text
@@ -108,11 +107,12 @@ class Exhibit < ApplicationRecord
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "ID", "Bestätigt", "Name", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
+       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
   end
   def csv_array
     return [ id,
              is_approved?, StringSanitizer.sanitize_encoding(user_name),
+             StringSanitizer.sanitize_encoding(user_email),
              StringSanitizer.sanitize_encoding(name),
              StringSanitizer.sanitize_encoding(description),
              StringSanitizer.sanitize_encoding(remarks),
