@@ -119,7 +119,8 @@ class Exhibit < ApplicationRecord
              url, size_x, size_y, size_z,
              (unit.nil? ? 'cm' : unit.name),
              size_x_meter, size_y_meter, size_z_meter,
-             value, building_hours, brick_count,
+             is_installation ? 0.0 : value,
+             building_hours, brick_count,
              needs_power_supply, needs_transportation,
              is_installation, is_part_of_installation, installation_exhibit_name,
              updated_at.strftime("%F %T") ]

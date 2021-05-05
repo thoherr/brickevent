@@ -43,3 +43,19 @@ two:
   installation_exhibit_id: 1
   remarks: Need my own exhibit hall
   updated_at: 2018-07-10
+
+three:
+  id: 44
+  attendance: four
+  name: installation
+  description: This is our SW Installation MOC
+  url: MyString
+  size_x: 100
+  size_y: 200
+  unit: meters
+  size_x_meter: 100
+  size_y_meter: 200
+  value: 1.234
+  is_installation: true
+  is_part_of_installation: false
+  updated_at: 2021-05-04
