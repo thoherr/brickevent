@@ -175,6 +175,7 @@ de:
   room_request_for: "Neue Zimmeranfrage für"
   participants: "Teilnehmer"
   heading_moc_card_text: "Text für MOC-Karte"
+  heading_moc_description: "Beschreibung des MOCs"
   heading_size: "Maße"
   heading_insurrance_value: "Versicherungswert"
   heading_build_time: "Anzahl Baustunden"
