@@ -1,7 +1,6 @@
 # Dockerfile for BrickEvent
 
-# TODO: This should not require our proprietary base image, we use it just to get container up and running
-FROM docker-reg-muc.teleteach.de:5000/tt-ubuntu20-ruby as brickevent
+FROM ruby:2.7 as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
@@ -14,9 +13,10 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# user "rails" comes with base image
 ARG APPUSER=rails
 ARG APPBASEDIR=/brickevent
+
+RUN useradd -u 300 -U -m $APPUSER
 
 # Prepare Application directory
 RUN mkdir $APPBASEDIR
