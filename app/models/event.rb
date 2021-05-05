@@ -20,46 +20,43 @@ class Event < ApplicationRecord
     managers.each do |m|
       return true if m == user
     end
-    return false
+    false
   end
 
   def number_of_attendees
-    return attendees.count
+    attendees.count
   end
 
   def approved_attendees
-    return attendees.select { |a| a.is_approved? }
-  end
-
-  def number_of_attendees_at_afols_event
+    attendees.select { |a| a.is_approved? }
   end
 
   def number_of_approved_attendees
-    return approved_attendees.count
+    approved_attendees.count
   end
 
   def number_of_exhibits
-    return exhibits.count
+    exhibits.count
   end
 
   def installations
-    return exhibits.select { |e| e.is_installation? }
+    exhibits.select { |e| e.is_installation? }
   end
 
   def tickets
-    return approved_attendees.select { |a| a.needs_ticket? }
+    approved_attendees.select { |a| a.needs_ticket? }
   end
 
   def number_of_tickets
-    return tickets.count
+    tickets.count
   end
 
   def attendees_at_afols_event
-    return approved_attendees.select { |a| a.afols_event? }
+    approved_attendees.select { |a| a.afols_event? }
   end
 
   def number_of_attendees_at_afols_event
-    return attendees_at_afols_event.count
+    attendees_at_afols_event.count
   end
 
   def to_s
