@@ -57,28 +57,23 @@ class Exhibit < ApplicationRecord
   end
 
   def event_installations
-    return attendance.event_installations if attendance
-    return []
+    return attendance&.event_installations || []
   end
 
   def event_title
-    return attendance.event_title if attendance
-    return "NO ATTENDANCE"
+    return attendance&.event_title || "NO ATTENDANCE"
   end
 
   def user_name
-    return attendance.user_name if attendance
-    return "NO ATTENDANCE"
+    return attendance&.user_name || "NO ATTENDANCE"
   end
 
   def user_lug
-    return attendance.user_lug if attendance
-    return "NO ATTENDANCE"
+    return attendance&.user_lug || "NO ATTENDANCE"
   end
 
   def installation_exhibit_name
-    return installation.name if installation
-    return "-"
+    return installation&.name|| "-"
   end
 
   def size_in_square_meters
