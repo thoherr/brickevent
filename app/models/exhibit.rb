@@ -107,22 +107,25 @@ class Exhibit < ApplicationRecord
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert","Baustunden","Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
+       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
   end
+
   def csv_array
-    return [ id,
-             is_approved?, StringSanitizer.sanitize_encoding(user_name),
-             StringSanitizer.sanitize_encoding(user_email),
-             StringSanitizer.sanitize_encoding(name),
-             StringSanitizer.sanitize_encoding(description),
-             StringSanitizer.sanitize_encoding(remarks),
-             url, size_x, size_y, size_z,
-             (unit.nil? ? 'cm' : unit.name),
-             size_x_meter, size_y_meter, size_z_meter,
-             value, building_hours, brick_count,
-             needs_power_supply, needs_transportation,
-             is_installation, is_part_of_installation, installation_exhibit_name,
-             updated_at.strftime("%F %T") ]
+    [id,
+     is_approved?, StringSanitizer.sanitize_encoding(user_name),
+     StringSanitizer.sanitize_encoding(user_email),
+     StringSanitizer.sanitize_encoding(name),
+     StringSanitizer.sanitize_encoding(description),
+     StringSanitizer.sanitize_encoding(remarks),
+     url, size_x, size_y, size_z,
+     (unit.nil? ? 'cm' : unit.name),
+     size_x_meter, size_y_meter, size_z_meter,
+     is_installation ? 0.0 : value,
+     is_installation ? value : 0.0,
+     building_hours, brick_count,
+     needs_power_supply, needs_transportation,
+     is_installation, is_part_of_installation, installation_exhibit_name,
+     updated_at.strftime("%F %T")]
   end
 
 end
