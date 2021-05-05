@@ -33,9 +33,9 @@ two:
   unit: meters
   size_x_meter: 24
   size_y_meter: 64
-  value: 10.000.000
-  building_hours: 10.000
-  brick_count: 1.000.000
+  value: 10000000
+  building_hours: 10000
+  brick_count: 1000000
   needs_power_supply: false
   needs_transportation: true
   is_installation: false
@@ -55,7 +55,7 @@ three:
   unit: meters
   size_x_meter: 100
   size_y_meter: 200
-  value: 1.234
+  value: 1234
   is_installation: true
   is_part_of_installation: false
   updated_at: 2021-05-04
