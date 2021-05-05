@@ -65,6 +65,7 @@ pipeline {
                     cd /brickevent
                     bundle config
                     bundle list
+                    bundle exec rails db:migrate RAILS_ENV=test
                 """
                 sh """
                     cd /brickevent
