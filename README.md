@@ -56,7 +56,7 @@ You can use the simple script tools/generate_config.sh to create the configurati
 System requirements
 -------------------
 
-Currently the app uses Rails 5.2 and Sqlite3/MySQL.
+Currently the app uses Rails 6.1.3 and Sqlite3/MySQL.
 
 Known Flaws
 -----------

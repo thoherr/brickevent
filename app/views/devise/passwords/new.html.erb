@@ -6,7 +6,7 @@
 Das System sendet Dir nach dem Abschicken dieses Formulars eine Mail mit den Anweisungen zur Erstellung eines neuen Passworts.</p>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= render :partial => "devise/shared/error_messages" %>
+  <%= render "devise/shared/error_messages" %>
 
   <div class="field"><%= f.label :email, 'Deine Email-Adresse' %><br />
   <%= f.email_field :email %></div>
@@ -16,4 +16,4 @@ Das System sendet Dir nach dem Abschicken dieses Formulars eine Mail mit den Anw
 
 </div>
 
-<%= render :partial => "devise/shared/links" %>
+<%= render "devise/shared/links" %>

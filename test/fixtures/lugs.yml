@@ -8,7 +8,7 @@ lugone:
   info_mail: info@bricking-bavaria.de
   impress_url: http://bricking-bavaria.de/m-impressum.html
   favicon_url: /assets/bricking-bavaria.favicon.ico
-  request_pattern: localhost
+  request_pattern: 127.0.0.1
 
 lugtwo:
   name: Schwabenstein 2*4 e. V.
@@ -18,7 +18,7 @@ lugtwo:
   info_mail: info@schwabenstein.com
   impress_url: https://www.schwabenstein.com/impressum/
   favicon_url: /assets/schwabenstein.favicon.ico
-  request_pattern: 127.0.0.1
+  request_pattern: info.schwabenstein.com
 
 bb:
   name: Bricking Bavaria e. V.

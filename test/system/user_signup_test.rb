@@ -1,29 +1,10 @@
-# encoding: UTF-8
-require 'test_helper'
-require 'capybara/rails'
+require "application_system_test_case"
 
-class UserSignupTest < ActionDispatch::IntegrationTest
-  fixtures :all
-
-  include Capybara::DSL
-
-  def login_dummy_user
-    @user = User.create!(:email => "dummy@email.com",
-                :password => "password",
-                :password_confirmation => "password",
-                :name => "Dummy User")
-    @user.confirm
-    visit '/users/sign_in'
-    fill_in 'user_email', :with => @user.email
-    fill_in 'user_password', :with => "password"
-    click_on 'submit'
-
-  end
-
+class UserSignupTest < ApplicationSystemTestCase
   test "sign up" do
-
     visit '/'
     assert has_content?('BrickEvent'), "BrickEvent"
+    find_by_id('germanLink').click
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
@@ -48,13 +29,13 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
     assert has_content?('Ausloggen') == false, "Ausloggen"
-
+    take_screenshot
   end
 
   test "sign up without accepting data storage" do
-
     visit '/'
     assert has_content?('BrickEvent'), "BrickEvent"
+    find_by_id('germanLink').click
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
@@ -88,7 +69,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
     assert has_content?('Ausloggen') == false, "Ausloggen"
-
+    take_screenshot
   end
 
   test "sign in" do
@@ -104,25 +85,10 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     fill_in 'user_password', :with => "password"
     click_on 'submit'
 
+    find_by_id('germanLink').click
     assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
     assert has_content?('Ausloggen'), "Ausloggen"
-
-  end
-
-  test "sign up for event" do
-
-    login_dummy_user
-    assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
-    assert has_content?('Ausloggen'), "Ausloggen"
-
-    visit new_attendance_path(:event_id => events(:one).id, :user_id => @user.id)
-    assert has_content?('Anmeldung für'), "Anmeldung für"
-    assert has_content?('Vielen Dank, dass Du Dich zur Teilnahme an'), "Vielen Dank, dass Du Dich zur Teilnahme an"
-
-    click_on 'submit'
-    assert has_content?('Anmeldung für'), "Anmeldung für"
-    assert has_content?('Du hast 1 Teilnehmer angemeldet'), "Du hast 1 Teilnehmer angemeldet"
-
+    take_screenshot
   end
 
 end
