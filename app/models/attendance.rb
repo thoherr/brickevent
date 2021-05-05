@@ -24,46 +24,44 @@ class Attendance < ApplicationRecord
   end
 
   def other_open_attendances
-    return user.open_attendances.select { |att| att != self } if user
-    return []
+    user&.open_attendances.select { |att| att != self } || []
   end
 
   def other_attendances_with_exhibits
-    return user.attendances.select { |att| att != self && att.exhibits.count > 0 } if user
-    return []
+    user&.attendances.select { |att| att != self && att.exhibits.count > 0 } || []
   end
 
   def has_former_exhibits?
-    return !other_attendances_with_exhibits.empty?
+    !other_attendances_with_exhibits.empty?
   end
 
   def event_registration_open?
-    event && event.registration_open?
+    event&.registration_open?
   end
 
   def event_installations
-    return event.installations if event
-    return []
+    event&.installations || []
   end
 
   def event_title
-    return event.title if event
-    return "NO EVENT"
+    event&.title || "NO EVENT"
   end
 
   def user_name
-    return user.name if user
-    return "NO USER"
+    user&.name || "NO USER"
+  end
+
+  def user_email
+    user&.email || "NO USER"
   end
 
   def user_lug
-    return user.lug if user
-    return "NO USER"
+    user&.lug || "NO USER"
   end
 
   def transportation_count
     translist = exhibits.select { |e| e.needs_transportation? }
-    return translist.length
+    translist.length
   end
 
   def contains_version_of(exhibit)
