@@ -1,4 +1,4 @@
-class AddVisibleToEvents < ActiveRecord::Migration[3.1]
+class AddVisibleToEvents < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :visible, :boolean
   end

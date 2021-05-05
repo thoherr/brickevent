@@ -1,4 +1,4 @@
-class InitializeExhibitHistory < ActiveRecord::Migration[3.1]
+class InitializeExhibitHistory < ActiveRecord::Migration[4.2]
   def up
     Exhibit.order('created_at desc').each do |e|
       if e.former_exhibit.nil?

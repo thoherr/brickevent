@@ -1,4 +1,4 @@
-class AddMocSizeToExhibits < ActiveRecord::Migration[3.1]
+class AddMocSizeToExhibits < ActiveRecord::Migration[4.2]
   def change
     add_column :exhibits, :size_x, :integer
     add_column :exhibits, :size_y, :integer

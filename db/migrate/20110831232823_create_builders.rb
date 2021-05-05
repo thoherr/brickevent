@@ -1,4 +1,4 @@
-class CreateBuilders < ActiveRecord::Migration[3.1]
+class CreateBuilders < ActiveRecord::Migration[4.2]
   def change
     create_table :builders do |t|
       t.integer :exhibit_id

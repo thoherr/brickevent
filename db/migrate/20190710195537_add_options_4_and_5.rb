@@ -1,4 +1,4 @@
-class AddOptions4And5 < ActiveRecord::Migration[3.1]
+class AddOptions4And5 < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :has_option_4, :boolean
     add_column :events, :label_option_4, :string

@@ -1,4 +1,4 @@
-class AddOptionsToAttendees < ActiveRecord::Migration[3.1]
+class AddOptionsToAttendees < ActiveRecord::Migration[4.2]
   def change
     add_column :attendees, :option_1, :boolean, :default => false
     add_column :attendees, :option_2, :boolean, :default => false

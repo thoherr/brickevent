@@ -1,4 +1,4 @@
-class CreateLugs < ActiveRecord::Migration[3.1]
+class CreateLugs < ActiveRecord::Migration[4.2]
   def change
     create_table :lugs do |t|
       t.string :name

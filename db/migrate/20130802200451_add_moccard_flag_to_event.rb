@@ -1,4 +1,4 @@
-class AddMoccardFlagToEvent < ActiveRecord::Migration[3.1]
+class AddMoccardFlagToEvent < ActiveRecord::Migration[4.2]
   def up
     change_table(:events) do |t|
       t.boolean :has_moc_card_service

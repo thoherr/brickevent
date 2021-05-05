@@ -1,4 +1,4 @@
-class AddImpressUrlToLug < ActiveRecord::Migration[3.1]
+class AddImpressUrlToLug < ActiveRecord::Migration[4.2]
   def change
     add_column :lugs, :impress_url, :string
   end
