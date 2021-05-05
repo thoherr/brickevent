@@ -2,6 +2,8 @@ require "application_system_test_case"
 
 class RegisterForEventsTest < ApplicationSystemTestCase
   def login_dummy_user
+    # needed by User.create! and normally done by before_action in app controller
+    ActionMailer::Base.default_url_options[:host] = "localhost:3000"
     @user = User.create!(:email => "dummy@email.com",
                          :password => "password",
                          :password_confirmation => "password",
@@ -10,13 +12,13 @@ class RegisterForEventsTest < ApplicationSystemTestCase
     visit '/users/sign_in'
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => "password"
-    click_on 'Anmelden'
+    click_on 'submit'
   end
 
   test "visting events overview" do
     visit '/'
     assert_text "BrickEvent"
-    click_on 'German'
+    find_by_id('germanLink').click
     assert_text "Veranstaltungsübersicht"
     click_on 'Anmelden'
     assert_text "Anmeldung"
@@ -28,7 +30,7 @@ class RegisterForEventsTest < ApplicationSystemTestCase
     travel_to Time.zone.local(2011, 7, 15)
 
     login_dummy_user
-    click_on 'German'
+    find_by_id('germanLink').click
 
     assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
     assert has_content?('Ausloggen'), "Ausloggen"

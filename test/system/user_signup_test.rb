@@ -4,7 +4,7 @@ class UserSignupTest < ApplicationSystemTestCase
   test "sign up" do
     visit '/'
     assert has_content?('BrickEvent'), "BrickEvent"
-    click_on 'German'
+    find_by_id('germanLink').click
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
@@ -35,7 +35,7 @@ class UserSignupTest < ApplicationSystemTestCase
   test "sign up without accepting data storage" do
     visit '/'
     assert has_content?('BrickEvent'), "BrickEvent"
-    click_on 'German'
+    find_by_id('germanLink').click
     assert has_content?('Veranstaltungsübersicht'), "Veranstaltungsübersicht"
     assert has_content?('Melde Dich gleich an!'), "Melde Dich gleich an!"
 
@@ -85,7 +85,7 @@ class UserSignupTest < ApplicationSystemTestCase
     fill_in 'user_password', :with => "password"
     click_on 'submit'
 
-    click_on 'German'
+    find_by_id('germanLink').click
     assert has_content?('Meine Anmeldungen'), "Meine Anmeldungen"
     assert has_content?('Ausloggen'), "Ausloggen"
     take_screenshot
