@@ -49,6 +49,7 @@ class Exhibit < ApplicationRecord
 
   def copy_for_new_attendance
     new_exhibit = self.dup
+    new_exhibit.is_approved = false
     new_exhibit.attendance_id = nil
     new_exhibit.is_part_of_installation = false
     new_exhibit.installation = nil
