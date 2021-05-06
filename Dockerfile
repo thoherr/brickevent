@@ -16,7 +16,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ARG APPUSER=rails
+ARG APPUSER=brickevent
 ARG APPBASEDIR=/brickevent
 
 RUN useradd -u 300 -U -m $APPUSER
@@ -46,7 +46,7 @@ RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
 RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
 
 # groups for using chrome (not really sure if this is neccessary, but it doesn't hurt)
-RUN usermod -G audio,video rails
+RUN usermod -G audio,video brickevent
 
 # Set options for chrome via wrapper script to make Rails system test setup easier
 RUN rm /usr/bin/google-chrome \
