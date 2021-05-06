@@ -7,24 +7,30 @@ class Exhibit < ApplicationRecord
   has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", :dependent => :nullify
   belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", optional: true
 
-  before_save :calculate_size_in_meters
+  before_save :calculate_size_in_meters_and_centimeters
 
-  def calculate_size_in_meters
+  def calculate_size_in_meters_and_centimeters
     factor = if unit then unit.factor else 0.01 end # assume cm if not known
     if size_x.blank?
       self.size_x_meter = nil
+      self.size_x_centimeter = nil
     else
       self.size_x_meter = size_x * factor
+      self.size_x_centimeter = size_x_meter * 100.0
     end
     if size_y.blank?
       self.size_y_meter = nil
+      self.size_y_centimeter = nil
     else
       self.size_y_meter = size_y * factor
+      self.size_y_centimeter = size_y_meter * 100.0
     end
     if size_z.blank?
       self.size_z_meter = nil
+      self.size_z_centimeter = nil
     else
       self.size_z_meter = size_z * factor
+      self.size_z_centimeter = size_z_meter * 100.0
     end
   end
 
