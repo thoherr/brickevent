@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Precompile assets for production
-rake assets:precompile
+bundle exec rake assets:precompile
 
 # copy assets referred by database
 cp app/assets/images/* public/assets/
