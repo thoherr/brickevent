@@ -8,9 +8,11 @@ one:
   url: MyString
   size_x: 1.6
   size_y: 2.4
-  unit: meters
+  unit: m
   size_x_meter: 1.6
   size_y_meter: 2.4
+  size_x_centimeter: 160
+  size_y_centimeter: 240
   value: 1000
   building_hours: 1
   brick_count: 1
@@ -30,9 +32,11 @@ two:
   url: MyString
   size_x: 24
   size_y: 64
-  unit: meters
+  unit: m
   size_x_meter: 24
   size_y_meter: 64
+  size_x_centimeter: 2400
+  size_y_centimeter: 6400
   value: 10000000
   building_hours: 10000
   brick_count: 1000000
@@ -52,9 +56,11 @@ three:
   url: MyString
   size_x: 100
   size_y: 200
-  unit: meters
+  unit: m
   size_x_meter: 100
   size_y_meter: 200
+  size_x_centimeter: 10000
+  size_y_centimeter: 20000
   value: 1234
   is_installation: true
   is_part_of_installation: false
