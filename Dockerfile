@@ -4,6 +4,9 @@ FROM ruby:2.7.2 as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
+# Install netcat for our startup script
+RUN apt-get update && apt-get -y install netcat && apt-get clean
+
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN curl -sS https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
