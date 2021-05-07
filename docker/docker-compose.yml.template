@@ -25,6 +25,7 @@ services:
       DATABASE_PASSWORD: DB_PASSWORD_PLACEHOLDER
       RAILS_ENV: 'production'
       RAILS_SERVE_STATIC_FILES: 1
+      SECRET_KEY_BASE: 'SECRET_KEY_BASE_PLACEHOLDER'
     ports:
         - 3000:3000
     volumes:
