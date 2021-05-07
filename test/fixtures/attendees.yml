@@ -41,3 +41,15 @@ three:
   attendance: three
   attendee_type: two
   updated_at: 2018-06-21
+
+four:
+  id: 104
+  name: Attendee4
+  lug: LUG2
+  nickname: Guy without shirts
+  shirt_size: XL
+  remarks: Hi, there
+  attendance: five
+  attendee_type: one
+  updated_at: 2020-05-07
+
