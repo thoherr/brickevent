@@ -10,7 +10,7 @@
         <th><%= t('heading_transportation') %></th>
     <% end %>
     <th><%= t('heading_joint_project') %></th>
-    <th><%= t('heading_size_m') %></th>
+    <th><%= t('heading_size') %></th>
     <th><%= t('heading_remarks') %></th>
     <th colspan="3"></th>
   </tr>
@@ -25,10 +25,10 @@
             <td><%= to_yes_no(exhibit.needs_transportation) %></td>
         <% end %>
         <td><%= exhibit.installation_exhibit_name %></td>
-        <td><% if exhibit.size_text == 'MISSING' -%>
+        <td><% if exhibit.size_text_in_cm == 'MISSING' -%>
 	  <b><%= t('exhibit_size_missing') %></b>
 	  <% else -%>
-	  <%= exhibit.size_text %>
+	  <%= exhibit.size_text_in_cm %>
 	  <% end -%>
 	</td>
         <td><%= exhibit.remarks %></td>

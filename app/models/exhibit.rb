@@ -7,24 +7,30 @@ class Exhibit < ApplicationRecord
   has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", :dependent => :nullify
   belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", optional: true
 
-  before_save :calculate_size_in_meters
+  before_save :calculate_size_in_meters_and_centimeters
 
-  def calculate_size_in_meters
-    factor = if unit then unit.factor else 0.01 end # assume cm if not known
+  def calculate_size_in_meters_and_centimeters
+    factor_to_cm = if unit then unit.centimeter else 1.0 end # assume cm if not known
     if size_x.blank?
       self.size_x_meter = nil
+      self.size_x_centimeter = nil
     else
-      self.size_x_meter = size_x * factor
+      self.size_x_centimeter = size_x * factor_to_cm
+      self.size_x_meter = size_x_centimeter / 100.0
     end
     if size_y.blank?
       self.size_y_meter = nil
+      self.size_y_centimeter = nil
     else
-      self.size_y_meter = size_y * factor
+      self.size_y_centimeter = size_y * factor_to_cm
+      self.size_y_meter = size_y_centimeter / 100.0
     end
     if size_z.blank?
       self.size_z_meter = nil
+      self.size_z_centimeter = nil
     else
-      self.size_z_meter = size_z * factor
+      self.size_z_centimeter = size_z * factor_to_cm
+      self.size_z_meter = size_z_centimeter / 100.0
     end
   end
 
@@ -93,11 +99,11 @@ class Exhibit < ApplicationRecord
     size_x_with_buffer * size_y_with_buffer
   end
 
-  def size_text
-    unless size_x_meter.blank?
-      return size_x_meter.to_s +
-          if size_y_meter.blank? then "" else " x " + size_y_meter.to_s end +
-          if size_z_meter.blank? then "" else " x " + size_z_meter.to_s end
+  def size_text_in_cm
+    unless size_x_centimeter.blank?
+      return size_x_centimeter.to_s +
+          if size_y_centimeter.blank? then "" else " x " + size_y_centimeter.to_s end +
+          if size_z_centimeter.blank? then "" else " x " + size_z_centimeter.to_s end
     end
     "MISSING"
   end
@@ -108,7 +114,7 @@ class Exhibit < ApplicationRecord
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (m)", "Größe y (m)", "Größe z (m)", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
+       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
   end
 
   def csv_array
@@ -120,7 +126,7 @@ class Exhibit < ApplicationRecord
      StringSanitizer.sanitize_encoding(remarks),
      url, size_x, size_y, size_z,
      (unit.nil? ? 'cm' : unit.name),
-     size_x_meter, size_y_meter, size_z_meter,
+     size_x_centimeter, size_y_centimeter, size_z_centimeter,
      is_installation ? 0.0 : value,
      is_installation ? value : 0.0,
      building_hours, brick_count,

@@ -3,24 +3,24 @@
 one:
   name: MyString
   description: MyString1
-  factor: 9.99
+  centimeter: 9.99
 
 two:
   name: MyString
   description: MyString2
-  factor: 9.99
+  centimeter: 9.99
 
 m:
   name: m
   description: Meter
-  factor: 1.00
+  centimeter: 100.0
 
 cm:
   name: cm
   description: Centimeter
-  factor: 0.01
+  centimeter: 1.0
 
 studs:
   name: studs
   description: Noppen
-  factor: 0.008
+  centimeter: 0.8
