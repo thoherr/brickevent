@@ -5,7 +5,7 @@ module Admin
     before_action :authenticate_user!
     before_action :redirect_non_admins_to_frontend!
 
-    ActiveScaffold.set_defaults do |config| 
+    ActiveScaffold.defaults do |config|
       config.ignore_columns.add [:created_at, :updated_at, :lock_version]
     end
 
