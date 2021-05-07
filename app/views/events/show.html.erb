@@ -33,7 +33,7 @@
     <p class="Indented">
       <%= mail_to "#{@lug.info_mail}", 'Mail an alle Teilnehmer', bcc: @event.attendees_mails %>
     </p>
-    <%= render 'attendees/exportlist', :attendees => @event.attendees %>
+    <%= render 'attendees/exportlist', :attendees => @event.attendees, :event => @event %>
 
     <h2>MOC-Liste
       <%= button_to 'CSV Datei der MOCs exportieren', :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
