@@ -10,7 +10,7 @@ class Exhibit < ApplicationRecord
   before_save :calculate_size_in_meters_and_centimeters
 
   def calculate_size_in_meters_and_centimeters
-    factor_to_cm = if unit then unit.centimeter else 1.0 end # assume cm if not known
+    factor_to_cm = if unit then unit.factor_to_cm else 1.0 end # assume cm if not known
     if size_x.blank?
       self.size_x_meter = nil
       self.size_x_centimeter = nil
