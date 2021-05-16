@@ -44,4 +44,5 @@ gem 'active_scaffold'
 
 # use devise for user auth
 gem 'devise'
+gem 'devise-i18n'
 
