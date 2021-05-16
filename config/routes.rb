@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     resources :users, concerns: :active_scaffold
     resources :accommodation_types, concerns: :active_scaffold
     resources :attendee_types, concerns: :active_scaffold
+    resources :units, concerns: :active_scaffold
   end
 
   root :to => "events#index"
