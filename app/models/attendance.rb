@@ -87,7 +87,7 @@ class Attendance < ApplicationRecord
   end
 
   def to_s
-    "#{user.name} @ #{event.to_s}"
+    "#{user&.name} @ #{event&.to_s}"
   end
 
 end
