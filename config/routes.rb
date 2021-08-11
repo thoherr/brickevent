@@ -83,8 +83,8 @@ Rails.application.routes.draw do
   resources :users
 
   # special data export routes
-  get 'events/:id/attendees_as_csv' => 'events#attendees_as_csv'
-  get 'events/:id/exhibits_as_csv' => 'events#exhibits_as_csv'
+  post 'events/:id/attendees_as_csv' => 'events#attendees_as_csv'
+  post 'events/:id/exhibits_as_csv' => 'events#exhibits_as_csv'
 
   resources :accommodation_types
   resources :attendee_types
