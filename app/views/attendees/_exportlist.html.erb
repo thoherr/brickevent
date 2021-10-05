@@ -75,7 +75,7 @@
         <% end %>
         <% if event && event.has_event_shirt? %>
           <td>
-            <% unless attendee.number_of_shirts&.zero? %>
+            <% unless attendee.number_of_shirts.nil? || attendee.number_of_shirts&.zero? %>
               <%= attendee.number_of_shirts %> x <%= attendee.shirt_size %>
             <% end %>
         <% end %>
