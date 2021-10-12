@@ -8,7 +8,7 @@ gem 'bootsnap'
 gem 'webpacker'
 
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.5'
 
 group :development, :test do
     gem 'sqlite3'
