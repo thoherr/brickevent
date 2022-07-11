@@ -1,21 +1,24 @@
 # coding: utf-8
 class StringSanitizer
+  def self.sanitize_encoding(string)
+    return string unless string.respond_to? :gsub
+    return '' if string.blank?
 
-  def self.sanitize_encoding(text)
-    return '' if text.blank?
-    text.gsub(/[–—´`…‘’‛“”„‟]/,
-            '–' => '-',
-            '—' => '-',
-            '´' => '\'',
-            '`' => '\'',
-            '…' => '...',
-            '‘' => '\'',
-            '’' => '\'',
-            '‛' => '\'',
-            '“' => '"',
-            '”' => '"',
-            '„' => '"',
-            '‟' => '"')
+    string.gsub(/[–—´`…‘’‛“”„‟Şş]/,
+                '–' => '-',
+                '—' => '-',
+                '´' => '\'',
+                '`' => '\'',
+                '…' => '...',
+                '‘' => '\'',
+                '’' => '\'',
+                '‛' => '\'',
+                '“' => '"',
+                '”' => '"',
+                '„' => '"',
+                '‟' => '"',
+                'Ş' => "S",
+                'ş' => "s"
+    )
   end
-  
 end
