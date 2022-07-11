@@ -4,7 +4,7 @@ class StringSanitizer
     return string unless string.respond_to? :gsub
     return '' if string.blank?
 
-    string.gsub(/[–—´`…‘’‛“”„‟Şş]/,
+    string.gsub(/[–—´`…‘’‛“”„‟Şş™]/,
                 '–' => '-',
                 '—' => '-',
                 '´' => '\'',
@@ -18,7 +18,8 @@ class StringSanitizer
                 '„' => '"',
                 '‟' => '"',
                 'Ş' => "S",
-                'ş' => "s"
+                'ş' => "s",
+                '™' => '(TM)'
     )
   end
 end
