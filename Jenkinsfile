@@ -22,6 +22,7 @@ pipeline {
 
     stages {
         stage("Tag with build number") {
+            agent { label 'tt-ubuntu18-jenkins-builder-java11-ruby25' }
             steps {
                 sh """
                     echo ${BUILD_NUMBER} >${WORKSPACE}/BUILDNUMBER
@@ -31,6 +32,7 @@ pipeline {
         }
 
         stage("Build docker container") {
+            agent { label 'tt-ubuntu18-jenkins-builder-java11-ruby25' }
             steps {
                 script {
                     dockerImage = docker.build(dockerImageName)
@@ -87,6 +89,7 @@ pipeline {
         }
 
         stage("Push container") {
+            agent { label 'tt-ubuntu18-jenkins-builder-java11-ruby25' }
             steps {
                 script {
                     docker.withRegistry("${DOCKER_REGISTRY_URL}") {
