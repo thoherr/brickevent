@@ -14,7 +14,8 @@ dockerImage = null
 
 pipeline {
 
-    agent any
+    // agent any
+    agent { label 'tt-ubuntu18-jenkins-builder-java11-ruby25' }
 
     environment {
         DOCKER_REGISTRY_URL = credentials("DOCKER_REGISTRY_URL")
