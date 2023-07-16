@@ -23,7 +23,16 @@
   <% exhibits.each do |exhibit| %>
       <tr>
         <td><%= link_to to_yes_no(exhibit.is_approved?), approve_exhibit_path(exhibit), :method => :post %></td>
-        <td><%= exhibit.user_name %></td>
+        <td>
+          <% if user_is_admin? and exhibit.is_installation? %>
+            <%= form_for(exhibit) do |f| %>
+              <%= f.submit '-->', :id => 'submit' %>
+              <%= f.select :attendance_id, exhibit.attendance.event.attendances.collect { |a| [a.user_name, a.id] } %>
+            <% end %>
+          <% else %>
+            <%= exhibit.user_name %>
+          <% end %>
+        </td>
         <td><%= exhibit.name %></td>
         <td><%= exhibit.description %></td>
         <td><%= exhibit.url %></td>
@@ -39,7 +48,8 @@
         <td><%= to_yes_no(exhibit.needs_power_supply) %></td>
         <td colspan="3"><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
           <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
-          <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> --></td>
+          <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
+        </td>
       </tr>
   <% end %>
 </table>

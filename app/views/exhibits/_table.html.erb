@@ -46,6 +46,12 @@
             <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), method: :post %>
           <% end %>
         <% end %>
+        <% if user_is_admin? and exhibit.is_installation? %>
+          <%= form_for(exhibit) do |f| %>
+            <%= f.select :attendance_id, @attendance.event.attendances.collect { |a| [a.user_name, a.id] } %>
+            <%= f.submit 'Zuordnen', :id => 'submit' %>
+          <% end %>
+      <% end %>
       </td>
     </tr>
   <% end %>
