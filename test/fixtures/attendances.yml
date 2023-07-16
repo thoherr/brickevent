@@ -19,3 +19,7 @@ four:
 five:
   user: thoherr
   event: two
+
+six:
+  user: two
+  event: fourty_two

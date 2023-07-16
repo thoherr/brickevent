@@ -2,7 +2,7 @@
 
 one:
   email: MyString
-  name: MyString
+  name: User One
   lug: MyString
   nickname: MyString
   address: MyString
@@ -11,7 +11,7 @@ one:
 
 two:
   email: MyString2
-  name: MyString
+  name: Second user
   lug: MyString
   nickname: MyString
   address: MyString
