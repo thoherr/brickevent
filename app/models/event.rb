@@ -96,7 +96,7 @@ class Event < ApplicationRecord
   end
 
   def attendees_as_csv
-    CSV.generate({ :col_sep => ';', :quote_char => '"' }) do |csv|
+    CSV.generate(**{ col_sep: ';', quote_char: '"' }) do |csv|
        csv << Attendee.csv_array_header(self)
        self.attendees.each do |item|
           csv << item.csv_array
@@ -105,7 +105,7 @@ class Event < ApplicationRecord
   end
 
   def exhibits_as_csv
-    CSV.generate({ :col_sep => ';', :quote_char => '"' }) do |csv|
+    CSV.generate(**{col_sep: ';', quote_char: '"' }) do |csv|
        csv << Exhibit.csv_array_header
        self.exhibits.each do |item|
           csv << item.csv_array
