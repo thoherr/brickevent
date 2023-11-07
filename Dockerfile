@@ -1,6 +1,6 @@
 # Dockerfile for BrickEvent
 
-FROM ruby:2.7.2 as brickevent
+FROM ruby:2.7.8 as brickevent
 
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
