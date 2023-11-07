@@ -40,7 +40,7 @@ Then
     rake db:migrate
     rake test
 
-There is a Dockerfile provided for building a docker container for the App. The container cat be build with
+There is a Dockerfile provided for building a docker container for the App. The container can be build with
 
     docker build -t brickevent .
 
@@ -56,7 +56,7 @@ You can use the simple script tools/generate_config.sh to create the configurati
 System requirements
 -------------------
 
-Currently the app uses Rails 6.1.3 and Sqlite3/MySQL.
+Currently the app uses Rails 6.1.7 and Sqlite3/MySQL.
 
 Known Flaws
 -----------
