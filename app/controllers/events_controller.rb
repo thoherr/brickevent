@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   end
 
   def attendees_as_csv
-    @event = Event.find(params[:id])
+    get_event_for_data_export
     if @event
       # According to RFC 4180 the MIME type for our csv data is text/csv
       send_data(@event.attendees_as_csv.encode(Encoding::ISO_8859_15), :type => "text/csv", :filename => params[:filename])
@@ -36,7 +36,7 @@ class EventsController < ApplicationController
   end
 
   def exhibits_as_csv
-    @event = Event.find(params[:id])
+    get_event_for_data_export
     if @event
       # According to RFC 4180 the MIME type for our csv data is text/csv
       send_data(@event.exhibits_as_csv.encode(Encoding::ISO_8859_15), :type => "text/csv", :filename => params[:filename])
@@ -44,4 +44,15 @@ class EventsController < ApplicationController
       redirect_to events_url
     end
   end
+
+  private
+
+  def get_event_for_data_export
+    event = Event.find(params[:id])
+    unless event.is_managed_by? current_user || current_user.is_admin?
+      raise 'unauthorized request'
+    end
+    @event = event
+  end
+
 end
