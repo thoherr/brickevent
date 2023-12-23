@@ -14,8 +14,9 @@ class ExhibitsController < ApplicationController
   end
 
   def approve
-    @exhibit = Exhibit.find(params[:id])
+    get_exhibit
     if @exhibit
+      raise 'approval denied' unless @exhibit.attendance.event.is_managed_by?(current_user) || current_user.is_admin?
       @exhibit.is_approved=!@exhibit.is_approved
       respond_to do |format|
         if @exhibit.save
@@ -32,7 +33,7 @@ class ExhibitsController < ApplicationController
   # GET /exhibits/1/edit
   def edit
     store_referrer
-    @exhibit = Exhibit.find(params[:id])
+    get_exhibit
   end
 
   # POST /exhibits
@@ -54,7 +55,7 @@ class ExhibitsController < ApplicationController
   # PUT /exhibits/1
   # PUT /exhibits/1.json
   def update
-    @exhibit = Exhibit.find(params[:id])
+    get_exhibit
 
     respond_to do |format|
       if @exhibit.update(exhibit_params)
@@ -70,7 +71,7 @@ class ExhibitsController < ApplicationController
   # DELETE /exhibits/1
   # DELETE /exhibits/1.json
   def destroy
-    @exhibit = Exhibit.find(params[:id])
+    get_exhibit
     @attendance_id = @exhibit.attendance_id
     @exhibit.destroy
 
@@ -81,6 +82,15 @@ class ExhibitsController < ApplicationController
   end
 
   private
+
+  def get_exhibit
+    exhibit = Exhibit.find(params[:id])
+    unless exhibit.attendance.user.id == current_user.id || exhibit.attendance.event.is_managed_by?(current_user) || current_user.is_admin?
+      raise 'unauthorized request'
+    end
+    @exhibit = exhibit
+  end
+
   def exhibit_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:exhibit).permit!

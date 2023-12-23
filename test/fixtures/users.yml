@@ -19,6 +19,15 @@ two:
   is_admin: false
   accept_data_storage: true
 
+three:
+  email: u333@mytestdomain.de
+  name: User 3
+  lug: MyString
+  nickname: MyString
+  address: MyString
+  phone: MyString
+  is_admin: false
+
 thoherr:
     email: mail@thoherr.de
     # test123
