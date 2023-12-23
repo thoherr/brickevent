@@ -2,13 +2,10 @@ require 'test_helper'
 
 class AccommodationsControllerTest < ActionController::TestCase
   setup do
-    user = User.first
+    user = users(:one)
     user.confirm
     sign_in user
     @accommodation = accommodations(:one)
-    @attendance = attendances(:one)
-    @accommodation.attendance = @attendance
-    @accommodation.accommodation_type = accommodation_types(:one)
   end
 
   test "should get new" do
@@ -29,9 +26,21 @@ class AccommodationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "unauthorized user should not get edit" do
+    assert_raise do
+      get :edit, params: { id: accommodations(:two).to_param }
+    end
+  end
+
   test "should update accommodation" do
     put :update, params: { id: @accommodation.to_param, accommodation: @accommodation.attributes }
     assert_redirected_to attendance_path(assigns(:accommodation).attendance)
+  end
+
+  test "unauthorized user should not update accommodation" do
+    assert_raise do
+      put :update, params: { id: accommodations(:two).to_param, accommodation: accommodations(:two).attributes }
+    end
   end
 
   test "should destroy accommodation" do
@@ -39,6 +48,6 @@ class AccommodationsControllerTest < ActionController::TestCase
       delete :destroy, params: { id: @accommodation.to_param }
     end
 
-    assert_redirected_to attendance_path(1)
+    assert_redirected_to attendance_path(attendances(:one))
   end
 end

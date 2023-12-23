@@ -17,7 +17,7 @@ class AccommodationsController < ApplicationController
   # GET /accommodations/1/edit
   def edit
     store_referrer
-    @accommodation = Accommodation.find(params[:id])
+    get_accommodation
   end
 
   # POST /accommodations
@@ -39,7 +39,7 @@ class AccommodationsController < ApplicationController
   # PUT /accommodations/1
   # PUT /accommodations/1.json
   def update
-    @accommodation = Accommodation.find(params[:id])
+    get_accommodation
 
     respond_to do |format|
       if @accommodation.update(accommodation_params)
@@ -56,7 +56,7 @@ class AccommodationsController < ApplicationController
   # DELETE /accommodations/1.json
   def destroy
     store_referrer
-    @accommodation = Accommodation.find(params[:id])
+    get_accommodation
     @attendance_id = @accommodation.attendance_id
     @accommodation.destroy
 
@@ -67,6 +67,15 @@ class AccommodationsController < ApplicationController
   end
 
   private
+
+  def get_accommodation
+    accommodation = Accommodation.find(params[:id])
+    unless accommodation.attendance.user.id == current_user.id || current_user.is_admin?
+      raise 'unauthorized request'
+    end
+    @accommodation = accommodation
+  end
+
   def accommodation_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:accommodation).permit!
