@@ -2,12 +2,10 @@ require 'test_helper'
 
 class AttendeesControllerTest < ActionController::TestCase
   setup do
-    user = User.first
+    user = users(:two)
     user.confirm
     sign_in user
-    @attendee = attendees(:one)
-    @attendee.attendance = attendances(:one)
-    @attendee.attendee_type = attendee_types(:one)
+    @attendee = attendees(:two)
   end
 
   test "should get new" do
@@ -28,7 +26,33 @@ class AttendeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not get edit if unauthorized" do
+    user = users(:one)
+    user.confirm
+    sign_in user
+    assert_raise do
+      get :edit, params: { id: @attendee.to_param }
+    end
+  end
+
   test "should update attendee" do
+    put :update, params: { id: @attendee.to_param, attendee: @attendee.attributes }
+    assert_redirected_to attendance_path(assigns(:attendee).attendance)
+  end
+
+  test "should not update attendee if unauthorized" do
+    user = users(:one)
+    user.confirm
+    sign_in user
+    assert_raise do
+      put :update, params: { id: @attendee.to_param, attendee: @attendee.attributes }
+    end
+  end
+
+  test "admin should be able to update attendee" do
+    user = users(:thoherr)
+    user.confirm
+    sign_in user
     put :update, params: { id: @attendee.to_param, attendee: @attendee.attributes }
     assert_redirected_to attendance_path(assigns(:attendee).attendance)
   end
