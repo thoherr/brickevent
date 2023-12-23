@@ -1,7 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  email: MyString
+  id: 42
+  email: user42@mytestdomain.de
   name: User One
   lug: MyString
   nickname: MyString
@@ -10,13 +11,14 @@ one:
   is_admin: false
 
 two:
-  email: MyString2
+  email: second@mytestdomain.de
   name: Second user
-  lug: MyString
+  lug: LUG of second user
   nickname: MyString
   address: MyString
   phone: MyString
   is_admin: false
+  accept_data_storage: true
 
 thoherr:
     email: mail@thoherr.de
