@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  attendance_id: 1
-  accommodation_type_id: 1
+  attendance: one
+  accommodation_type: one
   count: 1
-  remarks: MyString
+  remarks: First Accommodation
 
 two:
-  attendance_id: 1
-  accommodation_type_id: 1
+  attendance: two
+  accommodation_type: two
   count: 1
-  remarks: MyString
+  remarks: Second Accommodation
