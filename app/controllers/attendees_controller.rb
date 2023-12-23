@@ -14,7 +14,8 @@ class AttendeesController < ApplicationController
   end
 
   def approve
-    @attendee = Attendee.find(params[:id])
+    get_attendee
+    raise 'approval denied' unless @attendee.event.is_managed_by?(current_user) || current_user.is_admin?
     if @attendee
       @attendee.is_approved=!@attendee.is_approved
       respond_to do |format|
@@ -32,7 +33,7 @@ class AttendeesController < ApplicationController
   # GET /attendees/1/edit
   def edit
     store_referrer
-    @attendee = Attendee.find(params[:id])
+    get_attendee
   end
 
   # POST /attendees
@@ -54,7 +55,7 @@ class AttendeesController < ApplicationController
   # PUT /attendees/1
   # PUT /attendees/1.json
   def update
-    @attendee = Attendee.find(params[:id])
+    get_attendee
 
     respond_to do |format|
       if @attendee.update(attendee_params)
@@ -71,7 +72,7 @@ class AttendeesController < ApplicationController
   # DELETE /attendees/1.json
   def destroy
     store_referrer
-    @attendee = Attendee.find(params[:id])
+    get_attendee
     @attendance_id = @attendee.attendance_id
     @attendee.destroy
 
@@ -82,6 +83,15 @@ class AttendeesController < ApplicationController
   end
 
   private
+
+  def get_attendee
+    attendee = Attendee.find(params[:id])
+    unless attendee.attendance.user.id == current_user.id || attendee.event.is_managed_by?(current_user) || current_user.is_admin?
+      raise 'unauthorized request'
+    end
+    @attendee = attendee
+  end
+
   def attendee_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:attendee).permit!
