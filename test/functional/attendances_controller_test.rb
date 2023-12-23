@@ -19,6 +19,28 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should be approvable by admin" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    post :approve, params: { id: @attendance.id }
+    assert_redirected_to event_path(@attendance.event)
+  end
+
+  test "should be approvable by event manager" do
+    @user = users(:two)
+    @user.confirm
+    sign_in @user
+    post :approve, params: { id: @attendance.id }
+    assert_redirected_to event_path(@attendance.event)
+  end
+
+  test "should not be approvable by user" do
+    assert_raise do
+      post :approve, params: { id: @attendance.id }
+    end
+  end
+
   test "should create attendance" do
     assert_difference('Attendance.count') do
       @attendance.event = events(:fourty_two)  # avoid to break uniqueness
@@ -31,5 +53,11 @@ class AttendancesControllerTest < ActionController::TestCase
   test "should show attendance" do
     get :show, params: { id: @attendance.to_param }
     assert_response :success
+  end
+
+  test "should not show attendance if unauthorized" do
+    assert_raise do
+      get :show, params: { id: attendances(:two).to_param }
+    end
   end
 end

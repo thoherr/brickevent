@@ -21,7 +21,7 @@ class EventsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "non admind should not get attendees as csv for event" do
+  test "non admins should not get attendees as csv for event" do
     assert_raise do
       get :attendees_as_csv, params: { id: events(:three).to_param }
     end
