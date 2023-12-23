@@ -16,7 +16,7 @@ class AttendancesController < ApplicationController
   # GET /attendances/1
   # GET /attendances/1.json
   def show
-    @attendance = Attendance.find(params[:id])
+    get_attendance
 
     respond_to do |format|
       format.html # show.html.erb
@@ -54,8 +54,9 @@ class AttendancesController < ApplicationController
   end
 
   def approve
-    @attendance = Attendance.find(params[:id])
+    get_attendance
     if @attendance
+      raise 'approval denied' unless @attendance.event.is_managed_by?(current_user) || current_user.is_admin?
       @attendance.is_approved=!@attendance.is_approved
       respond_to do |format|
         if @attendance.save
@@ -71,7 +72,7 @@ class AttendancesController < ApplicationController
 
   # POST /attendances/copy_exhibits/:other_attendance_id
   def copy_exhibits
-    @attendance = Attendance.find(params[:id])
+    get_attendance
     @other_attendance = Attendance.find(params[:other_attendance_id])
 
     respond_to do |format|
@@ -87,7 +88,7 @@ class AttendancesController < ApplicationController
 
   # POST /attendances/add_former_exhibit/:former_exhibit_id
   def add_former_exhibit
-    @attendance = Attendance.find(params[:id])
+    get_attendance
     # TODO
     @former_exhibit = Exhibit.find(params[:former_exhibit_id])
     respond_to do |format|
@@ -103,7 +104,7 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/former_exhibits
   def former_exhibits
-    @attendance = Attendance.find(params[:id])
+    get_attendance
     # TODO
     # @former_exhibits =
     respond_to do |format|
@@ -113,6 +114,15 @@ class AttendancesController < ApplicationController
   end
 
   private
+
+  def get_attendance
+    attendance = Attendance.find(params[:id])
+    unless attendance.user.id == current_user.id || attendance.event.is_managed_by?(current_user) || current_user.is_admin?
+      raise 'unauthorized request'
+    end
+    @attendance = attendance
+  end
+
   def attendance_params
     params.require(:attendance).permit(:user_id, :event_id, :is_approved)
   end
