@@ -6,6 +6,10 @@ class Accommodation < ApplicationRecord
   validates_presence_of :accommodation_type
   validates_presence_of :count
 
+  def owner
+    attendance&.owner
+  end
+
   def event_title
     return attendance.event_title if attendance
     return "NO ATTENDANCE"

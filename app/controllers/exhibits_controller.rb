@@ -89,7 +89,7 @@ class ExhibitsController < ApplicationController
   end
 
   def authorized?(exhibit)
-    exhibit.attendance.user.id == current_user.id ||
+    exhibit.owner == current_user ||
       exhibit.attendance.event.is_managed_by?(current_user) ||
       current_user.is_admin?
   end

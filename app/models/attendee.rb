@@ -7,6 +7,10 @@ class Attendee < ApplicationRecord
 
   validate :shirt_count_positive_when_size_given
 
+  def owner
+    attendance&.owner
+  end
+
   def event
     attendance&.event
   end

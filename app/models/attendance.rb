@@ -47,6 +47,10 @@ class Attendance < ApplicationRecord
     event&.title || "NO EVENT"
   end
 
+  def owner
+    user
+  end
+
   def user_name
     user&.name || "NO USER"
   end

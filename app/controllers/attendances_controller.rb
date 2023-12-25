@@ -121,7 +121,7 @@ class AttendancesController < ApplicationController
   end
 
   def authorized?(attendance)
-    attendance.user.id == current_user.id ||
+    attendance.owner == current_user ||
       attendance.event.is_managed_by?(current_user) ||
       current_user.is_admin?
   end

@@ -71,6 +71,10 @@ class Exhibit < ApplicationRecord
     attendance&.event_title || "NO ATTENDANCE"
   end
 
+  def owner
+    attendance&.owner
+  end
+
   def user_name
     attendance&.user_name || "NO ATTENDANCE"
   end
