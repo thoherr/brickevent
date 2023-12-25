@@ -64,8 +64,7 @@ class Attendance < ApplicationRecord
   end
 
   def transportation_count
-    translist = exhibits.select { |e| e.needs_transportation? }
-    translist.length
+    exhibits.select { |e| e.needs_transportation? }.length
   end
 
   def contains_version_of(exhibit)
@@ -73,21 +72,17 @@ class Attendance < ApplicationRecord
   end
 
   def add_former_exhibit!(exhibit)
-    new_exhibit = exhibit.copy_for_new_attendance
-    self.exhibits << new_exhibit
+    self.exhibits << exhibit.copy_for_new_attendance
   end
 
   def copy_exhibits!(other_attendance)
-    if other_attendance.exhibits
-      other_attendance.exhibits.each do |exhibit|
-        if exhibit.is_latest?
-          self.add_former_exhibit! exhibit
-        end
-      end
-      self
-    else
-      nil
+    return unless other_attendance.exhibits
+
+    other_attendance.exhibits.filter(&:is_latest?).each do |exhibit|
+      add_former_exhibit!(exhibit)
     end
+
+    self
   end
 
   def to_s
