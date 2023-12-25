@@ -14,7 +14,7 @@ class AttendeesController < ApplicationController
   end
 
   def approve
-    get_attendee
+    load_attendee
     raise 'approval denied' unless @attendee.event.is_managed_by?(current_user) || current_user.is_admin?
     if @attendee
       @attendee.is_approved=!@attendee.is_approved
@@ -33,7 +33,7 @@ class AttendeesController < ApplicationController
   # GET /attendees/1/edit
   def edit
     store_referrer
-    get_attendee
+    load_attendee
   end
 
   # POST /attendees
@@ -55,7 +55,7 @@ class AttendeesController < ApplicationController
   # PUT /attendees/1
   # PUT /attendees/1.json
   def update
-    get_attendee
+    load_attendee
 
     respond_to do |format|
       if @attendee.update(attendee_params)
@@ -72,7 +72,7 @@ class AttendeesController < ApplicationController
   # DELETE /attendees/1.json
   def destroy
     store_referrer
-    get_attendee
+    load_attendee
     @attendance_id = @attendee.attendance_id
     @attendee.destroy
 
@@ -84,7 +84,7 @@ class AttendeesController < ApplicationController
 
   private
 
-  def get_attendee
+  def load_attendee
     @attendee = Attendee.find(params[:id])
     raise 'Unauthorized request' unless authorized?(@attendee)
   end

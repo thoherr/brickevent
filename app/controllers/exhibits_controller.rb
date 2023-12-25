@@ -14,7 +14,7 @@ class ExhibitsController < ApplicationController
   end
 
   def approve
-    get_exhibit
+    load_exhibit
     if @exhibit
       raise 'approval denied' unless @exhibit.attendance.event.is_managed_by?(current_user) || current_user.is_admin?
       @exhibit.is_approved=!@exhibit.is_approved
@@ -33,7 +33,7 @@ class ExhibitsController < ApplicationController
   # GET /exhibits/1/edit
   def edit
     store_referrer
-    get_exhibit
+    load_exhibit
   end
 
   # POST /exhibits
@@ -55,7 +55,7 @@ class ExhibitsController < ApplicationController
   # PUT /exhibits/1
   # PUT /exhibits/1.json
   def update
-    get_exhibit
+    load_exhibit
 
     respond_to do |format|
       if @exhibit.update(exhibit_params)
@@ -71,7 +71,7 @@ class ExhibitsController < ApplicationController
   # DELETE /exhibits/1
   # DELETE /exhibits/1.json
   def destroy
-    get_exhibit
+    load_exhibit
     @attendance_id = @exhibit.attendance_id
     @exhibit.destroy
 
@@ -83,7 +83,7 @@ class ExhibitsController < ApplicationController
 
   private
 
-  def get_exhibit
+  def load_exhibit
     @exhibit = Exhibit.find(params[:id])
     raise 'Unauthorized request' unless authorized?(@exhibit)
   end

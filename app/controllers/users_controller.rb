@@ -2,13 +2,13 @@
 class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
-    get_user
+    load_user
   end
 
   # PUT /users/1
   # PUT /users/1.json
   def update
-    get_user
+    load_user
 
     respond_to do |format|
       if @user.update(user_params)
@@ -23,8 +23,8 @@ class UsersController < ApplicationController
 
   private
 
-  def get_user
-    @user = User.find(params[:id].to_i)
+  def load_user
+    @user = User.find(params[:id])
     raise 'Unauthorized request' unless authorized?(@user)
   end
 

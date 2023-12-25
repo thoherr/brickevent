@@ -16,7 +16,7 @@ class AttendancesController < ApplicationController
   # GET /attendances/1
   # GET /attendances/1.json
   def show
-    get_attendance
+    load_attendance
 
     respond_to do |format|
       format.html # show.html.erb
@@ -54,7 +54,7 @@ class AttendancesController < ApplicationController
   end
 
   def approve
-    get_attendance
+    load_attendance
     if @attendance
       raise 'approval denied' unless @attendance.event.is_managed_by?(current_user) || current_user.is_admin?
       @attendance.is_approved=!@attendance.is_approved
@@ -72,7 +72,7 @@ class AttendancesController < ApplicationController
 
   # POST /attendances/copy_exhibits/:other_attendance_id
   def copy_exhibits
-    get_attendance
+    load_attendance
     @other_attendance = Attendance.find(params[:other_attendance_id])
 
     respond_to do |format|
@@ -88,7 +88,7 @@ class AttendancesController < ApplicationController
 
   # POST /attendances/add_former_exhibit/:former_exhibit_id
   def add_former_exhibit
-    get_attendance
+    load_attendance
     # TODO
     @former_exhibit = Exhibit.find(params[:former_exhibit_id])
     respond_to do |format|
@@ -104,7 +104,7 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/former_exhibits
   def former_exhibits
-    get_attendance
+    load_attendance
     # TODO
     # @former_exhibits =
     respond_to do |format|
@@ -115,7 +115,7 @@ class AttendancesController < ApplicationController
 
   private
 
-  def get_attendance
+  def load_attendance
     @attendance = Attendance.find(params[:id])
     raise 'Unauthorized request' unless authorized?(@attendance)
   end

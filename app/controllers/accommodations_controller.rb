@@ -17,7 +17,7 @@ class AccommodationsController < ApplicationController
   # GET /accommodations/1/edit
   def edit
     store_referrer
-    get_accommodation
+    load_accommodation
   end
 
   # POST /accommodations
@@ -39,7 +39,7 @@ class AccommodationsController < ApplicationController
   # PUT /accommodations/1
   # PUT /accommodations/1.json
   def update
-    get_accommodation
+    load_accommodation
 
     respond_to do |format|
       if @accommodation.update(accommodation_params)
@@ -56,7 +56,7 @@ class AccommodationsController < ApplicationController
   # DELETE /accommodations/1.json
   def destroy
     store_referrer
-    get_accommodation
+    load_accommodation
     @attendance_id = @accommodation.attendance_id
     @accommodation.destroy
 
@@ -68,7 +68,7 @@ class AccommodationsController < ApplicationController
 
   private
 
-  def get_accommodation
+  def load_accommodation
     @accommodation = Accommodation.find(params[:id])
     raise 'Unauthorized request' unless authorized?(@accommodation)
   end
