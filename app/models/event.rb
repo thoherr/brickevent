@@ -13,14 +13,11 @@ class Event < ApplicationRecord
 
   def self.open_events
     Event.find_all_by_registration_open(true)
-  end
+    end
 
   def is_managed_by?(user)
     return false if user.nil?
-    managers.each do |m|
-      return true if m == user
-    end
-    false
+    managers.include?(user)
   end
 
   def number_of_attendees
