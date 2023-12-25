@@ -18,15 +18,15 @@ class User < ApplicationRecord
     attendances.each do |a|
       return a if a.event == event
     end
-    return nil
+    nil
   end
 
   def attends_event? (event)
-    return !attendance_for_event(event).blank?
+    !attendance_for_event(event).blank?
   end
 
   def open_attendances
-    return attendances.select {|att| att.event_registration_open? }
+    attendances.select {|att| att.event_registration_open? }
   end
 
   def has_open_attendances?
