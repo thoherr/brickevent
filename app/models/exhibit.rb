@@ -36,7 +36,7 @@ class Exhibit < ApplicationRecord
 
   def get_ancestor
     return self if former_exhibit.nil?
-    return former_exhibit.get_ancestor
+    former_exhibit.get_ancestor
   end
 
   def is_first?
@@ -88,7 +88,7 @@ class Exhibit < ApplicationRecord
   end
 
   def installation_exhibit_name
-    installation&.name|| "-"
+    installation&.name || "-"
   end
 
   def size_in_square_meters
