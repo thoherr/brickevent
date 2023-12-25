@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_161235) do
+ActiveRecord::Schema.define(version: 2023_12_25_225439) do
 
   create_table "accommodation_types", force: :cascade do |t|
     t.string "name"
