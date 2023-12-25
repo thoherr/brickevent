@@ -84,11 +84,14 @@ class ExhibitsController < ApplicationController
   private
 
   def get_exhibit
-    exhibit = Exhibit.find(params[:id])
-    unless exhibit.attendance.user.id == current_user.id || exhibit.attendance.event.is_managed_by?(current_user) || current_user.is_admin?
-      raise 'unauthorized request'
-    end
-    @exhibit = exhibit
+    @exhibit = Exhibit.find(params[:id])
+    raise 'Unauthorized request' unless authorized?(@exhibit)
+  end
+
+  def authorized?(exhibit)
+    exhibit.attendance.user.id == current_user.id ||
+      exhibit.attendance.event.is_managed_by?(current_user) ||
+      current_user.is_admin?
   end
 
   def exhibit_params

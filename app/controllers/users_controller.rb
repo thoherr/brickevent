@@ -22,12 +22,14 @@ class UsersController < ApplicationController
   end
 
   private
+
   def get_user
-    id = params[:id].to_i
-    unless current_user.id == id || current_user.is_admin?
-      raise 'unauthorized request'
-    end
-    @user = User.find(id)
+    @user = User.find(params[:id].to_i)
+    raise 'Unauthorized request' unless authorized?(@user)
+  end
+
+  def authorized?(user_to_check)
+    current_user == user_to_check || current_user.is_admin?
   end
 
   def user_params

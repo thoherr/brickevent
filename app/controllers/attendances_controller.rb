@@ -116,11 +116,14 @@ class AttendancesController < ApplicationController
   private
 
   def get_attendance
-    attendance = Attendance.find(params[:id])
-    unless attendance.user.id == current_user.id || attendance.event.is_managed_by?(current_user) || current_user.is_admin?
-      raise 'unauthorized request'
-    end
-    @attendance = attendance
+    @attendance = Attendance.find(params[:id])
+    raise 'Unauthorized request' unless authorized?(@attendance)
+  end
+
+  def authorized?(attendance)
+    attendance.user.id == current_user.id ||
+      attendance.event.is_managed_by?(current_user) ||
+      current_user.is_admin?
   end
 
   def attendance_params

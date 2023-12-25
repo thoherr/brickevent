@@ -47,12 +47,13 @@ class EventsController < ApplicationController
 
   private
 
+  def authorized?(event)
+    event.is_managed_by?(current_user) || current_user.is_admin?
+  end
+
   def get_event_for_data_export
-    event = Event.find(params[:id])
-    unless event.is_managed_by?(current_user) || current_user.is_admin?
-      raise 'unauthorized request'
-    end
-    @event = event
+    @event = Event.find(params[:id])
+    raise 'Unauthorized request' unless authorized?(@event)
   end
 
 end

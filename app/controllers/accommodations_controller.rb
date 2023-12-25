@@ -69,11 +69,12 @@ class AccommodationsController < ApplicationController
   private
 
   def get_accommodation
-    accommodation = Accommodation.find(params[:id])
-    unless accommodation.attendance.user.id == current_user.id || current_user.is_admin?
-      raise 'unauthorized request'
-    end
-    @accommodation = accommodation
+    @accommodation = Accommodation.find(params[:id])
+    raise 'Unauthorized request' unless authorized?(@accommodation)
+  end
+
+  def authorized?(accommodation)
+    accommodation.attendance.user.id == current_user.id || current_user.is_admin?
   end
 
   def accommodation_params
