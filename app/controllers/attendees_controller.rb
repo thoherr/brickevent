@@ -90,7 +90,9 @@ class AttendeesController < ApplicationController
   end
 
   def attendee_params
-    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
-    params.require(:attendee).permit!
+    params.require(:attendee).permit(:attendance_id, :attendee_type_id, :name, :lug, :nickname, :email,
+                                     :afols_event, :remarks, :shirt_size, :needs_ticket,
+                                     :option_1, :option_2, :option_3, :option_4, :option_5,
+                                     :number_of_shirts)
   end
 end

@@ -29,7 +29,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
-    params.require(:user).permit!
+    params.require(:user).permit(:email, :name, :phone, :nickname, :address)
   end
 end

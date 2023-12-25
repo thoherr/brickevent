@@ -89,7 +89,14 @@ class ExhibitsController < ApplicationController
   end
 
   def exhibit_params
-    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
-    params.require(:exhibit).permit!
+    # FIXME: get rid of "old" size attributes (size_studs, size, size_x_meter?, size_x_centimeter?, ....)
+    params.require(:exhibit).permit(:attendance_id, :name, :description, :url,
+                                    :size_studs, :size, :value, :building_hours, :brick_count,
+                                    :needs_power_supply, :needs_transportation, :is_installation,
+                                    :is_part_of_installation, :installation_exhibit_id,
+                                    :remarks, :size_x, :size_y, :size_z, :unit_id,
+                                    :size_x_meter, :size_y_meter, :size_z_meter,
+                                    :former_exhibit_id,
+                                    :size_x_centimeter, :size_y_centimeter, :size_z_centimeter)
   end
 end

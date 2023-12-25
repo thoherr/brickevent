@@ -74,7 +74,6 @@ class AccommodationsController < ApplicationController
   end
 
   def accommodation_params
-    # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
-    params.require(:accommodation).permit!
+    params.require(:accommodation).permit(:attendance_id, :accommodation_type_id, :count, :remarks)
   end
 end
