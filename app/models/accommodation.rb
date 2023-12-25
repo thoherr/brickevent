@@ -11,18 +11,15 @@ class Accommodation < ApplicationRecord
   end
 
   def event_title
-    return attendance.event_title if attendance
-    return "NO ATTENDANCE"
+    attendance&.event_title || "NO ATTENDANCE"
   end
 
   def user_name
-    return attendance.user_name if attendance
-    return "NO ATTENDANCE"
+    attendance&.user_name || "NO ATTENDANCE"
   end
 
   def accommodation_type_name
-    return accommodation_type.name if accommodation_type
-    return "NO ACCOMODATION_TYPE"
+    accommodation_type&.name || "NO ACCOMODATION_TYPE"
   end
 
   def to_s
