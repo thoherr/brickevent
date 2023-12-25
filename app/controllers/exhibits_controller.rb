@@ -3,7 +3,6 @@ class ExhibitsController < ApplicationController
   # GET /exhibits/new
   # GET /exhibits/new.json
   def new
-    store_referrer
     @exhibit = Exhibit.new
     @exhibit.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
@@ -32,7 +31,6 @@ class ExhibitsController < ApplicationController
 
   # GET /exhibits/1/edit
   def edit
-    store_referrer
     load_exhibit
   end
 

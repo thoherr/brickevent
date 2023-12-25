@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_action :authenticate_user!
+  before_action :store_referrer
   before_action :get_lug
   before_action :set_context
   before_action :mailer_set_url_options

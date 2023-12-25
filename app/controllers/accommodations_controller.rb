@@ -4,7 +4,6 @@ class AccommodationsController < ApplicationController
   # GET /accommodations/new
   # GET /accommodations/new.json
   def new
-    store_referrer
     @accommodation = Accommodation.new
     @accommodation.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
@@ -16,7 +15,6 @@ class AccommodationsController < ApplicationController
 
   # GET /accommodations/1/edit
   def edit
-    store_referrer
     load_accommodation
   end
 
@@ -55,7 +53,6 @@ class AccommodationsController < ApplicationController
   # DELETE /accommodations/1
   # DELETE /accommodations/1.json
   def destroy
-    store_referrer
     load_accommodation
     @attendance_id = @accommodation.attendance_id
     @accommodation.destroy

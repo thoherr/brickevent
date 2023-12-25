@@ -3,7 +3,6 @@ class AttendeesController < ApplicationController
   # GET /attendees/new
   # GET /attendees/new.json
   def new
-    store_referrer
     @attendee = Attendee.new
     @attendee.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
 
@@ -32,7 +31,6 @@ class AttendeesController < ApplicationController
 
   # GET /attendees/1/edit
   def edit
-    store_referrer
     load_attendee
   end
 
@@ -71,7 +69,6 @@ class AttendeesController < ApplicationController
   # DELETE /attendees/1
   # DELETE /attendees/1.json
   def destroy
-    store_referrer
     load_attendee
     @attendance_id = @attendee.attendance_id
     @attendee.destroy
