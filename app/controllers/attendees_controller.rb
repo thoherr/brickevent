@@ -89,10 +89,6 @@ class AttendeesController < ApplicationController
     raise 'Unauthorized request' unless authorized?(@attendee)
   end
 
-  def authorized?(attendee)
-    attendee.is_managed_by?(current_user) || current_user.is_admin?
-  end
-
   def attendee_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:attendee).permit!

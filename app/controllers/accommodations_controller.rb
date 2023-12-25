@@ -73,10 +73,6 @@ class AccommodationsController < ApplicationController
     raise 'Unauthorized request' unless authorized?(@accommodation)
   end
 
-  def authorized?(accommodation)
-    accommodation.is_managed_by?(current_user) || current_user.is_admin?
-  end
-
   def accommodation_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:accommodation).permit!

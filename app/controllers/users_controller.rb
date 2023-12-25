@@ -28,10 +28,6 @@ class UsersController < ApplicationController
     raise 'Unauthorized request' unless authorized?(@user)
   end
 
-  def authorized?(user)
-    user.is_managed_by?(current_user) || current_user.is_admin?
-  end
-
   def user_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:user).permit!

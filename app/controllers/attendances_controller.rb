@@ -120,10 +120,6 @@ class AttendancesController < ApplicationController
     raise 'Unauthorized request' unless authorized?(@attendance)
   end
 
-  def authorized?(attendance)
-    attendance.is_managed_by?(current_user) || current_user.is_admin?
-  end
-
   def attendance_params
     params.require(:attendance).permit(:user_id, :event_id, :is_approved)
   end

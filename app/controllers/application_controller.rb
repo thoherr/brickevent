@@ -56,7 +56,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone, :lug, :nickname, :address, :accept_data_storage])
   end
 
+  def authorized?(object)
+    object.is_managed_by?(current_user) || current_user.is_admin?
+  end
+
   private
+
   def extract_locale_from_accept_language_header
     http_accept_language = request.env['HTTP_ACCEPT_LANGUAGE']
     return http_accept_language.scan(/^[a-z]{2}/).first if http_accept_language

@@ -88,10 +88,6 @@ class ExhibitsController < ApplicationController
     raise 'Unauthorized request' unless authorized?(@exhibit)
   end
 
-  def authorized?(exhibit)
-    exhibit.is_managed_by?(current_user) || current_user.is_admin?
-  end
-
   def exhibit_params
     # FIXME: This is just a temporary wild card to get the app running on Raila 4.0
     params.require(:exhibit).permit!
