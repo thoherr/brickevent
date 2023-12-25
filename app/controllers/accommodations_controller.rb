@@ -74,7 +74,7 @@ class AccommodationsController < ApplicationController
   end
 
   def authorized?(accommodation)
-    accommodation.owner == current_user || current_user.is_admin?
+    accommodation.is_managed_by?(current_user) || current_user.is_admin?
   end
 
   def accommodation_params

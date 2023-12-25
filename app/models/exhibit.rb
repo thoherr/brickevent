@@ -71,8 +71,8 @@ class Exhibit < ApplicationRecord
     attendance&.event_title || "NO ATTENDANCE"
   end
 
-  def owner
-    attendance&.owner
+  def is_managed_by?(user)
+    attendance&.is_managed_by?(user)
   end
 
   def user_name

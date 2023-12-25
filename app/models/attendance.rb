@@ -35,6 +35,10 @@ class Attendance < ApplicationRecord
     !other_attendances_with_exhibits.empty?
   end
 
+  def is_managed_by?(user)
+    self.user == user || event&.is_managed_by?(user)
+  end
+
   def event_registration_open?
     event&.registration_open?
   end
@@ -45,10 +49,6 @@ class Attendance < ApplicationRecord
 
   def event_title
     event&.title || "NO EVENT"
-  end
-
-  def owner
-    user
   end
 
   def user_name

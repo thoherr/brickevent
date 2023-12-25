@@ -28,8 +28,8 @@ class UsersController < ApplicationController
     raise 'Unauthorized request' unless authorized?(@user)
   end
 
-  def authorized?(user_to_check)
-    current_user == user_to_check || current_user.is_admin?
+  def authorized?(user)
+    user.is_managed_by?(current_user) || current_user.is_admin?
   end
 
   def user_params

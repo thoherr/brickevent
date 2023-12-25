@@ -14,6 +14,10 @@ class User < ApplicationRecord
   validates_presence_of :email, :name
   validates_acceptance_of :accept_data_storage, :on => :create, :accept => true, :message => 'Du musst der Speicherung Deiner Daten zustimmen!'
 
+  def is_managed_by?(user)
+    self == user
+  end
+
   def attendance_for_event (event)
     attendances.each do |a|
       return a if a.event == event

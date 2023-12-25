@@ -6,8 +6,8 @@ class Accommodation < ApplicationRecord
   validates_presence_of :accommodation_type
   validates_presence_of :count
 
-  def owner
-    attendance&.owner
+  def is_managed_by?(user)
+    attendance&.is_managed_by?(user)
   end
 
   def event_title
