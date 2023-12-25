@@ -18,11 +18,8 @@ class User < ApplicationRecord
     self == user
   end
 
-  def attendance_for_event (event)
-    attendances.each do |a|
-      return a if a.event == event
-    end
-    nil
+  def attendance_for_event(event)
+    attendances.find { |a| a.event == event }
   end
 
   def attends_event? (event)
