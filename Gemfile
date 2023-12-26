@@ -42,5 +42,3 @@ gem 'active_scaffold'
 gem 'devise'
 gem 'devise-i18n'
 
-
-gem "webrick", "~> 1.8"
