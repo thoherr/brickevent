@@ -2,31 +2,42 @@
 
 one:
   email: user42@mytestdomain.de
+  # test123
+  encrypted_password: $2a$10$vAt64bXkDXHsAuhcBbACXur3Bvqsq.t7b0Z9Ectq42EXtIvmkoo8W
   name: User One
   lug: MyString
   nickname: MyString
   address: MyString
   phone: MyString
   is_admin: false
+  confirmed_at: 2020-01-01
+  accept_data_storage: true
 
 two:
   email: second@mytestdomain.de
+  # test123
+  encrypted_password: $2a$10$vAt64bXkDXHsAuhcBbACXur3Bvqsq.t7b0Z9Ectq42EXtIvmkoo8W
   name: Second user
   lug: LUG of second user
   nickname: MyString
   address: MyString
   phone: MyString
   is_admin: false
+  confirmed_at: 2020-01-01
   accept_data_storage: true
 
 three:
   email: u333@mytestdomain.de
+  # test123
+  encrypted_password: $2a$10$vAt64bXkDXHsAuhcBbACXur3Bvqsq.t7b0Z9Ectq42EXtIvmkoo8W
   name: User 3
   lug: MyString
   nickname: MyString
   address: MyString
   phone: MyString
   is_admin: false
+  confirmed_at: 2020-01-01
+  accept_data_storage: true
 
 thoherr:
     email: mail@thoherr.de
