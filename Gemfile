@@ -24,7 +24,8 @@ gem 'json'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'apparition'
+  # see https://github.com/twalpole/apparition/pull/79#issuecomment-901381116
+  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'selenium-webdriver'
 end
 
