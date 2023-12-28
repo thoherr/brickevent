@@ -2,6 +2,9 @@
 
 FROM ruby:2.7.8 as brickevent
 
+ARG APPUSER=brickevent
+ARG APPBASEDIR=/$APPUSER
+
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
 # Install netcat for our startup script
@@ -16,13 +19,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ARG APPUSER=brickevent
-ARG APPBASEDIR=/brickevent
-
-RUN useradd -u 300 -U -m $APPUSER
-
-# Prepare Application directory
-RUN mkdir $APPBASEDIR
+RUN useradd -u 300 -U -d $APPBASEDIR -m $APPUSER
 
 WORKDIR $APPBASEDIR
 
@@ -46,7 +43,7 @@ RUN mkdir -p $APPBASEDIR/tmp && mkdir -p $APPBASEDIR/log
 RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
 
 # groups for using chrome (not really sure if this is neccessary, but it doesn't hurt)
-RUN usermod -G audio,video brickevent
+RUN usermod -G audio,video $APPUSER
 
 # Set options for chrome via wrapper script to make Rails system test setup easier
 RUN rm /usr/bin/google-chrome \
@@ -63,4 +60,4 @@ RUN bundle config set path '/usr/local/bundle'
 RUN yarn install --check-files
 
 EXPOSE 3000
-ENTRYPOINT /bin/bash -l -c startup/startup.sh
+CMD /bin/bash -l -c startup/startup.sh
