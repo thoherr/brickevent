@@ -37,7 +37,7 @@ gem 'uglifier'
 
 gem 'jquery-rails'
 
-gem 'active_scaffold'
+gem 'active_scaffold', github: 'activescaffold/active_scaffold', ref: '65dbb573340a2ea6d1027668abe13ca30346242b'
 
 # use devise for user auth
 gem 'devise'
