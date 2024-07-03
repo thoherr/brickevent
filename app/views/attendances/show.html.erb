@@ -30,7 +30,7 @@
 
 <p class="Indented"><%= t('you_registered1') + " " + @attendance.exhibits.count.to_s %>
   MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> <%= t('you_registered2') %>
-  <% if @registration_open -%>(<%= link_to t('register_moc'), new_exhibit_path(:attendance_id => @attendance) -%>)
+  <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>(<%= link_to t('register_moc'), new_exhibit_path(:attendance_id => @attendance) -%>)
   <% end -%>:</p>
 
 <%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
