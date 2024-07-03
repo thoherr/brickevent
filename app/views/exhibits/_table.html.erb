@@ -37,7 +37,7 @@
         <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
           <%= link_to t('edit'), edit_exhibit_path(exhibit) %>
         <% end -%>
-        <% if @registration_open -%>
+        <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
           <%= link_to t('delete'), exhibit, data: { confirm: t('are_you_sure') }, :method => :delete %>
         <% end -%>
         <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
