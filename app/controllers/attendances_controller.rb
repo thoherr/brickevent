@@ -18,6 +18,8 @@ class AttendancesController < ApplicationController
   def show
     load_attendance
 
+    @qr_png = RQRCode::QRCode.new(attendance_url(@attendance)).as_png(size: 240, border_modules: 2)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @attendance }
