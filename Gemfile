@@ -43,5 +43,6 @@ gem 'active_scaffold', github: 'activescaffold/active_scaffold', ref: '65dbb5733
 gem 'devise'
 gem 'devise-i18n'
 
+gem 'rqrcode'
 
-gem "webrick", "~> 1.8"
+gem 'webrick', '~> 1.8'
