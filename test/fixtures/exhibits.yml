@@ -22,6 +22,8 @@ one:
   is_part_of_installation: false
   is_approved: true
   remarks: Very important remark
+  table: 4
+  position: 2
   updated_at: 2018-06-15
 
 two:

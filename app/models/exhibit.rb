@@ -116,6 +116,10 @@ class Exhibit < ApplicationRecord
     name
   end
 
+  def table_position
+    "#{table}.#{position}"
+  end
+
   # CSV Stuff
   def Exhibit.csv_array_header
        return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
