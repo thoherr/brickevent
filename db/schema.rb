@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2023_12_27_201255) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_28_131514) do
   create_table "accommodation_types", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -148,6 +148,8 @@ ActiveRecord::Schema[7.2].define(version: 2023_12_27_201255) do
     t.decimal "size_x_centimeter", precision: 6, scale: 1
     t.decimal "size_y_centimeter", precision: 6, scale: 1
     t.decimal "size_z_centimeter", precision: 6, scale: 1
+    t.integer "table"
+    t.integer "position"
   end
 
   create_table "lugs", force: :cascade do |t|
