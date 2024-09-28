@@ -91,6 +91,7 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
+    acts_as_votable (0.14.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     base64 (0.2.0)
@@ -313,6 +314,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_scaffold!
+  acts_as_votable
   apparition!
   bootsnap
   capybara (>= 3.26)

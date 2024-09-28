@@ -44,5 +44,6 @@ gem 'devise'
 gem 'devise-i18n'
 
 gem 'rqrcode'
+gem 'acts_as_votable'
 
 gem 'webrick', '~> 1.8'
