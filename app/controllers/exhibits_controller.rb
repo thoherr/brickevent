@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class ExhibitsController < ApplicationController
+
   # GET /exhibits/new
   # GET /exhibits/new.json
   def new
@@ -12,6 +13,8 @@ class ExhibitsController < ApplicationController
     end
   end
 
+  # POST /exhibits/approve
+  # POST /exhibits/approve.json
   def approve
     load_exhibit
     if @exhibit

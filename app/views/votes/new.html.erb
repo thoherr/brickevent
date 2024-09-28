@@ -1,0 +1,12 @@
+<h2><%= @exhibit.name %> <%= @exhibit.table_position %></h2>
+<% unless @voted_already %>
+  <%= form_for @vote, :url => url_for(:controller => 'votes', :action => 'create') do |f| %>
+    <div class="InputForm">
+      <div class="actions">
+        <%= f.submit t('vote'), :id => 'submit' %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <%= t('voted_already') %>
+<% end %>

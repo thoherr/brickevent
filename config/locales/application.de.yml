@@ -184,3 +184,5 @@ de:
   label_room_remarks: "Bemerkungen/Sonderwünsche (z. B. verschobene An-/Abreise, Doppelzimmer mit Anderen etc.)"
   exhibit_size_missing: "MOC-Größe fehlt!"
   heading_id: "#"
+  vote: "Abstimmen!"
+  voted_already: "Danke für Deine Stimme für dieses MOC"

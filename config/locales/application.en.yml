@@ -184,3 +184,5 @@ en:
   label_room_remarks: "Remarks (e. g. different travel dates, room sharing with others etc.)"
   exhibit_size_missing: "size of MOC missing!"
   heading_id: "#"
+  vote: "Count my vote!"
+  voted_already: "Thank you for your vote for this MOC"

@@ -9,6 +9,8 @@ class Exhibit < ApplicationRecord
 
   before_save :calculate_size_in_meters_and_centimeters
 
+  acts_as_votable
+
   def calculate_size_in_meters_and_centimeters
     factor_to_cm = if unit then unit.factor_to_cm else 1.0 end # assume cm if not known
     if size_x.blank?
@@ -117,7 +119,8 @@ class Exhibit < ApplicationRecord
   end
 
   def table_position
-    "#{table}.#{position}"
+    return "#{table}.#{position}" if table and position
+    ""
   end
 
   # CSV Stuff
