@@ -49,6 +49,7 @@
         <td colspan="3"><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
           <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
           <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
+          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) %>
         </td>
       </tr>
   <% end %>

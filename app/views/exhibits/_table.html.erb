@@ -41,6 +41,7 @@
           <%= link_to t('delete'), exhibit, data: { confirm: t('are_you_sure') }, :method => :delete %>
         <% end -%>
         <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
+        <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) %>
         <% @attendance.other_open_attendances.each do |to_attendance| %>
           <% unless to_attendance.contains_version_of(exhibit) %>
             <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), method: :post %>

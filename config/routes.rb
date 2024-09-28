@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :exhibits do
     member do
       post 'approve', :action => :approve, :as => :approve
+      get 'voting_poster', :action => :voting_poster, :as => :voting_poster
       resources :votes, :only => [:new, :create]
     end
   end
