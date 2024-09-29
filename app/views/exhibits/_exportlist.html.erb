@@ -17,6 +17,7 @@
     <th><%= t('heading_size') %></th>
     <th><%= t('heading_insurrance_value') %></th>
     <th><%= t('heading_power_supply') %></th>
+    <th><%= t('table_position') %></th>
     <th colspan="3"></th>
   </tr>
 
@@ -46,6 +47,7 @@
         <td><%= exhibit.size_text_in_cm %></td>
         <td><%= exhibit.value %></td>
         <td><%= to_yes_no(exhibit.needs_power_supply) %></td>
+        <td><%= exhibit.table_position %></td>
         <td colspan="3"><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
           <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
           <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->

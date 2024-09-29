@@ -187,3 +187,8 @@ de:
   vote: "Abstimmen!"
   voted_already: "Danke für Deine Stimme für dieses MOC"
   link_create_voting_card: "QR Code für MOC-Wahl"
+  import_position_csv: "CSV mit MOC-Standorten importieren"
+  csv_datei_der_mo_cs_exportieren: "CSV Datei der MOCs exportieren"
+  table_position: "Tischposition"
+  no_file_added: "Keine Datei angegeben"
+  only_csv_files_allowed: "Nur CSV-Dateien können importiert werden"

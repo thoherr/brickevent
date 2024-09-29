@@ -16,15 +16,17 @@
 <% if user_is_admin? ||@event.is_managed_by?(current_user) %>
 
     <h2>Anmeldeliste</h2>
-    <div class="Indented">
-      <% @new_attendance = Attendance.new
-         @new_attendance.event_id = @event.id %>
-      <%= form_for(@new_attendance) do |f| %>
-          <%= f.submit "Weitere Anmeldung manuell erstellen (User-ID eingeben)", :id => 'submit' %>
-          <%= f.text_field :user_id %>
-          <%= f.hidden_field :event_id %>
-      <% end %>
-    </div>
+  <p>
+  <div class="Indented">
+    <% @new_attendance = Attendance.new
+       @new_attendance.event_id = @event.id %>
+    <%= form_for(@new_attendance) do |f| %>
+      <%= f.submit "Weitere Anmeldung manuell erstellen (User-ID eingeben)", :id => 'submit' %>
+      <%= f.text_field :user_id %>
+      <%= f.hidden_field :event_id %>
+    <% end %>
+  </div>
+  </p>
     <%= render 'attendances/exportlist', :attendances => @event.attendances %>
 
     <h2>Teilnehmerliste
@@ -36,9 +38,18 @@
     <%= render 'attendees/exportlist', :attendees => @event.attendees, :event => @event %>
 
     <h2>MOC-Liste
-      <%= button_to 'CSV Datei der MOCs exportieren', :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
+      <%= button_to t('csv_datei_der_mo_cs_exportieren'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
     </h2>
-    <table class="ExhibitsTable FrontendTable">
+  <p>
+  <div class="Indented">
+    <%= form_tag position_import_exhibits_path, method: :post, multipart: true do %>
+      <%= file_field_tag :file, accept: ".csv" %><br/>
+      <%= submit_tag t('import_position_csv') %>
+    <% end %>
+  </div>
+  </p>
+
+  <table class="ExhibitsTable FrontendTable">
       <tr>
         <th>Größe in qm</th>
         <th>MOC-Größe</th>

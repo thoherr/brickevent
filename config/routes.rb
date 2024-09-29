@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   end
   resources :events
   resources :exhibits do
+    collection do
+      post :position_import
+    end
     member do
       post 'approve', :action => :approve, :as => :approve
       get 'voting_poster', :action => :voting_poster, :as => :voting_poster
