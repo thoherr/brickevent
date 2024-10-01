@@ -8,7 +8,7 @@ ARG APPBASEDIR=/$APPUSER
 LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 
 # Install netcat for our startup script
-RUN apt-get update && apt-get -y install netcat && apt-get clean
+RUN apt-get update && apt-get -y install netcat-traditional && apt-get clean
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
