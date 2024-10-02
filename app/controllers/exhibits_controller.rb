@@ -85,7 +85,7 @@ class ExhibitsController < ApplicationController
   def voting_poster
     load_exhibit
     @voting_poster = VotingPosterCreation.call(new_vote_url(@exhibit))
-    send_data(@voting_poster, :type => 'image/png', :filename => "#{@exhibit.id}-#{@exhibit.table_position}.png")
+    send_data(@voting_poster, :type => 'image/png', :filename => "#{@exhibit.id}-#{@exhibit.platform_position}.png")
   end
 
   def position_import

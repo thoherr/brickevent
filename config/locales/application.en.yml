@@ -189,7 +189,7 @@ en:
   link_create_voting_card: "Voting QR Code"
   import_position_csv: "Import CSV for table and position"
   csv_datei_der_mo_cs_exportieren: "Export MOCs as CSV file"
-  table_position: "Table position"
+  table_position: "Position"
   no_file_added: "No file added"
   only_csv_files_allowed: "Only CSV files allowed"
   vote_for: "I'd like to vote for MOC"

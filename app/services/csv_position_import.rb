@@ -15,7 +15,7 @@ class CsvPositionImport < ApplicationService
     CSV.foreach(opened_file, **options) do |row|
 
       exhibit = Exhibit.find(row['id'])
-      exhibit.table = row['table']
+      exhibit.platform = row['platform']
       exhibit.position = row['position']
       exhibit.save!
 

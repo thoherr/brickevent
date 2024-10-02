@@ -1,6 +1,6 @@
 <h2><%= @event.name %></h2>
 <% moctext = "#{@exhibit.name}" %>
-<% moctext += " (#{@exhibit.table_position})" unless @exhibit.table_position.blank? %>
+<% moctext += " (#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %>
 <% if @voted_already %>
   <p><%= t('voted_already') %>  <i><b><%= moctext %></b></i></p>
 <% else %>

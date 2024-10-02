@@ -118,14 +118,14 @@ class Exhibit < ApplicationRecord
     name
   end
 
-  def table_position
-    return "#{table}.#{position}" if table and position
+  def platform_position
+    return "#{platform}.#{position}" if platform and position
     ""
   end
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
+       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Tisch", "Position", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
   end
 
   def csv_array
@@ -138,6 +138,7 @@ class Exhibit < ApplicationRecord
      url, size_x, size_y, size_z,
      (unit.nil? ? 'cm' : unit.name),
      size_x_centimeter, size_y_centimeter, size_z_centimeter,
+     platform, position,
      is_installation ? 0.0 : value,
      is_installation ? value : 0.0,
      building_hours, brick_count,
