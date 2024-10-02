@@ -12,7 +12,7 @@ class VotesController < ApplicationController
       @voted_already = visitor.voted_for? @exhibit
     end
     @vote = Vote.new
-    render :layout => false
+    render :layout => 'voting'
   end
 
   # POST /exhibits/:exhibit_id/votes

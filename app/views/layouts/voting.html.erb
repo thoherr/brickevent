@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<% titleline = "#{SoftwareVersion.appname} #{@lug.name}" %>
+<html>
+<head>
+  <title><%= titleline %></title>
+  <%= favicon_link_tag "#{@lug.favicon_url}" %>
+  <meta name="application-name" content="<%= "#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
+  <meta name="description" content="<%= "#{@lug.name} event management" %>">
+  <meta name="copyright" content="(c) 2010-2024 Thomas Herrmann <mail@thoherr.de>">
+  <%= stylesheet_link_tag "voting" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= @stage%> <%= I18n.locale%>">
+
+<div id="votingTitle">
+  <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
+</div>
+
+<div id="votingContent">
+  <%= render "shared/flashes" %>
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -2,11 +2,12 @@
 <% moctext = "#{@exhibit.name}" %>
 <% moctext += " (#{@exhibit.table_position})" unless @exhibit.table_position.blank? %>
 <% if @voted_already %>
-  <%= t('voted_already') %>  <%= moctext %>
+  <p><%= t('voted_already') %>  <i><b><%= moctext %></b></i></p>
 <% else %>
-  <h3><%= t('vote_for') %> <%= moctext %> </h3>
   <%= form_for @vote, :url => url_for(:controller => 'votes', :action => 'create') do |f| %>
-    <div class="InputForm">
+    <div class="VotingForm">
+      <p><%= t('vote_for') %></p>
+      <p><i><b><%= moctext %></b></i> </p>
       <div class="actions">
         <%= f.submit t('vote'), :id => 'submit' %>
       </div>
