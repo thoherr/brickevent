@@ -3,6 +3,8 @@
 class VotingPosterCreation < ApplicationService
   require 'prawn'
 
+  attr_reader :url
+
   def initialize(url)
     @url = url
   end

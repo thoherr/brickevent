@@ -92,7 +92,7 @@ class ExhibitsController < ApplicationController
     return redirect_to request.referer, notice: I18n.t('no_file_added') if params[:file].nil?
     return redirect_to request.referer, notice: I18n.t('only_csv_files_allowed') unless params[:file].content_type == 'text/csv'
 
-    CsvPositionImportService.new.call(params[:file])
+    CsvPositionImport.call(params[:file])
 
     redirect_to request.referer, notice: 'Position data imported'
   end
