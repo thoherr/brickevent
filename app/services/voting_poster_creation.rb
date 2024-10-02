@@ -3,15 +3,38 @@
 class VotingPosterCreation < ApplicationService
   require 'prawn'
 
-  attr_reader :url
+  #  attr_reader :exhibit, :url
 
-  def initialize(url)
+  def initialize(exhibit, url)
+    @exhibit = exhibit
     @url = url
   end
 
   def call
-    qr_png = RQRCode::QRCode.new(@url).as_png
-    qr_png
+    voting_poster
   end
 
+  private
+
+  def voting_poster
+    pdf = Prawn::Document.new(top_margin: 5, left_margin: 5, page_size: 'A6', page_layout: :landscape, print_scaling: :none)
+    pdf.text @exhibit.event_title
+    current_locale = I18n.locale
+    I18n.locale = :de
+    pdf.text I18n.t('voting_poster_intro')
+    pdf.text I18n.t('voting_poster_instruction')
+    I18n.locale = :en
+    pdf.text I18n.t('voting_poster_intro')
+    pdf.text I18n.t('voting_poster_instruction')
+    I18n.locale = current_locale
+    pdf.text @exhibit.name
+    pdf.text @exhibit.platform_position
+    pdf.image StringIO.new( qr_png.to_datastream.to_s )
+    pdf.text @url
+    pdf.render
+  end
+
+  def qr_png
+    RQRCode::QRCode.new(@url).as_png
+  end
 end
