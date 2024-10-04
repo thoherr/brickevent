@@ -5,6 +5,25 @@
   <h2><%= t('no_votes') %></h2>
 <% else %>
   <h2><%= t('number_of_votes', size: @votes.size) %></h2>
+  <table class="ExhibitsTable FrontendTable">
+    <tr>
+      <th><%= t('heading_votes') %></th>
+      <th><%= t('table_position') %></th>
+      <th><%= t('heading_moc') %></th>
+      <th><%= t('heading_name') %></th>
+      <th><%= t('heading_id') %></th>
+    </th>
+    <% @top_votes.each do |k, v| %>
+      <% exhibit = Exhibit.find(k) %>
+      <tr>
+        <td><%= v %></td>
+        <td><%= exhibit.platform_position %></td>
+        <td><%= exhibit.name %></td>
+        <td><%= exhibit.user_name %></td>
+        <td><%= exhibit.id %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
 
 <% if user_is_admin? || (@event && @event.is_managed_by?(current_user)) -%>

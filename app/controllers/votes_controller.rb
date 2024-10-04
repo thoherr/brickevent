@@ -8,9 +8,12 @@ class VotesController < ApplicationController
   def index
     load_event
     @votes = Vote.where(vote_scope: @event.id)
+    @vote_counts = @votes.group(:votable_id).count
+    # TODO limit (10) as parameter
+    @top_votes = @vote_counts.sort_by{ |k, v| -v }.first(10).to_h
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @votes }
+      format.json { render :json => @top_votes }
     end
   end
 
