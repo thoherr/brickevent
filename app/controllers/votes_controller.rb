@@ -1,7 +1,18 @@
 # encoding: UTF-8
 class VotesController < ApplicationController
 
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, except: [:index]
+
+  # GET /events/:id/votes
+  # GET /events/:id/votes.json
+  def index
+    load_event
+    @votes = Vote.where(vote_scope: @event.id)
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @votes }
+    end
+  end
 
   # GET /exhibits/:id/votes/new
   # GET /exhibits/:id/votes/new.json
@@ -9,7 +20,7 @@ class VotesController < ApplicationController
     load_exhibit_and_event
     if @exhibit
       visitor = Visitor.load_or_create(session[:session_id])
-      @voted_already = visitor.voted_for? @exhibit
+      @voted_already = visitor.voted_for? @exhibit, {:vote_scope => @event.id}
     end
     @vote = Vote.new
     render :layout => 'voting'
@@ -22,7 +33,7 @@ class VotesController < ApplicationController
     if @exhibit
       visitor = Visitor.load_or_create(session[:session_id])
       if visitor
-        @exhibit.liked_by visitor
+        @exhibit.liked_by visitor, vote_scope: @event.id
         respond_to do |format|
           if @exhibit.save
             format.html { redirect_to new_vote_path(@exhibit) }
@@ -37,6 +48,12 @@ class VotesController < ApplicationController
   end
 
 private
+
+  def load_event
+    @event = Event.find(params[:id])
+    raise 'Unauthorized request' unless authorized?(@event)
+  end
+
 
   def load_exhibit_and_event
     @exhibit = Exhibit.find(params[:id])

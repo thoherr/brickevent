@@ -195,3 +195,7 @@ en:
   vote_for: "I'd like to vote for MOC"
   voting_poster_intro: "Vote for the best MOCs of this event"
   voting_poster_instruction: "Scan the QR code to vote"
+  exhibit_voting_results_for: "Results of the MOC voting for"
+  no_votes: "No votes"
+  number_of_votes: "We got %{size} votes"
+  exhibit_voting_results: "Voting results"

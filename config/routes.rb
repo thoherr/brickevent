@@ -19,7 +19,12 @@ Rails.application.routes.draw do
       post 'approve', :action => :approve, :as => :approve
     end
   end
-  resources :events
+  resources :events do
+    member do
+      resources :votes, :only => [:index]
+    end
+  end
+
   resources :exhibits do
     collection do
       post :position_import
