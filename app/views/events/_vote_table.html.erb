@@ -1,0 +1,26 @@
+<!-- Copyright 2024 by Thomas Herrmann -->
+<% if total_vote_count.size == 0 %>
+  <h3><%= t('no_votes') %></h3>
+<% else %>
+  <h3><%= t('number_of_votes', size: total_vote_count) %></h3>
+  <table class="ExhibitsTable FrontendTable">
+    <tr>
+      <th><%= t('heading_votes') %></th>
+      <th><%= t('table_position') %></th>
+      <th><%= t('heading_moc') %></th>
+      <th><%= t('heading_name') %></th>
+      <th><%= t('heading_id') %></th>
+      </th>
+      <% top_voted_exhibits.each do |exhibit| %>
+      <tr>
+        <td>
+          <progress max=<%= max_votes %> value=<%= exhibit.number_of_votes %>></progress>
+          <%= exhibit.number_of_votes %></td>
+        <td><%= exhibit.platform_position %></td>
+        <td><%= exhibit.name %></td>
+        <td><%= exhibit.user_name %></td>
+        <td><%= exhibit.id %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -201,3 +201,5 @@ de:
   number_of_votes: "Es wurden %{size} Stimmen abgegeben"
   event_voting_results: "Ergebnis der MOC-Wahl"
   event_voting_posters: "Alle Stimmkarten für diese Veranstaltung herunterladen"
+  installation_poll: "Wahl der Gemeinstaftsanlagen"
+  single_exhibit_poll: "Wahl der Einzel-MOCs"

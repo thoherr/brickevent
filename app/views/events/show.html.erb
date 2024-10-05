@@ -13,7 +13,7 @@
   <%= t('confirmed_for_afols_event') + " " + @event.number_of_attendees_at_afols_event.to_s %><br/>
   <%= t('confirmed_tickets') + " " + @event.number_of_tickets.to_s %><br/>
   <%= link_to t('event_voting_posters'), voting_posters_event_path(@event) %><br/>
-  <%= link_to t('event_voting_results'), votes_path(@event) %>
+  <%= link_to t('event_voting_results'), votes_event_path(@event) %>
 </p>
 
 <% if user_is_admin? ||@event.is_managed_by?(current_user) %>

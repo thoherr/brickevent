@@ -40,6 +40,10 @@ class Event < ApplicationRecord
     exhibits.select { |e| e.is_installation? }
   end
 
+  def single_exhibits
+    exhibits.select { |e| ! e.is_installation? }
+  end
+
   def tickets
     approved_attendees.select { |a| a.needs_ticket? }
   end
