@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :events do
     member do
       get 'votes'
+      post 'close_voting', :action => :close_voting, :as => :close_voting
+      post 'open_voting', :action => :open_voting, :as => :open_voting
       get 'voting_posters', :action => :voting_posters, :as => :voting_posters
     end
   end

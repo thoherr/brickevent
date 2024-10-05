@@ -1,16 +1,23 @@
 <h2><%= @exhibit.event_title %></h2>
-<% moctext = "#{@exhibit.name}" %>
-<% moctext += " (#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %>
-<% if @voted_already %>
-  <p><%= t('voted_already') %>  <i><b><%= moctext %></b></i></p>
+<% voting_scope = @event.current_voting_scope %>
+<% if voting_scope.blank? %>
+  <p><%= t('voting_closed') %></p>
+  <p><%= t('check_voting_times') %></p>
 <% else %>
-  <%= form_for @vote, :url => url_for(:controller => 'votes', :action => 'create') do |f| %>
-    <div class="VotingForm">
-      <p><%= t('vote_for') %></p>
-      <p><i><b><%= moctext %></b></i> </p>
-      <div class="actions">
-        <%= f.submit t('vote'), :id => 'submit' %>
+  <h3><%= t(voting_scope) %></h3>
+  <% moctext = "#{@exhibit.name}" %>
+  <% moctext += " (#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %>
+  <% if @voted_already %>
+    <p><%= t('voted_already') %>  <i><b><%= moctext %></b></i></p>
+  <% else %>
+    <%= form_for @vote, :url => url_for(:controller => 'votes', :action => 'create') do |f| %>
+      <div class="VotingForm">
+        <p><%= t('vote_for') %></p>
+        <p><i><b><%= moctext %></b></i></p>
+        <div class="actions">
+          <%= f.submit t('vote'), :id => 'submit' %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>

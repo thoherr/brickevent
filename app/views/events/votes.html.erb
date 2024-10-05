@@ -1,6 +1,17 @@
 <!-- Copyright 2024 by Thomas Herrmann -->
 <h1><%= t('exhibit_voting_results_for') %> <%= @event.title %></h1>
 
+<% voting_scope = @event.current_voting_scope %>
+<% if voting_scope.blank? %>
+  <h3><%= t('voting_closed') %></h3>
+  <% [Vote.PUBLIC_VOTES, Vote.ATTENDEES_VOTES].each do |voting_scope| %>
+    <div class="OverviewLink"><%= link_to t('open_'+voting_scope+'_voting'), open_voting_event_path(@event, {:voting_scope => voting_scope}), :method => :post %></div>
+  <% end %>
+<% else %>
+  <h3><%= t('current_voting') %>: <%= t(voting_scope) %></h3>
+  <div class="OverviewLink"><%= link_to t('close_voting'), close_voting_event_path(@event), :method => :post %></td></div>
+<% end %>
+
 <% [Vote.PUBLIC_VOTES, Vote.ATTENDEES_VOTES].each do |voting_scope| %>
 
   <div class="EventListEntry">

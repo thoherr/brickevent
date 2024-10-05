@@ -6,7 +6,7 @@ class VotesController < ApplicationController
   # GET /exhibits/:id/votes/new
   # GET /exhibits/:id/votes/new.json
   def new
-    load_exhibit
+    load_exhibit_and_event
     if @exhibit
       visitor = Visitor.load_or_create(session[:session_id])
       @voted_already = visitor.voted_for? @exhibit, vote_scope: @exhibit.current_voting_scope
@@ -18,9 +18,13 @@ class VotesController < ApplicationController
   # POST /exhibits/:exhibit_id/votes
   # POST /exhibits/:exhibit_id/votes.json
   def create
-    load_exhibit
+    load_exhibit_and_event
     if @exhibit
       visitor = Visitor.load_or_create(session[:session_id])
+      @voted_already = visitor.voted_for? @exhibit, vote_scope: @exhibit.current_voting_scope
+      if @voted_already
+        redirect_to new_vote_path(@exhibit)
+      end
       if visitor
         @exhibit.liked_by visitor, vote_scope: @exhibit.current_voting_scope
         respond_to do |format|
@@ -38,8 +42,9 @@ class VotesController < ApplicationController
 
 private
 
-  def load_exhibit
+  def load_exhibit_and_event
     @exhibit = Exhibit.find(params[:id])
+    @event = @exhibit.attendance.event
   end
 
 end

@@ -31,6 +31,38 @@ class EventsController < ApplicationController
     load_event
   end
 
+  def open_voting
+    load_event
+    if @event
+      @event.current_voting_scope=params[:voting_scope]
+      respond_to do |format|
+        if @event.save
+          format.html { redirect_to votes_event_path(@event), :notice => t('voting_started') }
+          format.json { render :json => @event.current_voting_scope, :status => :updated, :location => @event }
+        else
+          format.html { render :action => "votes" }
+          format.json { render :json => @event.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+  def close_voting
+    load_event
+    if @event
+      @event.current_voting_scope=''
+      respond_to do |format|
+        if @event.save
+          format.html { redirect_to votes_event_path(@event), :notice => t('voting_stopped') }
+          format.json { render :json => @event.current_voting_scope, :status => :updated, :location => @event }
+        else
+          format.html { render :action => "votes" }
+          format.json { render :json => @event.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   def voting_posters
     load_event
 
