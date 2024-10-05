@@ -41,18 +41,20 @@
           <%= link_to t('delete'), exhibit, data: { confirm: t('are_you_sure') }, :method => :delete %>
         <% end -%>
         <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
-        <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) %>
         <% @attendance.other_open_attendances.each do |to_attendance| %>
           <% unless to_attendance.contains_version_of(exhibit) %>
             <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), method: :post %>
           <% end %>
         <% end %>
-        <% if user_is_admin? and exhibit.is_installation? %>
-          <%= form_for(exhibit) do |f| %>
-            <%= f.select :attendance_id, @attendance.event.attendances.collect { |a| [a.user_name, a.id] } %>
-            <%= f.submit 'Zuordnen', :id => 'submit' %>
+        <% if user_is_admin? %>
+          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) %>
+          <% if exhibit.is_installation? %>
+            <%= form_for(exhibit) do |f| %>
+              <%= f.select :attendance_id, @attendance.event.attendances.collect { |a| [a.user_name, a.id] } %>
+              <%= f.submit 'Zuordnen', :id => 'submit' %>
+            <% end %>
           <% end %>
-      <% end %>
+        <% end %>
       </td>
     </tr>
   <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_05_132036) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_05_160001) do
   create_table "accommodation_types", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_132036) do
     t.string "label_option_5"
     t.boolean "edit_of_attendees_allowed", default: false
     t.boolean "edit_of_exhibits_allowed", default: false
+    t.string "current_voting_scope"
   end
 
   create_table "exhibits", force: :cascade do |t|
