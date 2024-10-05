@@ -6,10 +6,10 @@ class VotesController < ApplicationController
   # GET /exhibits/:id/votes/new
   # GET /exhibits/:id/votes/new.json
   def new
-    load_exhibit_and_event
+    load_exhibit
     if @exhibit
       visitor = Visitor.load_or_create(session[:session_id])
-      @voted_already = visitor.voted_for? @exhibit, {:vote_scope => @event.id}
+      @voted_already = visitor.voted_for? @exhibit
     end
     @vote = Vote.new
     render :layout => 'voting'
@@ -18,11 +18,11 @@ class VotesController < ApplicationController
   # POST /exhibits/:exhibit_id/votes
   # POST /exhibits/:exhibit_id/votes.json
   def create
-    load_exhibit_and_event
+    load_exhibit
     if @exhibit
       visitor = Visitor.load_or_create(session[:session_id])
       if visitor
-        @exhibit.liked_by visitor, vote_scope: @event.id
+        @exhibit.liked_by visitor
         respond_to do |format|
           if @exhibit.save
             format.html { redirect_to new_vote_path(@exhibit) }
@@ -38,9 +38,8 @@ class VotesController < ApplicationController
 
 private
 
-  def load_exhibit_and_event
+  def load_exhibit
     @exhibit = Exhibit.find(params[:id])
-    @event = @exhibit.attendance.event # no nil guard using &, missing event is a fatal error
   end
 
 end
