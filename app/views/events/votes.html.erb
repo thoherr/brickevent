@@ -1,10 +1,10 @@
 <!-- Copyright 2024 by Thomas Herrmann -->
 <h1><%= t('exhibit_voting_results_for') + @event.title %></h1>
 
-<% if @votes.size == 0 %>
+<% if @top_voted_exhibits.size == 0 %>
   <h2><%= t('no_votes') %></h2>
 <% else %>
-  <h2><%= t('number_of_votes', size: @votes.size) %></h2>
+  <h2><%= t('number_of_votes', size: @total_vote_count) %></h2>
   <table class="ExhibitsTable FrontendTable">
     <tr>
       <th><%= t('heading_votes') %></th>
@@ -13,10 +13,10 @@
       <th><%= t('heading_name') %></th>
       <th><%= t('heading_id') %></th>
     </th>
-    <% @top_votes.each do |k, v| %>
-      <% exhibit = Exhibit.find(k) %>
+    <% @top_voted_exhibits.each do |exhibit| %>
       <tr>
-        <td><progress max=<%= @max_votes %> value=<%= v %>></progress> <%= v %></td>
+        <td><progress max=<%= @max_votes %> value=<%= exhibit.number_of_votes %>></progress>
+          <%= exhibit.number_of_votes %></td>
         <td><%= exhibit.platform_position %></td>
         <td><%= exhibit.name %></td>
         <td><%= exhibit.user_name %></td>

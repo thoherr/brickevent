@@ -1,22 +1,7 @@
 # encoding: UTF-8
 class VotesController < ApplicationController
 
-  skip_before_action :authenticate_user!, except: [:index]
-
-  # GET /events/:id/votes
-  # GET /events/:id/votes.json
-  def index
-    load_event
-    @votes = Vote.where(vote_scope: @event.id)
-    @vote_counts = @votes.group(:votable_id).count
-    # TODO limit (10) as parameter
-    @top_votes = @vote_counts.sort_by{ |k, v| -v }.first(10).to_h
-    @max_votes = @top_votes.values.max
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @top_votes }
-    end
-  end
+  skip_before_action :authenticate_user!
 
   # GET /exhibits/:id/votes/new
   # GET /exhibits/:id/votes/new.json
@@ -52,12 +37,6 @@ class VotesController < ApplicationController
   end
 
 private
-
-  def load_event
-    @event = Event.find(params[:id])
-    raise 'Unauthorized request' unless authorized?(@event)
-  end
-
 
   def load_exhibit_and_event
     @exhibit = Exhibit.find(params[:id])

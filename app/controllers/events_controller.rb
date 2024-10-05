@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
+    load_event
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,8 +25,25 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/:id/votes
+  # GET /events/:id/votes.json
+  def votes
+    load_event
+
+    @total_vote_count = @event.exhibits.sum(&:number_of_votes)
+    @exhibits = @event.exhibits.sort_by(&:number_of_votes).reverse
+    # TODO limit (10) as parameter
+    @top_voted_exhibits = @exhibits.first(10)
+    @max_votes = @top_voted_exhibits.max_by(&:number_of_votes).number_of_votes unless @top_voted_exhibits.empty?
+    respond_to do |format|
+      format.html # votes.html.erb
+      format.json { render :json => @top_voted_exhibits }
+    end
+  end
+
   def voting_posters
-    @event = Event.find(params[:id])
+    load_event
+
     zip_data = VotingPosterZipfileCreation.call(@event)
     send_data zip_data,
               :type => 'application/zip',

@@ -114,6 +114,10 @@ class Exhibit < ApplicationRecord
     "MISSING"
   end
 
+  def number_of_votes
+    votes_for.size
+  end
+
   def to_s
     name
   end
