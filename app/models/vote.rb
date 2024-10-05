@@ -2,4 +2,6 @@
 
 # dummy class for form
 class Vote < ApplicationRecord
+  @@PUBLIC = 'public'
+  @@ATTENDEE = 'attendee'
 end
