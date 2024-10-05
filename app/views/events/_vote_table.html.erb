@@ -1,8 +1,8 @@
 <!-- Copyright 2024 by Thomas Herrmann -->
 <% if total_vote_count.size == 0 %>
-  <h3><%= t('no_votes') %></h3>
+  <h4><%= t('no_votes') %></h4>
 <% else %>
-  <h3><%= t('number_of_votes', size: total_vote_count) %></h3>
+  <h4><%= t('number_of_votes', size: total_vote_count) %></h4>
   <table class="ExhibitsTable FrontendTable">
     <tr>
       <th><%= t('heading_votes') %></th>
@@ -12,10 +12,11 @@
       <th><%= t('heading_id') %></th>
       </th>
       <% top_voted_exhibits.each do |exhibit| %>
+      <% number_of_votes = exhibit.find_votes_for(vote_scope: voting_scope).size %>
       <tr>
         <td>
-          <progress max=<%= max_votes %> value=<%= exhibit.number_of_votes %>></progress>
-          <%= exhibit.number_of_votes %></td>
+          <progress max=<%= max_votes %> value=<%= number_of_votes %>></progress>
+          <%= number_of_votes %></td>
         <td><%= exhibit.platform_position %></td>
         <td><%= exhibit.name %></td>
         <td><%= exhibit.user_name %></td>

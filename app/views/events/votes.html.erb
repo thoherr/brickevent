@@ -1,21 +1,35 @@
 <!-- Copyright 2024 by Thomas Herrmann -->
-<h1><%= t('exhibit_voting_results_for') + @event.title %></h1>
+<h1><%= t('exhibit_voting_results_for') %> <%= @event.title %></h1>
 
-<h2><%= t('installation_poll') %></h2>
-  <%= render 'vote_table', {
-    :total_vote_count => @installations_vote_count,
-    :max_votes => @max_installations_votes,
-    :top_voted_exhibits => @top_voted_installations
-  }
- %>
+<% [Vote.PUBLIC_VOTES, Vote.ATTENDEES_VOTES].each do |voting_scope| %>
 
-<h2><%= t('single_exhibit_poll') %></h2>
-<%= render 'vote_table', {
-  :total_vote_count => @single_exhibits_vote_count,
-  :max_votes => @max_single_exhibits_votes,
-  :top_voted_exhibits => @top_voted_single_exhibits
-}
-%>
+  <div class="EventListEntry">
+
+    <h2><%= t(voting_scope) %></h2>
+
+    <h3><%= t('installation_poll') %></h3>
+    <% results = VotingResult.new(@event, voting_scope, true).call %>
+    <%= render 'vote_table', {
+      :voting_scope => voting_scope,
+      :total_vote_count => results[:vote_count],
+      :max_votes => results[:max_votes],
+      :top_voted_exhibits => results[:top_voted]
+    }
+    %>
+
+    <h3><%= t('single_exhibit_poll') %></h3>
+    <% results = VotingResult.new(@event, voting_scope, false).call %>
+    <%= render 'vote_table', {
+      :voting_scope => voting_scope,
+      :total_vote_count => results[:vote_count],
+      :max_votes => results[:max_votes],
+      :top_voted_exhibits => results[:top_voted]
+    }
+    %>
+
+  </div>
+
+<% end %>
 
 <% if user_is_admin? || (@event && @event.is_managed_by?(current_user)) -%>
   <div class="OverviewLink"><%= link_to t('back_to_event'), event_path(@event) unless @event.nil? %></div>

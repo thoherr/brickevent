@@ -29,23 +29,6 @@ class EventsController < ApplicationController
   # GET /events/:id/votes.json
   def votes
     load_event
-
-    @installations_vote_count = @event.installations.sum(&:cached_votes_score)
-    @installations = @event.installations.sort_by(&:cached_votes_score).reverse
-    # TODO limit (10) as parameter
-    @top_voted_installations = @installations.first(10)
-    @max_installations_votes = @top_voted_installations.max_by(&:cached_votes_score).number_of_votes unless @top_voted_installations.empty?
-
-    @single_exhibits_vote_count = @event.single_exhibits.sum(&:cached_votes_score)
-    @single_exhibits = @event.single_exhibits.sort_by(&:cached_votes_score).reverse
-    # TODO limit (10) as parameter
-    @top_voted_single_exhibits = @single_exhibits.first(10)
-    @max_single_exhibits_votes = @top_voted_single_exhibits.max_by(&:cached_votes_score).number_of_votes unless @top_voted_single_exhibits.empty?
-
-    respond_to do |format|
-      format.html # votes.html.erb
-      format.json { render :json => @top_voted_single_exhibits }
-    end
   end
 
   def voting_posters

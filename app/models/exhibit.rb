@@ -73,6 +73,10 @@ class Exhibit < ApplicationRecord
     attendance&.event_title || "NO ATTENDANCE"
   end
 
+  def current_voting_scope
+    attendance&.event&.current_voting_scope
+  end
+
   def is_managed_by?(user)
     attendance&.is_managed_by?(user)
   end
@@ -112,10 +116,6 @@ class Exhibit < ApplicationRecord
           if size_z_centimeter.blank? then "" else " x " + size_z_centimeter.to_s end
     end
     "MISSING"
-  end
-
-  def number_of_votes
-    votes_for.size
   end
 
   def to_s

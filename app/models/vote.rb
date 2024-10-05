@@ -3,5 +3,14 @@
 # dummy class for form
 class Vote < ApplicationRecord
   @@PUBLIC = 'public'
-  @@ATTENDEE = 'attendee'
-end
+  @@ATTENDEES = 'attendees'
+  class << self
+    def PUBLIC_VOTES
+      @@PUBLIC
+    end
+    def ATTENDEES_VOTES
+      @@ATTENDEES
+    end
+  end
+
+ end
