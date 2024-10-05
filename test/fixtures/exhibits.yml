@@ -67,3 +67,18 @@ three:
   is_installation: true
   is_part_of_installation: false
   updated_at: 2021-05-04
+
+four:
+  id: 45
+  attendance: one
+  name: Simple litte MOC
+  description: Quite awesome
+  size_x: 0.5
+  size_y: 0.75
+  unit: m
+  value: 123
+  is_installation: false
+  is_part_of_installation: true
+  is_approved: true
+  platform: 5
+  updated_at: 2024-09-10

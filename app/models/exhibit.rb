@@ -124,6 +124,7 @@ class Exhibit < ApplicationRecord
 
   def platform_position
     return "#{platform}.#{position}" if platform and position
+    return "#{platform}" if platform
     ""
   end
 
