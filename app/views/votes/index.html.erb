@@ -16,7 +16,7 @@
     <% @top_votes.each do |k, v| %>
       <% exhibit = Exhibit.find(k) %>
       <tr>
-        <td><%= v %></td>
+        <td><progress max=<%= @max_votes %> value=<%= v %>></progress> <%= v %></td>
         <td><%= exhibit.platform_position %></td>
         <td><%= exhibit.name %></td>
         <td><%= exhibit.user_name %></td>
