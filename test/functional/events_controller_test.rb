@@ -17,6 +17,9 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should show event" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
     get :show, params: { id: @event.to_param }
     assert_response :success
   end
