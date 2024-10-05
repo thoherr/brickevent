@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :events do
     member do
       resources :votes, :only => [:index]
+      get 'voting_posters', :action => :voting_posters, :as => :voting_posters
     end
   end
 

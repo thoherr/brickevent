@@ -50,4 +50,6 @@ gem 'acts_as_votable'
 
 gem 'prawn'
 
+gem 'rubyzip'
+
 gem 'webrick', '~> 1.8'

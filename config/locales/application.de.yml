@@ -199,4 +199,5 @@ de:
   exhibit_voting_results_for: "Ergebnisse der MOC-Wahl für"
   no_votes: "Keine abgegebenen Stimmen"
   number_of_votes: "Es wurden %{size} Stimmen abgegeben"
-  exhibit_voting_results: "Ergebnis der MOC-Wahl"
+  event_voting_results: "Ergebnis der MOC-Wahl"
+  event_voting_posters: "Alle Stimmkarten für diese Veranstaltung herunterladen"

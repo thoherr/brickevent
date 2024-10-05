@@ -332,6 +332,7 @@ DEPENDENCIES
   rails (~> 7.2)
   rails-controller-testing
   rqrcode
+  rubyzip
   sass-rails
   selenium-webdriver
   sqlite3

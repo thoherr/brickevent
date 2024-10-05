@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class VotingPosterCreation < ApplicationService
+  include Rails.application.routes.url_helpers
+
   require 'prawn'
 
-  #  attr_reader :exhibit, :url
-
-  def initialize(exhibit, url)
+  def initialize(exhibit)
     @exhibit = exhibit
-    @url = url
+    @url = new_vote_url(@exhibit)
   end
 
   def call

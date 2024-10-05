@@ -25,6 +25,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def voting_posters
+    @event = Event.find(params[:id])
+    zip_data = VotingPosterZipfileCreation.call(@event)
+    send_data zip_data,
+              :type => 'application/zip',
+              :disposition => 'attachment',
+              :filename => "voting-posters.#{@event}.zip"
+  end
+
   def attendees_as_csv
     load_event
     if @event

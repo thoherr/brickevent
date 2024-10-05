@@ -84,7 +84,7 @@ class ExhibitsController < ApplicationController
 
   def voting_poster
     load_exhibit
-    @voting_poster = VotingPosterCreation.call(@exhibit, new_vote_url(@exhibit))
+    @voting_poster = VotingPosterCreation.call(@exhibit)
     send_data(@voting_poster, :type => 'application/pdf',
               :filename => "#{@exhibit.id}-#{@exhibit.platform_position}.pdf")
   end

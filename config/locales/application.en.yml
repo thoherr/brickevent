@@ -199,4 +199,5 @@ en:
   exhibit_voting_results_for: "Results of the MOC voting for"
   no_votes: "No votes"
   number_of_votes: "We got %{size} votes"
-  exhibit_voting_results: "Voting results"
+  event_voting_results: "Voting results"
+  event_voting_posters: "Get all voting posters for event"
