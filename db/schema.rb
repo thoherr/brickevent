@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_05_160001) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_06_160928) do
   create_table "accommodation_types", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -151,13 +151,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_160001) do
     t.decimal "size_z_centimeter", precision: 6, scale: 1
     t.integer "platform"
     t.integer "position"
-    t.integer "cached_votes_total", default: 0
-    t.integer "cached_votes_score", default: 0
-    t.integer "cached_votes_up", default: 0
-    t.integer "cached_votes_down", default: 0
-    t.integer "cached_weighted_score", default: 0
-    t.integer "cached_weighted_total", default: 0
-    t.float "cached_weighted_average", default: 0.0
+    t.integer "cached_scoped_public_votes_total", default: 0
+    t.integer "cached_scoped_public_votes_score", default: 0
+    t.integer "cached_scoped_public_votes_up", default: 0
+    t.integer "cached_scoped_public_votes_down", default: 0
+    t.integer "cached_weighted_public_score", default: 0
+    t.integer "cached_weighted_public_total", default: 0
+    t.float "cached_weighted_public_average", default: 0.0
+    t.integer "cached_scoped_attendees_votes_total", default: 0
+    t.integer "cached_scoped_attendees_votes_score", default: 0
+    t.integer "cached_scoped_attendees_votes_up", default: 0
+    t.integer "cached_scoped_attendees_votes_down", default: 0
+    t.integer "cached_weighted_attendees_score", default: 0
+    t.integer "cached_weighted_attendees_total", default: 0
+    t.float "cached_weighted_attendees_average", default: 0.0
   end
 
   create_table "lugs", force: :cascade do |t|
