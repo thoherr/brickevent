@@ -212,3 +212,4 @@ de:
   voting_started: "Abstimmung gestartet"
   voting_stopped: "Abstimmung beendet"
   close_voting: "Wahl beenden"
+  cannot_vote_twice: "Du kannst nur einmal für ein MOC stimmen"
