@@ -36,11 +36,14 @@ class VotesController < ApplicationController
   private
 
   def load_visitor_exhibit_and_event
-    @visitor = Visitor.load_or_create(session[:session_id])
-    @exhibit = Exhibit.find(params[:id])
-    raise 'INVALID REQUEST' unless @exhibit and @visitor
-    @event = @exhibit.attendance.event
-    raise 'INVALID REQUEST' unless @event
+    begin
+      @visitor = Visitor.load_or_create(session[:session_id])
+      @exhibit = Exhibit.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      raise 'INVALID REQUEST'
+    else
+      @event = @exhibit.attendance.event
+      raise 'INVALID REQUEST' unless @exhibit and @visitor and @event
+    end
   end
-
 end

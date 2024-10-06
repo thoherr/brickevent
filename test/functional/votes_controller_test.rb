@@ -58,9 +58,9 @@ class VotesControllerTest < ActionController::TestCase
     end
   end
 
-  test "wrong data should raise error" do
+  test "wrong data should raise INVALID REQUEST message" do
     request.session[:session_id] = 42
-    assert_raise ActiveRecord::RecordNotFound do
+    assert_raise "INVALID REQUEST" do
       post :create, params: { id: 12345 }
     end
   end
