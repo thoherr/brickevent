@@ -30,7 +30,7 @@ class VotingPosterCreation < ApplicationService
     pdf.text @exhibit.event_title, align: :center, style: :bold, size: 12
 
     pdf.float do
-      pdf.image StringIO.new( qr_png.to_datastream.to_s ), position: :right, vposition: :bottom, scale: 1.20
+      pdf.image StringIO.new(qr_png.to_datastream.to_s), position: :right, vposition: :bottom, scale: 1.20
     end
 
     pdf.float do
@@ -53,9 +53,13 @@ class VotingPosterCreation < ApplicationService
     end
 
     pdf.float do
-      pdf.bounding_box([0, 210], width: width, height: 80) do
-        pdf.text @exhibit.name, style: :bold, size: 16, align: :center, valign: :center
-      end
+      pdf.text_box @exhibit.name,
+                   at: [0, 210],
+                   width: width,
+                   height: 80,
+                   overflow: :shrink_to_fit,
+                   style: :bold, size: 16,
+                   align: :center, valign: :center
     end
 
     pdf.float do
