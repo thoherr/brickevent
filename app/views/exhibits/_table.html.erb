@@ -12,6 +12,7 @@
     <th><%= t('heading_joint_project') %></th>
     <th><%= t('heading_size') %></th>
     <th><%= t('heading_remarks') %></th>
+    <th><%= t('table_position') %></th>
     <th colspan="3"></th>
   </tr>
 
@@ -33,6 +34,7 @@
         <% end -%>
       </td>
       <td><%= exhibit.remarks %></td>
+      <td><%= exhibit.platform_position %></td>
       <td colspan="3">
         <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
           <%= link_to t('edit'), edit_exhibit_path(exhibit) %>
