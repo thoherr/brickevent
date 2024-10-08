@@ -12,7 +12,9 @@ class ExhibitTest < ActiveSupport::TestCase
   test "print exhibit position" do
     exhibit = exhibits(:one)
     assert_equal "4.2", exhibit.platform_position
+    exhibit = exhibits(:two)
+    assert_equal "x.x", exhibit.platform_position
     exhibit = exhibits(:four)
-    assert_equal "5", exhibit.platform_position
+    assert_equal "5.x (x.x)", exhibit.platform_position
   end
 end
