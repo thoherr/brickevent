@@ -19,7 +19,7 @@ class VotingPosterCreation < ApplicationService
   private
 
   def voting_poster
-    pdf = Prawn::Document.new(margin: 5, page_size: 'A6', page_layout: :landscape, print_scaling: :none)
+    pdf = Prawn::Document.new(margin: 7, page_size: 'A6', page_layout: :landscape, print_scaling: :none)
     width = pdf.bounds.width
     height = pdf.bounds.height
     logo_url = @exhibit.attendance.event.logo_url
@@ -53,18 +53,19 @@ class VotingPosterCreation < ApplicationService
     end
 
     pdf.float do
-      pdf.text_box @exhibit.name,
+      pdf.text_box "#{@exhibit.name} #{'<br/><font size=\'12\'> (' + @exhibit.installation.name + ')</font>' if @exhibit.installation}",
+                   inline_format: true,
                    at: [0, 210],
                    width: width,
                    height: 80,
                    overflow: :shrink_to_fit,
-                   style: :bold, size: 16,
+                   style: :bold, size: 24,
                    align: :center, valign: :center
     end
 
     pdf.float do
-      pdf.bounding_box([0, 40], width: 150, height: 40) do
-        pdf.text @exhibit.platform_position, style: :bold, size: 28, valign: :bottom
+      pdf.bounding_box([0, 40], width: 275, height: 40) do
+        pdf.text @exhibit.platform_position, style: :bold, size: 24, valign: :bottom
       end
     end
 
