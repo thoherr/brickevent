@@ -89,13 +89,13 @@ class ExhibitsController < ApplicationController
               :filename => "#{@exhibit.id}-#{@exhibit.platform_position}.pdf")
   end
 
-  def position_import
+  def csv_import
     return redirect_to request.referer, notice: I18n.t('no_file_added') if params[:file].nil?
     return redirect_to request.referer, notice: I18n.t('only_csv_files_allowed') unless params[:file].content_type == 'text/csv'
 
-    CsvPositionImport.call(params[:file])
+    CsvExhibitImport.call(params[:file])
 
-    redirect_to request.referer, notice: 'Position data imported'
+    redirect_to request.referer, notice: 'MOC data imported'
   end
   private
 

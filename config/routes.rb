@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :exhibits do
     collection do
-      post :position_import
+      post :csv_import
     end
     member do
       post 'approve', :action => :approve, :as => :approve

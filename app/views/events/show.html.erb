@@ -42,13 +42,13 @@
     <%= render 'attendees/exportlist', :attendees => @event.attendees, :event => @event %>
 
     <h2>MOC-Liste
-      <%= button_to t('csv_datei_der_mo_cs_exportieren'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
+      <%= button_to t('export_exhibit_csv'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
     </h2>
   <p>
   <div class="Indented">
-    <%= form_tag position_import_exhibits_path, method: :post, multipart: true do %>
+    <%= form_tag csv_import_exhibits_path, method: :post, multipart: true do %>
       <%= file_field_tag :file, accept: ".csv" %><br/>
-      <%= submit_tag t('import_position_csv') %>
+      <%= submit_tag t('import_exhibit_csv') %>
     <% end %>
   </div>
   </p>
