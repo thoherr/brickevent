@@ -124,7 +124,7 @@ class Exhibit < ApplicationRecord
 
   def platform_position
     return "#{platform || 'x'}.#{position || 'x'}" unless is_part_of_installation
-    "#{platform || 'x'}.#{position || 'x'} (#{installation&.platform || 'x'}.#{installation&.position || 'x'})"
+    "#{platform || 'x'}.#{position || 'x'} (#{installation&.platform_position || 'x.x'})"
   end
 
   # CSV Stuff

@@ -82,3 +82,20 @@ four:
   is_approved: true
   platform: 5
   updated_at: 2024-09-10
+
+five:
+  id: 48
+  attendance: four
+  name: Part of Installation MOC
+  description: Small but beautiful
+  size_x: 0.2
+  size_y: 0.3
+  unit: m
+  value: 456
+  is_installation: false
+  is_part_of_installation: true
+  installation: three
+  is_approved: true
+  platform: 6
+  position: 7
+  updated_at: 2024-10-10

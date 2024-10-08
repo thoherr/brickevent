@@ -16,5 +16,7 @@ class ExhibitTest < ActiveSupport::TestCase
     assert_equal "x.x", exhibit.platform_position
     exhibit = exhibits(:four)
     assert_equal "5.x (x.x)", exhibit.platform_position
+    exhibit = exhibits(:five)
+    assert_equal "6.7 (x.x)", exhibit.platform_position
   end
 end
