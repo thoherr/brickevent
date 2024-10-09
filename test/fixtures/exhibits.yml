@@ -53,7 +53,7 @@ two:
 three:
   id: 44
   attendance: four
-  name: installation
+  name: StarWars Installation
   description: This is our SW Installation MOC
   url: MyString
   size_x: 100
@@ -66,6 +66,7 @@ three:
   value: 1234
   is_installation: true
   is_part_of_installation: false
+  platform: 7
   updated_at: 2021-05-04
 
 four:
@@ -80,7 +81,6 @@ four:
   is_installation: false
   is_part_of_installation: true
   is_approved: true
-  platform: 5
   updated_at: 2024-09-10
 
 five:
@@ -94,8 +94,6 @@ five:
   value: 456
   is_installation: false
   is_part_of_installation: true
-  installation: three
+  installation_exhibit_id: 44
   is_approved: true
-  platform: 6
-  position: 7
   updated_at: 2024-10-10

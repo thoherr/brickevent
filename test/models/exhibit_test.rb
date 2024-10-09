@@ -13,10 +13,15 @@ class ExhibitTest < ActiveSupport::TestCase
     exhibit = exhibits(:one)
     assert_equal "4.2", exhibit.platform_position
     exhibit = exhibits(:two)
-    assert_equal "0.0", exhibit.platform_position
+    assert_equal "-", exhibit.platform_position
+    exhibit = exhibits(:three)
+    assert_equal "7", exhibit.platform_position
     exhibit = exhibits(:four)
-    assert_equal "5.0 (0.0)", exhibit.platform_position
+    assert exhibit.is_part_of_installation
+    assert_equal "--", exhibit.platform_position
     exhibit = exhibits(:five)
-    assert_equal "6.7 (0.0)", exhibit.platform_position
+    assert exhibit.is_part_of_installation
+    assert exhibit.installation
+    assert_equal "7", exhibit.platform_position
   end
 end
