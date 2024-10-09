@@ -3,6 +3,7 @@
 <table class="ExhibitsTable FrontendTable">
   <tr>
     <th><%= t('heading_confirmed') %></th>
+    <th><%= t('table_position') %></th>
     <th><%= t('heading_name') %></th>
     <th><%= t('heading_url') %></th>
     <th><%= t('heading_power_supply') %></th>
@@ -12,13 +13,13 @@
     <th><%= t('heading_joint_project') %></th>
     <th><%= t('heading_size') %></th>
     <th><%= t('heading_remarks') %></th>
-    <th><%= t('table_position') %></th>
     <th colspan="3"></th>
   </tr>
 
   <% exhibits.each do |exhibit| %>
     <tr>
       <td><%= to_yes_no(exhibit.is_approved?) %></td>
+      <td><%= exhibit.platform_position %></td>
       <td><%= exhibit.name %></td>
       <td><%= exhibit.url %></td>
       <td><%= to_yes_no(exhibit.needs_power_supply) %></td>
@@ -34,7 +35,6 @@
         <% end -%>
       </td>
       <td><%= exhibit.remarks %></td>
-      <td><%= exhibit.platform_position %></td>
       <td colspan="3">
         <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
           <%= link_to t('edit'), edit_exhibit_path(exhibit) %>
