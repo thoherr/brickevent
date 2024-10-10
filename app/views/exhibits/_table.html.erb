@@ -19,7 +19,7 @@
   <% exhibits.each do |exhibit| %>
     <tr>
       <td><%= to_yes_no(exhibit.is_approved?) %></td>
-      <td><%= exhibit.platform_position %></td>
+      <td><%= exhibit.platform_position if exhibit.is_approved? %></td>
       <td><%= exhibit.name %></td>
       <td><%= exhibit.url %></td>
       <td><%= to_yes_no(exhibit.needs_power_supply) %></td>
