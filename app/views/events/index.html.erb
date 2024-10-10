@@ -6,16 +6,16 @@
   <ul>
     <li>
       <% if user_signed_in? %>
-          <%= t('register_as_exhibitor_or_assistant') %>
+        <%= t('register_as_exhibitor_or_assistant') %>
       <% else %>
-          <%= link_to t('register_as_exhibitor_or_assistant'), new_user_registration_path %>
+        <%= link_to t('register_as_exhibitor_or_assistant'), new_user_registration_path %>
       <% end %>
       <%= t('or') %>
       <% if user_signed_in? %>
-          <%= t('login_with_your_account') %>
+        <%= t('login_with_your_account') %>
       <% else %>
-          <%= link_to t('login_with_your_account'), new_user_session_path %>.
-          <br/><%= t('need_your_name_and_mail') %>
+        <%= link_to t('login_with_your_account'), new_user_session_path %>.
+        <br/><%= t('need_your_name_and_mail') %>
       <% end %>
     </li>
     <li><%= t('register2a') %>
@@ -24,9 +24,9 @@
       <% end -%>
     </li>
     <li><%= t('register3') %>
-        <%= t('register3a') %>
-        <%= t('register3b') %>
-        <%= t('register3c') %>
+      <%= t('register3a') %>
+      <%= t('register3b') %>
+      <%= t('register3c') %>
     </li>
   </ul>
   <p><%= t('register_questions_and_contact') %>
@@ -35,69 +35,70 @@
 
 <% if @events.length == 0 %>
 
-    <h2><%= t('no_event_visible') %></h2>
+  <h2><%= t('no_event_visible') %></h2>
 
-    <p class="Indented"><%= t('submit_data_after_registration_closed') %>
-      <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
+  <p class="Indented"><%= t('submit_data_after_registration_closed') %>
+    <a href="<%= "mailto:#{@lug.info_mail}" %>"><%= @lug.info_mail %></a>.</p>
 
 <% else %>
 
-    <h2><%= t('current_events') %></h2>
+  <h2><%= t('current_events') %></h2>
 
-    <div class="EventList">
-      <% @events.each do |event| %>
-          <div class="EventListEntry">
-            <% if event.logo_url %>
-                <div><img class="EventLogo" src="<%= event.logo_url %>"/></div>
-            <% end %>
-            <p>
-
-            <div class="EventTitle"><%= event.title %></div>
-            <div class="EventTime"><%= t('from') + " #{event.start_date} " + t('until') %> <%= event.end_date %></div>
-            </p>
-            <% unless event.description.nil? || event.description.empty? -%>
-                <p class="EventDescription"><%= convert_markdown(event.description) %></p>
-	    <% end %>
-            <% if user_signed_in? && current_user.attends_event?(event) -%>
-                <% unless event.additional_information.nil? || event.additional_information.empty? -%>
-                    <p class="EventDescription"><%= convert_markdown(event.additional_information) %></p>
-                <% end %>
-            <% end %>
-            <% unless event.url.nil? || event.url.empty? -%><p>
-                <div class="EventUrl"><%= t('more_information_on') + " " + event.title + " " + t('is_available_at') %> <%= link_to event.url, event.url, :target => "_new" %></div>
-                </p>
-            <% end -%>
-            <p class="EventInfo"><%= t('for_this_event') + " " + event.number_of_attendees.to_s + " " +
-                                         t('participants_with') + " " + event.number_of_exhibits.to_s + " " +
-                                         t('mocs_registered') %></p>
-            <% if event.registration_open? %>
-                <% if user_signed_in? %>
-                    <% if current_user.attends_event? event -%>
-                        <p class="EventSignup"><%= link_to (t('edit_attendance1') + " " + event.title + " " + t('edit_attendance2')), attendance_path(current_user.attendance_for_event event) %></p>
-                    <% else -%>
-                        <p class="EventSignup"><%= link_to (t('register_attendance1') + " " + event.title + " " + t('register_attendance2')), new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
-                    <% end -%>
-                <% else -%>
-                    <p class="EventSignup"><%= t('signup_for_attendance1') + event.title + t('signup_for_attendance2') %>
-                      <%= link_to t('signup_for_attendance3'), new_user_session_path %>
-                <% end %>
-            <% else %>
-                <p class="EventInfo"><%= t('registration_closed') %></p>
-                <% if user_signed_in? && current_user.attends_event?(event) -%>
-                    <p class="EventSignup">
-                      <%= link_to (t('show_attendance_link1') + event.title + t('show_attendance_link2')), attendance_path(current_user.attendance_for_event event) %></p>
-                <% end %>
-            <% end %>
-            <% if user_is_admin? || event.is_managed_by?(current_user) -%>
-                <p class="EventSignup"><%= link_to (t('attendance_overview') + " '#{event.title}'"), event_path(event) %></p>
-            <% end %>
+  <div class="EventList">
+    <% @events.each do |event| %>
+      <div class="EventListEntry">
+        <% if event.logo_url %>
+          <div><img class="EventLogo" src="<%= event.logo_url %>" alt="<%= event.name %>"/></div>
+        <% end %>
+        <p></p>
+        <div class="EventTitle"><%= event.title %></div>
+        <div class="EventTime"><%= t('from') + " #{event.start_date} " + t('until') %> <%= event.end_date %></div>
+        <% unless event.description.nil? || event.description.empty? -%>
+          <p class="EventDescription"><%= convert_markdown(event.description) %></p>
+        <% end %>
+        <% if user_signed_in? && current_user.attends_event?(event) -%>
+          <% unless event.additional_information.nil? || event.additional_information.empty? -%>
+            <p class="EventDescription"><%= convert_markdown(event.additional_information) %></p>
+          <% end %>
+        <% end %>
+        <% unless event.url.nil? || event.url.empty? -%>
+          <div class="EventUrl">
+            <%= t('more_information_on') + " " + event.title + " " + t('is_available_at') %> <%= link_to event.url, event.url, :target => "_new" %>
           </div>
-      <% end %>
-    </div>
+        <% end -%>
+        <p class="EventInfo"><%= t('for_this_event') + " " + event.number_of_attendees.to_s + " " +
+                                   t('participants_with') + " " + event.number_of_exhibits.to_s + " " +
+                                   t('mocs_registered') %></p>
+        <% if event.registration_open? %>
+          <% if user_signed_in? %>
+            <% if current_user.attends_event? event -%>
+              <p class="EventSignup"><%= link_to (t('edit_attendance1') + " " + event.title + " " + t('edit_attendance2')), attendance_path(current_user.attendance_for_event event) %></p>
+            <% else -%>
+              <p class="EventSignup"><%= link_to (t('register_attendance1') + " " + event.title + " " + t('register_attendance2')), new_attendance_path(:user_id => current_user.id, :event_id => event.id) %></p>
+            <% end -%>
+          <% else -%>
+            <p class="EventSignup"><%= t('signup_for_attendance1') + event.title + t('signup_for_attendance2') %>
+              <%= link_to t('signup_for_attendance3'), new_user_session_path %>
+            </p>
+          <% end %>
+        <% else %>
+          <p class="EventInfo"><%= t('registration_closed') %></p>
+          <% if user_signed_in? && current_user.attends_event?(event) -%>
+            <p class="EventSignup">
+              <%= link_to (t('show_attendance_link1') + event.title + t('show_attendance_link2')), attendance_path(current_user.attendance_for_event event) %>
+            </p>
+          <% end %>
+        <% end %>
+        <% if user_is_admin? || event.is_managed_by?(current_user) -%>
+          <p class="EventSignup"><%= link_to (t('attendance_overview') + " '#{event.title}'"), event_path(event) %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
 <% end %>
 
 <% if !user_signed_in? %>
-    <h2><%= t('like_to_participate1') + " " + @lug.name + " " + t('like_to_participate2') %>
-      <%= link_to t('like_to_participate3'), new_user_session_path %></h2>
+  <h2><%= t('like_to_participate1') + " " + @lug.name + " " + t('like_to_participate2') %>
+    <%= link_to t('like_to_participate3'), new_user_session_path %></h2>
 <% end %>
