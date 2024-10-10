@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_06_160928) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_10_164329) do
   create_table "accommodation_types", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -165,6 +165,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_160928) do
     t.integer "cached_weighted_attendees_score", default: 0
     t.integer "cached_weighted_attendees_total", default: 0
     t.float "cached_weighted_attendees_average", default: 0.0
+    t.boolean "is_collab", default: false
   end
 
   create_table "lugs", force: :cascade do |t|
