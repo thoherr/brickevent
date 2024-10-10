@@ -99,6 +99,8 @@ GEM
     bigdecimal (3.1.8)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
+    brakeman (6.2.1)
+      racc
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -317,6 +319,7 @@ DEPENDENCIES
   acts_as_votable
   apparition!
   bootsnap
+  brakeman
   capybara (>= 3.26)
   coffee-rails
   csv
