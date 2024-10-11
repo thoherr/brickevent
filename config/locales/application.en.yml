@@ -201,7 +201,7 @@ en:
   number_of_votes: "We got %{size} votes"
   event_voting_results: "Voting results"
   event_voting_posters: "Get all voting posters for event"
-  installation_poll: "Joint project poll"
+  collab_poll: "Joint project poll"
   single_exhibit_poll: "Single MOC poll"
   public: "Public"
   open_public_voting: "Open public voting"
@@ -213,3 +213,4 @@ en:
   voting_stopped: "Voting stopped"
   close_voting: "Stop voting"
   cannot_vote_twice: "You can only vote once for a MOC"
+  label_moc_is_collab: "This is a COLLAB joint project (no single MOCs included)"

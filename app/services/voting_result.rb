@@ -2,10 +2,10 @@
 
 class VotingResult < ApplicationService
 
-  def initialize(event, vote_scope, installations)
+  def initialize(event, vote_scope, collabs)
     @event = event
     @vote_scope = vote_scope
-    @installations = installations
+    @collabs = collabs
   end
 
   def call
@@ -16,10 +16,10 @@ class VotingResult < ApplicationService
 
   def voting_result
 
-    @exhibits = if @installations
-                  @event.installations
+    @exhibits = if @collabs
+                  @event.votable_collabs
                 else
-                  @event.single_exhibits
+                  @event.votable_single_exhibits
                 end
 
     @exhibits = @exhibits.sort_by{|e| e.find_votes_for(vote_scope: @vote_scope).size}.reverse

@@ -12,7 +12,11 @@ class Exhibit < ApplicationRecord
   acts_as_votable
 
   def calculate_size_in_meters_and_centimeters
-    factor_to_cm = if unit then unit.factor_to_cm else 1.0 end # assume cm if not known
+    factor_to_cm = if unit then
+                     unit.factor_to_cm
+                   else
+                     1.0
+                   end # assume cm if not known
     if size_x.blank?
       self.size_x_meter = nil
       self.size_x_centimeter = nil
@@ -104,22 +108,60 @@ class Exhibit < ApplicationRecord
 
   def required_space_in_square_meters
     return 1.0 if size_x_meter.blank? or size_y_meter.blank?
-    size_x_with_buffer = if size_x_meter < 0.4 then 0.5 elsif size_x_meter < 0.65 then Math.sqrt(0.5) elsif size_x_meter > 1.00 && size_x_meter < 1.40 then 1.5 else size_x_meter.ceil end
-    size_y_with_buffer = if size_y_meter < 0.4 then 0.5 elsif size_y_meter < 0.65 then Math.sqrt(0.5) elsif size_y_meter > 1.00 && size_y_meter < 1.40 then 1.5 else size_y_meter.ceil end
+    size_x_with_buffer = if size_x_meter < 0.4 then
+                           0.5
+                         elsif size_x_meter < 0.65 then
+                           Math.sqrt(0.5)
+                         elsif size_x_meter > 1.00 && size_x_meter < 1.40 then
+                           1.5
+                         else
+                           size_x_meter.ceil
+                         end
+    size_y_with_buffer = if size_y_meter < 0.4 then
+                           0.5
+                         elsif size_y_meter < 0.65 then
+                           Math.sqrt(0.5)
+                         elsif size_y_meter > 1.00 && size_y_meter < 1.40 then
+                           1.5
+                         else
+                           size_y_meter.ceil
+                         end
     size_x_with_buffer * size_y_with_buffer
   end
 
   def size_text_in_cm
     unless size_x_centimeter.blank?
       return size_x_centimeter.to_s +
-          if size_y_centimeter.blank? then "" else " x " + size_y_centimeter.to_s end +
-          if size_z_centimeter.blank? then "" else " x " + size_z_centimeter.to_s end
+        if size_y_centimeter.blank? then
+          ""
+        else
+          " x " + size_y_centimeter.to_s
+        end +
+        if size_z_centimeter.blank? then
+          ""
+        else
+          " x " + size_z_centimeter.to_s
+        end
     end
     "MISSING"
   end
 
   def to_s
     name
+  end
+
+  def is_single_exhibit?
+    not is_installation and not is_part_of_installation
+  end
+
+  def is_part_of_non_collab_installation?
+    is_part_of_installation and installation and not installation.is_collab?
+  end
+
+  def votable?
+    is_collab? or
+      is_single_exhibit? or
+      is_part_of_non_collab_installation?
   end
 
   def platform_position
@@ -131,7 +173,7 @@ class Exhibit < ApplicationRecord
 
   # CSV Stuff
   def Exhibit.csv_array_header
-       return [ "ID", "Bestätigt", "Name", "Email", "MOC","Beschreibung","Anmerkungen","URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Tisch", "Position", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert" ]
+    return ["ID", "Bestätigt", "Name", "Email", "MOC", "Beschreibung", "Anmerkungen", "URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Tisch", "Position", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert"]
   end
 
   def csv_array

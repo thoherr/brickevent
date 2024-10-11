@@ -19,6 +19,7 @@ class VotingPosterCreation < ApplicationService
   private
 
   def voting_poster
+    throw "Exhibit #{@exhibit.to_s} is not votable" if not @exhibit.votable?
     pdf = Prawn::Document.new(margin: 7, page_size: 'A6', page_layout: :landscape, print_scaling: :none)
     width = pdf.bounds.width
     height = pdf.bounds.height

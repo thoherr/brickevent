@@ -109,7 +109,7 @@ class ExhibitsController < ApplicationController
     params.require(:exhibit).permit(:attendance_id, :name, :description, :url,
                                     :size_studs, :size, :value, :building_hours, :brick_count,
                                     :needs_power_supply, :needs_transportation, :is_installation,
-                                    :is_part_of_installation, :installation_exhibit_id,
+                                    :is_part_of_installation, :installation_exhibit_id, :is_collab,
                                     :remarks, :size_x, :size_y, :size_z, :unit_id,
                                     :size_x_meter, :size_y_meter, :size_z_meter,
                                     :former_exhibit_id,

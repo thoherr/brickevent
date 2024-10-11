@@ -40,8 +40,12 @@ class Event < ApplicationRecord
     exhibits.select { |e| e.is_installation? }
   end
 
-  def single_exhibits
-    exhibits.select { |e| ! e.is_installation? }
+  def votable_collabs
+    exhibits.select { |e| e.is_collab? and e.votable? }
+  end
+
+  def votable_single_exhibits
+    exhibits.select { |e| not e.is_collab? and e.votable? }
   end
 
   def tickets

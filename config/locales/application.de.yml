@@ -201,7 +201,7 @@ de:
   number_of_votes: "Es wurden %{size} Stimmen abgegeben"
   event_voting_results: "Ergebnis der MOC-Wahl"
   event_voting_posters: "Alle Stimmkarten für diese Veranstaltung herunterladen"
-  installation_poll: "Wahl der Gemeinstaftsanlagen"
+  collab_poll: "Wahl der Gemeinstaftsanlagen"
   single_exhibit_poll: "Wahl der Einzel-MOCs"
   public: "Öffentlich"
   open_public_voting: "Besucherwahl starten"
@@ -213,3 +213,4 @@ de:
   voting_stopped: "Abstimmung beendet"
   close_voting: "Wahl beenden"
   cannot_vote_twice: "Du kannst nur einmal für ein MOC stimmen"
+  label_moc_is_collab: "Dieses MOC ist eine COLLAB (enthält keine Einzel-MOCs)"

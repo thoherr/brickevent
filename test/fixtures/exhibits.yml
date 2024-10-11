@@ -72,7 +72,7 @@ three:
 four:
   id: 45
   attendance: one
-  name: Simple litte MOC
+  name: Simple small MOC
   description: Quite awesome
   size_x: 0.5
   size_y: 0.75
@@ -97,3 +97,21 @@ five:
   installation_exhibit_id: 44
   is_approved: true
   updated_at: 2024-10-10
+
+six:
+  id: 6
+  attendance: six
+  name: A Collab
+  is_installation: true
+  is_collab: true
+  is_approved: true
+  updated_at: 2024-10-11
+
+seven:
+  id: 7
+  attendance: six
+  name: Part of Collab
+  is_part_of_installation: true
+  installation_exhibit_id: 6
+  is_approved: true
+  updated_at: 2024-10-11

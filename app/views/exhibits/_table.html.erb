@@ -49,7 +49,7 @@
           <% end %>
         <% end %>
         <% if user_is_admin? %>
-          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) %>
+          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) if exhibit.votable? %>
           <% if exhibit.is_installation? %>
             <%= form_for(exhibit) do |f| %>
               <%= f.select :attendance_id, @attendance.event.attendances.collect { |a| [a.user_name, a.id] } %>
