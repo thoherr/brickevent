@@ -55,10 +55,10 @@ class EventsControllerTest < ActionController::TestCase
     sign_in @user
     get :exhibits_as_csv, params: { id: events(:three).to_param }
     assert_response :success
-    assert_equal "ID;Bestätigt;Name;Email;MOC;Beschreibung;Anmerkungen;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (cm);Größe y (cm);Größe z (cm);Tisch;Position;Versicherungswert;Versicherungswert Anlage;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\n" +
-                   "41;true;User One;user42@mytestdomain.de;My first extraordinary MOC;Very awesome;Very important remark;MyString;1;2;;m;160.0;240.0;;4;2;1000;0.0;1;1;false;false;false;false;-;2018-06-15 00:00:00\n" +
-                   "42;false;Second user;second@mytestdomain.de;Another great MOC;Even more awesome 'the - killer, bla bla bla...' MOC;Need my own exhibit hall;MyString;24;64;;m;2400.0;6400.0;;;;10000000;0.0;10000;1000000;false;true;false;false;-;2018-07-10 00:00:00\n" +
-                   "45;true;User One;user42@mytestdomain.de;Simple small MOC;Quite awesome;;;0;0;;m;;;;;;123;0.0;;;;;false;true;-;2024-09-10 00:00:00\n",
+    assert_equal "ID;Bestätigt;Name;Email;MOC;Beschreibung;Anmerkungen;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (cm);Größe y (cm);Größe z (cm);Tisch;Position;Versicherungswert;Versicherungswert Anlage;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Collab?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\n" +
+                   "41;true;User One;user42@mytestdomain.de;My first extraordinary MOC;Very awesome;Very important remark;MyString;1;2;;m;160.0;240.0;;4;2;1000;0.0;1;1;false;false;false;false;false;-;2018-06-15 00:00:00\n" +
+                   "42;false;Second user;second@mytestdomain.de;Another great MOC;Even more awesome 'the - killer, bla bla bla...' MOC;Need my own exhibit hall;MyString;24;64;;m;2400.0;6400.0;;;;10000000;0.0;10000;1000000;false;true;false;false;false;-;2018-07-10 00:00:00\n" +
+                   "45;true;User One;user42@mytestdomain.de;Simple small MOC;Quite awesome;;;0;0;;m;;;;;;123;0.0;;;;;false;false;true;-;2024-09-10 00:00:00\n",
                  response.body.encode(Encoding::UTF_8)
   end
 end

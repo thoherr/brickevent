@@ -7,7 +7,7 @@ class Exhibit < ApplicationRecord
   has_many :subsequent_exhibits, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", :dependent => :nullify
   belongs_to :former_exhibit, :class_name => "Exhibit", :foreign_key => "former_exhibit_id", optional: true
 
-  before_save :calculate_size_in_meters_and_centimeters
+  before_save :calculate_size_in_meters_and_centimeters, :clear_installation_id_if_no_installation
 
   acts_as_votable
 
@@ -38,6 +38,10 @@ class Exhibit < ApplicationRecord
       self.size_z_centimeter = size_z * factor_to_cm
       self.size_z_meter = size_z_centimeter / 100.0
     end
+  end
+
+  def clear_installation_id_if_no_installation
+    self.installation= nil unless self.is_part_of_installation?
   end
 
   def get_ancestor
@@ -173,7 +177,13 @@ class Exhibit < ApplicationRecord
 
   # CSV Stuff
   def Exhibit.csv_array_header
-    return ["ID", "Bestätigt", "Name", "Email", "MOC", "Beschreibung", "Anmerkungen", "URL", "Größe x", "Größe y", "Größe z", "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)", "Tisch", "Position", "Versicherungswert", "Versicherungswert Anlage", "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport", "Gemeinschaftsprojekt?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt", "Zuletzt geändert"]
+    return ["ID", "Bestätigt", "Name", "Email", "MOC", "Beschreibung", "Anmerkungen",
+            "URL", "Größe x", "Größe y", "Größe z",
+            "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)",
+            "Tisch", "Position", "Versicherungswert", "Versicherungswert Anlage",
+            "Baustunden", "Anzahl Steine", "Strom?", "Sammeltransport",
+            "Gemeinschaftsprojekt?", "Collab?", "Teil Gemeinschaftsprojekt", "Name Gemeinschaftsprojekt",
+            "Zuletzt geändert"]
   end
 
   def csv_array
@@ -191,7 +201,7 @@ class Exhibit < ApplicationRecord
      is_installation ? value : 0.0,
      building_hours, brick_count,
      needs_power_supply, needs_transportation,
-     is_installation, is_part_of_installation, installation_exhibit_name,
+     is_installation, is_collab, is_part_of_installation, installation_exhibit_name,
      updated_at.strftime("%F %T")]
   end
 
