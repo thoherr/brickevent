@@ -84,9 +84,9 @@ class ExhibitsController < ApplicationController
 
   def voting_poster
     load_exhibit
-    @voting_poster = VotingPosterCreation.call(@exhibit)
-    send_data(@voting_poster, :type => 'application/pdf',
-              :filename => "#{@exhibit.id}-#{@exhibit.platform_position}.pdf")
+    @poster = VotingPosterCreation.call(@exhibit)
+    send_data(@poster[:pdf], :type => 'application/pdf',
+              :filename => @poster[:filename])
   end
 
   def csv_import

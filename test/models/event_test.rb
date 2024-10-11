@@ -44,8 +44,8 @@ class EventTest < ActiveSupport::TestCase
     zip = VotingPosterZipfileCreation.new(events(:fourty_two)).call
     assert_not_empty zip
     Zip::InputStream.open(StringIO.new(zip)) do |io|
-      assert_equal "voting-poster.6--.pdf", io.get_next_entry.name
-      assert_equal "voting-poster.48-7.pdf", io.get_next_entry.name
+      assert_equal "COLLAB-voting-6--.pdf", io.get_next_entry.name
+      assert_equal "MOC-voting-48-7.pdf", io.get_next_entry.name
       assert_nil io.get_next_entry
     end
   end

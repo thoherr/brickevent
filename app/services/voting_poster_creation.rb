@@ -13,7 +13,12 @@ class VotingPosterCreation < ApplicationService
   end
 
   def call
-    voting_poster
+    { pdf: voting_poster, filename: filename }
+  end
+
+  def filename
+    type = @exhibit.is_collab? ? 'COLLAB' : 'MOC';
+    "#{type}-voting-#{@exhibit.id}-#{@exhibit.platform_position}.pdf"
   end
 
   private
@@ -54,7 +59,9 @@ class VotingPosterCreation < ApplicationService
     end
 
     pdf.float do
-      pdf.text_box "#{@exhibit.name} #{'<br/><font size=\'12\'> (' + @exhibit.installation.name + ')</font>' if @exhibit.installation}",
+      pdf.text_box "#{@exhibit.name}" +
+                     "#{'<br/><font size=\'12\'> (' + @exhibit.installation.name + ')</font>' if @exhibit.installation}" +
+                     "#{'<br/><font size=\'10\'> (Gemeinschaftsprojekt / Collab)</font>' if @exhibit.is_collab?}",
                    inline_format: true,
                    at: [0, 210],
                    width: width,
