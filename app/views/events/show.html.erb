@@ -46,7 +46,7 @@
     </h2>
   <p>
   <div class="Indented">
-    <%= form_tag csv_import_exhibits_path, method: :post, multipart: true do %>
+    <%= form_tag csv_import_event_path(@event), method: :post, multipart: true do %>
       <%= file_field_tag :file, accept: ".csv" %><br/>
       <%= submit_tag t('import_exhibit_csv') %>
     <% end %>

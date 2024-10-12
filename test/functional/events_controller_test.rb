@@ -61,4 +61,18 @@ class EventsControllerTest < ActionController::TestCase
                    "45;true;User One;user42@mytestdomain.de;Simple small MOC;Quite awesome;;;0;0;;m;;;;;;123;0.0;;;;;false;false;true;-;2024-09-10 00:00:00\n",
                  response.body.encode(Encoding::UTF_8)
   end
+
+  test "authorized user should be able to upload csv data" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+
+    event = events(:three)
+    post :csv_import,
+         params: { id: event.id,
+                   file: file_fixture_upload('exhibit_import_valid.csv',
+                                             'text/csv') }
+    assert_redirected_to event_path(event)
+  end
+
 end

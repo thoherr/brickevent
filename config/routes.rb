@@ -25,13 +25,11 @@ Rails.application.routes.draw do
       post 'close_voting', :action => :close_voting, :as => :close_voting
       post 'open_voting', :action => :open_voting, :as => :open_voting
       get 'voting_posters', :action => :voting_posters, :as => :voting_posters
+      post :csv_import
     end
   end
 
   resources :exhibits do
-    collection do
-      post :csv_import
-    end
     member do
       post 'approve', :action => :approve, :as => :approve
       get 'voting_poster', :action => :voting_poster, :as => :voting_poster

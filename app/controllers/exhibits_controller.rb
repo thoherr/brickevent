@@ -89,14 +89,6 @@ class ExhibitsController < ApplicationController
               :filename => @poster[:filename])
   end
 
-  def csv_import
-    return redirect_to request.referer, notice: I18n.t('no_file_added') if params[:file].nil?
-    return redirect_to request.referer, notice: I18n.t('only_csv_files_allowed') unless params[:file].content_type == 'text/csv'
-
-    CsvExhibitImport.call(params[:file])
-
-    redirect_to request.referer, notice: 'MOC data imported'
-  end
   private
 
   def load_exhibit

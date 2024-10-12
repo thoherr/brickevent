@@ -93,6 +93,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def csv_import
+    load_event
+    return redirect_to event_path(@event), notice: I18n.t('no_file_added') if params[:file].nil?
+    return redirect_to event_path(@event), notice: I18n.t('only_csv_files_allowed') unless params[:file].content_type == 'text/csv'
+
+    if @event
+      CsvExhibitImport.call(@event, params[:file])
+    end
+
+    redirect_to event_path(@event), notice: 'MOC data imported'
+  end
+
   private
 
   def load_event
