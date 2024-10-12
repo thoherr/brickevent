@@ -14,12 +14,14 @@ class CsvExhibitImport < ApplicationService
     options = { headers: true, col_sep: ';' }
     CSV.foreach(opened_file, **options) do |row|
 
-      exhibit = Exhibit.find(row['ID'])
-      exhibit.is_approved = row['Bestätigt'] if row['Bestätigt'].present?
-      exhibit.name = row['MOC'] if row['MOC'].present?
-      exhibit.platform = row['Tisch'] if row['Tisch'].present?
-      exhibit.position = row['Position'] if row['Position'].present?
-      exhibit.save!
+      if row['ID'] .present? and row['ID'].to_i > 0
+        exhibit = Exhibit.find(row['ID'])
+        exhibit.is_approved = row['Bestätigt'] if row['Bestätigt'].present?
+        exhibit.name = row['MOC'] if row['MOC'].present?
+        exhibit.platform = row['Tisch'] if row['Tisch'].present?
+        exhibit.position = row['Position'] if row['Position'].present?
+        exhibit.save!
+      end
 
     end
   end
