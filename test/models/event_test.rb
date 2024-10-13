@@ -70,27 +70,30 @@ class EventTest < ActiveSupport::TestCase
   test "import valid csv file" do
     event3 = events(:three)
     import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_valid.csv'))
-    assert_equal 3, import.size
+    assert_equal 4, import.size
     assert_equal 3, import[:success_count]
     assert_equal 1, import[:failure_count]
+    assert_equal ["44"], import[:errors]
     assert_equal 0, import[:ignore_count]
   end
 
   test "import invalid csv file" do
     event3 = events(:three)
     import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_invalid.csv'))
-    assert_equal 3, import.size
+    assert_equal 4, import.size
     assert_equal 3, import[:success_count]
     assert_equal 3, import[:failure_count]
+    assert_equal ["44", "95", "48"], import[:errors]
     assert_equal 3, import[:ignore_count]
   end
 
   test "import corrupt csv file" do
     event3 = events(:three)
     import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_corrupt.csv'))
-    assert_equal 3, import.size
+    assert_equal 4, import.size
     assert_equal 3, import[:success_count]
     assert_equal 2, import[:failure_count]
+    assert_equal ["44", "48"], import[:errors]
     assert_equal 7, import[:ignore_count]
   end
 

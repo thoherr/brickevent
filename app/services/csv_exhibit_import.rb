@@ -13,7 +13,8 @@ class CsvExhibitImport < ApplicationService
   def call
     ignore_count = 0;
     success_count = 0;
-    failure_count = 0;
+    failure_count = 0
+    errors = []
     opened_file = File.open(@file)
     options = { headers: true, col_sep: ';' }
     CSV.foreach(opened_file, **options) do |row|
@@ -23,6 +24,7 @@ class CsvExhibitImport < ApplicationService
         exhibit = Exhibit.find_by(id: row['ID'])
         if not exhibit or @event != exhibit.event
           failure_count += 1
+          errors << row['ID']
           next
         end
 
@@ -34,12 +36,14 @@ class CsvExhibitImport < ApplicationService
           success_count += 1;
         else
           failure_count += 1;
+          errors << row['ID']
         end
 
       else
         ignore_count += 1;
       end
     end
-    { success_count: success_count, failure_count: failure_count, ignore_count: ignore_count }
+    { success_count: success_count, failure_count: failure_count,
+      errors: errors, ignore_count: ignore_count }
   end
 end
