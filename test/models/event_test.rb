@@ -67,4 +67,13 @@ class EventTest < ActiveSupport::TestCase
     assert_equal false, event.is_managed_by?(nil)
   end
 
+  test "import valid csv file" do
+    event3 = events(:three)
+    import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_valid.csv'))
+    assert_equal 3, import.size
+    assert_equal 4, import[:success_count]
+    assert_equal 0, import[:failure_count]
+    assert_equal 0, import[:ignore_count]
+  end
+
 end

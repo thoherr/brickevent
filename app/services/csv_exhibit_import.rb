@@ -11,6 +11,9 @@ class CsvExhibitImport < ApplicationService
   end
 
   def call
+    ignore_count = 0;
+    success_count = 0;
+    failure_count = 0;
     opened_file = File.open(@file)
     options = { headers: true, col_sep: ';' }
     CSV.foreach(opened_file, **options) do |row|
@@ -22,9 +25,15 @@ class CsvExhibitImport < ApplicationService
         exhibit.name = row['MOC'] if row['MOC'].present?
         exhibit.platform = row['Tisch'] if row['Tisch'].present?
         exhibit.position = row['Position'] if row['Position'].present?
-        exhibit.save!
+        if exhibit.save!
+          success_count += 1;
+        else
+          failure_count += 1;
+        end
+      else
+        ignore_count += 1;
       end
-
     end
+    { success_count: success_count, failure_count: failure_count, ignore_count: ignore_count }
   end
 end
