@@ -28,12 +28,20 @@ class Event < ApplicationRecord
     attendees.select { |a| a.is_approved? }
   end
 
-  def number_of_approved_attendees
+  def number_of_attendees_approved
     approved_attendees.count
   end
 
   def number_of_exhibits
     exhibits.count
+  end
+
+  def approved_exhibits
+    exhibits.select { |e| e.is_approved? }
+  end
+
+  def number_of_exhibits_approved
+    approved_exhibits.count
   end
 
   def installations
@@ -76,7 +84,7 @@ class Event < ApplicationRecord
 
   def size_square_meters_approved
     square_meters = 0.0
-    exhibits.each { |e| square_meters += e.size_in_square_meters if e.is_approved? }
+    approved_exhibits.each { |e| square_meters += e.size_in_square_meters}
     square_meters
   end
 
@@ -88,7 +96,7 @@ class Event < ApplicationRecord
 
   def required_space_square_meters_approved
     square_meters = 0.0
-    exhibits.each { |e| square_meters += e.required_space_in_square_meters if e.is_approved? && ! e.is_part_of_installation? }
+    approved_exhibits.each { |e| square_meters += e.required_space_in_square_meters unless e.is_part_of_installation? }
     square_meters
   end
 

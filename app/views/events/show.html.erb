@@ -1,4 +1,4 @@
-<!-- Copyright 2011 by Thomas Herrmann -->
+<!-- Copyright 2011-2024 by Thomas Herrmann -->
 <p id="notice"><%= notice %></p>
 
 <h1><%= t('overview_attendances') %></h1>
@@ -7,8 +7,9 @@
 <div class="EventTitle"><%= t('all_attendances_for') + " " + @event.title %></div>
 <div class="EventTime"><%= t('from') + " " + @event.start_date.to_s + " " + t('until') + " " + @event.end_date.to_s %></div></p>
 <p class="EventInfo"><%= t('for_this_event') + " " + @event.number_of_attendees.to_s + " " + t('attendees') + " " +
-                             t('of_which') + " " + @event.number_of_approved_attendees.to_s + " " + t('are_confirmed') + " " +
-                             t('with_totally') + " " + @event.number_of_exhibits.to_s + " " + t('mocs_registered') %>
+                             t('of_which') + " " + @event.number_of_attendees_approved.to_s + " " + t('are_confirmed') + " " +
+                             t('with_totally') + " " + @event.number_of_exhibits.to_s + " " + t('mocs') + " " +
+                           t('of_which') + " " + @event.number_of_exhibits_approved.to_s + " " + t('are_confirmed') + " " + t('registered') %>
   <br/>
   <%= t('confirmed_for_afols_event') + " " + @event.number_of_attendees_at_afols_event.to_s %><br/>
   <%= t('confirmed_tickets') + " " + @event.number_of_tickets.to_s %><br/>
