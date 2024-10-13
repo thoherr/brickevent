@@ -191,7 +191,7 @@ en:
   link_create_voting_card: "MOC Voting Card"
   import_exhibit_csv: "Import CSV for MOCs"
   export_exhibit_csv: "Export MOCs as CSV file"
-  table_position: "Position"
+  table_position: "Position (table.number)"
   no_file_added: "No file added"
   only_csv_files_allowed: "Only CSV files allowed"
   vote_for: "I'd like to vote for MOC"

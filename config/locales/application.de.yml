@@ -191,7 +191,7 @@ de:
   link_create_voting_card: "MOC-Wahl-Karte"
   import_exhibit_csv: "CSV mit MOC-Daten importieren"
   export_exhibit_csv: "CSV Datei der MOCs exportieren"
-  table_position: "Position"
+  table_position: "Position (Tisch.LfdNr)"
   no_file_added: "Keine Datei angegeben"
   only_csv_files_allowed: "Nur CSV-Dateien können importiert werden"
   vote_for: "Ich möchte abstimmen für das MOC"
