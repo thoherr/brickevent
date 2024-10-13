@@ -81,6 +81,10 @@ class Exhibit < ApplicationRecord
     attendance&.event_title || "NO ATTENDANCE"
   end
 
+  def event
+    attendance&.event
+  end
+
   def current_voting_scope
     attendance&.event&.current_voting_scope
   end

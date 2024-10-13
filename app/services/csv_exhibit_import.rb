@@ -19,8 +19,13 @@ class CsvExhibitImport < ApplicationService
     CSV.foreach(opened_file, **options) do |row|
 
       if row['ID'] .present? and row['ID'].to_i > 0
+
         exhibit = Exhibit.find(row['ID'])
-        # TODO: Check if Exhibit matches event
+        if @event != exhibit.event
+          failure_count += 1
+          next
+        end
+
         exhibit.is_approved = row['Bestätigt'] if row['Bestätigt'].present?
         exhibit.name = row['MOC'] if row['MOC'].present?
         exhibit.platform = row['Tisch'] if row['Tisch'].present?
@@ -30,6 +35,7 @@ class CsvExhibitImport < ApplicationService
         else
           failure_count += 1;
         end
+
       else
         ignore_count += 1;
       end

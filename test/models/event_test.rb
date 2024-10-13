@@ -71,8 +71,8 @@ class EventTest < ActiveSupport::TestCase
     event3 = events(:three)
     import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_valid.csv'))
     assert_equal 3, import.size
-    assert_equal 4, import[:success_count]
-    assert_equal 0, import[:failure_count]
+    assert_equal 3, import[:success_count]
+    assert_equal 1, import[:failure_count]
     assert_equal 0, import[:ignore_count]
   end
 
@@ -80,8 +80,8 @@ class EventTest < ActiveSupport::TestCase
     event3 = events(:three)
     import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_invalid.csv'))
     assert_equal 3, import.size
-    assert_equal 5, import[:success_count]
-    assert_equal 0, import[:failure_count]
+    assert_equal 3, import[:success_count]
+    assert_equal 2, import[:failure_count]
     assert_equal 3, import[:ignore_count]
   end
 
