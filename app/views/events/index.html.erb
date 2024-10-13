@@ -68,7 +68,7 @@
         <% end -%>
         <p class="EventInfo"><%= t('for_this_event') + " " + event.number_of_attendees.to_s + " " +
                                    t('participants_with') + " " + event.number_of_exhibits.to_s + " " +
-                                   t('mocs_registered') %></p>
+                                   t('mocs') + "." %></p>
         <% if event.registration_open? %>
           <% if user_signed_in? %>
             <% if current_user.attends_event? event -%>
