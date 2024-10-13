@@ -99,10 +99,14 @@ class EventsController < ApplicationController
     return redirect_to event_path(@event), notice: I18n.t('only_csv_files_allowed') unless params[:file].content_type == 'text/csv'
 
     if @event
-      CsvExhibitImport.call(@event, params[:file])
+      import = CsvExhibitImport.call(@event, params[:file])
+      redirect_to event_path(@event),
+                  notice: "MOC data imported (#{import[:ignore_count]} skipped, " +
+                    "#{import[:failure_count]} failed, " +
+                    "#{import[:success_count]} imported)"
+    else
+      redirect_to events_url
     end
-
-    redirect_to event_path(@event), notice: 'MOC data imported'
   end
 
   private
