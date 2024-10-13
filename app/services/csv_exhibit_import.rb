@@ -20,8 +20,8 @@ class CsvExhibitImport < ApplicationService
 
       if row['ID'] .present? and row['ID'].to_i > 0
 
-        exhibit = Exhibit.find(row['ID'])
-        if @event != exhibit.event
+        exhibit = Exhibit.find_by(id: row['ID'])
+        if not exhibit or @event != exhibit.event
           failure_count += 1
           next
         end

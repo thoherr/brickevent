@@ -80,7 +80,14 @@ class EventsControllerTest < ActionController::TestCase
                    file: file_fixture_upload('exhibit_import_invalid.csv',
                                              'text/csv') }
     assert_redirected_to event_path(event)
-    assert_equal "MOC data imported (3 skipped, 2 failed, 3 imported)", flash[:notice]
+    assert_equal "MOC data imported (3 skipped, 3 failed, 3 imported)", flash[:notice]
+
+    post :csv_import,
+         params: { id: event.id,
+                   file: file_fixture_upload('exhibit_import_corrupt.csv',
+                                             'text/csv') }
+    assert_redirected_to event_path(event)
+    assert_equal "MOC data imported (7 skipped, 2 failed, 3 imported)", flash[:notice]
 
   end
 
