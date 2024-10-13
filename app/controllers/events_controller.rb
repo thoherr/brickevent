@@ -103,7 +103,8 @@ class EventsController < ApplicationController
       redirect_to event_path(@event),
                   notice: "MOC data imported (#{import[:ignore_count]} skipped, " +
                     "#{import[:failure_count]} failed, " +
-                    "#{import[:success_count]} imported)"
+                    "#{import[:success_count]} imported)",
+                  alert: import[:errors].size > 0 ? import[:errors].inspect : nil
     else
       redirect_to events_url
     end

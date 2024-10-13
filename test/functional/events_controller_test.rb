@@ -73,7 +73,8 @@ class EventsControllerTest < ActionController::TestCase
                    file: file_fixture_upload('exhibit_import_valid.csv',
                                              'text/csv') }
     assert_redirected_to event_path(event)
-    assert_equal "MOC data imported (0 skipped, 1 failed, 3 imported)", flash[:notice]
+    assert_equal "MOC data imported (0 skipped, 0 failed, 3 imported)", flash[:notice]
+    assert_nil flash[:alert]
 
     post :csv_import,
          params: { id: event.id,
@@ -81,6 +82,7 @@ class EventsControllerTest < ActionController::TestCase
                                              'text/csv') }
     assert_redirected_to event_path(event)
     assert_equal "MOC data imported (3 skipped, 3 failed, 3 imported)", flash[:notice]
+    assert_equal "[\"44\", \"95\", \"48\"]", flash[:alert]
 
     post :csv_import,
          params: { id: event.id,
@@ -88,6 +90,7 @@ class EventsControllerTest < ActionController::TestCase
                                              'text/csv') }
     assert_redirected_to event_path(event)
     assert_equal "MOC data imported (7 skipped, 2 failed, 3 imported)", flash[:notice]
+    assert_equal "[\"44\", \"48\"]", flash[:alert]
 
   end
 

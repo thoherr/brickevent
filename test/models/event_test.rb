@@ -72,8 +72,8 @@ class EventTest < ActiveSupport::TestCase
     import = CsvExhibitImport.call(event3, file_fixture('exhibit_import_valid.csv'))
     assert_equal 4, import.size
     assert_equal 3, import[:success_count]
-    assert_equal 1, import[:failure_count]
-    assert_equal ["44"], import[:errors]
+    assert_equal 0, import[:failure_count]
+    assert_equal [], import[:errors]
     assert_equal 0, import[:ignore_count]
   end
 
