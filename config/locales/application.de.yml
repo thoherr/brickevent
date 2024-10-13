@@ -185,7 +185,7 @@ de:
   label_number_of_rooms: "Benötgte Anzahl dieses Zimmertyps"
   label_room_remarks: "Bemerkungen/Sonderwünsche (z. B. verschobene An-/Abreise, Doppelzimmer mit Anderen etc.)"
   exhibit_size_missing: "MOC-Größe fehlt!"
-  heading_id: "#"
+  heading_id: "ID"
   vote: "Abstimmen!"
   voted_already: "Danke für Deine Stimme für"
   link_create_voting_card: "MOC-Wahl-Karte"

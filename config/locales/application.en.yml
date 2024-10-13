@@ -185,7 +185,7 @@ en:
   label_number_of_rooms: "Number of rooms of this type"
   label_room_remarks: "Remarks (e. g. different travel dates, room sharing with others etc.)"
   exhibit_size_missing: "size of MOC missing!"
-  heading_id: "#"
+  heading_id: "ID"
   vote: "Count my vote!"
   voted_already: "Thank you for your vote for"
   link_create_voting_card: "MOC Voting Card"
