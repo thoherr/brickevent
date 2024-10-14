@@ -30,7 +30,7 @@
     <% end %>
   </div>
   </p>
-    <%= render 'attendances/exportlist', :attendances => @event.attendances.includes(:user, :exhibits, :attendees) %>
+    <%= render 'attendances/exportlist', :attendances => @event.attendances.includes(:user, :exhibits) %>
 
     <h2>Teilnehmerliste
       <%= button_to 'CSV Datei der Teilnehmer exportieren', :action => 'attendees_as_csv', :id => @event, :filename => 'teilnehmer.csv' %>
@@ -38,7 +38,7 @@
     <p class="Indented">
       <%= mail_to "#{@lug.info_mail}", 'Mail an alle Teilnehmer', bcc: @event.attendees_mails %>
     </p>
-    <%= render 'attendees/exportlist', :attendees => @event.attendees.includes(:attendee_type, :attendance), :event => @event %>
+    <%= render 'attendees/exportlist', :attendees => @event.attendees.includes(:attendee_type), :event => @event %>
 
     <h2>MOC-Liste
       <%= button_to t('export_exhibit_csv'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
@@ -69,11 +69,11 @@
         <td><%= @event.required_space_square_meters_approved.round(2) %> </td>
       </tr>
     </table>
-    <%= render 'exhibits/exportlist', :exhibits => @event.exhibits.includes(:attendance), :event => @event %>
+    <%= render 'exhibits/exportlist', :exhibits => @event.exhibits, :event => @event %>
 
     <% if @event.has_accommodation %>
         <h2>Hotelliste</h2>
-        <%= render 'accommodations/exportlist', :accommodations => @event.accommodations.includes(:attendance) %>
+        <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
     <% end %>
 
 <% end %>
