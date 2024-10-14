@@ -101,10 +101,8 @@ class EventsController < ApplicationController
     if @event
       import = CsvExhibitImport.call(@event, params[:file])
       redirect_to event_path(@event),
-                  notice: "MOC data imported (#{import[:ignore_count]} skipped, " +
-                    "#{import[:failure_count]} failed, " +
-                    "#{import[:success_count]} imported)",
-                  alert: import[:errors].size > 0 ? import[:errors].inspect : nil
+                  notice: I18n.t('moc_data_imported_stats_notice', import: import[:ignore_count], import2: import[:failure_count], import3: import[:success_count]),
+                  alert: import[:errors].size > 0 ? I18n.t('failed_moc_ids', inspect: import[:errors].inspect) : nil
     else
       redirect_to events_url
     end

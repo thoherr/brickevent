@@ -215,3 +215,5 @@ en:
   close_voting: "Stop voting"
   cannot_vote_twice: "You can only vote once for a MOC"
   label_moc_is_collab: "This is a COLLAB joint project (no single MOCs included)"
+  moc_data_imported_stats_notice: "MOC data imported (%{import} skipped, %{import2} failed, %{import3} imported)"
+  failed_moc_ids: "Failed MOC-IDs: %{inspect}"
