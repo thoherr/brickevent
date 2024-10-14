@@ -139,6 +139,9 @@ GEM
     ffi (1.17.0-arm64-darwin)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    goldiloader (5.3.1)
+      activerecord (>= 6.1, < 8)
+      activesupport (>= 6.1, < 8)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -325,6 +328,7 @@ DEPENDENCIES
   csv
   devise
   devise-i18n
+  goldiloader
   jquery-rails
   json
   kramdown

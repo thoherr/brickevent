@@ -19,6 +19,9 @@ group :production do
     gem 'mysql2'
 end
 
+# https://github.com/salsify/goldiloader
+gem 'goldiloader'
+
 gem 'json'
 
 group :test do
