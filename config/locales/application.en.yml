@@ -205,6 +205,8 @@ en:
   collab_poll: "Joint project poll"
   single_exhibit_poll: "Single MOC poll"
   public: "Public"
+  public_voting: "Visitor voting"
+  attendees_voting: "AFOLs voting"
   open_public_voting: "Open public voting"
   open_attendees_voting: "Open attendees voting"
   voting_closed: "Voting is currently closed."

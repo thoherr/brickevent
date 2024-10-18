@@ -4,7 +4,7 @@
   <p><%= t('voting_closed') %></p>
   <p><%= t('check_voting_times') %></p>
 <% else %>
-  <h3><%= t(voting_scope) %></h3>
+  <h3><%= t(voting_scope + '_voting') %></h3>
   <% moctext = "#{@exhibit.name}" %>
   <% moctext += " (#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %>
   <% if @voted_already %>

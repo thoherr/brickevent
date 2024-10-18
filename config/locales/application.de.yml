@@ -205,6 +205,8 @@ de:
   collab_poll: "Wahl der Gemeinstaftsanlagen"
   single_exhibit_poll: "Wahl der Einzel-MOCs"
   public: "Öffentlich"
+  public_voting: "Besucherwahl"
+  attendees_voting: "AFOLs-Wahl"
   open_public_voting: "Besucherwahl starten"
   open_attendees_voting: "Teilnehmerwahl starten"
   voting_closed: "Die MOC-Wahl ist aktuell geschlossen."

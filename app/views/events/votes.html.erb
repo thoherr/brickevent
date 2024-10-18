@@ -8,7 +8,7 @@
     <div class="OverviewLink"><%= link_to t('open_'+voting_scope+'_voting'), open_voting_event_path(@event, {:voting_scope => voting_scope}), :method => :post %></div>
   <% end %>
 <% else %>
-  <h3><%= t('current_voting') %>: <%= t(voting_scope) %></h3>
+  <h3><%= t('current_voting') %>: <%= t(voting_scope + '_voting') %></h3>
   <div class="OverviewLink"><%= link_to t('close_voting'), close_voting_event_path(@event), :method => :post %></td></div>
 <% end %>
 
@@ -16,7 +16,7 @@
 
   <div class="EventListEntry">
 
-    <h2><%= t(voting_scope) %></h2>
+    <h2><%= t(voting_scope + '_voting') %></h2>
 
     <h3><%= t('collab_poll') %></h3>
     <% results = VotingResult.new(@event, voting_scope, true).call %>
