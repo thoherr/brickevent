@@ -12,11 +12,17 @@
 </head>
 <body class="<%= @stage%> <%= I18n.locale%>">
 
-<div id="mainTitle">
-  <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
-  <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring} #{@stage}" %></span>
-  <span class="TitleText"><%= titleline %></span>
-</div>
+<table id="mainTitle">
+  <tr>
+    <td>
+      <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
+    </td>
+    <td>
+      <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring} #{@stage}" %></span>
+      <span class="TitleText"><%= titleline %></span>
+    </td>
+  </tr>
+</table>
 
 <div id="mainNavi">
   <%= render "shared/user_navi" %>
