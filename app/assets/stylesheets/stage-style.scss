@@ -10,7 +10,7 @@ body::before{
   height: 0;
   width: 0;
   content: "";
-  font-size: 90px;
+  font-size: x-large;
   font-weight: bold;
   font-style: italic;
   text-align: center;
@@ -31,7 +31,7 @@ body::before{
     display: block;
     content: "DEVELOPMENT";
     color: #aaa;
-    height: 110px;
+    height: 30%;
     width: 100%;
   }
 }
@@ -42,7 +42,7 @@ body::before{
     display: block;
     content: "RELEASE CANDIDATE";
     color: #aaa;
-    height: 110px;
+    height: 30%;
     width: 100%;
   }
 }

@@ -1,48 +1,24 @@
+html {
+  font-family: verdana, arial, helvetica, sans-serif;
+}
 
 #votingTitle {
-  font-family: Verdana, sans-serif;
-  background-position: 30px 5px;
-  position: absolute;
-  top: 0px;
   width: 100%;
-  color: #333;
-  height: 50px;
+  text-align: center;
 }
 
 #votingTitle .LugLogo {
-  left: 5px;
-  top: 5px;
-  position: absolute;
+  max-width: 90%;
 }
 
 #votingContent {
-  font-family: Verdana, sans-serif;
-  margin-left: 1px;
-  margin-right: 1px;
-  margin-top: 55px;
-  margin-bottom: 5px;
-}
-
-#votingContent h2 {
-  padding-left: 5px;
-  padding-top: 5px;
-}
-
-#votingContent p {
-  padding-left: 5px;
-  padding-top: 5px;
+  margin: 1%;
+  text-align: center;
 }
 
 .VotingForm {
-  border: 2px solid #ddd;
+  border: 2px solid #eeeeee;
   border-collapse: collapse;
-  width: 90%;
-  align: center;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 2px;
+  width: 96%;
+  padding: 2%;
 }

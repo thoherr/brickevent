@@ -1,5 +1,5 @@
 body, input {
-    font-family: Verdana, sans-serif;
+    font-family: verdana, arial, helvetica, sans-serif;
     font-size: 14px;
 }
 
@@ -7,11 +7,6 @@ body, div, span {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 14px;
-}
-
-p {
-    font-size: 24px;
 }
 
 h1 {
@@ -68,16 +63,16 @@ a {
 #mainTitle .TitleText {
     display: block;
     padding: 0px;
-    padding-right: 30px;
+    padding-right: 2%;
     font-weight: bold;
-    font-size: 10px;
+    font-size: x-small;
 }
 
 #mainTitle .VersionText {
     display: block;
     padding: 0px;
-    padding-right: 30px;
-    font-size: 9px;
+    padding-right: 2%;
+    font-size: xx-small;
 }
 
 #mainNavi {
@@ -95,13 +90,14 @@ a {
 #mainNavi ul {
     list-style: none;
     margin: 0;
-    padding-left: 35px;
+    padding-left: 2%;
+    padding-right: 1%;
 }
 
 #mainNavi ul li {
     display: block;
     float: left;
-    padding-right: 30px;
+    padding-right: 1%;
 }
 #mainNavi ul li a, #mainNavi ul li a:visited {
     display: block;
@@ -115,7 +111,7 @@ a {
 }
 
 #mainNavi ul li.subsequentLink {
-  padding-right: 5px;
+  padding-right: 0.5%;
 }
 
 #mainContent {
@@ -228,7 +224,6 @@ a {
 .FrontendTable {
     margin-left: 25px;
     margin-bottom: 25px;
-/*    border: 2px solid #ddd; */
     border-collapse: collapse;
     font-size: 13px;
 }
@@ -236,7 +231,6 @@ a {
 .FrontendTable th {
    border: 1px solid #ddd;
    background: #eee;
-   /* background: #E6F2FF; */
    text-align: left;
    padding: 5px;
 }
@@ -297,7 +291,6 @@ a {
     margin-right: 60px;
     color: #700;
     background-color: #fdd;
-    border-color: #700;
     padding: 3pt 10pt;
-    border: 2px solid;
+    border: 2px solid #700;
 }
