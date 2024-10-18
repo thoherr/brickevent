@@ -189,18 +189,17 @@ a {
     padding-left: 1%;
 }
 
-
 .FrontendTable {
     margin: 1%;
     border-collapse: collapse;
-    font-size: smaller;
+    font-size: small;
 }
 
 .FrontendTable th {
    border: 1px solid #ddd;
    background: #eee;
    text-align: left;
-   padding: 1%;
+   padding: 1ex;
 }
 
 .FrontendTable th.open {
@@ -213,7 +212,7 @@ a {
 
 .FrontendTable td {
   border: 1px solid #ddd;
-  padding: 1%;
+  padding: 1ex;
 }
 
 .FrontendTable .whitespace {

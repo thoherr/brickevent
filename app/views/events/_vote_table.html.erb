@@ -2,8 +2,8 @@
 <% if total_vote_count.size == 0 %>
   <h4><%= t('no_votes') %></h4>
 <% else %>
-  <h4><%= t('number_of_votes', size: total_vote_count) %></h4>
-  <table class="ExhibitsTable FrontendTable">
+  <p><%= t('number_of_votes', size: total_vote_count) %></p>
+  <table class="VotingTable FrontendTable">
     <tr>
       <th><%= t('heading_votes') %></th>
       <th><%= t('table_position') %></th>

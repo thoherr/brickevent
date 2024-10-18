@@ -16,6 +16,23 @@ html {
   text-align: center;
 }
 
+.VotingListEntry {
+  border: 2px solid #ddd;
+  border-collapse: collapse;
+  margin: 1%;
+  padding: 1%;
+}
+
+.VotingListEntry h2,p {
+  margin: 1%;
+  padding: 0;
+}
+
+.VotingListEntry h3,h4 {
+  margin: 1%;
+  padding-top: 1%;
+}
+
 .VotingForm {
   border: 2px solid #eeeeee;
   border-collapse: collapse;
