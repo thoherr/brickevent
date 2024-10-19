@@ -19,7 +19,7 @@ GIT
       websocket-driver (>= 0.6.5)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actioncable (7.2.1.1)
       actionpack (= 7.2.1.1)
