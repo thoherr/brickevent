@@ -9,6 +9,9 @@ class Event < ApplicationRecord
   has_many :event_managers
   has_many :managers, :source => :user, :through => :event_managers
 
+  validates :url, url: { allow_nil: true, allow_blank: true, schemes: %w[http https] }
+  validates :logo_url, url: { allow_nil: true, allow_blank: true, schemes: %w[http https] }
+
   default_scope { order('start_date desc') }
 
   def self.open_events

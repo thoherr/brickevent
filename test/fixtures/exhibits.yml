@@ -5,7 +5,7 @@ one:
   attendance: one
   name: My first extraordinary MOC
   description: Very awesome
-  url: MyString
+  url: https://mocone.example.com/pic.jpg
   size_x: 1.6
   size_y: 2.4
   unit: m
@@ -31,7 +31,7 @@ two:
   attendance: two
   name: Another great MOC
   description: Even more awesome `the — killer, bla bla bla…´ MOC
-  url: MyString
+  url: https://awesome.example.com/
   size_x: 24
   size_y: 64
   unit: m
@@ -55,7 +55,7 @@ three:
   attendance: four
   name: StarWars Installation
   description: This is our SW Installation MOC
-  url: MyString
+  url: https://moc3.example.com/
   size_x: 100
   size_y: 200
   unit: m

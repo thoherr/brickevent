@@ -5,7 +5,7 @@ one:
   title: BB2011
   description: MyString
   location: MyString
-  url: MyString
+  url: https://one.example.com
   lugname: Bricking Bavaria
   lug: bb
   registration_open: true
@@ -19,7 +19,7 @@ two:
   title: MyString
   description: MyString
   location: MyString
-  url: MyString
+  url: http://two.example.com
   lugname: LUG2
   lug: lugtwo
   registration_open: false
@@ -33,7 +33,7 @@ three:
   title: Number 3
   description: MyString
   location: MyString
-  url: MyString
+  url: https://three.example.com
   lugname: LUG1
   lug: lugone
   registration_open: true
@@ -53,7 +53,7 @@ four:
   title: Our best event so far
   description: MyString
   location: MyString
-  url: MyString
+  url: https://lug1.example.com
   lugname: LUG1
   lug: lugone
   registration_open: false
@@ -67,7 +67,7 @@ fourty_two:
   title: Number 42
   description: MyString
   location: MyString
-  url: MyString
+  url: https://42.example.com
   lugname: LUG1
   lug: lugone
   registration_open: true

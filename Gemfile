@@ -40,6 +40,9 @@ gem 'uglifier'
 
 gem 'brakeman'
 
+# https://github.com/perfectline/validates_url
+gem 'validate_url'
+
 gem 'jquery-rails'
 
 gem 'active_scaffold', github: 'activescaffold/active_scaffold', ref: '65dbb573340a2ea6d1027668abe13ca30346242b'

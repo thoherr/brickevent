@@ -298,6 +298,9 @@ GEM
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
     useragent (0.16.10)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     warden (1.2.9)
       rack (>= 2.0.9)
     webpacker (5.4.4)
@@ -344,6 +347,7 @@ DEPENDENCIES
   selenium-webdriver
   sqlite3
   uglifier
+  validate_url
   webpacker
   webrick (~> 1.8)
 

@@ -25,8 +25,8 @@ class EventTest < ActiveSupport::TestCase
     event3 = events(:three)
     assert_equal 3, event3.number_of_exhibits
     assert_equal "ID;Bestätigt;Name;Email;MOC;Beschreibung;Anmerkungen;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (cm);Größe y (cm);Größe z (cm);Tisch;Position;Versicherungswert;Versicherungswert Anlage;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Collab?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\n" +
-                   "41;true;User One;user42@mytestdomain.de;My first extraordinary MOC;Very awesome;Very important remark;MyString;1;2;;m;160.0;240.0;;4;2;1000;0.0;1;1;false;false;false;false;false;-;2018-06-15 00:00:00\n" +
-                   "42;false;Second user;second@mytestdomain.de;Another great MOC;Even more awesome 'the - killer, bla bla bla...' MOC;Need my own exhibit hall;MyString;24;64;;m;2400.0;6400.0;;;;10000000;0.0;10000;1000000;false;true;false;false;false;-;2018-07-10 00:00:00\n" +
+                   "41;true;User One;user42@mytestdomain.de;My first extraordinary MOC;Very awesome;Very important remark;https://mocone.example.com/pic.jpg;1;2;;m;160.0;240.0;;4;2;1000;0.0;1;1;false;false;false;false;false;-;2018-06-15 00:00:00\n" +
+                   "42;false;Second user;second@mytestdomain.de;Another great MOC;Even more awesome 'the - killer, bla bla bla...' MOC;Need my own exhibit hall;https://awesome.example.com/;24;64;;m;2400.0;6400.0;;;;10000000;0.0;10000;1000000;false;true;false;false;false;-;2018-07-10 00:00:00\n" +
                    "45;true;User One;user42@mytestdomain.de;Simple small MOC;Quite awesome;;;0;0;;m;;;;;;123;0.0;;;;;false;false;true;-;2024-09-10 00:00:00\n",
                  event3.exhibits_as_csv
     event42 = events(:fourty_two)
@@ -34,7 +34,7 @@ class EventTest < ActiveSupport::TestCase
     assert_equal "ID;Bestätigt;Name;Email;MOC;Beschreibung;Anmerkungen;URL;Größe x;Größe y;Größe z;Größe Einheit;Größe x (cm);Größe y (cm);Größe z (cm);Tisch;Position;Versicherungswert;Versicherungswert Anlage;Baustunden;Anzahl Steine;Strom?;Sammeltransport;Gemeinschaftsprojekt?;Collab?;Teil Gemeinschaftsprojekt;Name Gemeinschaftsprojekt;Zuletzt geändert\n" +
                    "6;true;Second user;second@mytestdomain.de;A Collab;;;;;;;cm;;;;;;0.0;;;;;;true;true;;-;2024-10-11 00:00:00\n" +
                    "7;true;Second user;second@mytestdomain.de;Part of Collab;;;;;;;cm;;;;;;;0.0;;;;;;false;true;A Collab;2024-10-11 00:00:00\n" +
-                   "44;false;Thomas Herrmann;mail@thoherr.de;StarWars Installation;This is our SW Installation MOC;;MyString;100;200;;m;10000.0;20000.0;;7;;0.0;1234;;;;;true;false;false;-;2021-05-04 00:00:00\n" +
+                   "44;false;Thomas Herrmann;mail@thoherr.de;StarWars Installation;This is our SW Installation MOC;;https://moc3.example.com/;100;200;;m;10000.0;20000.0;;7;;0.0;1234;;;;;true;false;false;-;2021-05-04 00:00:00\n" +
                    "48;true;Thomas Herrmann;mail@thoherr.de;Part of Installation MOC;Small but beautiful;;;0;0;;m;;;;;;456;0.0;;;;;false;false;true;StarWars Installation;2024-10-10 00:00:00\n",
                  event42.exhibits_as_csv
   end
@@ -95,6 +95,35 @@ class EventTest < ActiveSupport::TestCase
     assert_equal 2, import[:failure_count]
     assert_equal ["44", "48"], import[:errors]
     assert_equal 7, import[:ignore_count]
+  end
+
+  test "event should only accept sane event URLs" do
+    event = events(:fourty_two)
+    assert event.valid?
+    event.url = 'http://example.com'
+    assert event.valid?
+    event.url = 'javascript://example.com/test.js'
+    assert_not event.valid?
+    event.url = 'https://example.com'
+    assert event.valid?
+    event.url = 'blablubb://example.com'
+    assert_not event.valid?
+  end
+
+  test "event should only accept sane logo URLs" do
+    event = events(:fourty_two)
+    assert event.valid?
+    event.logo_url = 'http://example.com'
+    assert event.valid?
+    event.logo_url = 'blablubb://example.com'
+    assert_not event.valid?
+
+    event = events(:three)
+    assert event.valid?
+    event.logo_url = 'javascript://example.com/test.js'
+    assert_not event.valid?
+    event.logo_url = 'https://example.com'
+    assert event.valid?
   end
 
 end

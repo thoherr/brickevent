@@ -6,7 +6,7 @@ class ExhibitTest < ActiveSupport::TestCase
     exhibit_copy = exhibit.copy_for_new_attendance
     meter = units(:m)
     new_exhibit = Exhibit.new(id: nil, attendance_id: nil, name: "My first extraordinary MOC",
-                              description: "Very awesome", url: "MyString",
+                              description: "Very awesome", url: "https://mocone.example.com/pic.jpg",
                               size_studs: nil, size: nil, value: 1000, building_hours: "1",
                               brick_count: 1, needs_power_supply: false, needs_transportation: false,
                               is_installation: false, is_part_of_installation: false,
@@ -59,6 +59,22 @@ class ExhibitTest < ActiveSupport::TestCase
     exhibit = exhibits(:seven)
     poster_creation = VotingPosterCreation.new(exhibit)
     assert_raises "Exhibit Part of Collab is not votable" do poster_creation.call end
+  end
+
+  test "exhibit should only accept sane exhibit URLs" do
+    exhibit = exhibits(:one)
+    assert exhibit.valid?
+    exhibit.url = 'http://example.com'
+    assert exhibit.valid?
+    exhibit.url = 'javascript://example.com/test.js'
+    assert_not exhibit.valid?
+
+    exhibit = exhibits(:two)
+    assert exhibit.valid?
+    exhibit.url = 'blablubb://example.com'
+    assert_not exhibit.valid?
+    exhibit.url = 'https://example.com'
+    assert exhibit.valid?
   end
 
 end
