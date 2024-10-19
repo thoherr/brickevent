@@ -9,6 +9,7 @@ body, div, span {
 }
 
 h1 {
+    padding-left: 1%;
     font-size: xx-large;
     color: #333;
 }
@@ -103,8 +104,8 @@ a {
 }
 
 .Indented {
-    padding-left: 2%;
-    padding-right: 25px;
+    padding-left: 1%;
+    padding-right: 2%;
 }
 
 .RegistrationInfo {
@@ -164,12 +165,14 @@ a {
 }
 
 .EventTitle {
+    padding-left: 1%;
     font-size: 20px;
     font-weight: bold;
     color: #333;
 }
 
 .EventTime {
+    padding-left: 1%;
     padding-top: 5px;
     font-size: 12px;
 }
