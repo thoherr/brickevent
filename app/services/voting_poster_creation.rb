@@ -30,7 +30,7 @@ class VotingPosterCreation < ApplicationService
     height = pdf.bounds.height
     logo_url = @exhibit.attendance.event.logo_url
     unless logo_url.blank?
-      pdf.image URI.open(logo_url),
+      pdf.image URI.parse(logo_url).open,
                 position: :center, vposition: :top, width: width * 0.9, height: height * 0.2
     end
     pdf.text @exhibit.event_title, align: :center, style: :bold, size: 12
