@@ -1,0 +1,40 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "27a2cf1af650b3284fdf88547bedb6f645bf60dfcafb3bd77a19b895b71f9779",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/events/index.html.erb",
+      "line": 65,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to((Unresolved Model).new.url, (Unresolved Model).new.url, :target => \"_new\")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "EventsController",
+          "method": "index",
+          "line": 12,
+          "file": "app/controllers/events_controller.rb",
+          "rendered": {
+            "name": "events/index",
+            "file": "app/views/events/index.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "events/index"
+      },
+      "user_input": "(Unresolved Model).new.url",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": "URLs are validated in event and exhibit (only http and https allowed)"
+    }
+  ],
+  "updated": "2024-10-19 13:35:14 +0200",
+  "brakeman_version": "6.2.2"
+}
