@@ -15,7 +15,7 @@ class CsvExhibitImport < ApplicationService
     success_count = 0;
     failure_count = 0
     errors = []
-    opened_file = File.open(@file)
+    opened_file = File.open(Rails.root.join('tmp', @file))
     options = { headers: true, col_sep: ';' }
     CSV.foreach(opened_file, **options) do |row|
 

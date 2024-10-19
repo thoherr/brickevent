@@ -99,7 +99,8 @@ class EventsController < ApplicationController
     return redirect_to event_path(@event), notice: I18n.t('only_csv_files_allowed') unless params[:file].content_type == 'text/csv'
 
     if @event
-      import = CsvExhibitImport.call(@event, params[:file])
+      sanitized_file = ActiveStorage::Filename.new(params[:file].original_filename).sanitized
+      import = CsvExhibitImport.call(@event, sanitized_file)
       redirect_to event_path(@event),
                   notice: I18n.t('moc_data_imported_stats_notice', import: import[:ignore_count], import2: import[:failure_count], import3: import[:success_count]),
                   alert: import[:errors].size > 0 ? I18n.t('failed_moc_ids', inspect: import[:errors].inspect) : nil
