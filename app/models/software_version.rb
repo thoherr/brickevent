@@ -23,7 +23,7 @@ class SoftwareVersion
   def self.appname
     appname = @@appname_default
     if File.exist?(@@appname_filename)
-      appname = IO.read(@@appname_filename)
+      appname = File.read(@@appname_filename)
     end
     appname.strip
   end
@@ -32,7 +32,7 @@ class SoftwareVersion
   def self.release
     release = @@release_default
     if File.exist?(@@release_filename)
-      release = IO.read(@@release_filename)
+      release = File.read(@@release_filename)
     end
     release.strip
   end
@@ -41,7 +41,7 @@ class SoftwareVersion
   def self.buildnumber
     buildnumber = @@buildnumber_default
     if File.exist?(@@buildnumber_filename)
-      buildnumber = IO.read(@@buildnumber_filename)
+      buildnumber = File.read(@@buildnumber_filename)
     end
     buildnumber.strip
   end
@@ -55,7 +55,7 @@ class SoftwareVersion
   def self.full_revision
     revision = @@revision_default
     if File.exist?(@@revision_filename)
-      revision = IO.read(@@revision_filename)
+      revision = File.read(@@revision_filename)
     end
     revision.strip
   end
