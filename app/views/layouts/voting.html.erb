@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<% titleline = "#{SoftwareVersion.appname} #{@lug.name}" %>
+<% titleline = "#{@exhibit.event_title}" %>
 <html>
 <head>
   <title><%= titleline %></title>
   <%= favicon_link_tag "#{@lug.favicon_url}" %>
   <meta name="application-name" content="<%= "#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
-  <meta name="description" content="<%= "#{@lug.name} event management" %>">
-  <meta name="copyright" content="(c) 2010-2024 Thomas Herrmann <mail@thoherr.de>">
+  <meta name="description" content="<%= "#{@lug.name} MOC voting for #{@exhibit.event_title}" %>">
+  <meta name="copyright" content="(c) 2024 Thomas Herrmann <mail@thoherr.de>">
   <%= stylesheet_link_tag "voting" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
