@@ -3,6 +3,10 @@ class VotesController < ApplicationController
 
   skip_before_action :authenticate_user!
 
+  # see https://stackoverflow.com/questions/30402183/prevent-user-going-back-and-viewing-previously-submitted-form-rails
+  # disable duplicate voting form
+  before_action :set_cache_buster
+
   # GET /exhibits/:id/votes/new
   # GET /exhibits/:id/votes/new.json
   def new
@@ -46,4 +50,13 @@ class VotesController < ApplicationController
       raise 'INVALID REQUEST' unless @exhibit and @visitor and @event
     end
   end
+
+  protected
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "#{1.year.ago}"
+  end
+
 end
