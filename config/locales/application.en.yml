@@ -195,7 +195,7 @@ en:
   no_file_added: "No file added"
   only_csv_files_allowed: "Only CSV files allowed"
   vote_for: "Vote for"
-  voting_poster_intro: "You like the model?"
+  voting_poster_intro: "Do zou like this model?"
   voting_poster_instruction: "Then scan the code and cast your vote!"
   exhibit_voting_results_for: "Results of the MOC voting for"
   no_votes: "No votes"
