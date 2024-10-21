@@ -1,19 +1,19 @@
-<h2><%= @exhibit.event_title %></h2>
 <% voting_scope = @event.current_voting_scope %>
 <% if voting_scope.blank? %>
   <p><%= t('voting_closed') %></p>
   <p><%= t('check_voting_times') %></p>
 <% else %>
-  <h3><%= t(voting_scope + '_voting') %></h3>
-  <% moctext = "#{@exhibit.name}" %>
-  <% moctext += " (#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %>
+  <h2><%= t(voting_scope + '_voting') %></h2>
   <% if @voted_already %>
-    <p><%= t('voted_already') %>  <i><b><%= moctext %></b></i></p>
+    <p><%= t('voted_already') %></p>
+    <p class="VotingExhibit"><i><b><%= "#{@exhibit.name}" %></b></i></p>
+    <p><small><%= "(#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %></small></p>
   <% else %>
     <%= form_for @vote, :url => url_for(:controller => 'votes', :action => 'create') do |f| %>
       <div class="VotingForm">
         <p><%= t('vote_for') %></p>
-        <p><i><b><%= moctext %></b></i></p>
+        <p class="VotingExhibit"><i><b><%= "#{@exhibit.name}" %></b></i></p>
+        <p><small><%= "(#{@exhibit.platform_position})" unless @exhibit.platform_position.blank? %></small></p>
         <div class="actions VotingButton">
           <%= f.submit t('vote'), :id => 'submit' %>
         </div>
