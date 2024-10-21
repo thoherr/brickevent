@@ -219,3 +219,4 @@ de:
   label_moc_is_collab: "Dieses MOC ist eine COLLAB (enthält keine Einzel-MOCs)"
   moc_data_imported_stats_notice: "MOC-Daten importiert (%{import} übersprungen, %{import2} fehlerhaft, %{import3} importiert)"
   failed_moc_ids: "Fehlerhafte MOC-IDs: %{inspect}"
+  label_table_position: "Tischposition:"

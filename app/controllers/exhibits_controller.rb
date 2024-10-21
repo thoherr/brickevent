@@ -102,6 +102,7 @@ class ExhibitsController < ApplicationController
                                     :size_studs, :size, :value, :building_hours, :brick_count,
                                     :needs_power_supply, :needs_transportation, :is_installation,
                                     :is_part_of_installation, :installation_exhibit_id, :is_collab,
+                                    :platform, :position,
                                     :remarks, :size_x, :size_y, :size_z, :unit_id,
                                     :size_x_meter, :size_y_meter, :size_z_meter,
                                     :former_exhibit_id,
