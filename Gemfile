@@ -15,6 +15,8 @@ group :development, :test do
     gem 'listen'
 end
 
+gem 'simplecov', require: false, group: :test
+
 group :production do
     gem 'mysql2'
 end
