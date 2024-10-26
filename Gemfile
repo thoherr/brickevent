@@ -15,7 +15,11 @@ group :development, :test do
     gem 'listen'
 end
 
+# SimpleCov for test coverage
 gem 'simplecov', require: false, group: :test
+
+# detailed production coverage analysis
+gem 'coverband'
 
 group :production do
     gem 'mysql2'

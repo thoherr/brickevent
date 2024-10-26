@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Coverband::Reporters::Web.new, at: '/coverage'
+  end
+
   resources :accommodations
   resources :attendances do
     member do
