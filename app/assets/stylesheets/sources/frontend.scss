@@ -1,0 +1,227 @@
+#mainTitle {
+  width: 100%;
+  color: #333;
+}
+
+#mainTitle .LugLogo {
+  padding: 1%;
+}
+
+#mainTitle .TitleText {
+  display: block;
+  text-align: right;
+  padding: 0 2% 0 0;
+  font-weight: bold;
+  font-size: x-small;
+}
+
+#mainTitle .VersionText {
+  display: block;
+  text-align: right;
+  margin-top: 0;
+  padding: 0 2% 0 0;
+  font-size: xx-small;
+}
+
+#mainNavi {
+  //    margin-top: 0.5%;
+  width: 100%;
+  background-color: #E6F2FF;
+  border-top: 1px solid #005CB8;
+  border-bottom: 1px solid #005CB8;
+  height: 20px;
+  text-align: center;
+}
+
+#mainNavi ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 2%;
+  padding-right: 1%;
+}
+
+#mainNavi ul li {
+  display: block;
+  float: left;
+  padding-right: 1%;
+}
+#mainNavi ul li a, #mainNavi ul li a:visited {
+  display: block;
+  float: left;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#mainNavi ul li.languageLink, #mainNavi ul li#editUserLink, #mainNavi ul li#loginLink, #mainNavi ul li#logoutLink, #mainNavi ul li#impressLink {
+  float: right;
+}
+
+#mainNavi ul li.subsequentLink {
+  padding-right: 0.5%;
+}
+
+#mainContent {
+  margin: 1%;
+}
+
+.Indented {
+  padding-left: 1%;
+  padding-right: 2%;
+}
+
+.RegistrationInfo {
+  border: 2px solid #ddd;
+  border-collapse: collapse;
+  margin: 1%;
+  padding: 1%;
+}
+
+.RegistrationInfo li {
+  margin-top: 1ex;
+}
+
+.RegistrationInfo li ul li{
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+
+.OverviewLink {
+  padding-left: 2%;
+}
+
+.InputForm {
+  border: 2px solid #ddd;
+  border-collapse: collapse;
+  margin: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 0.5%;
+}
+
+.Event {
+  font-weight: bold;
+  color: #333;
+}
+
+.EventList {
+  font-size: 16px;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.EventListEntry {
+  border: 2px solid #ddd;
+  border-collapse: collapse;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.EventLogo {
+  display: block;
+  float: right;
+  max-width: 40%;
+  max-height: 20%;
+}
+
+.EventTitle {
+  padding-left: 1%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.EventTime {
+  padding-left: 1%;
+  padding-top: 5px;
+  font-size: 12px;
+}
+
+.EventDescription {
+  padding-left: 1%;
+}
+
+.EventInfo {
+  padding-left: 1%;
+}
+
+.EventUrl {
+}
+
+.EventSignup {
+  padding-left: 1%;
+}
+
+.FrontendTable {
+  margin: 1%;
+  border-collapse: collapse;
+  font-size: small;
+}
+
+.FrontendTable th {
+  border: 1px solid #ddd;
+  background: #eee;
+  text-align: left;
+  padding: 1ex;
+}
+
+.FrontendTable th.open {
+  background: #efe;
+}
+
+.FrontendTable th.closed {
+  background: #fee;
+}
+
+.FrontendTable td {
+  border: 1px solid #ddd;
+  padding: 1ex;
+}
+
+.FrontendTable .whitespace {
+  border: none;
+}
+
+.Flash {
+  background-color: #eee;
+  padding: 7px 15px;
+  border: 2px solid;
+  margin-bottom: 10px;
+}
+
+.Flash ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.FlashWarn {
+  color: #770;
+  font-weight: bold;
+}
+
+.FlashNotice {
+  color: green;
+  font-weight: bold;
+}
+
+.FlashError {
+  color: red;
+  font-weight: bold;
+}
+
+.FlashAlert {
+  color: red;
+  font-weight: bold;
+  border-color: red;
+}
+
+.ModelError {
+  margin-left: 40px;
+  margin-right: 60px;
+  color: #700;
+  background-color: #fdd;
+  padding: 3pt 10pt;
+  border: 2px solid #700;
+}
