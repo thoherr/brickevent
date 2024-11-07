@@ -335,7 +335,7 @@ DEPENDENCIES
   simplecov
   sqlite3
   validate_url
-  webrick (~> 1.8)
+  webrick
 
 BUNDLED WITH
    2.5.3
