@@ -3,29 +3,29 @@
 lugone:
   name: LUG1 (auch BB)
   description: BB (dummy)
-  logo_url: /assets/bricking-bavaria.jpg
+  logo_url: /images/bricking-bavaria.jpg
   url: https://bricking-bavaria.de
   info_mail: info@bricking-bavaria.de
   impress_url: https://bricking-bavaria.de/m-impressum.html
-  favicon_url: /assets/bricking-bavaria.favicon.ico
+  favicon_url: /images/bricking-bavaria.favicon.ico
   request_pattern: 127.0.0.1
 
 lugtwo:
   name: LUG TWO
   description: The second LUG
-  logo_url: /assets/luglogo.png
+  logo_url: /images/luglogo.png
   url: https://lug2.mytestdomain.de
   info_mail: lug2@mytestdomain.de
   impress_url: https://lug2.mytestdomain.de/impressum/
-  favicon_url: /assets/lug2.favicon.ico
+  favicon_url: /images/lug2.favicon.ico
   request_pattern: lug2.mytestdomain.de
 
 bb:
   name: Bricking Bavaria e. V.
   description: BB
-  logo_url: /assets/bricking-bavaria.jpg
+  logo_url: /images/bricking-bavaria.jpg
   url: https://bricking-bavaria.de
   info_mail: info@bricking-bavaria.de
   impress_url: https://bricking-bavaria.de/m-impressum.html
-  favicon_url: /assets/bricking-bavaria.favicon.ico
+  favicon_url: /images/bricking-bavaria.favicon.ico
   request_pattern: bricking-bavaria.de
