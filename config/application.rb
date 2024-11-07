@@ -11,6 +11,9 @@ module BrickEvent
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
+    # we use SCCS and precompile to assets/builds, which will be included in asset:precompile
+    config.assets.excluded_paths << File.join(Rails.root, 'app/assets/stylesheets')
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
