@@ -38,10 +38,6 @@ end
 
 gem 'kramdown' # our markdown library, see http://kramdown.rubyforge.org/
 
-#gem 'sass-rails'
-#gem 'coffee-rails'
-#gem 'uglifier'
-
 gem 'brakeman'
 
 # https://github.com/perfectline/validates_url
