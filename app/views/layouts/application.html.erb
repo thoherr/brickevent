@@ -14,7 +14,7 @@
 <table id="mainTitle">
   <tr>
     <td>
-      <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
+      <%= image_tag "#{@lug.logo_url}", class: "LugLogo" %>
     </td>
     <td>
       <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring} #{@stage}" %></span>

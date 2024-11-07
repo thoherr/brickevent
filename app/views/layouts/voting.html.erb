@@ -14,7 +14,7 @@
 <body class="<%= @stage%> <%= I18n.locale%>">
 
 <div id="votingTitle">
-  <img class="LugLogo" src="<%= "#{@lug.logo_url}" %>"/>
+  <%= image_tag "#{@lug.logo_url}", class: "LugLogo" %>
 </div>
 
 <div id="votingContent">
