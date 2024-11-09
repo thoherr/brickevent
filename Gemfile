@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.2'
+gem 'rails', '~> 8.0'
 gem 'rails-controller-testing'
 
 gem 'bootsnap'
