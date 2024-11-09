@@ -47,7 +47,7 @@ gem 'validate_url'
 
 gem 'jquery-rails'
 
-gem 'active_scaffold', github: 'activescaffold/active_scaffold', ref: '65dbb573340a2ea6d1027668abe13ca30346242b'
+gem 'active_scaffold', github: 'activescaffold/active_scaffold', ref: 'bce7d9bd0309f4fece73982d6a7f660ecd7068d3'
 
 # use devise for user auth
 gem 'devise'
