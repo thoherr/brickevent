@@ -13,8 +13,8 @@ Currently still far too much of texts and structure is hard coded. All texts are
 
 However, it is planned to further generalize this rails app in order to use it for several of the many AFOLs events in Germany, Europe and Worldwide.
 
-In November 2016, Schwabenstein 2*4 e.V. joined the club and we introduced the LUG as Entity to this application.
-Therefore, some of the UI is now dependent on the name this app is accessed (e. g. the logo).
+Since 2016 the app is capable of managing events of several LUGs on the same database. 
+Therefore, part of the UI is now dependent on the URL at which this app is accessed (e. g. the logo).
 
 Help from other IT affine LEGO fans is very welcome ;-).
 
@@ -56,7 +56,7 @@ You can use the simple script tools/generate_config.sh to create the configurati
 System requirements
 -------------------
 
-Currently the app uses Rails 7.1.2 and Sqlite3/MySQL.
+Currently the app uses Rails 7.2 and Sqlite3/MySQL.
 
 Known Flaws
 -----------
