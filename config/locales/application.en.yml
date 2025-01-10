@@ -8,7 +8,7 @@ en:
   administration: "Administration"
   impress: "Impress"
   logout: "Logout"
-  change_password: "Change Password"
+  change_password: "Change Email/Password"
   my_profile: "My Profile"
   login: "Login"
   logged_in_as: "Logged in as"
