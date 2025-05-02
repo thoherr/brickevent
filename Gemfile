@@ -5,7 +5,9 @@ gem 'rails-controller-testing'
 
 gem 'bootsnap'
 
-gem 'webpacker'
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
+gem 'propshaft'
 
 # Use Puma as the app server
 gem 'puma'
@@ -36,10 +38,6 @@ end
 
 gem 'kramdown' # our markdown library, see http://kramdown.rubyforge.org/
 
-gem 'sass-rails'
-gem 'coffee-rails'
-gem 'uglifier'
-
 gem 'brakeman'
 
 # https://github.com/perfectline/validates_url
@@ -62,4 +60,4 @@ gem 'prawn'
 
 gem 'rubyzip'
 
-gem 'webrick', '~> 1.8'
+gem 'webrick'
