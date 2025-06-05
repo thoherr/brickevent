@@ -175,7 +175,7 @@ class Exhibit < ApplicationRecord
   end
 
   def platform_position
-    return "#{installation&.platform_position || '--'}" if is_part_of_installation
+    return "#{installation&.platform_position || '--'}" if is_part_of_installation and id != installation&.id
     return "#{platform}.#{position}" if platform and position
     return "#{platform}" if platform
     "#{'-'}"
