@@ -199,7 +199,7 @@ class Exhibit < ApplicationRecord
      StringSanitizer.sanitize_encoding(name),
      StringSanitizer.sanitize_encoding(description),
      StringSanitizer.sanitize_encoding(remarks),
-     url, size_x, size_y, size_z,
+     StringSanitizer.sanitize_encoding(url), size_x, size_y, size_z,
      (unit.nil? ? 'cm' : unit.name),
      size_x_centimeter, size_y_centimeter, size_z_centimeter,
      platform, position,
@@ -207,7 +207,8 @@ class Exhibit < ApplicationRecord
      is_installation ? value : 0.0,
      building_hours, brick_count,
      needs_power_supply, needs_transportation,
-     is_installation, is_collab, is_part_of_installation, installation_exhibit_name,
+     is_installation, is_collab, is_part_of_installation,
+     StringSanitizer.sanitize_encoding(installation_exhibit_name),
      updated_at.strftime("%F %T")]
   end
 
