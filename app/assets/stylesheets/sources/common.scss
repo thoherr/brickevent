@@ -1,0 +1,42 @@
+html {
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+
+body, input {
+    font-size: 14px;
+}
+
+body, div, span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+h1 {
+    padding-left: 1%;
+    font-size: xx-large;
+    color: #333;
+}
+
+h2 {
+    padding-left: 1%;
+    padding-top: 1%;
+    font-size: x-large;
+}
+
+h3, h4, h5, h6 {
+    font-size: large;
+}
+
+img {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.translation_missing {
+  background: yellow;
+}

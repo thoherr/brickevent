@@ -28,3 +28,6 @@ yarn-debug.log*
 .yarn-integrity
 
 coverage/
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
