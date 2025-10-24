@@ -22,6 +22,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Tag with build number
+      run: |
+        echo ${{ github.run_number }} > BUILDNUMBER
+        echo ${{ github.sha }} > REVISION
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
