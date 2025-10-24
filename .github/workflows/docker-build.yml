@@ -42,7 +42,7 @@ jobs:
           type=ref,event=pr
           type=raw,value=latest,enable={{is_default_branch}}
           type=sha,prefix={{branch}}-,enable=${{ github.event_name != 'pull_request' }}
-      type=sha,prefix=pr-,enable=${{ github.event_name == 'pull_request' }}
+          type=sha,prefix=pr-,enable=${{ github.event_name == 'pull_request' }}
         labels: |
           org.opencontainers.image.title=BrickEvent
           org.opencontainers.image.description=Web Application for participant registration at LEGO(R) Fan Exhibitions
