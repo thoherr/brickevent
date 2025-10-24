@@ -19,9 +19,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /etc/ap
 #RUN curl -sS https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg \
 #  && echo "deb [arch=amd64,signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update \
- && apt-get install -y libsqlite3-dev nodejs yarn google-chrome-stable --no-install-recommends \
+ && apt-get install -y libsqlite3-dev nodejs yarn \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+ # Skip Chrome
+ # google-chrome-stable --no-install-recommends
 
 RUN useradd -u 300 -U -d $APPBASEDIR -m $APPUSER
 
