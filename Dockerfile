@@ -10,10 +10,14 @@ LABEL maintainer="Thomas Herrmann <mail@thoherr.de>"
 # Install netcat for our startup script
 RUN apt-get update && apt-get -y install netcat-traditional && apt-get clean
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN curl -sS https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
+# Setup Yarn repository (using new method without apt-key)
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /etc/apt/keyrings/yarn.gpg \
+  && echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+# Setup Google Chrome repository (using new method without apt-key), I wouldn't ship a full Chrome with the base container though?
+# Might be better to later build a test container FROM this one, that adds Chrome
+#RUN curl -sS https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg \
+#  && echo "deb [arch=amd64,signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update \
  && apt-get install -y libsqlite3-dev nodejs yarn google-chrome-stable --no-install-recommends \
  && apt-get clean \
@@ -46,9 +50,9 @@ RUN chown -R $APPUSER:$APPUSER $APPBASEDIR
 RUN usermod -G audio,video $APPUSER
 
 # Set options for chrome via wrapper script to make Rails system test setup easier
-RUN rm /usr/bin/google-chrome \
- && echo "/usr/bin/google-chrome-stable --headless --disable-gpu --no-sandbox \$@" > /usr/bin/google-chrome \
- && chmod +x /usr/bin/google-chrome
+#RUN rm /usr/bin/google-chrome \
+# && echo "/usr/bin/google-chrome-stable --headless --disable-gpu --no-sandbox \$@" > /usr/bin/google-chrome \
+# && chmod +x /usr/bin/google-chrome
 
 # Switch to application user
 USER $APPUSER
