@@ -152,6 +152,10 @@ GEM
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    importmap-rails (2.2.2)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
     io-console (0.7.2)
     irb (1.14.1)
       rdoc (>= 4.0.0)
@@ -339,6 +343,7 @@ DEPENDENCIES
   devise
   devise-i18n
   goldiloader
+  importmap-rails
   jquery-rails
   json
   kramdown

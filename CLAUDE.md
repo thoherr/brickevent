@@ -123,10 +123,27 @@ Modern asset pipeline using a hybrid approach:
   - Active Scaffold CSS (has ERB dependencies, compiled via SassC)
   - Final asset serving from `public/assets/` in production
 
-### JavaScript
-- **Terser**: Modern JS minification (replaces deprecated Uglifier)
-- **jQuery**: Required by Active Scaffold
-- Sprockets with `//= require` directives in `app/assets/javascripts/application.js`
+### JavaScript (Hybrid Approach)
+
+**Two JavaScript systems work together:**
+
+1. **Sprockets** (for Active Scaffold + jQuery)
+   - Location: `app/assets/javascripts/application.js`
+   - Uses `//= require` directives
+   - Compiled by Sprockets (supports ERB)
+   - Loaded via `javascript_include_tag "application"`
+   - Includes: jQuery, jquery_ujs, Active Scaffold
+
+2. **Importmap** (for modern ES6 modules)
+   - Location: `app/javascript/application.js`
+   - Uses ES6 `import`/`export` syntax
+   - Configured in `config/importmap.rb`
+   - Loaded via `javascript_importmap_tags`
+   - No build step required
+
+**Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.
+
+- **Terser**: Modern JS minification for Sprockets assets
 
 ### Development Workflow
 - Use `bin/dev` to start server with CSS file watcher
