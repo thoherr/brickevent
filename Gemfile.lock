@@ -119,6 +119,9 @@ GEM
     cow_proxy (0.3.3)
     crass (1.0.6)
     csv (3.3.0)
+    dartsass-rails (0.5.1)
+      railties (>= 6.0.0)
+      sass-embedded (~> 1.63)
     date (3.4.0)
     devise (4.9.4)
       bcrypt (~> 3.0)
@@ -139,6 +142,12 @@ GEM
     goldiloader (5.4.0)
       activerecord (>= 6.1, < 8.1)
       activesupport (>= 6.1, < 8.1)
+    google-protobuf (4.33.0-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.0-x86_64-linux-gnu)
+      bigdecimal
+      rake (>= 13)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -257,16 +266,12 @@ GEM
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
     rubyzip (2.3.2)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
+    sass-embedded (1.93.2-arm64-darwin)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.93.2-x86_64-linux-gnu)
+      google-protobuf (~> 4.31)
     sassc (2.4.0)
       ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     securerandom (0.3.1)
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
@@ -280,8 +285,9 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
-    sprockets (4.2.1)
+    sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
+      logger
       rack (>= 2.2.4, < 4)
     sprockets-rails (3.5.2)
       actionpack (>= 6.1)
@@ -293,7 +299,6 @@ GEM
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
     thor (1.3.2)
-    tilt (2.4.0)
     timeout (0.4.2)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
@@ -326,6 +331,7 @@ DEPENDENCIES
   brakeman
   capybara (>= 3.26)
   csv
+  dartsass-rails
   devise
   devise-i18n
   goldiloader
@@ -340,9 +346,10 @@ DEPENDENCIES
   rails-controller-testing
   rqrcode
   rubyzip
-  sass-rails
+  sassc
   selenium-webdriver
   simplecov
+  sprockets-rails
   sqlite3
   terser
   validate_url

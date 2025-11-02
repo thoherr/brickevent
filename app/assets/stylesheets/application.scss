@@ -1,0 +1,10 @@
+/*
+ * This is the main application stylesheet using Sass imports.
+ * Compiled by dartsass-rails into a single CSS file.
+ * Note: active_scaffold CSS is loaded via Sprockets manifest due to ERB dependencies.
+ * Note: voting.scss is compiled separately for the voting layout.
+ */
+
+@import "common";
+@import "scaffolds";
+@import "stage-style";
