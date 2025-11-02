@@ -5,7 +5,6 @@ gem 'rails-controller-testing'
 
 gem 'bootsnap'
 
-gem 'webpacker'
 
 # Use Puma as the app server
 gem 'puma'
