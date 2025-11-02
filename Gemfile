@@ -5,7 +5,6 @@ gem 'rails-controller-testing'
 
 gem 'bootsnap'
 
-gem 'webpacker'
 
 # Use Puma as the app server
 gem 'puma'
@@ -36,9 +35,10 @@ end
 
 gem 'kramdown' # our markdown library, see http://kramdown.rubyforge.org/
 
-gem 'sass-rails'
-gem 'coffee-rails'
-gem 'uglifier'
+gem 'sprockets-rails'
+gem 'sassc' # For Sprockets to compile SCSS from gems (e.g., active_scaffold)
+gem 'dartsass-rails'
+gem 'terser'
 
 gem 'brakeman'
 
