@@ -29,7 +29,14 @@ bin/rails console           # Start Rails console (alias: bin/rails c)
 ```bash
 rake test                   # Run all tests except system tests
 bin/rails test:system       # Run system tests with Capybara
-rake brakeman:check         # Run security analysis
+```
+
+### Security Checks
+```bash
+rake security:audit         # Check for vulnerable dependencies (bundler-audit)
+rake brakeman:check         # Run static security analysis (brakeman)
+rake security:check         # Run all security checks (bundler-audit + brakeman)
+rake security               # Alias for security:check
 ```
 
 ### Asset Management
@@ -105,10 +112,34 @@ Events have boolean flags controlling features:
 
 Uses Rails minitest with:
 - Model tests in `test/models/`
-- Controller tests in `test/functional/` 
+- Controller tests in `test/functional/`
 - System tests in `test/system/` using Capybara + Apparition
 - SimpleCov for coverage reporting
 - Fixtures in `test/fixtures/` for test data
+
+## Security
+
+### Continuous Security Monitoring
+
+**bundler-audit**: Checks for vulnerable gem dependencies
+- Automatically updates vulnerability database
+- Scans Gemfile.lock against known CVEs
+- Run via: `rake security:audit`
+
+**brakeman**: Static security analysis for Rails
+- Analyzes code for common vulnerabilities (SQL injection, XSS, etc.)
+- No database or tests required
+- Run via: `rake brakeman:check`
+
+**Combined Security Check**: Run both tools together
+- `rake security:check` or `rake security`
+- Recommended for CI/CD pipelines
+- Should be run before each release
+
+### Current Security Status
+- **Gem Vulnerabilities**: None (verified by bundler-audit)
+- **Code Security Warnings**: 0 (verified by brakeman)
+- Last Updated: Phase 3 (v2.10)
 
 ## Services & Background Jobs
 
