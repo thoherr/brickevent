@@ -10,10 +10,13 @@ BrickEvent is a Rails 7.2 web application for managing LEGO User Group (LUG) eve
 
 ### Setup
 ```bash
-bundle install               # Install Ruby gems
-rake db:migrate             # Run database migrations  
+bundle install               # Install Ruby gems (excludes production group by default)
+rake db:migrate             # Run database migrations
 rake db:seed                # Seed database with initial data
 ```
+
+**Note:** Bundler is configured to exclude production gems in development/test (`.bundle/config`).
+This means `mysql2` is not installed locally - development uses SQLite3 instead.
 
 ### Development Server
 ```bash
@@ -78,9 +81,13 @@ rake db:reset               # Drop, create, and migrate database
 ## Important Configuration
 
 ### Database Configuration
-- Development/test: SQLite3
-- Production: MySQL2
-- Environment variables: `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`
+- Development/test: SQLite3 (`sqlite3` gem in development/test group)
+- Production: MySQL2 (`mysql2` gem in production group)
+- Environment variables for production: `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`
+
+**Bundler Configuration:** Production gems are excluded in development/test via `.bundle/config`.
+This prevents `mysql2` from being installed locally, avoiding build failures when MySQL client
+libraries aren't available. In production, run `bundle install --with production`.
 
 ### Multi-tenancy
 - LUG selection based on request URL/domain
