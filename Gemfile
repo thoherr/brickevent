@@ -42,6 +42,7 @@ gem 'importmap-rails'
 gem 'terser'
 
 gem 'brakeman'
+gem 'bundler-audit'
 
 # https://github.com/perfectline/validates_url
 gem 'validate_url'
