@@ -38,6 +38,7 @@ gem 'kramdown' # our markdown library, see http://kramdown.rubyforge.org/
 gem 'sprockets-rails'
 gem 'sassc' # For Sprockets to compile SCSS from gems (e.g., active_scaffold)
 gem 'dartsass-rails'
+gem 'importmap-rails'
 gem 'terser'
 
 gem 'brakeman'

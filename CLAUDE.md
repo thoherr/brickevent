@@ -10,10 +10,13 @@ BrickEvent is a Rails 7.2 web application for managing LEGO User Group (LUG) eve
 
 ### Setup
 ```bash
-bundle install               # Install Ruby gems
-rake db:migrate             # Run database migrations  
+bundle install               # Install Ruby gems (excludes production group by default)
+rake db:migrate             # Run database migrations
 rake db:seed                # Seed database with initial data
 ```
+
+**Note:** Bundler is configured to exclude production gems in development/test (`.bundle/config`).
+This means `mysql2` is not installed locally - development uses SQLite3 instead.
 
 ### Development Server
 ```bash
@@ -78,9 +81,13 @@ rake db:reset               # Drop, create, and migrate database
 ## Important Configuration
 
 ### Database Configuration
-- Development/test: SQLite3
-- Production: MySQL2
-- Environment variables: `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`
+- Development/test: SQLite3 (`sqlite3` gem in development/test group)
+- Production: MySQL2 (`mysql2` gem in production group)
+- Environment variables for production: `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`
+
+**Bundler Configuration:** Production gems are excluded in development/test via `.bundle/config`.
+This prevents `mysql2` from being installed locally, avoiding build failures when MySQL client
+libraries aren't available. In production, run `bundle install --with production`.
 
 ### Multi-tenancy
 - LUG selection based on request URL/domain
@@ -123,12 +130,39 @@ Modern asset pipeline using a hybrid approach:
   - Active Scaffold CSS (has ERB dependencies, compiled via SassC)
   - Final asset serving from `public/assets/` in production
 
-### JavaScript
-- **Terser**: Modern JS minification (replaces deprecated Uglifier)
-- **jQuery**: Required by Active Scaffold
-- Sprockets with `//= require` directives in `app/assets/javascripts/application.js`
+### JavaScript (Hybrid Approach)
+
+**Two JavaScript systems work together:**
+
+1. **Sprockets** (for Active Scaffold + jQuery)
+   - Location: `app/assets/javascripts/application.js`
+   - Uses `//= require` directives
+   - Compiled by Sprockets (supports ERB)
+   - Loaded via `javascript_include_tag "application"`
+   - Includes: jQuery, jquery_ujs, Active Scaffold
+
+2. **Importmap** (for modern ES6 modules)
+   - Location: `app/javascript/application.js`
+   - Uses ES6 `import`/`export` syntax
+   - Configured in `config/importmap.rb`
+   - Loaded via `javascript_importmap_tags`
+   - No build step required
+
+**Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.
+
+- **Terser**: Modern JS minification for Sprockets assets
 
 ### Development Workflow
 - Use `bin/dev` to start server with CSS file watcher
 - CSS changes auto-rebuild via dartsass:watch
 - No CoffeeScript (removed - was unused)
+- Development/test: Assets compiled on-the-fly (`config.assets.compile = true`)
+
+### Production Deployment
+- Run `rake assets:precompile` before deployment
+- Sprockets assets (CSS, Sprockets JS) are precompiled to `public/assets/`
+- Importmap JavaScript files are served directly (no precompilation needed)
+- Production settings:
+  - `config.assets.compile = false` (no on-the-fly compilation)
+  - `config.assets.css_compressor = :sass` (CSS minification)
+- Web server (NGINX/Apache) serves precompiled assets from `public/assets/`
