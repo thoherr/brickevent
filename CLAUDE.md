@@ -32,7 +32,7 @@ rake brakeman:check         # Run security analysis
 ```bash
 rake assets:precompile      # Compile assets for production
 rake assets:clean           # Remove old compiled assets
-bundle exec webpack-dev-server  # Start webpack dev server
+rake assets:clobber         # Remove all compiled assets
 ```
 
 ### Database
@@ -109,8 +109,8 @@ Uses Rails minitest with:
 
 ## Asset Pipeline
 
-- Webpacker for JavaScript bundling
-- Sprockets for CSS/image assets
-- CoffeeScript for JavaScript files
+- **Sprockets** for all asset management (JavaScript, CSS, images)
+- CoffeeScript for JavaScript files (mostly empty template files)
 - SCSS for stylesheets
-- jQuery and custom JavaScript for interactive features
+- jQuery and Active Scaffold provided via gems
+- Traditional Rails asset pipeline with `//= require` directives
