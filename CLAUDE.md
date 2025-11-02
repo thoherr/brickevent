@@ -17,7 +17,8 @@ rake db:seed                # Seed database with initial data
 
 ### Development Server
 ```bash
-bin/rails server            # Start development server (alias: bin/rails s)
+bin/dev                     # Start server + CSS watcher (recommended)
+bin/rails server            # Start development server only (alias: bin/rails s)
 bin/rails console           # Start Rails console (alias: bin/rails c)
 ```
 
@@ -30,7 +31,9 @@ rake brakeman:check         # Run security analysis
 
 ### Asset Management
 ```bash
-rake assets:precompile      # Compile assets for production
+rake dartsass:build         # Build Sass CSS files
+rake dartsass:watch         # Watch and rebuild CSS on file changes
+rake assets:precompile      # Compile all assets for production
 rake assets:clean           # Remove old compiled assets
 rake assets:clobber         # Remove all compiled assets
 ```
@@ -109,8 +112,23 @@ Uses Rails minitest with:
 
 ## Asset Pipeline
 
-- **Sprockets** for all asset management (JavaScript, CSS, images)
-- CoffeeScript for JavaScript files (mostly empty template files)
-- SCSS for stylesheets
-- jQuery and Active Scaffold provided via gems
-- Traditional Rails asset pipeline with `//= require` directives
+Modern asset pipeline using a hybrid approach:
+
+### CSS Compilation
+- **dartsass-rails**: Compiles application SCSS files to `app/assets/builds/`
+  - `application.scss` → `application.css` (main styles)
+  - `voting.scss` → `voting.css` (voting-specific styles)
+  - Configured in `config/initializers/dartsass.rb`
+- **Sprockets**: Serves compiled CSS and handles gem stylesheets
+  - Active Scaffold CSS (has ERB dependencies, compiled via SassC)
+  - Final asset serving from `public/assets/` in production
+
+### JavaScript
+- **Terser**: Modern JS minification (replaces deprecated Uglifier)
+- **jQuery**: Required by Active Scaffold
+- Sprockets with `//= require` directives in `app/assets/javascripts/application.js`
+
+### Development Workflow
+- Use `bin/dev` to start server with CSS file watcher
+- CSS changes auto-rebuild via dartsass:watch
+- No CoffeeScript (removed - was unused)
