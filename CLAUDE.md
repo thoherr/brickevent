@@ -149,3 +149,13 @@ Modern asset pipeline using a hybrid approach:
 - Use `bin/dev` to start server with CSS file watcher
 - CSS changes auto-rebuild via dartsass:watch
 - No CoffeeScript (removed - was unused)
+- Development/test: Assets compiled on-the-fly (`config.assets.compile = true`)
+
+### Production Deployment
+- Run `rake assets:precompile` before deployment
+- Sprockets assets (CSS, Sprockets JS) are precompiled to `public/assets/`
+- Importmap JavaScript files are served directly (no precompilation needed)
+- Production settings:
+  - `config.assets.compile = false` (no on-the-fly compilation)
+  - `config.assets.css_compressor = :sass` (CSS minification)
+- Web server (NGINX/Apache) serves precompiled assets from `public/assets/`
