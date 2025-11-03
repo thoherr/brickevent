@@ -42,6 +42,9 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
+  # Disable Active Storage variant processing since we don't use image attachments
+  config.active_storage.variant_processor = :disabled
+
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
