@@ -111,7 +111,12 @@ class EventsController < ApplicationController
   private
 
   def load_event
-    @event = Event.find(params[:id])
+    @event = Event.includes(
+      attendances: [:user, :exhibits],
+      attendees: { attendance: :user },
+      exhibits: { attendance: [:user, { event: { attendances: :user } }] },
+      accommodations: :attendance
+    ).find(params[:id])
     raise 'Unauthorized request' unless authorized?(@event)
   end
 

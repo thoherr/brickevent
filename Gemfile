@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.2'
+gem 'rails', '~> 8.1'
 gem 'rails-controller-testing'
 
 gem 'bootsnap'
@@ -19,9 +19,6 @@ gem 'simplecov', require: false, group: :test
 group :production do
     gem 'mysql2'
 end
-
-# https://github.com/salsify/goldiloader
-gem 'goldiloader'
 
 gem 'json'
 

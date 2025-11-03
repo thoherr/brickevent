@@ -1,9 +1,9 @@
 class Attendance < ApplicationRecord
   belongs_to :user
   belongs_to :event
-  has_many :attendees
-  has_many :accommodations
-  has_many :exhibits
+  has_many :attendees, -> { order(id: :asc) }
+  has_many :accommodations, -> { order(id: :asc) }
+  has_many :exhibits, -> { order(id: :asc) }
 
   after_create :create_user_as_first_attendee
 
