@@ -26,12 +26,8 @@ Rails.application.configure do
   # Compress CSS using a preprocessor.
   config.assets.css_compressor = :sass
 
-  # Allow fallback to assets pipeline for importmap files (served directly)
-  # Note: Sprockets assets are still precompiled, only importmap files compile on-demand
-  config.assets.compile = true
-
-  # Don't check for precompiled importmap assets (served directly by importmap)
-  config.assets.check_precompiled_asset = false
+  # Do not fall back to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
