@@ -142,8 +142,8 @@ GEM
     drb (2.2.3)
     erubi (1.13.1)
     execjs (2.10.0)
-    ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     goldiloader (5.4.0)
@@ -186,10 +186,10 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
-    matrix (0.4.2)
+    matrix (0.4.3)
     mini_mime (1.1.5)
     minitest (5.25.5)
-    msgpack (1.7.3)
+    msgpack (1.7.5)
     mysql2 (0.5.7)
       bigdecimal
     net-imap (0.5.12)
@@ -215,7 +215,7 @@ GEM
     psych (5.2.6)
       date
       stringio
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     puma (7.1.0)
       nio4r (~> 2.0)
     racc (1.8.1)
@@ -271,7 +271,7 @@ GEM
       ffi (~> 1.0)
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    regexp_parser (2.9.2)
+    regexp_parser (2.9.3)
     reline (0.5.12)
       io-console (~> 0.5)
     request_store (1.7.0)
@@ -302,7 +302,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
-    simplecov-html (0.13.1)
+    simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
