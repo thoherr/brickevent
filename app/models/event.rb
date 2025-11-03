@@ -2,10 +2,10 @@ require 'csv'
 
 class Event < ApplicationRecord
   belongs_to :lug
-  has_many :attendances
-  has_many :attendees, :through => :attendances
-  has_many :accommodations, :through => :attendances
-  has_many :exhibits, :through => :attendances
+  has_many :attendances, -> { order(id: :asc) }
+  has_many :attendees, -> { order(id: :asc) }, :through => :attendances
+  has_many :accommodations, -> { order(id: :asc) }, :through => :attendances
+  has_many :exhibits, -> { order(id: :asc) }, :through => :attendances
   has_many :event_managers
   has_many :managers, :source => :user, :through => :event_managers
 
