@@ -29,6 +29,9 @@ Rails.application.configure do
   # Do not fall back to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  # Don't check for precompiled importmap assets (served directly by importmap)
+  config.assets.check_precompiled_asset = false
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
