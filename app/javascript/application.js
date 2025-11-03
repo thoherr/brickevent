@@ -9,7 +9,7 @@
 // Add new JavaScript features here using ES6 import/export syntax
 
 // Example: Import and use an ES6 module
-import AppInfo from "./utils/app_info";
+import AppInfo from "utils/app_info";
 
 // Initialize on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
