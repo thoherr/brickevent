@@ -105,4 +105,50 @@ class ExhibitsControllerTest < ActionController::TestCase
     assert_redirected_to event_path(@exhibit.attendance.event)
   end
 
+  test "should handle failed exhibit creation with invalid data" do
+    assert_no_difference('Exhibit.count') do
+      post :create, params: {
+        exhibit: {
+          attendance_id: @exhibit.attendance_id,
+          unit_id: @exhibit.unit_id,
+          url: "invalid-url"  # Invalid URL format
+        }
+      }
+    end
+    assert_response :success
+    assert_template :new
+  end
+
+  test "should return json error on failed create" do
+    post :create, params: {
+      exhibit: {
+        attendance_id: @exhibit.attendance_id,
+        unit_id: @exhibit.unit_id,
+        url: "invalid-url"
+      },
+      format: :json
+    }
+    assert_response :unprocessable_entity
+    assert_equal 'application/json', response.media_type
+  end
+
+  test "should handle failed exhibit update with invalid data" do
+    put :update, params: {
+      id: @exhibit.to_param,
+      exhibit: { url: "invalid-url" }
+    }
+    assert_response :success
+    assert_template :edit
+  end
+
+  test "should return json error on failed update" do
+    put :update, params: {
+      id: @exhibit.to_param,
+      exhibit: { url: "invalid-url" },
+      format: :json
+    }
+    assert_response :unprocessable_entity
+    assert_equal 'application/json', response.media_type
+  end
+
 end

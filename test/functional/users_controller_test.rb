@@ -47,4 +47,23 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to events_path
   end
 
+  test "should handle failed user update with invalid data" do
+    put :update, params: {
+      id: @user.to_param,
+      user: { email: "", name: "" }  # Invalid - required fields empty
+    }
+    assert_response :success
+    assert_template :edit
+  end
+
+  test "should return json error on failed update" do
+    put :update, params: {
+      id: @user.to_param,
+      user: { email: "", name: "" },
+      format: :json
+    }
+    assert_response :unprocessable_entity
+    assert_equal 'application/json', response.media_type
+  end
+
 end
