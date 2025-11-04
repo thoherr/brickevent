@@ -94,7 +94,7 @@ class EventsControllerTest < ActionController::TestCase
 
   end
 
-  test "should open voting for event" do
+  test "should open voting for event with HTML format" do
     @user = users(:thoherr)  # admin
     @user.confirm
     sign_in @user
@@ -107,19 +107,22 @@ class EventsControllerTest < ActionController::TestCase
     assert_equal Vote.PUBLIC_VOTES, event.reload.current_voting_scope
   end
 
-  test "should open voting with attendees scope" do
+  test "should open voting with JSON format" do
     @user = users(:thoherr)
     @user.confirm
     sign_in @user
     event = events(:three)
 
-    post :open_voting, params: { id: event.id, voting_scope: Vote.ATTENDEES_VOTES }
+    post :open_voting, params: { id: event.id, voting_scope: Vote.ATTENDEES_VOTES, format: :json }
 
-    assert_redirected_to votes_event_path(event)
+    assert_response :ok
+    assert_equal 'application/json', response.media_type
+    # Controller returns the voting scope string
+    assert_equal Vote.ATTENDEES_VOTES, response.body
     assert_equal Vote.ATTENDEES_VOTES, event.reload.current_voting_scope
   end
 
-  test "should close voting for event" do
+  test "should close voting for event with HTML format" do
     @user = users(:thoherr)  # admin
     @user.confirm
     sign_in @user
@@ -132,6 +135,24 @@ class EventsControllerTest < ActionController::TestCase
 
     assert_redirected_to votes_event_path(event)
     assert_equal I18n.t('voting_stopped'), flash[:notice]
+    assert_equal '', event.reload.current_voting_scope
+  end
+
+  test "should close voting with JSON format" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    # First open voting
+    event.update!(current_voting_scope: Vote.PUBLIC_VOTES)
+
+    post :close_voting, params: { id: event.id, format: :json }
+
+    assert_response :ok
+    assert_equal 'application/json', response.media_type
+    # Controller returns empty string
+    assert_equal '', response.body
     assert_equal '', event.reload.current_voting_scope
   end
 

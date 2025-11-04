@@ -38,7 +38,7 @@ class EventsController < ApplicationController
       respond_to do |format|
         if @event.save
           format.html { redirect_to votes_event_path(@event), :notice => t('voting_started') }
-          format.json { render :json => @event.current_voting_scope, :status => :updated, :location => @event }
+          format.json { render :json => @event.current_voting_scope, :status => :ok, :location => @event }
         else
           format.html { render :action => "votes" }
           format.json { render :json => @event.errors, :status => :unprocessable_entity }
@@ -54,7 +54,7 @@ class EventsController < ApplicationController
       respond_to do |format|
         if @event.save
           format.html { redirect_to votes_event_path(@event), :notice => t('voting_stopped') }
-          format.json { render :json => @event.current_voting_scope, :status => :updated, :location => @event }
+          format.json { render :json => @event.current_voting_scope, :status => :ok, :location => @event }
         else
           format.html { render :action => "votes" }
           format.json { render :json => @event.errors, :status => :unprocessable_entity }
