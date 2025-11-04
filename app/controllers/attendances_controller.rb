@@ -91,7 +91,6 @@ class AttendancesController < ApplicationController
   # POST /attendances/add_former_exhibit/:former_exhibit_id
   def add_former_exhibit
     load_attendance
-    # TODO
     @former_exhibit = Exhibit.find(params[:former_exhibit_id])
     respond_to do |format|
       if @attendance.add_former_exhibit! @former_exhibit
@@ -107,8 +106,6 @@ class AttendancesController < ApplicationController
   # GET /attendances/former_exhibits
   def former_exhibits
     load_attendance
-    # TODO
-    # @former_exhibits =
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @attendance }
