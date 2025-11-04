@@ -63,7 +63,7 @@ class AttendancesController < ApplicationController
       respond_to do |format|
         if @attendance.save
           format.html { redirect_to @attendance.event, :notice => 'Anmeldebestätigung geändert.' }
-          format.json { render :json => @attendance.event, :status => :updated, :location => @event }
+          format.json { render :json => @attendance.event, :status => :ok, :location => @event }
         else
           format.html { render :action => "show" }
           format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
