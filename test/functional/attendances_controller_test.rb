@@ -35,6 +35,17 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_redirected_to event_path(@attendance.event)
   end
 
+  test "should approve attendance with JSON format" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+
+    post :approve, params: { id: @attendance.id, format: :json }
+
+    assert_response :ok
+    assert_equal 'application/json', response.media_type
+  end
+
   test "should not be approvable by user" do
     assert_raise do
       post :approve, params: { id: @attendance.id }
