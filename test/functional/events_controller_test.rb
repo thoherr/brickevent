@@ -94,4 +94,69 @@ class EventsControllerTest < ActionController::TestCase
 
   end
 
+  test "should open voting for event" do
+    @user = users(:thoherr)  # admin
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    post :open_voting, params: { id: event.id, voting_scope: Vote.PUBLIC_VOTES }
+
+    assert_redirected_to votes_event_path(event)
+    assert_equal I18n.t('voting_started'), flash[:notice]
+    assert_equal Vote.PUBLIC_VOTES, event.reload.current_voting_scope
+  end
+
+  test "should open voting with attendees scope" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    post :open_voting, params: { id: event.id, voting_scope: Vote.ATTENDEES_VOTES }
+
+    assert_redirected_to votes_event_path(event)
+    assert_equal Vote.ATTENDEES_VOTES, event.reload.current_voting_scope
+  end
+
+  test "should close voting for event" do
+    @user = users(:thoherr)  # admin
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    # First open voting
+    event.update!(current_voting_scope: Vote.PUBLIC_VOTES)
+
+    post :close_voting, params: { id: event.id }
+
+    assert_redirected_to votes_event_path(event)
+    assert_equal I18n.t('voting_stopped'), flash[:notice]
+    assert_equal '', event.reload.current_voting_scope
+  end
+
+  test "should download voting posters zip" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    get :voting_posters, params: { id: event.id }
+
+    assert_response :success
+    assert_equal 'application/zip', response.media_type
+    # ZIP file magic number
+    assert response.body.start_with?("PK"), "Response should be a ZIP file"
+  end
+
+  test "unauthorized user should not access voting controls" do
+    user = users(:one)  # not admin or event manager
+    user.confirm
+    sign_in user
+
+    assert_raise do
+      post :open_voting, params: { id: events(:three).id, voting_scope: Vote.PUBLIC_VOTES }
+    end
+  end
+
 end
