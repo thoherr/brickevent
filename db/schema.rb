@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_03_194756) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
   create_table "accommodation_types", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.string "description"
@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_194756) do
     t.boolean "is_visible"
     t.string "name"
     t.datetime "updated_at", precision: nil, null: false
+    t.index ["name"], name: "index_attendee_types_on_name"
   end
 
   create_table "attendees", force: :cascade do |t|
@@ -70,6 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_194756) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["attendance_id"], name: "index_attendees_on_attendance_id"
     t.index ["attendee_type_id"], name: "index_attendees_on_attendee_type_id"
+    t.index ["is_approved"], name: "index_attendees_on_is_approved"
   end
 
   create_table "builders", force: :cascade do |t|
@@ -126,7 +128,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_194756) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "url"
     t.boolean "visible"
+    t.index ["lug_id", "registration_open", "visible"], name: "index_events_on_lug_and_registration_and_visibility"
     t.index ["lug_id"], name: "index_events_on_lug_id"
+    t.index ["start_date"], name: "index_events_on_start_date"
   end
 
   create_table "exhibits", force: :cascade do |t|
@@ -179,6 +183,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_194756) do
     t.index ["attendance_id"], name: "index_exhibits_on_attendance_id"
     t.index ["former_exhibit_id"], name: "index_exhibits_on_former_exhibit_id"
     t.index ["installation_exhibit_id"], name: "index_exhibits_on_installation_exhibit_id"
+    t.index ["is_approved"], name: "index_exhibits_on_is_approved"
+    t.index ["is_collab"], name: "index_exhibits_on_is_collab"
+    t.index ["is_installation"], name: "index_exhibits_on_is_installation"
+    t.index ["is_part_of_installation"], name: "index_exhibits_on_is_part_of_installation"
     t.index ["unit_id"], name: "index_exhibits_on_unit_id"
   end
 
@@ -236,6 +244,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_194756) do
     t.datetime "created_at", null: false
     t.string "session_id"
     t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_visitors_on_session_id", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
