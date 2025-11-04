@@ -1,6 +1,5 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
 
 <h1><%= t('room_request_for') + " " + @accommodation.event_title %></h1>
-<!-- TODO: Text for event hotel in database!!! -->
 <%= render 'form' %>
 <div class="OverviewLink"><%= link_to t('back_to_overview'), attendance_path(@accommodation.attendance_id) %></div>
