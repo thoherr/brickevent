@@ -23,3 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("⚠️ This browser may not support all modern JavaScript features");
   }
 });
+import "@hotwired/turbo-rails"
+import "controllers"

@@ -62,3 +62,5 @@ gem 'prawn'
 gem 'rubyzip'
 
 gem 'webrick', '~> 1.8'
+
+gem "hotwire-rails", "~> 0.1.3"
