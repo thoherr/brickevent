@@ -5,6 +5,7 @@
  * Note: voting.scss is compiled separately for the voting layout.
  */
 
+@use "layout";       // Modern mobile-first layout (NEW)
 @use "common";
 @use "scaffolds";
 @use "stage-style";
