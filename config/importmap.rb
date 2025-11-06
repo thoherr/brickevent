@@ -1,6 +1,6 @@
 # Pin npm packages by running ./bin/importmap
 
-pin "application"
+pin "application", preload: true
 pin "utils/app_info", to: "utils/app_info.js"
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "stimulus.min.js"

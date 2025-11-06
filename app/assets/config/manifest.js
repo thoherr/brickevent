@@ -2,7 +2,8 @@
 //= link_directory ../javascripts .js
 //= link utils/app_info.js
 //= link_tree ../builds
-//= link_tree ../../javascript .js
+//= link ../../javascript/application.js
+//= link_tree ../../javascript/controllers .js
 //= link active_scaffold_layout.css
 //= link active_scaffold_images.css
 //= link active_scaffold_jquery_ui.css
