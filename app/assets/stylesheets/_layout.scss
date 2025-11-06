@@ -50,20 +50,21 @@ body {
 }
 
 .header-meta .VersionText {
-  /* Preserve original styling from common.scss */
+  /* Smaller than original for less prominence */
   display: block;
   text-align: right;
   margin-top: 0;
   padding: 0;
+  font-size: xx-small;  /* Original size from common.scss */
 }
 
 .header-content .TitleText {
-  /* Preserve original styling from common.scss */
+  /* Larger than original for more prominence - swapped with version size */
   display: block;
   text-align: right;
   padding: 0;
   font-weight: bold;
-  font-size: x-small;  /* Original size from common.scss */
+  font-size: small;  /* Swapped: was x-small, now small for better hierarchy */
   margin: 0;
 }
 
