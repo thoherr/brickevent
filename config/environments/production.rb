@@ -26,8 +26,9 @@ Rails.application.configure do
   # Compress CSS using a preprocessor.
   config.assets.css_compressor = :sass
 
-  # Do not fall back to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  # Enable on-demand asset compilation for local production testing
+  # In real production deploy, set this to false and run rake assets:precompile
+  config.assets.compile = ENV.fetch("RAILS_ASSETS_COMPILE", "true") == "true"
 
   # Don't check for precompiled importmap assets (served directly by importmap)
   config.assets.check_precompiled_asset = false

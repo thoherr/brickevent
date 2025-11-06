@@ -5,3 +5,6 @@ Rails.application.config.assets.version = "1.0"
 
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path
+
+# Add app/javascript to asset paths so importmap can serve files in development
+Rails.application.config.assets.paths << Rails.root.join("app/javascript")
