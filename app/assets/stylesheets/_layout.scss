@@ -43,28 +43,25 @@ body {
 .header-content {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
   /* Right-align content to match original layout */
   text-align: right;
   padding-right: 2%;
 }
 
 .header-meta .VersionText {
-  /* Smaller than original for less prominence */
   display: block;
   text-align: right;
   margin-top: 0;
   padding: 0;
-  font-size: xx-small;  /* Original size from common.scss */
+  font-size: xx-small;
 }
 
 .header-content .TitleText {
-  /* Larger than original for more prominence - swapped with version size */
   display: block;
   text-align: right;
   padding: 0;
   font-weight: bold;
-  font-size: small;  /* Swapped: was x-small, now small for better hierarchy */
+  font-size: x-small;
   margin: 0;
 }
 
