@@ -12,7 +12,7 @@
       (it imports .css.erb files), so the five parts are linked individually (see also manifest.js) %>
   <%= stylesheet_link_tag "active_scaffold_layout", "active_scaffold_images", "active_scaffold_jquery_ui", "active_scaffold_extensions", "active_scaffold_colors" %>
 </head>
-<body class="<%= @stage%> <%= I18n.locale%>">
+<body class="<%= @stage%> <%= I18n.locale%>" data-turbo="false">
 
 <div id="mainTitle">
   <%= image_tag "#{@lug.logo_url}", class: "LugLogo" %>

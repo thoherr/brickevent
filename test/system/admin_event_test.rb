@@ -58,13 +58,17 @@ class AdminEventTest < ApplicationSystemTestCase
     assert has_content?('Third Event'), "Third Event"
 
     find('td', text: 'Third Event').sibling('td', class: 'actions').find('a', text: 'Bearbeiten').click
+    # Wait for Active Scaffold AJAX to load the edit form
+    # Using longer timeout as Active Scaffold uses jQuery AJAX which may be slower
+    sleep 1  # Give Active Scaffold time to initiate the request
+    assert has_content?('Editiere Third Event', wait: 10), "Editiere Third Event"
     take_screenshot
-    assert has_content?('Editiere Third Event'), "Editiere Third Event"
     find('a', text: 'Abbrechen').click
 
     find('td', text: 'Bricking Bavaria 2011').sibling('td', class: 'actions').find('a', text: 'Bearbeiten').click
+    # Wait for Active Scaffold AJAX to load the edit form
+    assert has_content?('Editiere Bricking Bavaria 2011', wait: 5), "Editiere Bricking Bavaria 2011"
     take_screenshot
-    assert has_content?('Editiere Bricking Bavaria 2011'), "Editiere Bricking Bavaria 2011"
 
     find('textarea', class: 'description-input').fill_in with: 'BB is the best'
     find('input', class: 'submit').click
