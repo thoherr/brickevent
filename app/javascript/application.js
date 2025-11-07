@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const appInfo = new AppInfo();
 
   // Log app information to demonstrate ES6 modules are working
-  appInfo.logInfo();
+  // This just causes noise (e.g. when running tests) and should therefore only used when debugging
+  // appInfo.logInfo();
 
   // Check browser compatibility
   if (!appInfo.isModernBrowser()) {
