@@ -57,6 +57,8 @@ class AdminEventTest < ApplicationSystemTestCase
     assert has_content?('MOCs'), "MOCs"
     assert has_content?('Third Event'), "Third Event"
 
+    take_screenshot
+
     find('td', text: 'Third Event').sibling('td', class: 'actions').find('a', text: 'Bearbeiten').click
     # Wait for Active Scaffold AJAX to load the edit form
     # Using longer timeout as Active Scaffold uses jQuery AJAX which may be slower
