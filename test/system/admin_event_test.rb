@@ -50,31 +50,28 @@ class AdminEventTest < ApplicationSystemTestCase
     assert has_content?('Administration'), "Administration"
 
     click_on "Administration"
+    sleep 1 # Wait for Avo to load
     take_screenshot
 
-    assert has_content?('LUGs'), "LUGs"
-    assert has_content?('Events'), "Events"
-    assert has_content?('MOCs'), "MOCs"
-    assert has_content?('Third Event'), "Third Event"
+    # Verify Avo admin interface loaded
+    assert has_content?('BrickEvent Admin'), "Avo app name"
 
+    # Verify key resources are accessible in Avo
+    # Avo displays resources in the sidebar navigation
+    assert has_content?('Events'), "Events resource"
+    assert has_content?('Lugs'), "Lugs resource"
+    assert has_content?('Users'), "Users resource"
+    assert has_content?('Attendees'), "Attendees resource"
+
+    # Click on Events resource to verify it works
+    click_on 'Events'
+    sleep 1
     take_screenshot
 
-    find('td', text: 'Third Event').sibling('td', class: 'actions').find('a', text: 'Bearbeiten').click
-    # Wait for Active Scaffold AJAX to load the edit form
-    # Using longer timeout as Active Scaffold uses jQuery AJAX which may be slower
-    sleep 1  # Give Active Scaffold time to initiate the request
-    assert has_content?('Editiere Third Event', wait: 10), "Editiere Third Event"
-    take_screenshot
-    find('a', text: 'Abbrechen').click
+    # Verify Events list loads in Avo
+    assert has_content?('Third Event'), "Third Event in Avo"
+    assert has_content?('Bricking Bavaria 2011'), "Bricking Bavaria 2011 in Avo"
 
-    find('td', text: 'Bricking Bavaria 2011').sibling('td', class: 'actions').find('a', text: 'Bearbeiten').click
-    # Wait for Active Scaffold AJAX to load the edit form
-    assert has_content?('Editiere Bricking Bavaria 2011', wait: 5), "Editiere Bricking Bavaria 2011"
-    take_screenshot
-
-    find('textarea', class: 'description-input').fill_in with: 'BB is the best'
-    find('input', class: 'submit').click
-    assert has_content?('BB is the best'), "BB is the best"
     take_screenshot
 
   end

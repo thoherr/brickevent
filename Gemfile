@@ -44,9 +44,8 @@ gem 'bundler-audit'
 # https://github.com/perfectline/validates_url
 gem 'validate_url'
 
-gem 'jquery-rails'
-
-gem 'active_scaffold', github: 'activescaffold/active_scaffold', ref: 'bce7d9bd0309f4fece73982d6a7f660ecd7068d3'
+# Modern admin framework (replaced Active Scaffold)
+gem 'avo', '~> 3.0'
 
 # use devise for user auth
 gem 'devise'

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  mount_avo
 
-  concern :active_scaffold_association, ActiveScaffold::Routing::Association.new
-  concern :active_scaffold, ActiveScaffold::Routing::Basic.new(association: true)
+  # Active Scaffold - disabled, replaced with Avo
+  # concern :active_scaffold_association, ActiveScaffold::Routing::Association.new
+  # concern :active_scaffold, ActiveScaffold::Routing::Basic.new(association: true)
 
   devise_for :users
 
@@ -45,19 +47,20 @@ Rails.application.routes.draw do
   resources :accommodation_types
   resources :attendee_types
 
-  namespace :admin do
-    resources :accommodations, concerns: :active_scaffold
-    resources :attendances, concerns: :active_scaffold
-    resources :attendees, concerns: :active_scaffold
-    resources :events, concerns: :active_scaffold
-    resources :event_managers, concerns: :active_scaffold
-    resources :exhibits, concerns: :active_scaffold
-    resources :lugs, concerns: :active_scaffold
-    resources :users, concerns: :active_scaffold
-    resources :accommodation_types, concerns: :active_scaffold
-    resources :attendee_types, concerns: :active_scaffold
-    resources :units, concerns: :active_scaffold
-  end
+  # Admin routes - will be replaced with Avo routes
+  # namespace :admin do
+  #   resources :accommodations
+  #   resources :attendances
+  #   resources :attendees
+  #   resources :events
+  #   resources :event_managers
+  #   resources :exhibits
+  #   resources :lugs
+  #   resources :users
+  #   resources :accommodation_types
+  #   resources :attendee_types
+  #   resources :units
+  # end
 
   root :to => "events#index"
 
