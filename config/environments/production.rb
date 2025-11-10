@@ -23,8 +23,8 @@ Rails.application.configure do
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
 
-  # Compress CSS using a preprocessor.
-  config.assets.css_compressor = :sass
+  # CSS is compiled and minified by dartsass-rails, no additional Sprockets compression needed
+  # config.assets.css_compressor = nil
 
   # Enable on-demand asset compilation for local production testing
   # In real production deploy, set this to false and run rake assets:precompile
