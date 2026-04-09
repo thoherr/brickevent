@@ -204,21 +204,9 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.5)
-<<<<<<< HEAD
-<<<<<<< HEAD
     nokogiri (1.19.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.2-x86_64-linux-gnu)
-=======
-    nokogiri (1.19.1-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.19.1-x86_64-linux-gnu)
->>>>>>> origin/dependabot/bundler/nokogiri-1.19.1
-=======
-    nokogiri (1.19.2-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.19.2-x86_64-linux-gnu)
->>>>>>> origin/dependabot/bundler/action_text-trix-2.1.18
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pdf-core (0.10.0)
@@ -230,11 +218,7 @@ GEM
       ttfunk (~> 1.8)
     prettyprint (0.2.0)
     prism (1.9.0)
-<<<<<<< HEAD
     psych (5.2.6)
-=======
-    psych (5.3.1)
->>>>>>> origin/dependabot/bundler/action_text-trix-2.1.18
       date
       stringio
     public_suffix (6.0.2)
@@ -340,13 +324,8 @@ GEM
     stringio (3.2.0)
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
-<<<<<<< HEAD
     thor (1.4.0)
     timeout (0.6.1)
-=======
-    thor (1.5.0)
-    timeout (0.4.4)
->>>>>>> origin/dependabot/bundler/action_text-trix-2.1.18
     tsort (0.2.0)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
