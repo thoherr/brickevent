@@ -21,7 +21,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    action_text-trix (2.1.15)
+    action_text-trix (2.1.18)
       railties
     actioncable (8.1.2.1)
       actionpack (= 8.1.2.1)
@@ -127,7 +127,7 @@ GEM
     dartsass-rails (0.5.1)
       railties (>= 6.0.0)
       sass-embedded (~> 1.63)
-    date (3.5.0)
+    date (3.5.1)
     devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -139,7 +139,7 @@ GEM
       rails-i18n
     docile (1.4.1)
     drb (2.2.3)
-    erb (5.1.3)
+    erb (6.0.2)
     erubi (1.13.1)
     execjs (2.10.0)
     ffi (1.17.2-arm64-darwin)
@@ -159,9 +159,10 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.8.1)
-    irb (1.15.3)
+    io-console (0.8.2)
+    irb (1.17.0)
       pp (>= 0.6.0)
+      prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jquery-rails (4.6.1)
@@ -204,6 +205,7 @@ GEM
       net-protocol
     nio4r (2.7.5)
 <<<<<<< HEAD
+<<<<<<< HEAD
     nokogiri (1.19.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.2-x86_64-linux-gnu)
@@ -212,6 +214,11 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.1-x86_64-linux-gnu)
 >>>>>>> origin/dependabot/bundler/nokogiri-1.19.1
+=======
+    nokogiri (1.19.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.19.2-x86_64-linux-gnu)
+>>>>>>> origin/dependabot/bundler/action_text-trix-2.1.18
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pdf-core (0.10.0)
@@ -223,7 +230,11 @@ GEM
       ttfunk (~> 1.8)
     prettyprint (0.2.0)
     prism (1.9.0)
+<<<<<<< HEAD
     psych (5.2.6)
+=======
+    psych (5.3.1)
+>>>>>>> origin/dependabot/bundler/action_text-trix-2.1.18
       date
       stringio
     public_suffix (6.0.2)
@@ -236,7 +247,7 @@ GEM
       rack (>= 3.0.0)
     rack-test (2.2.0)
       rack (>= 1.3)
-    rackup (2.2.1)
+    rackup (2.3.1)
       rack (>= 3)
     rails (8.1.2.1)
       actioncable (= 8.1.2.1)
@@ -279,12 +290,12 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    rdoc (6.15.1)
+    rdoc (7.2.0)
       erb
       psych (>= 4.0.0)
       tsort
     regexp_parser (2.11.3)
-    reline (0.6.2)
+    reline (0.6.3)
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
@@ -326,11 +337,16 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (2.7.4-arm64-darwin)
     sqlite3 (2.7.4-x86_64-linux-gnu)
-    stringio (3.1.7)
+    stringio (3.2.0)
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
+<<<<<<< HEAD
     thor (1.4.0)
     timeout (0.6.1)
+=======
+    thor (1.5.0)
+    timeout (0.4.4)
+>>>>>>> origin/dependabot/bundler/action_text-trix-2.1.18
     tsort (0.2.0)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
@@ -351,7 +367,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.3)
+    zeitwerk (2.7.5)
 
 PLATFORMS
   arm64-darwin-23
