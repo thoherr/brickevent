@@ -13,4 +13,15 @@ class AttendeeTest < ActiveSupport::TestCase
     expected_messages = {:"T-Shirts"=>["Die Anzahl muss größer 0 sein, wenn eine Größe ausgewählt wurde"]}
     assert_equal expected_messages, missing_shirt_count.errors.messages
   end
+  test "full name and to_s" do
+    attendee = attendees(:one)
+    assert_equal "Attendee One", attendee.full_name
+    assert_equal "Attendee One (Aussteller)", attendee.to_s
+  end
+
+  test "attendee name parts are optional" do
+    attendee = Attendee.new(attendance: attendances(:one), attendee_type: attendee_types(:one), given_name: "Marius")
+    assert attendee.valid?, attendee.errors.full_messages.join(", ")
+    assert_equal "Marius", attendee.full_name
+  end
 end

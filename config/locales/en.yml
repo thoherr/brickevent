@@ -31,3 +31,11 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        given_name: "Given name"
+        family_name: "Family name"
+      attendee:
+        given_name: "Given name"
+        family_name: "Family name"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_06_120000) do
   create_table "accommodation_types", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.string "description"
@@ -55,9 +55,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
     t.integer "attendee_type_id"
     t.datetime "created_at", precision: nil, null: false
     t.string "email"
+    t.string "family_name"
+    t.string "given_name"
     t.boolean "is_approved"
     t.string "lug"
-    t.string "name"
     t.boolean "needs_ticket", default: true
     t.string "nickname"
     t.integer "number_of_shirts"
@@ -222,11 +223,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
     t.string "current_sign_in_ip"
     t.string "email"
     t.string "encrypted_password", limit: 128, default: "", null: false
+    t.string "family_name"
+    t.string "given_name"
     t.boolean "is_admin"
     t.datetime "last_sign_in_at", precision: nil
     t.string "last_sign_in_ip"
     t.string "lug"
-    t.string "name"
     t.string "nickname"
     t.string "phone"
     t.datetime "remember_created_at", precision: nil

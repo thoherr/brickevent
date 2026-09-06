@@ -16,11 +16,13 @@ class UserSignupTest < ApplicationSystemTestCase
 
     mail = "myname@mymail.com"
     password = "MySecret"
-    name = "Bugs Bunny"
+    given_name = "Bugs"
+    family_name = "Bunny"
     fill_in 'user_email', :with => mail
     fill_in 'user_password', :with => password
     fill_in 'user_password_confirmation', :with => password
-    fill_in 'user_name', :with => name
+    fill_in 'user_given_name', :with => given_name
+    fill_in 'user_family_name', :with => family_name
     check 'user_accept_data_storage'
     click_on 'submit'
 
@@ -47,11 +49,13 @@ class UserSignupTest < ApplicationSystemTestCase
 
     mail = "myname@mymail.com"
     password = "MySecret"
-    name = "Bugs Bunny"
+    given_name = "Bugs"
+    family_name = "Bunny"
     fill_in 'user_email', :with => mail
     fill_in 'user_password', :with => password
     fill_in 'user_password_confirmation', :with => password
-    fill_in 'user_name', :with => name
+    fill_in 'user_given_name', :with => given_name
+    fill_in 'user_family_name', :with => family_name
     click_on 'submit'
 
     # because we didn't accept data storage we are still on the form
@@ -78,7 +82,7 @@ class UserSignupTest < ApplicationSystemTestCase
     @user = User.create!(:email => "email@email.com",
                 :password => "password",
                 :password_confirmation => "password",
-                :name => "My Name")
+                :given_name => "My", :family_name => "Name")
     @user.confirm
     visit '/users/sign_in'
     fill_in 'user_email', :with => "email@email.com"

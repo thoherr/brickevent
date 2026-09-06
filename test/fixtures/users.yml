@@ -2,7 +2,8 @@
 
 one:
   email: user42@mytestdomain.de
-  name: User One
+  given_name: User
+  family_name: One
   lug: MyString
   nickname: MyString
   address: MyString
@@ -11,7 +12,8 @@ one:
 
 two:
   email: second@mytestdomain.de
-  name: Second user
+  given_name: Second
+  family_name: user
   lug: LUG of second user
   nickname: MyString
   address: MyString
@@ -21,7 +23,8 @@ two:
 
 three:
   email: u333@mytestdomain.de
-  name: User 3
+  given_name: User
+  family_name: "3"
   lug: MyString
   nickname: MyString
   address: MyString
@@ -32,7 +35,8 @@ thoherr:
     email: mail@thoherr.de
     # test123
     encrypted_password: $2a$10$vAt64bXkDXHsAuhcBbACXur3Bvqsq.t7b0Z9Ectq42EXtIvmkoo8W
-    name: Thomas Herrmann
+    given_name: Thomas
+    family_name: Herrmann
     lug: Bricking Bavaria e. V.
     nickname: thoherr
     address: Jeschkenstr. 49, 82538 Geretsried

@@ -42,9 +42,9 @@
       <tr>
         <td><%= link_to to_yes_no(attendee.is_approved?), approve_attendee_path(attendee), :method => :post %></td>
         <td><%= attendee.attendee_type %></td>
-        <td><%= attendee.name %>
-            <% if attendee&.name && attendee&.name != attendee&.attendance&.user&.name %>
-              (<%= link_to attendee&.attendance&.user&.name, attendance_path(attendee&.attendance) %>)
+        <td><%= attendee.full_name %>
+            <% if attendee.full_name.present? && attendee.full_name != attendee&.attendance&.user&.full_name %>
+              (<%= link_to attendee&.attendance&.user&.full_name, attendance_path(attendee&.attendance) %>)
             <% end %>
         </td>
         <td><%= attendee.nickname %></td>

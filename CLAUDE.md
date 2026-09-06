@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-BrickEvent is a Rails 7.2 web application for managing LEGO User Group (LUG) event registrations, exhibitor signups, and voting systems. Originally built for LEGO KidsFest 2012, it now supports multiple LUG events on a shared database with multi-tenant capabilities based on URL routing.
+BrickEvent is a Rails 8.1 (Ruby 3.3.6) web application for managing LEGO User Group (LUG) event registrations, exhibitor signups, and voting systems. Originally built for LEGO KidsFest 2012, it now supports multiple LUG events on a shared database with multi-tenant capabilities based on URL routing.
 
 ## Development Commands
 
@@ -63,8 +63,8 @@ rake db:reset               # Drop, create, and migrate database
 - **EventManager**: Join table linking users to events they can manage
 
 ### User & Registration System  
-- **User**: Authentication via Devise with email confirmation
-- **Attendee**: Person attending an event (linked to attendance)
+- **User**: Authentication via Devise with email confirmation; person name stored as `given_name` + `family_name` (see `PersonName` concern for `full_name`)
+- **Attendee**: Person attending an event (linked to attendance); also uses `given_name` + `family_name`
 - **AttendeeType**: Categories like exhibitor, visitor, staff
 - **Attendance**: Join table linking attendees to events
 
