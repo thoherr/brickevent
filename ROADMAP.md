@@ -45,6 +45,7 @@ Once Active Scaffold is gone, Sprockets has no remaining hard dependency.
 
 - [ ] **Exhibit size attributes**: resolve the `exhibits_controller.rb` FIXME — consolidate `size_studs` / `size` / `size_x_meter?` / `size_x_centimeter?` into a normalized size + unit pair, migrate data, drop dead columns
 - [ ] Drop `events.lugname` column — use `lug_id` association exclusively
+- [x] Split `users.name` / `attendees.name` into `given_name` + `family_name` (2026-09-06, see `doc/plans/split-name-into-given-and-family-name.md`)
 - [ ] Review DB indexes added in #144 for any remaining N+1 / missing-index hotspots
 - [ ] Document the "former exhibit" historical-tracking pattern in `ARCHITECTURE.md`, or simplify it
 

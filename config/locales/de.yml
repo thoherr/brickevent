@@ -103,6 +103,13 @@ de:
       short: ""
     pm: p.m.
   activerecord:
+    attributes:
+      user:
+        given_name: "Vorname"
+        family_name: "Nachname"
+      attendee:
+        given_name: "Vorname"
+        family_name: "Nachname"
     errors:
       template: 
         body: "Die folgenden Angaben sind nicht korrekt"
@@ -135,8 +142,10 @@ de:
             email:
               blank: "Du musst eine Mailadresse angeben."
               taken: "Diese Mailadresse ist schon registriert! Bitte wähle eine andere Adresse. Falls Du Dein Passwort vergessen hast, kannst Du es mit dem Link am Ende der Seite zurücksetzen."
-            name:
-              blank: "Bitte gib' Deinen Namen an."
+            given_name:
+              blank: "Bitte gib' Deinen Vornamen an."
+            family_name:
+              blank: "Bitte gib' Deinen Nachnamen an."
             password:
               blank: "Du musst ein Passwort angeben."
               confirmation: "Die beiden eingegebenen Passwörter stimmen nicht überein. Bitte korrigieren."

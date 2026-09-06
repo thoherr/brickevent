@@ -1,5 +1,7 @@
 # encoding: utf-8
 class Attendee < ApplicationRecord
+  include PersonName
+
   belongs_to :attendance
   belongs_to :attendee_type
   validates_presence_of :attendance
@@ -36,18 +38,19 @@ class Attendee < ApplicationRecord
   end
 
   def to_s
-    "#{name} (#{attendee_type})"
+    "#{full_name} (#{attendee_type})"
   end
 
   # CSV Stuff
   def Attendee.csv_array_header(event)
-       return ["ID","Typ","Bestätigt","Name","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Zuletzt geändert"]
+       return ["ID","Typ","Bestätigt","Vorname","Nachname","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Zuletzt geändert"]
   end
 
   def csv_array
     [id,
      attendee_type.name, is_approved?,
-     StringSanitizer.sanitize_encoding(name),
+     StringSanitizer.sanitize_encoding(given_name),
+     StringSanitizer.sanitize_encoding(family_name),
      StringSanitizer.sanitize_encoding(lug),
      StringSanitizer.sanitize_encoding(nickname),
      email, phone,

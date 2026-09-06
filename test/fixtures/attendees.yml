@@ -2,7 +2,8 @@
 
 one:
   id: 101
-  name: Attendee1
+  given_name: Attendee
+  family_name: One
   lug: LUG1
   nickname: Nick1
   afols_event: true
@@ -15,7 +16,8 @@ one:
 
 two:
   id: 102
-  name: Attendee2
+  given_name: Attendee
+  family_name: Two
   lug: LUG1
   nickname: Nick2
   afols_event: false
@@ -31,7 +33,8 @@ two:
 
 three:
   id: 103
-  name: Attendee3
+  given_name: Attendee
+  family_name: Three
   lug: LUG2
   nickname: Nick3
   afols_event: true
@@ -44,7 +47,8 @@ three:
 
 four:
   id: 104
-  name: Attendee4
+  given_name: Attendee
+  family_name: Four
   lug: LUG2
   nickname: Guy without shirts
   shirt_size: XL

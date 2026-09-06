@@ -1,8 +1,12 @@
 <div class="InputForm">
   <%= form_for(@user) do |f| %>
       <div class="field">
-        <%= f.label :name, t(:label_name) %><br/>
-        <%= f.text_field :name %>
+        <%= f.label :given_name, t(:label_given_name) %><br/>
+        <%= f.text_field :given_name %>
+      </div>
+      <div class="field">
+        <%= f.label :family_name, t(:label_family_name) %><br/>
+        <%= f.text_field :family_name %>
       </div>
       <div class="field">
         <%= f.label :phone, t(:label_phone) %><br/>

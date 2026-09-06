@@ -4,7 +4,7 @@
 <% event_title = "<NO EVENT>" if event_title.nil? %>
 <% event_additional_information = @attendance.event.additional_information unless @attendance.event.nil? %>
 <% @registration_open = @attendance.event_registration_open? || user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) %>
-<% user_name = @attendance.user.name unless @attendance.user.nil? %>
+<% user_name = @attendance.user.full_name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
 <h1><%= t('attendance_for') + " " + event_title %></h1>
