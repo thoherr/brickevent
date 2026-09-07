@@ -24,6 +24,18 @@ class EventsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "admin link in navigation must not carry the current event id" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    get :show, params: { id: @event.to_param }
+    assert_response :success
+    assert_select "a[href^=?]", "/admin/events", count: 1
+    assert_select "a[href*=?]", "/admin/events/#{@event.id}", count: 0
+    assert_select "a[href^=?]", "/attendances", minimum: 1
+    assert_select "a[href*=?]", "/attendances/#{@event.id}", count: 0
+  end
+
   test "non admins should not get attendees as csv for event" do
     assert_raise do
       get :attendees_as_csv, params: { id: events(:three).to_param }
