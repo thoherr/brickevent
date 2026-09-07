@@ -84,7 +84,7 @@ class Attendee < ApplicationRecord
 
   # CSV Stuff
   def Attendee.csv_array_header(event)
-       return ["ID","Typ","Bestätigt","Vorname","Nachname","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Voucher","Bestell-Link","Zuletzt geändert"]
+       return ["ID","Typ","Bestätigt","Vorname","Nachname","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Voucher","Bestell-Link","Bestellcode","Positions-ID","Bestellstatus","Ticket-Secret","Ticket-Link","Bestellung importiert","Zuletzt geändert"]
   end
 
   def csv_array
@@ -100,6 +100,8 @@ class Attendee < ApplicationRecord
      StringSanitizer.sanitize_encoding(remarks),
      number_of_shirts, shirt_size,
      voucher_code, order_link,
+     order_code, order_position_id, order_status, ticket_secret, ticket_url,
+     order_imported_at&.strftime("%F %T"),
      updated_at.strftime("%F %T")]
   end
 

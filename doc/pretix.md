@@ -51,8 +51,8 @@ Design and background: `doc/plans/pretix-shop-integration.md`.
   are reported as failed rows.
 - If several rows exist for one attendee, the active (paid or pending) and
   newest row wins.
-- The attendee CSV export contains the voucher and the order link in the
-  columns "Voucher" and "Bestell-Link".
+- The attendee CSV export contains the voucher, the order link and the imported order data (order code, position id, status, ticket secret, ticket link, import time) in the
+  columns "Voucher", "Bestell-Link", "Bestellcode", "Positions-ID", "Bestellstatus", "Ticket-Secret", "Ticket-Link" and "Bestellung importiert".
 
 ## Security notes
 
