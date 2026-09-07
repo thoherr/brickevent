@@ -35,6 +35,9 @@
       <th><%= t('heading_event_shirt') %></th>
     <% end %>
     <th><%= t('heading_remarks') %></th>
+    <% if event&.shop_configured? %>
+      <th><%= t('heading_shop') %></th>
+    <% end %>
     <th colspan="2"></th>
   </tr>
 
@@ -80,6 +83,7 @@
             <% end %>
         <% end %>
         <td><%= attendee.remarks %></td>
+        <%= render 'attendees/shop_cell', attendee: attendee, show_voucher: true if event&.shop_configured? %>
         <td colspan="2"><%= link_to t('edit'), edit_attendee_path(attendee) %>
           <%= link_to t('delete'), attendee, :confirm => t('are_you_sure'), :method => :delete %></td>
       </tr>

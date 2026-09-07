@@ -11,6 +11,7 @@ class Event < ApplicationRecord
 
   validates :url, url: { allow_nil: true, allow_blank: true, schemes: %w[http https] }
   validates :logo_url, url: { allow_nil: true, allow_blank: true, schemes: %w[http https] }
+  validates :shop_url, url: { allow_nil: true, allow_blank: true, schemes: %w[http https] }
 
   default_scope { order('start_date desc') }
 
@@ -101,6 +102,31 @@ class Event < ApplicationRecord
     square_meters = 0.0
     approved_exhibits.each { |e| square_meters += e.required_space_in_square_meters unless e.is_part_of_installation? }
     square_meters
+  end
+
+  # pretix shop integration -------------------------------------------------
+
+  def shop_configured?
+    shop_url.present?
+  end
+
+  # shop_url with a guaranteed trailing slash, e.g. "https://pretix.eu/lug/event/"
+  def shop_base_url
+    return nil if shop_url.blank?
+
+    shop_url.end_with?('/') ? shop_url : "#{shop_url}/"
+  end
+
+  # One voucher code per line for pretix "Create multiple vouchers".
+  # By default only codes that have not been exported yet are returned;
+  # every returned attendee is marked as exported.
+  def vouchers_as_text(only_new: true)
+    scope = attendees.where.not(voucher_code: nil).reorder(:id)
+    scope = scope.where(voucher_exported_at: nil) if only_new
+    exported = scope.to_a
+    Attendee.where(id: exported.map(&:id)).update_all(voucher_exported_at: Time.current) unless exported.empty?
+    exported.map { |a| "#{a.voucher_code}
+" }.join
   end
 
   def attendees_mails

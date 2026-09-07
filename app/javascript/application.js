@@ -10,9 +10,12 @@
 
 // Example: Import and use an ES6 module
 import AppInfo from "utils/app_info";
+import { initTicketDialogs } from "shop_ticket_dialog";
 
 // Initialize on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
+  initTicketDialogs();
+
   const appInfo = new AppInfo();
 
   // Log app information to demonstrate ES6 modules are working

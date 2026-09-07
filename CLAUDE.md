@@ -106,6 +106,7 @@ Events have boolean flags controlling features:
 - `registration_open`: Allow new registrations
 - `has_tickets`: Ticket system enabled  
 - `has_moc_transport`: MOC transport coordination
+- `show_order_link`: show the personal pretix order link to approved attendees (requires `shop_url`, see `doc/pretix.md`)
 - Various edit flags controlling what users can modify
 
 ## Testing Framework
@@ -147,6 +148,7 @@ Uses Rails minitest with:
 - **VotingPosterZipfileCreation**: Creates zip files of voting materials  
 - **CsvExhibitImport**: Bulk import exhibits from CSV
 - **VotingResult**: Calculates and formats voting results
+- **CsvOrderImport**: Imports the pretix order export and stores ticket data on attendees (see `doc/pretix.md`)
 
 ## Asset Pipeline
 

@@ -34,6 +34,9 @@
       <th><%= t('heading_event_shirt') %></th>
     <% end %>
     <th><%= t('heading_remarks') %></th>
+    <% if event&.shop_configured? %>
+      <th><%= t('heading_shop') %></th>
+    <% end %>
     <th colspan="2"></th>
   </tr>
 
@@ -75,6 +78,7 @@
           </td>
         <% end %>
         <td><%= attendee.remarks %></td>
+        <%= render 'attendees/shop_cell', attendee: attendee if event&.shop_configured? %>
         <td colspan="2">
           <% if @registration_open || (event && event.edit_of_attendees_allowed?) -%>
             <%= link_to t('edit'), edit_attendee_path(attendee) %>

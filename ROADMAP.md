@@ -76,6 +76,8 @@ Once Active Scaffold is gone, Sprockets has no remaining hard dependency.
 
 ## 9. API & Integrations
 
+- [x] pretix shop integration, stages 1+2: per-attendee vouchers, order link, CSV import of ticket data (2026-09-07, `doc/pretix.md`)
+- [ ] pretix shop integration, stage 3: API sync of vouchers and orders, webhooks (`doc/plans/pretix-shop-integration.md`)
 - [ ] Formalize JSON endpoints (JSON:API or similar) with OpenAPI docs
 - [ ] Webhooks for event / attendance / voting lifecycle
 - [ ] CSV import/export hardening (template validation, scheduled exports)

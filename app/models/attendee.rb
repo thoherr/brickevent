@@ -9,6 +9,11 @@ class Attendee < ApplicationRecord
 
   validate :shirt_count_positive_when_size_given
 
+  after_create :generate_voucher_code
+
+  ORDER_STATUSES = %w[pending paid expired canceled].freeze
+  ACTIVE_ORDER_STATUSES = %w[pending paid].freeze
+
   def is_managed_by?(user)
     attendance&.is_managed_by?(user)
   end
@@ -41,9 +46,45 @@ class Attendee < ApplicationRecord
     "#{full_name} (#{attendee_type})"
   end
 
+  # pretix shop integration -------------------------------------------------
+
+  def self.voucher_code_for(attendee_id)
+    "#{attendee_id}-#{SecureRandom.uuid.upcase}"
+  end
+
+  # The voucher needs the id, so it is set right after the insert.
+  def generate_voucher_code
+    update_column(:voucher_code, Attendee.voucher_code_for(id)) if voucher_code.blank?
+  end
+
+  # Personal link into the pretix shop that redeems the attendee's voucher.
+  def order_link
+    return nil if voucher_code.blank? || event.nil? || !event.shop_configured?
+
+    "#{event.shop_base_url}redeem?voucher=#{voucher_code}"
+  end
+
+  # A pending or paid order exists in pretix; the voucher is used up.
+  def has_order?
+    order_code.present? && ACTIVE_ORDER_STATUSES.include?(order_status)
+  end
+
+  def order_pending?
+    order_code.present? && order_status == 'pending'
+  end
+
+  def show_ticket?
+    ticket_secret.present? && order_status == 'paid'
+  end
+
+  def show_order_link?
+    !!(event&.show_order_link? && order_link.present? && is_approved? && !has_order?)
+  end
+
+
   # CSV Stuff
   def Attendee.csv_array_header(event)
-       return ["ID","Typ","Bestätigt","Vorname","Nachname","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Zuletzt geändert"]
+       return ["ID","Typ","Bestätigt","Vorname","Nachname","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Voucher","Bestell-Link","Zuletzt geändert"]
   end
 
   def csv_array
@@ -58,6 +99,7 @@ class Attendee < ApplicationRecord
      afols_event, needs_ticket, option_1, option_2, option_3, option_4, option_5,
      StringSanitizer.sanitize_encoding(remarks),
      number_of_shirts, shirt_size,
+     voucher_code, order_link,
      updated_at.strftime("%F %T")]
   end
 

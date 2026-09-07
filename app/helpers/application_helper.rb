@@ -16,6 +16,11 @@ module ApplicationHelper
     user_signed_in? && current_user.is_admin?
   end
 
+  # SVG QR code of a pretix ticket secret, scannable by pretixSCAN
+  def ticket_qr_code(secret)
+    RQRCode::QRCode.new(secret).as_svg(module_size: 5, standalone: true, use_path: true, viewbox: true).html_safe
+  end
+
   def is_locale_supported?(locale)
     ApplicationController.supported_locales.include? locale
   end

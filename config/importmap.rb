@@ -2,3 +2,4 @@
 
 pin "application"
 pin "utils/app_info", to: "utils/app_info.js"
+pin "shop_ticket_dialog", to: "shop_ticket_dialog.js"
