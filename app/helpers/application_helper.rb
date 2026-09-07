@@ -12,6 +12,13 @@ module ApplicationHelper
     if value then t('yes') else t('no') end
   end
 
+  # Favicon of the current LUG; nothing is rendered when no favicon is configured.
+  def lug_favicon_link_tag(lug)
+    return nil if lug.nil? || lug.favicon_url.blank?
+
+    favicon_link_tag lug.favicon_url
+  end
+
   def user_is_admin?
     user_signed_in? && current_user.is_admin?
   end
