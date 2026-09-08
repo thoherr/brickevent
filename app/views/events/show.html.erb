@@ -40,6 +40,19 @@
     </p>
     <%= render 'attendees/exportlist', :attendees => @event.attendees, :event => @event %>
 
+    <% if @event.shop_configured? %>
+      <h3><%= t('shop_heading') %></h3>
+      <div class="Indented ShopTools">
+        <%= button_to t('export_pretix_vouchers'), vouchers_as_text_event_path(@event) %>
+        <%= button_to t('export_pretix_vouchers_all'), vouchers_as_text_event_path(@event, all: 1) %>
+        <%= form_tag order_import_event_path(@event), method: :post, multipart: true do %>
+          <%= file_field_tag :file, accept: ".csv" %><br/>
+          <%= submit_tag t('import_order_csv') %>
+        <% end %>
+        <p class="Hint"><%= t('import_order_csv_hint') %></p>
+      </div>
+    <% end %>
+
     <h2>MOC-Liste
       <%= button_to t('export_exhibit_csv'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
     </h2>

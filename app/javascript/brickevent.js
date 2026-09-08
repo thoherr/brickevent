@@ -1,5 +1,7 @@
 // Entry point for modern ES6 JavaScript loaded via importmap
 // Configure your import map in config/importmap.rb
+// (named brickevent.js, not application.js, because app/assets/javascripts/application.js
+//  is the Sprockets bundle and would shadow this file in the asset load path)
 // Read more: https://github.com/rails/importmap-rails
 //
 // Note: This app uses a hybrid JavaScript setup:
@@ -10,9 +12,12 @@
 
 // Example: Import and use an ES6 module
 import AppInfo from "utils/app_info";
+import { initTicketDialogs } from "shop_ticket_dialog";
 
 // Initialize on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
+  initTicketDialogs();
+
   const appInfo = new AppInfo();
 
   // Log app information to demonstrate ES6 modules are working

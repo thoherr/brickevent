@@ -6,14 +6,14 @@ class EventTest < ActiveSupport::TestCase
 
   test "generate attendees csv" do
     event1 = events(:one)
-    assert_equal "ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;;;;;;Bemerkungen;Anzahl Event-Shirts;Shirt-Größe;Zuletzt geändert\n",
+    assert_equal "ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;;;;;;Bemerkungen;Anzahl Event-Shirts;Shirt-Größe;Voucher;Bestell-Link;Bestellcode;Positions-ID;Bestellstatus;Ticket-Secret;Ticket-Link;Bestellung importiert;Zuletzt geändert\n",
                  event1.attendees_as_csv
     event3 = events(:three)
     assert_equal 3, event3.number_of_attendees
-    assert_equal "ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Our wonderful first option;;Some weird thing;Another weird thing;;Bemerkungen;Anzahl Event-Shirts;Shirt-Größe;Zuletzt geändert\n" +
-                   "101;Aussteller;false;Attendee;One;LUG1;Nick1;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;false;false;false;false;Glad to see you;;;2018-07-30 00:00:00\n" +
-                   "102;Aussteller;false;Attendee;Two;LUG1;Nick2;;MyString;MyString;false;false;true;false;false;true;false;Hi, there;2;2XL;2018-07-20 00:00:00\n" +
-                   "103;Helfer;false;Attendee;Three;LUG2;Nick3;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;true;false;false;true;None;;;2018-06-21 00:00:00\n",
+    assert_equal "ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Our wonderful first option;;Some weird thing;Another weird thing;;Bemerkungen;Anzahl Event-Shirts;Shirt-Größe;Voucher;Bestell-Link;Bestellcode;Positions-ID;Bestellstatus;Ticket-Secret;Ticket-Link;Bestellung importiert;Zuletzt geändert\n" +
+                   "101;Aussteller;true;Attendee;One;LUG1;Nick1;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;false;false;false;false;Glad to see you;;;101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101;https://pretix.example.com/lug1/ev3/redeem?voucher=101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101;;;;;;;2018-07-30 00:00:00\n" +
+                   "102;Aussteller;false;Attendee;Two;LUG1;Nick2;;MyString;MyString;false;false;true;false;false;true;false;Hi, there;2;2XL;102-0F4C4A3E-1F2B-4C3D-8E9F-000000000102;https://pretix.example.com/lug1/ev3/redeem?voucher=102-0F4C4A3E-1F2B-4C3D-8E9F-000000000102;;;;;;;2018-07-20 00:00:00\n" +
+                   "103;Helfer;true;Attendee;Three;LUG2;Nick3;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;true;false;false;true;None;;;103-0F4C4A3E-1F2B-4C3D-8E9F-000000000103;https://pretix.example.com/lug1/ev3/redeem?voucher=103-0F4C4A3E-1F2B-4C3D-8E9F-000000000103;ABC12;1;paid;s3cr3tt1ck3t;https://pretix.example.com/lug1/ev3/ticket/ABC12/1/websecret/;2018-06-22 00:00:00;2018-06-21 00:00:00\n",
                  event3.attendees_as_csv
   end
 
@@ -126,4 +126,33 @@ class EventTest < ActiveSupport::TestCase
     assert event.valid?
   end
 
+  test "shop configuration" do
+    assert events(:three).shop_configured?
+    assert_equal "https://pretix.example.com/lug1/ev3/", events(:three).shop_base_url
+    assert_not events(:one).shop_configured?
+    assert_nil events(:one).shop_base_url
+    event = Event.new(shop_url: "https://pretix.example.com/lug1/ev3")
+    assert_equal "https://pretix.example.com/lug1/ev3/", event.shop_base_url
+  end
+
+  test "shop url must be a http(s) url" do
+    event = events(:three)
+    event.shop_url = "javascript:alert(1)"
+    assert_not event.valid?
+    event.shop_url = ""
+    assert event.valid?
+  end
+
+  test "vouchers as text exports new vouchers once" do
+    event = events(:three)
+    codes = event.attendees.map(&:voucher_code)
+    assert_equal 3, codes.size
+
+    text = event.vouchers_as_text
+    assert_equal codes.map { |c| "#{c}\n" }.join, text
+    assert event.attendees.reload.all? { |a| a.voucher_exported_at.present? }
+
+    assert_equal "", event.vouchers_as_text, "second export contains no new vouchers"
+    assert_equal codes.map { |c| "#{c}\n" }.join, event.vouchers_as_text(only_new: false)
+  end
 end

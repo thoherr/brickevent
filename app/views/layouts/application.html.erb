@@ -3,12 +3,12 @@
 <html>
 <head>
   <title><%= titleline %></title>
-  <%= favicon_link_tag "#{@lug.favicon_url}" %>
+  <%= lug_favicon_link_tag @lug %>
   <meta name="application-name" content="<%= "#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
   <meta name="description" content="<%= "#{@lug.name} event management" %>">
   <meta name="copyright" content="(c) 2010-2024 Thomas Herrmann <mail@thoherr.de>">
   <%= render "shared/meta_includes" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_importmap_tags "brickevent" %>
 </head>
 <body class="<%= @stage%> <%= I18n.locale%>">
 

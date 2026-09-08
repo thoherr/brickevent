@@ -106,6 +106,7 @@ Events have boolean flags controlling features:
 - `registration_open`: Allow new registrations
 - `has_tickets`: Ticket system enabled  
 - `has_moc_transport`: MOC transport coordination
+- `show_order_link`: show the personal pretix order link to approved attendees (requires `shop_url`, see `doc/pretix.md`)
 - Various edit flags controlling what users can modify
 
 ## Testing Framework
@@ -147,6 +148,7 @@ Uses Rails minitest with:
 - **VotingPosterZipfileCreation**: Creates zip files of voting materials  
 - **CsvExhibitImport**: Bulk import exhibits from CSV
 - **VotingResult**: Calculates and formats voting results
+- **CsvOrderImport**: Imports the pretix order export and stores ticket data on attendees (see `doc/pretix.md`)
 
 ## Asset Pipeline
 
@@ -173,10 +175,11 @@ Modern asset pipeline using a hybrid approach:
    - Includes: jQuery, jquery_ujs, Active Scaffold
 
 2. **Importmap** (for modern ES6 modules)
-   - Location: `app/javascript/application.js`
+   - Location: `app/javascript/brickevent.js` (entry point; not named `application.js` because the Sprockets bundle of the same name shadows it in the asset load path)
    - Uses ES6 `import`/`export` syntax
    - Configured in `config/importmap.rb`
-   - Loaded via `javascript_importmap_tags`
+   - Loaded via `javascript_importmap_tags "brickevent"`
+   - Every file under `app/javascript` is linked in `app/assets/config/manifest.js` (`link_tree`), so new modules only need a pin in `config/importmap.rb`
    - No build step required
 
 **Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.

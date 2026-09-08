@@ -1,13 +1,13 @@
 # Implementation Plan: pretix Shop Integration for Attendees
 
-Status: proposed (2026-09-07)
+Status: stages 1 and 2 implemented (2026-09-07), stage 3 open
 Related: `doc/plans/split-name-into-given-and-family-name.md` (PR #158)
 
 ## 1. Goal
 
 Attendees order and pay event items (parking, event sets, shirts, catering,
 tickets) in a pretix shop. BrickEvent identifies each attendee towards pretix
-with a per-attendee voucher ("coupon"), shows the personal order link in the
+with a per-attendee voucher ("voucher"), shows the personal order link in the
 attendance view, and later shows the resulting ticket (link to the pretix
 ticket page and a QR code of the ticket secret) in the same place.
 
@@ -33,8 +33,8 @@ Integration is staged: CSV export/import first, pretix REST API later.
 ```
 BrickEvent                                   pretix
 ----------                                   ------
-attendee created ──► coupon "ID-UUID"
-attendee CSV export (incl. coupon) ────────► Create multiple vouchers (paste codes)
+attendee created ──► voucher "ID-UUID"
+attendee CSV export (incl. voucher) ────────► Create multiple vouchers (paste codes)
 attendance view: order link per attendee ──► /redeem?voucher=CODE → event product + add-ons → order
                                              Export "Order data" (positions sheet)
 order position import ◄──────────────────────── row with Voucher = main position:
@@ -48,17 +48,17 @@ Verified against the pretix API docs and the pretix source (master, 2026-09).
 
 | # | Topic | Finding | Consequence for BrickEvent |
 |---|---|---|---|
-| 1 | Voucher code format | `code` is a CharField, max 255, min 5 characters, no character restriction. **pretix uppercases the code on save** and matches case-insensitively on redemption. Unique per pretix event (case-insensitive). | Generate the coupon in upper case (`"#{id}-#{SecureRandom.uuid.upcase}"`, 39 chars). Compare case-insensitively on import. Attendee id prefix guarantees uniqueness. |
+| 1 | Voucher code format | `code` is a CharField, max 255, min 5 characters, no character restriction. **pretix uppercases the code on save** and matches case-insensitively on redemption. Unique per pretix event (case-insensitive). | Generate the voucher in upper case (`"#{id}-#{SecureRandom.uuid.upcase}"`, 39 chars). Compare case-insensitively on import. Attendee id prefix guarantees uniqueness. |
 | 2 | Redeem link | `https://<host>/<organizer>/<event>/redeem?voucher=<CODE>` (parameter name `voucher`). | Event needs a configurable shop base URL; BrickEvent builds the link. |
 | 3 | Voucher and add-ons | The voucher is redeemed by the event product only; add-on positions do not consume voucher usages and carry no voucher in the export. With `max_usages = 1` exactly one main position per attendee exists. | The row with the voucher is the attendee's ticket. Add-on rows are identified by "Add-on to position ID" + order code if they are ever needed. |
-| 4 | Voucher import | pretix has "Create multiple vouchers" (paste one code per line with shared settings) and the API endpoint `vouchers/batch_create`. There is no field-mapped CSV import. The bulk form rejects the whole batch if one code already exists. | Provide a plain code list export ("pretix voucher list") in addition to the coupon column in the attendee CSV. Track `coupon_exported_at` so the list can contain only new codes for incremental imports. |
+| 4 | Voucher import | pretix has "Create multiple vouchers" (paste one code per line with shared settings) and the API endpoint `vouchers/batch_create`. There is no field-mapped CSV import. The bulk form rejects the whole batch if one code already exists. | Provide a plain code list export ("pretix voucher list") in addition to the voucher column in the attendee CSV. Track `voucher_exported_at` so the list can contain only new codes for incremental imports. |
 | 5 | Order export | pretix "Order data" exporter, positions sheet. Relevant columns: Order code, Position ID, Status, Product, Variation, Attendee name, Attendee email, **Voucher**, Pseudonymization ID, **Ticket secret**, Add-on to position ID, **Position order link** (last column). **Headers and the Status text are localized** according to the pretix UI language at export time. | Export from pretix in English (fixed mapping), accept German header aliases as fallback. Map status text to a small enum. |
 | 6 | Position order link | Points to the pretix **position page** `/ticket/<order>/<positionid>/<web_secret>/`, which shows the position with its add-ons and offers the PDF download. It is not the PDF itself. | Show it as "Ticket" link. The PDF URL could be derived (`.../download/<pid>/pdf`) but the page is the more robust target. |
 | 7 | Cancelled and repeated orders | Cancelling an order releases the voucher, so an attendee can order again. The export then contains two rows with the same voucher (one canceled, one active). Orders can also be pending or expired. | Import keeps the non-canceled row (newest order date if several), stores the status, and shows the ticket only for paid orders. |
 | 8 | QR code | pretix ticket QR codes contain exactly the position `secret`; pretixSCAN scans that string. | A QR code rendered from the secret is a valid substitute ticket. `rqrcode` is already a dependency. |
 | 9 | Imported URLs | The ticket link comes from an uploaded file. | Validate on import that the URL starts with the event's shop base URL, otherwise reject the row (prevents injected links). |
 | 10 | Existing `has_tickets` / `needs_ticket` | These flags describe LUG-issued tickets. | Keep them untouched. The new `show_order_link` is independent. Whether `needs_ticket` becomes obsolete for shop events is a later decision. |
-| 11 | Personal data | The coupon contains only attendee id + random UUID. Order data (name, address, payment) is entered by the attendee in pretix. | No additional personal data leaves BrickEvent. Mention the shop in the privacy text. |
+| 11 | Personal data | The voucher contains only attendee id + random UUID. Order data (name, address, payment) is entered by the attendee in pretix. | No additional personal data leaves BrickEvent. Mention the shop in the privacy text. |
 | 12 | API (stage 3) | Order positions can be listed per event with filters (`voucher`, `secret`, `search`, `item`, `order__status`); each position carries `downloads` (output + URL), `secret`, `voucher`, `addon_to`. Webhooks (`pretix.event.order.placed`, `paid`, changed, canceled, check-in) deliver only identifiers, the receiver must fetch details via API and be idempotent. | The attendee columns from stage 2 are directly reusable; the sync replaces the CSV round trip. |
 
 Conclusion: with the event-product plus add-ons setup the proposed workflow
@@ -69,8 +69,8 @@ is consistent, and the ticket data can live directly on the attendee row.
 ### `attendees`
 | Column | Type | Notes |
 |---|---|---|
-| `coupon_code` | string, unique index | `"#{id}-#{UUID}"` upper case, set `after_create`, backfilled by migration (stage 1) |
-| `coupon_exported_at` | datetime, nullable | set by the voucher list export, enables incremental pretix import (stage 1) |
+| `voucher_code` | string, unique index | `"#{id}-#{UUID}"` upper case, set `after_create`, backfilled by migration (stage 1) |
+| `voucher_exported_at` | datetime, nullable | set by the voucher list export, enables incremental pretix import (stage 1) |
 | `order_code` | string, nullable | pretix order code of the main position (stage 2) |
 | `order_position_id` | integer, nullable | pretix position id of the main position (stage 2) |
 | `order_status` | string, nullable | `pending`, `paid`, `expired`, `canceled` (stage 2) |
@@ -96,29 +96,29 @@ equals the attendee's `order_position_id`) or from the API (`addon_to`).
 ## 6. Model behaviour
 
 - `Attendee`
-  - `after_create :generate_coupon_code` (uses `update_column`, needs the id)
-  - `order_link` → `"#{event.shop_url}redeem?voucher=#{coupon_code}"` (nil if event has no `shop_url`)
-  - `show_order_link?` → `event.show_order_link? && coupon_code.present? && is_approved? && !show_ticket?` (see §9 decisions 2 and 4)
+  - `after_create :generate_voucher_code` (uses `update_column`, needs the id)
+  - `order_link` → `"#{event.shop_url}redeem?voucher=#{voucher_code}"` (nil if event has no `shop_url`)
+  - `show_order_link?` → `event.show_order_link? && voucher_code.present? && is_approved? && !show_ticket?` (see §9 decisions 2 and 4)
   - `show_ticket?` → `ticket_secret.present? && order_status == 'paid'` (see §9 decision 3)
   - `order_pending?` → `order_status == 'pending'` (for a hint text)
-  - CSV: new columns "Coupon" and "Bestell-Link", inserted before "Zuletzt geändert" so the last column stays stable (see §9 decision 5)
+  - CSV: new columns "Voucher" and "Bestell-Link", inserted before "Zuletzt geändert" so the last column stays stable (see §9 decision 5)
 - `Event`
-  - `vouchers_as_text(only_new: true)` → one coupon per line for pretix bulk creation, marks `coupon_exported_at`
+  - `vouchers_as_text(only_new: true)` → one voucher per line for pretix bulk creation, marks `voucher_exported_at`
   - `shop_configured?` → `shop_url.present?`
 
 ## 7. Stages
 
-### Stage 1: coupon and order link (CSV export only)
+### Stage 1: voucher and order link (CSV export only)
 
-1. Migration `AddCouponCodeToAttendees`: add `coupon_code`, `coupon_exported_at` + unique index, backfill all existing attendees (`"#{id}-#{UUID}"`, plain SQL loop like the name split).
+1. Migration `AddVoucherCodeToAttendees`: add `voucher_code`, `voucher_exported_at` + unique index, backfill all existing attendees (`"#{id}-#{UUID}"`, plain SQL loop like the name split).
 2. Migration `AddShopFieldsToEvents`: `show_order_link`, `shop_url`.
-3. `Attendee#generate_coupon_code` callback, `#order_link`, `#show_order_link?`; `Event#shop_configured?`.
-4. Attendee CSV export: add "Coupon" and "Bestell-Link" columns (`Attendee.csv_array_header` / `#csv_array`). Update the two CSV tests (`test/models/event_test.rb`, `test/functional/events_controller_test.rb`).
-5. New action `EventsController#vouchers_as_text` (POST, manager/admin only, like `attendees_as_csv`): returns `text/plain`, one coupon per line, parameter `all=1` to include already exported ones; sets `coupon_exported_at`. Button on `events/show.html.erb` next to the attendee CSV button, only when `shop_configured?`.
-6. Attendance view: in `attendees/_table.html.erb` add a column "Shop" (header only when `event.shop_configured?`), cell shows `link_to t('order_link'), attendee.order_link, target: '_blank', rel: 'noopener'` when `attendee.show_order_link?`. Same column in `attendees/_exportlist.html.erb` for managers (shows the coupon code as text).
+3. `Attendee#generate_voucher_code` callback, `#order_link`, `#show_order_link?`; `Event#shop_configured?`.
+4. Attendee CSV export: add "Voucher" and "Bestell-Link" columns (`Attendee.csv_array_header` / `#csv_array`). Update the two CSV tests (`test/models/event_test.rb`, `test/functional/events_controller_test.rb`).
+5. New action `EventsController#vouchers_as_text` (POST, manager/admin only, like `attendees_as_csv`): returns `text/plain`, one voucher per line, parameter `all=1` to include already exported ones; sets `voucher_exported_at`. Button on `events/show.html.erb` next to the attendee CSV button, only when `shop_configured?`.
+6. Attendance view: in `attendees/_table.html.erb` add a column "Shop" (header only when `event.shop_configured?`), cell shows `link_to t('order_link'), attendee.order_link, target: '_blank', rel: 'noopener'` when `attendee.show_order_link?`. Same column in `attendees/_exportlist.html.erb` for managers (shows the voucher code as text).
 7. Admin: add `:show_order_link, :shop_url` to `Admin::EventsController` column list.
 8. Locales: `heading_shop`, `order_link`, `export_pretix_vouchers`, hints; German and English.
-9. Tests: coupon generation + format + uniqueness, backfill migration on sample data, `order_link` with and without `shop_url`, visibility helper, CSV columns, voucher list export incl. `coupon_exported_at` behaviour and authorization, view test that the link appears only when `show_order_link` is set.
+9. Tests: voucher generation + format + uniqueness, backfill migration on sample data, `order_link` with and without `shop_url`, visibility helper, CSV columns, voucher list export incl. `voucher_exported_at` behaviour and authorization, view test that the link appears only when `show_order_link` is set.
 10. Docs: CLAUDE.md feature flags, ROADMAP.md, short operator guide `doc/pretix.md` (pretix setup from §2, export in English).
 
 ### Stage 2: order import and ticket display
@@ -140,7 +140,7 @@ equals the attendee's `order_position_id`) or from the API (`addon_to`).
 
 1. Config: `pretix_organizer`, `pretix_event` on events, API token per LUG in credentials.
 2. `PretixClient` (Faraday or Net::HTTP) with pagination.
-3. Voucher sync: `vouchers/batch_create` for attendees without `coupon_exported_at`, with the voucher settings from §2; replaces the paste step.
+3. Voucher sync: `vouchers/batch_create` for attendees without `voucher_exported_at`, with the voucher settings from §2; replaces the paste step.
 4. Order sync job: list `orderpositions` for the event, keep positions with a voucher, update the attendee columns; use `downloads` URL for the PDF when preferred. Triggered manually from the event page first, later scheduled.
 5. Webhook endpoint (`POST /pretix/webhook`), idempotent, reacts to order placed/paid/changed/canceled by fetching the order and re-syncing its main position; disable CSRF for that route only.
 6. Retire the CSV import UI once the sync is stable (keep the service for emergencies).
@@ -148,7 +148,7 @@ equals the attendee's `order_position_id`) or from the API (`addon_to`).
 ## 8. Security and privacy notes
 
 - All new actions go through the existing `authorized?`/`is_managed_by?` checks; attendance view is already owner/manager/admin only.
-- `coupon_code` is a bearer secret for the pretix shop: never show it on public pages, never log it.
+- `voucher_code` is a bearer secret for the pretix shop: never show it on public pages, never log it.
 - Imported `ticket_url` is validated against `shop_url`; `link_to` gets `rel="noopener"`.
 - Run `rake security` after each stage (brakeman will flag the external `link_to` with dynamic URLs if the validation is missing).
 - Privacy text: mention that ordering happens in the LUG's pretix shop.
@@ -157,10 +157,10 @@ equals the attendee's `order_position_id`) or from the API (`addon_to`).
 
 | # | Question | Default |
 |---|---|---|
-| 1 | Coupon for every attendee, or only for events with `shop_url`? | Every attendee (cheap, avoids a second backfill later) |
+| 1 | Voucher for every attendee, or only for events with `shop_url`? | Every attendee (cheap, avoids a second backfill later) |
 | 2 | Show the order link only for approved attendees? | Yes, require `is_approved?` so unapproved registrations cannot buy the event product |
 | 3 | Ticket shown for `paid` only, or also `pending`? | `paid` only; pending shows a "payment pending" hint |
 | 4 | Once a ticket exists, hide the order link entirely (as proposed) or keep a small "order more" link? | Hide, as proposed; add-ons are ordered together with the event product |
-| 5 | Where to place the coupon columns in the attendee CSV? | Before "Zuletzt geändert" |
+| 5 | Where to place the voucher columns in the attendee CSV? | Before "Zuletzt geändert" |
 | 6 | pretix export separator and language | Export in English; importer detects `,` vs `;` |
 | 7 | Store add-on positions in BrickEvent? | Not in stage 1 and 2; optional `shop_order_addons` table later |

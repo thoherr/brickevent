@@ -34,6 +34,8 @@ three:
   description: MyString
   location: MyString
   url: https://three.example.com
+  shop_url: https://pretix.example.com/lug1/ev3/
+  show_order_link: true
   lugname: LUG1
   lug: lugone
   registration_open: true

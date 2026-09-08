@@ -24,6 +24,18 @@ class EventsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "admin link in navigation must not carry the current event id" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    get :show, params: { id: @event.to_param }
+    assert_response :success
+    assert_select "a[href^=?]", "/admin/events", count: 1
+    assert_select "a[href*=?]", "/admin/events/#{@event.id}", count: 0
+    assert_select "a[href^=?]", "/attendances", minimum: 1
+    assert_select "a[href*=?]", "/attendances/#{@event.id}", count: 0
+  end
+
   test "non admins should not get attendees as csv for event" do
     assert_raise do
       get :attendees_as_csv, params: { id: events(:three).to_param }
@@ -36,10 +48,10 @@ class EventsControllerTest < ActionController::TestCase
     sign_in @user
     get :attendees_as_csv, params: { id: events(:three).to_param }
     assert_response :success
-    assert_equal "ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Our wonderful first option;;Some weird thing;Another weird thing;;Bemerkungen;Anzahl Event-Shirts;Shirt-Größe;Zuletzt geändert\n" +
-                   "101;Aussteller;false;Attendee;One;LUG1;Nick1;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;false;false;false;false;Glad to see you;;;2018-07-30 00:00:00\n" +
-                   "102;Aussteller;false;Attendee;Two;LUG1;Nick2;;MyString;MyString;false;false;true;false;false;true;false;Hi, there;2;2XL;2018-07-20 00:00:00\n" +
-                   "103;Helfer;false;Attendee;Three;LUG2;Nick3;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;true;false;false;true;None;;;2018-06-21 00:00:00\n",
+    assert_equal "ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;AFOLs-Abend;Ticket;Our wonderful first option;;Some weird thing;Another weird thing;;Bemerkungen;Anzahl Event-Shirts;Shirt-Größe;Voucher;Bestell-Link;Bestellcode;Positions-ID;Bestellstatus;Ticket-Secret;Ticket-Link;Bestellung importiert;Zuletzt geändert\n" +
+                   "101;Aussteller;true;Attendee;One;LUG1;Nick1;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;false;false;false;false;Glad to see you;;;101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101;https://pretix.example.com/lug1/ev3/redeem?voucher=101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101;;;;;;;2018-07-30 00:00:00\n" +
+                   "102;Aussteller;false;Attendee;Two;LUG1;Nick2;;MyString;MyString;false;false;true;false;false;true;false;Hi, there;2;2XL;102-0F4C4A3E-1F2B-4C3D-8E9F-000000000102;https://pretix.example.com/lug1/ev3/redeem?voucher=102-0F4C4A3E-1F2B-4C3D-8E9F-000000000102;;;;;;;2018-07-20 00:00:00\n" +
+                   "103;Helfer;true;Attendee;Three;LUG2;Nick3;;+49 171 5715348;Jeschkenstr. 49, 82538 Geretsried;true;true;false;true;false;false;true;None;;;103-0F4C4A3E-1F2B-4C3D-8E9F-000000000103;https://pretix.example.com/lug1/ev3/redeem?voucher=103-0F4C4A3E-1F2B-4C3D-8E9F-000000000103;ABC12;1;paid;s3cr3tt1ck3t;https://pretix.example.com/lug1/ev3/ticket/ABC12/1/websecret/;2018-06-22 00:00:00;2018-06-21 00:00:00\n",
                  response.body.encode(Encoding::UTF_8)
   end
 
@@ -92,6 +104,60 @@ class EventsControllerTest < ActionController::TestCase
     assert_equal I18n.t('moc_data_imported_stats_notice', import: 7, import2: 2, import3: 3), flash[:notice]
     assert_equal I18n.t('failed_moc_ids', inspect: "[\"44\", \"48\"]"), flash[:alert]
 
+  end
+
+  test "non managers should not get vouchers as text" do
+    assert_raise do
+      post :vouchers_as_text, params: { id: events(:three).to_param }
+    end
+  end
+
+  test "admin should get vouchers as text" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    post :vouchers_as_text, params: { id: event.to_param }
+    assert_response :success
+    assert_equal "text/plain", response.media_type
+    assert_equal event.attendees.map { |a| "#{a.voucher_code}\n" }.join, response.body
+
+    post :vouchers_as_text, params: { id: event.to_param }
+    assert_equal "", response.body
+
+    post :vouchers_as_text, params: { id: event.to_param, all: 1 }
+    assert_equal 3, response.body.lines.size
+  end
+
+  test "non managers should not import orders" do
+    assert_raise do
+      post :order_import, params: { id: events(:three).to_param, file: file_fixture_upload('pretix_orders_valid.csv', 'text/csv') }
+    end
+  end
+
+  test "admin should import pretix orders" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    post :order_import, params: { id: event.id }
+    assert_redirected_to event_path(event)
+    assert_equal I18n.t('no_file_added'), flash[:notice]
+
+    post :order_import, params: { id: event.id, file: file_fixture_upload('pretix_orders_valid.csv', 'text/csv') }
+    assert_redirected_to event_path(event)
+    assert_equal I18n.t('order_data_imported_stats_notice', ignored: 1, failed: 1, imported: 2), flash[:notice]
+    assert_equal I18n.t('failed_order_rows', inspect: "row 5: unknown voucher"), flash[:alert]
+
+    one = attendees(:one).reload
+    assert_equal "QX7YP", one.order_code
+    assert_equal "secret-101-main", one.ticket_secret
+    assert one.show_ticket?
+    two = attendees(:two).reload
+    assert_equal "pending", two.order_status
+    assert two.order_pending?
   end
 
   test "should open voting for event with HTML format" do
