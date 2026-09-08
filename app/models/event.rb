@@ -117,16 +117,20 @@ class Event < ApplicationRecord
     shop_url.end_with?('/') ? shop_url : "#{shop_url}/"
   end
 
-  # One voucher code per line for pretix "Create multiple vouchers".
-  # By default only codes that have not been exported yet are returned;
-  # every returned attendee is marked as exported.
-  def vouchers_as_text(only_new: true)
-    scope = attendees.where.not(voucher_code: nil).reorder(:id)
+  # Voucher list for pretix "Create multiple vouchers": one attendee per line with
+  # id, name, email and voucher code (the voucher column is what gets pasted into
+  # pretix, the other columns identify the person). By default only vouchers that
+  # have not been exported yet are returned; every returned attendee is marked
+  # as exported.
+  def vouchers_as_csv(only_new: true)
+    scope = attendees.includes(attendance: :user).where.not(voucher_code: nil).reorder(:id)
     scope = scope.where(voucher_exported_at: nil) if only_new
     exported = scope.to_a
     Attendee.where(id: exported.map(&:id)).update_all(voucher_exported_at: Time.current) unless exported.empty?
-    exported.map { |a| "#{a.voucher_code}
-" }.join
+    CSV.generate(col_sep: ';', quote_char: '"') do |csv|
+      csv << Attendee.voucher_csv_header
+      exported.each { |attendee| csv << attendee.voucher_csv_array }
+    end
   end
 
   def attendees_mails

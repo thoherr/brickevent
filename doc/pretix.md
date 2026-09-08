@@ -24,10 +24,11 @@ Design and background: `doc/plans/pretix-shop-integration.md`.
 
 ## Workflow
 
-1. **Export vouchers**: event page → "Neue Vouchers für pretix exportieren".
-   Downloads a text file with one code per line and marks those attendees as
-   exported, so the next export only contains new registrations. "Alle
-   Vouchers ..." exports everything again.
+1. **Export vouchers**: event page → "Neue Voucher für pretix exportieren".
+   Downloads a CSV (ID, Vorname, Nachname, EMail, Voucher) and marks those
+   attendees as exported, so the next export only contains new registrations.
+   "Alle Voucher ..." exports everything again. The Voucher column is what
+   gets pasted into pretix; the other columns identify the person.
 2. **Create vouchers in pretix**: Vouchers → "Create multiple vouchers",
    paste the codes. Settings: product = event product, maximum usages = 1,
    "allow to buy hidden products" = yes. Repeat for each incremental export.
@@ -38,9 +39,9 @@ Design and background: `doc/plans/pretix-shop-integration.md`.
    "Positions", **with the pretix UI set to English** (headers and status
    texts are localized). Upload it on the event page ("pretix-Bestellungen
    importieren"). Repeat as often as needed; the import is idempotent.
-5. Attendees with a **paid** order now see the ticket link, the ticket secret
-   and a QR code (the QR contains the ticket secret and is scannable with
-   pretixSCAN). Pending orders show a hint, canceled or expired orders free
+5. Attendees with a **paid** order now see the ticket link. Admins and event
+   managers additionally see the ticket secret and a QR code (the QR contains
+   the ticket secret and is scannable with pretixSCAN). Pending orders show a hint, canceled or expired orders free
    the order link again.
 
 ## Import details

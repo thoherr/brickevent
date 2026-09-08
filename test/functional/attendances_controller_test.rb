@@ -92,6 +92,23 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_select "td.ShopCell a[href=?]", attendees(:three).order_link, count: 0
   end
 
+  test "should not show ticket secret and qr code to the attendance owner" do
+    # user one owns attendance one (event three) and is neither admin nor event manager;
+    # move attendee two into that attendance and give it a paid order
+    attendees(:two).update_columns(attendance_id: attendances(:one).id, is_approved: true, order_code: "OWN01", order_position_id: 1, order_status: "paid",
+                                   ticket_secret: "owner-secret", ticket_url: "https://pretix.example.com/lug1/ev3/ticket/OWN01/1/x/")
+    owner = users(:one)
+    owner.confirm
+    sign_in owner
+
+    get :show, params: { id: attendances(:one).to_param }
+    assert_response :success
+    assert_select "td.ShopCell a[href=?]", attendees(:two).ticket_url, text: I18n.t('ticket_link')
+    assert_select "span.TicketSecret", count: 0
+    assert_select "dialog.TicketQrDialog", count: 0
+    assert_no_match(/owner-secret/, response.body)
+  end
+
   test "should not show shop column for event without shop" do
     admin = users(:thoherr)
     admin.confirm

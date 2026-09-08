@@ -143,16 +143,18 @@ class EventTest < ActiveSupport::TestCase
     assert event.valid?
   end
 
-  test "vouchers as text exports new vouchers once" do
+  test "vouchers as csv exports new vouchers once" do
     event = events(:three)
-    codes = event.attendees.map(&:voucher_code)
-    assert_equal 3, codes.size
+    header = "ID;Vorname;Nachname;EMail;Voucher\n"
+    expected = header +
+               "101;Attendee;One;mail@thoherr.de;101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101\n" +
+               "102;Attendee;Two;second@mytestdomain.de;102-0F4C4A3E-1F2B-4C3D-8E9F-000000000102\n" +
+               "103;Attendee;Three;mail@thoherr.de;103-0F4C4A3E-1F2B-4C3D-8E9F-000000000103\n"
 
-    text = event.vouchers_as_text
-    assert_equal codes.map { |c| "#{c}\n" }.join, text
+    assert_equal expected, event.vouchers_as_csv
     assert event.attendees.reload.all? { |a| a.voucher_exported_at.present? }
 
-    assert_equal "", event.vouchers_as_text, "second export contains no new vouchers"
-    assert_equal codes.map { |c| "#{c}\n" }.join, event.vouchers_as_text(only_new: false)
+    assert_equal header, event.vouchers_as_csv, "second export contains no new vouchers"
+    assert_equal expected, event.vouchers_as_csv(only_new: false)
   end
 end
