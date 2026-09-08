@@ -64,6 +64,7 @@ class AttendancesControllerTest < ActionController::TestCase
   test "should show attendance" do
     get :show, params: { id: @attendance.to_param }
     assert_response :success
+    assert_select "img[src^='data:image']", { count: 0 }, "no QR code of the attendance URL on the page"
   end
 
   test "should show order link for approved attendee with voucher" do
