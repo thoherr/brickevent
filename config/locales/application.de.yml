@@ -234,3 +234,6 @@ de:
   import_order_csv_hint: "pretix-Export 'Bestelldaten' (Tabelle 'Positionen', bitte in englischer Oberfläche exportieren)"
   order_data_imported_stats_notice: "Bestelldaten importiert (%{ignored} übersprungen, %{failed} fehlerhaft, %{imported} Teilnehmer aktualisiert)"
   failed_order_rows: "Fehlerhafte Zeilen: %{inspect}"
+  show_table:
+    one: "Tabelle anzeigen (1 Eintrag)"
+    other: "Tabelle anzeigen (%{count} Einträge)"

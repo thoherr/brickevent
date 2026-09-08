@@ -316,3 +316,25 @@ a {
   font-size: small;
   color: #666;
 }
+
+/* collapsible tables on the event page */
+.CollapsibleTable {
+  margin: 1%;
+}
+
+.CollapsibleTable > summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5ex 1ex;
+  background: #eee;
+  border: 1px solid #ddd;
+  display: inline-block;
+}
+
+.CollapsibleTable[open] > summary {
+  margin-bottom: 0.5ex;
+}
+
+.CollapsibleTable > table {
+  margin-left: 0;
+}

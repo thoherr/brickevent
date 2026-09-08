@@ -36,6 +36,19 @@ class EventsControllerTest < ActionController::TestCase
     assert_select "a[href*=?]", "/attendances/#{@event.id}", count: 0
   end
 
+  test "event page shows the large tables collapsed" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    get :show, params: { id: events(:three).to_param }
+    assert_response :success
+    assert_select "details.CollapsibleTable", count: 3
+    assert_select "details.CollapsibleTable[open]", count: 0
+    assert_select "details.CollapsibleTable > summary", text: I18n.t('show_table', count: 3), minimum: 2
+    assert_select "details.CollapsibleTable table.AttendeesTable", count: 2
+    assert_select "details.CollapsibleTable table.ExhibitsTable", count: 1
+  end
+
   test "non admins should not get attendees as csv for event" do
     assert_raise do
       get :attendees_as_csv, params: { id: events(:three).to_param }
