@@ -1,0 +1,5 @@
+ID;Typ;Bestätigt;Vorname;Nachname;LUG;Nickname;EMail;Telefon;Adresse;Bemerkungen
+101;Aussteller;false;Änne;Müller-Lüdenscheid;LUG9;Anni;anni@example.com;123;somewhere;Neue Bemerkung
+102;Aussteller;ja;;;;;;;;
+104;Aussteller;true;Other;Event;;;;;;
+;;;;;;;;;;

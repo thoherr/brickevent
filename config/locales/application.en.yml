@@ -240,3 +240,7 @@ en:
   hide_table:
     one: "Hide table (1 entry)"
     other: "Hide table (%{count} entries)"
+  import_attendee_csv: "Import CSV with attendee data"
+  import_attendee_csv_hint: "Same columns as the attendee export; rows are matched by ID, imported are Vorname, Nachname, EMail, LUG, Nickname, Bemerkungen and Bestätigt (blank cells stay unchanged)"
+  attendee_data_imported_stats_notice: "Attendee data imported (%{ignored} skipped, %{failed} failed, %{imported} imported)"
+  failed_attendee_ids: "Failed attendee IDs: %{inspect}"

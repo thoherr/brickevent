@@ -101,6 +101,18 @@ class EventsController < ApplicationController
               :type => "text/plain", :filename => "pretix-vouchers.#{@event}.txt")
   end
 
+  # Import of attendee master data (same columns as the attendee export)
+  def attendee_import
+    load_event
+    return redirect_to event_path(@event), notice: I18n.t('no_file_added') if params[:file].nil?
+    return redirect_to event_path(@event), notice: I18n.t('only_csv_files_allowed') unless csv_upload?(params[:file])
+
+    import = CsvAttendeeImport.call(@event, params[:file])
+    redirect_to event_path(@event),
+                notice: I18n.t('attendee_data_imported_stats_notice', ignored: import[:ignore_count], failed: import[:failure_count], imported: import[:success_count]),
+                alert: import[:errors].size > 0 ? I18n.t('failed_attendee_ids', inspect: import[:errors].inspect) : nil
+  end
+
   # Import of the pretix order export (positions sheet)
   def order_import
     load_event

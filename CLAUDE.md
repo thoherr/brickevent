@@ -149,6 +149,7 @@ Uses Rails minitest with:
 - **CsvExhibitImport**: Bulk import exhibits from CSV
 - **VotingResult**: Calculates and formats voting results
 - **CsvOrderImport**: Imports the pretix order export and stores ticket data on attendees (see `doc/pretix.md`)
+- **CsvAttendeeImport**: Updates attendee master data (name, email, LUG, nickname, remarks, approved) from a CSV with the export columns, matched by ID
 
 ## Asset Pipeline
 

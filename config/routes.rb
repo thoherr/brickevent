@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get 'voting_posters', :action => :voting_posters, :as => :voting_posters
       post :csv_import
       post :order_import
+      post :attendee_import
       post :vouchers_as_text
     end
   end
