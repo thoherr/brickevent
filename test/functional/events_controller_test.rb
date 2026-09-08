@@ -146,6 +146,37 @@ class EventsControllerTest < ActionController::TestCase
     assert_equal 3, response.body.lines.size
   end
 
+  test "non managers should not import attendees" do
+    assert_raise do
+      post :attendee_import, params: { id: events(:three).to_param, file: file_fixture_upload('attendee_import_valid.csv', 'text/csv') }
+    end
+  end
+
+  test "admin should import attendee data" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    post :attendee_import, params: { id: event.id }
+    assert_redirected_to event_path(event)
+    assert_equal I18n.t('no_file_added'), flash[:notice]
+
+    post :attendee_import, params: { id: event.id, file: file_fixture_upload('attendee_import_valid.csv', 'text/csv') }
+    assert_redirected_to event_path(event)
+    assert_equal I18n.t('attendee_data_imported_stats_notice', ignored: 1, failed: 1, imported: 2), flash[:notice]
+    assert_equal I18n.t('failed_attendee_ids', inspect: "[\"104\"]"), flash[:alert]
+
+    one = attendees(:one).reload
+    assert_equal "Änne", one.given_name
+    assert_equal "Müller-Lüdenscheid", one.family_name
+    assert_equal "anni@example.com", one.email
+    assert_not one.is_approved?
+    two = attendees(:two).reload
+    assert two.is_approved?
+    assert_equal "Attendee", two.given_name
+  end
+
   test "non managers should not import orders" do
     assert_raise do
       post :order_import, params: { id: events(:three).to_param, file: file_fixture_upload('pretix_orders_valid.csv', 'text/csv') }
