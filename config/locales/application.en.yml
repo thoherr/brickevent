@@ -234,3 +234,9 @@ en:
   import_order_csv_hint: "pretix export 'Order data' (sheet 'Positions', please export with the English UI)"
   order_data_imported_stats_notice: "Order data imported (%{ignored} skipped, %{failed} failed, %{imported} attendees updated)"
   failed_order_rows: "Failed rows: %{inspect}"
+  show_table:
+    one: "Show table (1 entry)"
+    other: "Show table (%{count} entries)"
+  hide_table:
+    one: "Hide table (1 entry)"
+    other: "Hide table (%{count} entries)"
