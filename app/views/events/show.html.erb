@@ -31,7 +31,7 @@
   </div>
   </p>
     <details class="CollapsibleTable">
-      <summary><%= t('show_table', count: @event.attendances.size) %></summary>
+      <%= collapsible_table_summary(@event.attendances.size) %>
       <%= render 'attendances/exportlist', :attendances => @event.attendances %>
     </details>
 
@@ -42,7 +42,7 @@
       <%= mail_to "#{@lug.info_mail}", 'Mail an alle Teilnehmer', bcc: @event.attendees_mails %>
     </p>
     <details class="CollapsibleTable">
-      <summary><%= t('show_table', count: @event.attendees.size) %></summary>
+      <%= collapsible_table_summary(@event.attendees.size) %>
       <%= render 'attendees/exportlist', :attendees => @event.attendees, :event => @event %>
     </details>
 
@@ -89,14 +89,14 @@
       </tr>
     </table>
     <details class="CollapsibleTable">
-      <summary><%= t('show_table', count: @event.exhibits.size) %></summary>
+      <%= collapsible_table_summary(@event.exhibits.size) %>
       <%= render 'exhibits/exportlist', :exhibits => @event.exhibits, :event => @event %>
     </details>
 
     <% if @event.has_accommodation %>
         <h2>Hotelliste</h2>
         <details class="CollapsibleTable">
-          <summary><%= t('show_table', count: @event.accommodations.size) %></summary>
+          <%= collapsible_table_summary(@event.accommodations.size) %>
           <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
         </details>
     <% end %>

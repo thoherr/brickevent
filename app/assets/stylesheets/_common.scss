@@ -338,3 +338,12 @@ a {
 .CollapsibleTable > table {
   margin-left: 0;
 }
+
+.CollapsibleTable > summary .WhenOpen,
+.CollapsibleTable[open] > summary .WhenClosed {
+  display: none;
+}
+
+.CollapsibleTable[open] > summary .WhenOpen {
+  display: inline;
+}

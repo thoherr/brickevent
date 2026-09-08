@@ -45,7 +45,8 @@ class EventsControllerTest < ActionController::TestCase
     assert_response :success
     assert_select "details.CollapsibleTable", count: 4
     assert_select "details.CollapsibleTable[open]", count: 0
-    assert_select "details.CollapsibleTable > summary", text: I18n.t('show_table', count: 3), minimum: 2
+    assert_select "details.CollapsibleTable > summary span.WhenClosed", text: I18n.t('show_table', count: 3), minimum: 2
+    assert_select "details.CollapsibleTable > summary span.WhenOpen", text: I18n.t('hide_table', count: 3), minimum: 2
     assert_select "details.CollapsibleTable table.AttendeesTable", count: 2
     assert_select "details.CollapsibleTable table.ExhibitsTable", count: 1
     assert_select "details.CollapsibleTable table.AccommodationsTable", count: 1

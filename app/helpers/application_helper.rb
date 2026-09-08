@@ -19,6 +19,15 @@ module ApplicationHelper
     favicon_link_tag lug.favicon_url
   end
 
+  # Summary line for a collapsible table: shows "show" or "hide" depending on the
+  # open state of the surrounding <details> element (switched via CSS, no JS).
+  def collapsible_table_summary(count)
+    content_tag(:summary) do
+      content_tag(:span, t('show_table', count: count), class: 'WhenClosed') +
+        content_tag(:span, t('hide_table', count: count), class: 'WhenOpen')
+    end
+  end
+
   def user_is_admin?
     user_signed_in? && current_user.is_admin?
   end

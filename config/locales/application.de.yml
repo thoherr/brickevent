@@ -237,3 +237,6 @@ de:
   show_table:
     one: "Tabelle anzeigen (1 Eintrag)"
     other: "Tabelle anzeigen (%{count} Einträge)"
+  hide_table:
+    one: "Tabelle verbergen (1 Eintrag)"
+    other: "Tabelle verbergen (%{count} Einträge)"

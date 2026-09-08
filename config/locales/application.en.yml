@@ -237,3 +237,6 @@ en:
   show_table:
     one: "Show table (1 entry)"
     other: "Show table (%{count} entries)"
+  hide_table:
+    one: "Hide table (1 entry)"
+    other: "Hide table (%{count} entries)"
