@@ -1,23 +1,26 @@
 <%# Shop column for one attendee: order link, pending hint or ticket data.
     show_voucher: also print the voucher code (manager views)
-    The ticket secret and its QR code are only rendered for admins and event managers. %>
+    Everyone who sees the ticket gets the ticket link and the QR code dialog;
+    the ticket secret as text is only rendered for admins and event managers. %>
 <% show_voucher = local_assigns.fetch(:show_voucher, false) %>
+<% show_secret = attendee.show_ticket? && can_see_ticket_secret?(attendee) %>
 <td class="ShopCell">
   <% if attendee.show_ticket? %>
     <% if attendee.ticket_url.present? %>
       <%= link_to t('ticket_link'), attendee.ticket_url, target: '_blank', rel: 'noopener' %>
     <% end %>
-    <% if can_see_ticket_secret?(attendee) %>
-      <br/>
-      <span class="TicketSecret"><%= attendee.ticket_secret %></span>
-      <a href="#" class="TicketQrLink" data-dialog="ticket-qr-<%= attendee.id %>"><%= t('show_qr_code') %></a>
-      <dialog id="ticket-qr-<%= attendee.id %>" class="TicketQrDialog">
-        <p class="TicketQrTitle"><%= attendee.full_name %></p>
-        <%= ticket_qr_code(attendee.ticket_secret) %>
-        <p class="TicketSecret"><%= attendee.ticket_secret %></p>
-        <button type="button" class="TicketQrClose"><%= t('close') %></button>
-      </dialog>
+    <a href="#" class="TicketQrLink" data-dialog="ticket-qr-<%= attendee.id %>"><%= t('show_qr_code') %></a>
+    <% if show_secret %>
+      <br/><span class="TicketSecret"><%= attendee.ticket_secret %></span>
     <% end %>
+    <dialog id="ticket-qr-<%= attendee.id %>" class="TicketQrDialog">
+      <p class="TicketQrTitle"><%= attendee.full_name %></p>
+      <%= ticket_qr_code(attendee.ticket_secret) %>
+      <% if show_secret %>
+        <p class="TicketSecret"><%= attendee.ticket_secret %></p>
+      <% end %>
+      <button type="button" class="TicketQrClose"><%= t('close') %></button>
+    </dialog>
   <% elsif attendee.order_pending? %>
     <%= t('order_pending') %>
   <% elsif attendee.show_order_link? %>
