@@ -95,7 +95,10 @@
 
     <% if @event.has_accommodation %>
         <h2>Hotelliste</h2>
-        <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
+        <details class="CollapsibleTable">
+          <summary><%= t('show_table', count: @event.accommodations.size) %></summary>
+          <%= render 'accommodations/exportlist', :accommodations => @event.accommodations %>
+        </details>
     <% end %>
 
 <% end %>
