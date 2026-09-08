@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
   create_table "accommodation_types", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.string "description"
@@ -55,9 +55,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
     t.integer "attendee_type_id"
     t.datetime "created_at", precision: nil, null: false
     t.string "email"
+    t.string "family_name"
+    t.string "given_name"
     t.boolean "is_approved"
     t.string "lug"
-    t.string "name"
     t.boolean "needs_ticket", default: true
     t.string "nickname"
     t.integer "number_of_shirts"
@@ -66,12 +67,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
     t.boolean "option_3", default: false
     t.boolean "option_4", default: false
     t.boolean "option_5", default: false
+    t.string "order_code"
+    t.datetime "order_imported_at"
+    t.integer "order_position_id"
+    t.string "order_status"
     t.text "remarks", limit: 65384
     t.string "shirt_size"
+    t.string "ticket_secret"
+    t.string "ticket_url"
     t.datetime "updated_at", precision: nil, null: false
+    t.string "voucher_code"
+    t.datetime "voucher_exported_at"
     t.index ["attendance_id"], name: "index_attendees_on_attendance_id"
     t.index ["attendee_type_id"], name: "index_attendees_on_attendee_type_id"
     t.index ["is_approved"], name: "index_attendees_on_is_approved"
+    t.index ["voucher_code"], name: "index_attendees_on_voucher_code", unique: true
   end
 
   create_table "builders", force: :cascade do |t|
@@ -123,6 +133,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
     t.string "name"
     t.boolean "registration_open"
     t.text "remarks", limit: 65384
+    t.string "shop_url"
+    t.boolean "show_order_link", default: false, null: false
     t.date "start_date"
     t.string "title"
     t.datetime "updated_at", precision: nil, null: false
@@ -222,11 +234,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_04_195936) do
     t.string "current_sign_in_ip"
     t.string "email"
     t.string "encrypted_password", limit: 128, default: "", null: false
+    t.string "family_name"
+    t.string "given_name"
     t.boolean "is_admin"
     t.datetime "last_sign_in_at", precision: nil
     t.string "last_sign_in_ip"
     t.string "lug"
-    t.string "name"
     t.string "nickname"
     t.string "phone"
     t.datetime "remember_created_at", precision: nil

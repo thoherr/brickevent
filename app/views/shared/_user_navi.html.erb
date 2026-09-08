@@ -28,7 +28,7 @@
         <%= link_to t(:event_overview), :controller => "/events" %>
       </li>
       <li>
-        <%= link_to t('my_attendances'), :controller => "/attendances" %>
+        <%= link_to t('my_attendances'), attendances_path %>
       </li>
       <% if user_is_admin? %>
           <li>

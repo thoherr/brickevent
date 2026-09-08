@@ -66,6 +66,42 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show order link for approved attendee with voucher" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
+
+    get :show, params: { id: attendances(:three).to_param }
+    assert_response :success
+    assert_select "th", text: I18n.t('heading_shop')
+    assert_select "td.ShopCell a[href=?]", attendees(:one).order_link, text: I18n.t('order_link')
+    assert_select "small.VoucherCode", count: 0
+  end
+
+  test "should show ticket with qr dialog for paid attendee" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
+    attendance = attendances(:three)
+
+    get :show, params: { id: attendance.to_param }
+    assert_response :success
+    assert_select "td.ShopCell a[href=?]", attendees(:three).ticket_url, text: I18n.t('ticket_link')
+    assert_select "td.ShopCell span.TicketSecret", text: "s3cr3tt1ck3t"
+    assert_select "dialog#ticket-qr-103.TicketQrDialog svg"
+    assert_select "td.ShopCell a[href=?]", attendees(:three).order_link, count: 0
+  end
+
+  test "should not show shop column for event without shop" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
+
+    get :show, params: { id: attendances(:five).to_param }
+    assert_response :success
+    assert_select "th", text: I18n.t('heading_shop'), count: 0
+  end
+
   test "should not show attendance if unauthorized" do
     assert_raise do
       get :show, params: { id: attendances(:two).to_param }

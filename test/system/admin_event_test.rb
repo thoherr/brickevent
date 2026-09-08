@@ -7,7 +7,7 @@ class AdminEventTest < ApplicationSystemTestCase
     @user = User.create!(:email => "admin@mytestdomain.de",
                          :password => "password",
                          :password_confirmation => "password",
-                         :name => "Admin User",
+                         :given_name => "Admin", :family_name => "User",
                          :is_admin => true)
     @user.confirm
     visit '/users/sign_in'

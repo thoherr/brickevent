@@ -93,6 +93,38 @@ class EventsController < ApplicationController
     end
   end
 
+  # Voucher codes as plain text for pretix "Create multiple vouchers"
+  def vouchers_as_text
+    load_event
+    only_new = params[:all] != '1'
+    send_data(@event.vouchers_as_text(only_new: only_new),
+              :type => "text/plain", :filename => "pretix-vouchers.#{@event}.txt")
+  end
+
+  # Import of attendee master data (same columns as the attendee export)
+  def attendee_import
+    load_event
+    return redirect_to event_path(@event), notice: I18n.t('no_file_added') if params[:file].nil?
+    return redirect_to event_path(@event), notice: I18n.t('only_csv_files_allowed') unless csv_upload?(params[:file])
+
+    import = CsvAttendeeImport.call(@event, params[:file])
+    redirect_to event_path(@event),
+                notice: I18n.t('attendee_data_imported_stats_notice', ignored: import[:ignore_count], failed: import[:failure_count], imported: import[:success_count]),
+                alert: import[:errors].size > 0 ? I18n.t('failed_attendee_ids', inspect: import[:errors].inspect) : nil
+  end
+
+  # Import of the pretix order export (positions sheet)
+  def order_import
+    load_event
+    return redirect_to event_path(@event), notice: I18n.t('no_file_added') if params[:file].nil?
+    return redirect_to event_path(@event), notice: I18n.t('only_csv_files_allowed') unless csv_upload?(params[:file])
+
+    import = CsvOrderImport.call(@event, params[:file])
+    redirect_to event_path(@event),
+                notice: I18n.t('order_data_imported_stats_notice', ignored: import[:ignore_count], failed: import[:failure_count], imported: import[:success_count]),
+                alert: import[:errors].size > 0 ? I18n.t('failed_order_rows', inspect: import[:errors].join('; ')) : nil
+  end
+
   def csv_import
     load_event
     return redirect_to event_path(@event), notice: I18n.t('no_file_added') if params[:file].nil?
@@ -109,6 +141,12 @@ class EventsController < ApplicationController
   end
 
   private
+
+  CSV_CONTENT_TYPES = %w[text/csv application/vnd.ms-excel application/csv text/plain].freeze
+
+  def csv_upload?(upload)
+    CSV_CONTENT_TYPES.include?(upload.content_type) || File.extname(upload.original_filename.to_s).casecmp?('.csv')
+  end
 
   def load_event
     @event = Event.includes(

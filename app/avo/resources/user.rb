@@ -6,8 +6,8 @@ class Avo::Resources::User < Avo::BaseResource
   self.search = {
     query: -> {
       query.where(
-        "email LIKE ? OR name LIKE ? OR nickname LIKE ? OR lug LIKE ?",
-        "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%"
+        "email LIKE ? OR given_name LIKE ? OR family_name LIKE ? OR nickname LIKE ? OR lug LIKE ?",
+        *(["%#{params[:q]}%"] * 5)
       )
     }
   }
@@ -18,8 +18,10 @@ class Avo::Resources::User < Avo::BaseResource
     # Account Information
     field :email, as: :text, required: true,
       help: "User's email address (used for login)"
-    field :name, as: :text, required: true,
-      help: "Full name"
+    field :given_name, as: :text, required: true,
+      help: "Given name (Vorname)"
+    field :family_name, as: :text, required: true,
+      help: "Family name (Nachname)"
     field :nickname, as: :text,
       help: "Display name / nickname"
 

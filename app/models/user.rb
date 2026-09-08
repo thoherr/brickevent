@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include PersonName
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,7 +13,7 @@ class User < ApplicationRecord
   has_many :event_managers
   has_many :events, :through => :event_managers
 
-  validates_presence_of :email, :name
+  validates_presence_of :email, :given_name, :family_name
   validates_acceptance_of :accept_data_storage, :on => :create, :accept => true, :message => 'Du musst der Speicherung Deiner Daten zustimmen!'
 
   def is_managed_by?(user)

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-BrickEvent is a Rails 7.2 web application for managing LEGO User Group (LUG) event registrations, exhibitor signups, and voting systems. Originally built for LEGO KidsFest 2012, it now supports multiple LUG events on a shared database with multi-tenant capabilities based on URL routing.
+BrickEvent is a Rails 8.1 (Ruby 3.3.6) web application for managing LEGO User Group (LUG) event registrations, exhibitor signups, and voting systems. Originally built for LEGO KidsFest 2012, it now supports multiple LUG events on a shared database with multi-tenant capabilities based on URL routing.
 
 ## Development Commands
 
@@ -63,8 +63,8 @@ rake db:reset               # Drop, create, and migrate database
 - **EventManager**: Join table linking users to events they can manage
 
 ### User & Registration System  
-- **User**: Authentication via Devise with email confirmation
-- **Attendee**: Person attending an event (linked to attendance)
+- **User**: Authentication via Devise with email confirmation; person name stored as `given_name` + `family_name` (see `PersonName` concern for `full_name`)
+- **Attendee**: Person attending an event (linked to attendance); also uses `given_name` + `family_name`
 - **AttendeeType**: Categories like exhibitor, visitor, staff
 - **Attendance**: Join table linking attendees to events
 
@@ -106,6 +106,7 @@ Events have boolean flags controlling features:
 - `registration_open`: Allow new registrations
 - `has_tickets`: Ticket system enabled  
 - `has_moc_transport`: MOC transport coordination
+- `show_order_link`: show the personal pretix order link to approved attendees (requires `shop_url`, see `doc/pretix.md`)
 - Various edit flags controlling what users can modify
 
 ## Testing Framework
@@ -147,6 +148,8 @@ Uses Rails minitest with:
 - **VotingPosterZipfileCreation**: Creates zip files of voting materials  
 - **CsvExhibitImport**: Bulk import exhibits from CSV
 - **VotingResult**: Calculates and formats voting results
+- **CsvOrderImport**: Imports the pretix order export and stores ticket data on attendees (see `doc/pretix.md`)
+- **CsvAttendeeImport**: Updates attendee master data (name, email, LUG, nickname, remarks, approved) from a CSV with the export columns, matched by ID
 
 ## Asset Pipeline
 
@@ -158,28 +161,29 @@ Modern asset pipeline using a hybrid approach:
   - `voting.scss` → `voting.css` (voting-specific styles)
   - Configured in `config/initializers/dartsass.rb`
 - **Sprockets**: Serves compiled CSS and handles gem stylesheets
-  - Active Scaffold CSS (has ERB dependencies, compiled via SassC)
+  - Avo ships its own assets; Sprockets only serves the dartsass builds, images and the importmap modules
   - Final asset serving from `public/assets/` in production
 
 ### JavaScript (Hybrid Approach)
 
 **Two JavaScript systems work together:**
 
-1. **Sprockets** (for Active Scaffold + jQuery)
+1. **Sprockets** (asset serving only)
    - Location: `app/assets/javascripts/application.js`
    - Uses `//= require` directives
    - Compiled by Sprockets (supports ERB)
    - Loaded via `javascript_include_tag "application"`
-   - Includes: jQuery, jquery_ujs, Active Scaffold
+   - jQuery and Active Scaffold were removed with the switch to Avo; no Sprockets JavaScript bundle remains
 
 2. **Importmap** (for modern ES6 modules)
-   - Location: `app/javascript/application.js`
+   - Location: `app/javascript/brickevent.js` (entry point; not named `application.js` because the Sprockets bundle of the same name shadows it in the asset load path)
    - Uses ES6 `import`/`export` syntax
    - Configured in `config/importmap.rb`
-   - Loaded via `javascript_importmap_tags`
+   - Loaded via `javascript_importmap_tags "brickevent"`
+   - Every file under `app/javascript` is linked in `app/assets/config/manifest.js` (`link_tree`), so new modules only need a pin in `config/importmap.rb`
    - No build step required
 
-**Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.
+**Admin backend:** Avo 3 (`app/avo/resources`, `config/initializers/avo.rb`, mounted at `/avo`, admins only). Application code uses ES6 modules via importmap; Turbo and Stimulus are loaded from `app/javascript/brickevent.js`.
 
 - **Terser**: Modern JS minification for Sprockets assets
 

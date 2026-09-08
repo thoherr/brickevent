@@ -20,8 +20,13 @@ Avo.configure do |config|
   ## == Authentication ==
   config.current_user_method = :current_user
   config.authenticate_with do
-    # Redirect to Devise sign-in if not authenticated
-    redirect_to '/users/sign_in' unless current_user
+    # Devise sign-in for anonymous visitors, frontend for signed-in non-admins
+    # (same rule as the former Admin::AdminController)
+    if current_user.nil?
+      redirect_to '/users/sign_in'
+    elsif !current_user.is_admin?
+      redirect_to '/events'
+    end
   end
 
   ## == Authorization ==

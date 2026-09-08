@@ -3,7 +3,7 @@
 <html>
 <head>
   <title><%= titleline %></title>
-  <%= favicon_link_tag "#{@lug.favicon_url}" %>
+  <%= lug_favicon_link_tag @lug %>
   <meta name="application-name" content="<%= "#{SoftwareVersion.appname} #{SoftwareVersion.versionstring}" %>">
   <meta name="description" content="<%= "#{@lug.name} MOC voting for #{@exhibit.event_title}" %>">
   <meta name="copyright" content="(c) 2024 Thomas Herrmann <mail@thoherr.de>">

@@ -37,3 +37,15 @@ end
 # Alias for convenience
 desc "Alias for security:check - runs all security checks"
 task :security => 'security:check'
+
+# brakeman:check used to be provided by the active_scaffold gem; define it here
+# so `rake brakeman:check` and security:check keep working without that gem.
+namespace :brakeman do
+  desc "Check your code with Brakeman"
+  task :check do
+    require 'brakeman'
+
+    result = Brakeman.run(app_path: '.', print_report: true, quiet: true, pager: false)
+    abort "Brakeman found #{result.filtered_warnings.size} warning(s)" unless result.filtered_warnings.empty?
+  end
+end

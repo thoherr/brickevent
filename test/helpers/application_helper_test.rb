@@ -111,4 +111,14 @@ class ApplicationHelperTest < ActionView::TestCase
   test "is_locale_supported? handles string locales" do
     assert is_locale_supported?('en'.to_sym)
   end
+  test "lug_favicon_link_tag renders nothing without favicon" do
+    assert_nil lug_favicon_link_tag(nil)
+    assert_nil lug_favicon_link_tag(Lug.new(favicon_url: ""))
+  end
+
+  test "lug_favicon_link_tag uses the configured path" do
+    tag = lug_favicon_link_tag(Lug.new(favicon_url: "/images/lug.favicon.ico"))
+    assert_includes tag, 'href="/images/lug.favicon.ico"'
+    assert_includes tag, 'rel="icon"'
+  end
 end

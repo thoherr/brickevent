@@ -2,7 +2,10 @@
 
 one:
   id: 101
-  name: Attendee1
+  voucher_code: 101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101
+  is_approved: true
+  given_name: Attendee
+  family_name: One
   lug: LUG1
   nickname: Nick1
   afols_event: true
@@ -15,7 +18,9 @@ one:
 
 two:
   id: 102
-  name: Attendee2
+  voucher_code: 102-0F4C4A3E-1F2B-4C3D-8E9F-000000000102
+  given_name: Attendee
+  family_name: Two
   lug: LUG1
   nickname: Nick2
   afols_event: false
@@ -31,7 +36,16 @@ two:
 
 three:
   id: 103
-  name: Attendee3
+  voucher_code: 103-0F4C4A3E-1F2B-4C3D-8E9F-000000000103
+  is_approved: true
+  order_code: ABC12
+  order_position_id: 1
+  order_status: paid
+  ticket_secret: s3cr3tt1ck3t
+  ticket_url: https://pretix.example.com/lug1/ev3/ticket/ABC12/1/websecret/
+  order_imported_at: 2018-06-22
+  given_name: Attendee
+  family_name: Three
   lug: LUG2
   nickname: Nick3
   afols_event: true
@@ -44,7 +58,9 @@ three:
 
 four:
   id: 104
-  name: Attendee4
+  voucher_code: 104-0F4C4A3E-1F2B-4C3D-8E9F-000000000104
+  given_name: Attendee
+  family_name: Four
   lug: LUG2
   nickname: Guy without shirts
   shirt_size: XL

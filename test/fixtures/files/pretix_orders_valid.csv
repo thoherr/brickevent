@@ -1,0 +1,5 @@
+Event slug,Event name,Order code,Position ID,Status,Email,Order date,Order time,Product,Variation,Price,Attendee name,Attendee email,Voucher,Pseudonymization ID,Ticket secret,Add-on to position ID,Position order link
+ev3,Number 3,QX7YP,1,paid,one@example.com,2026-05-01,10:15:00,Teilnahme,,0.00,Attendee One,,101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101,PSEUDO1,secret-101-main,,https://pretix.example.com/lug1/ev3/ticket/QX7YP/1/w3bs3cr3t/
+ev3,Number 3,QX7YP,2,paid,one@example.com,2026-05-01,10:15:00,T-Shirt,L,15.00,,,,PSEUDO2,secret-101-addon,1,https://pretix.example.com/lug1/ev3/ticket/QX7YP/2/w3bs3cr3t2/
+ev3,Number 3,RT4KL,1,pending,two@example.com,2026-05-02,09:00:00,Teilnahme,,0.00,Attendee Two,,102-0f4c4a3e-1f2b-4c3d-8e9f-000000000102,PSEUDO3,secret-102-main,,https://pretix.example.com/lug1/ev3/ticket/RT4KL/1/w3bs3cr3t3/
+ev3,Number 3,ZZ9AA,1,paid,nobody@example.com,2026-05-03,12:00:00,Teilnahme,,0.00,Nobody,,999-0F4C4A3E-1F2B-4C3D-8E9F-000000000999,PSEUDO4,secret-999,,https://pretix.example.com/lug1/ev3/ticket/ZZ9AA/1/x/

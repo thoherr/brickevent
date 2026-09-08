@@ -43,6 +43,12 @@ class Avo::Resources::Event < Avo::BaseResource
     field :edit_of_attendees_allowed, as: :boolean
     field :edit_of_exhibits_allowed, as: :boolean
 
+    # pretix shop (see doc/pretix.md)
+    field :shop_url, as: :text, hide_on: :index,
+      help: "pretix event URL, e.g. https://pretix.eu/organizer/event/ - enables the Shop column"
+    field :show_order_link, as: :boolean, hide_on: :index,
+      help: "Show the personal pretix order link to approved attendees"
+
     # Feature Flags
     field :has_tickets, as: :boolean,
       help: "Enable ticket management"

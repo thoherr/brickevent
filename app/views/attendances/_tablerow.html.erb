@@ -4,7 +4,7 @@
     <% if attendance.attendees.count > 0 %>
         <p>
           <% attendance.attendees.each do |attendee| %>
-              <%= attendee.name %> (<%= attendee.attendee_type -%>)<br/>
+              <%= attendee.full_name %> (<%= attendee.attendee_type -%>)<br/>
           <% end %>
         </p>
     <% end %>

@@ -99,6 +99,14 @@ class Exhibit < ApplicationRecord
     attendance&.user_name || "NO ATTENDANCE"
   end
 
+  def user_given_name
+    attendance&.user_given_name || "NO ATTENDANCE"
+  end
+
+  def user_family_name
+    attendance&.user_family_name || "NO ATTENDANCE"
+  end
+
   def user_email
     attendance&.user_email || "NO ATTENDANCE"
   end
@@ -183,7 +191,7 @@ class Exhibit < ApplicationRecord
 
   # CSV Stuff
   def Exhibit.csv_array_header
-    return ["ID", "Bestätigt", "Name", "Email", "MOC", "Beschreibung", "Anmerkungen",
+    return ["ID", "Bestätigt", "Vorname", "Nachname", "Email", "MOC", "Beschreibung", "Anmerkungen",
             "URL", "Größe x", "Größe y", "Größe z",
             "Größe Einheit", "Größe x (cm)", "Größe y (cm)", "Größe z (cm)",
             "Tisch", "Position", "Versicherungswert", "Versicherungswert Anlage",
@@ -194,7 +202,9 @@ class Exhibit < ApplicationRecord
 
   def csv_array
     [id,
-     is_approved?, StringSanitizer.sanitize_encoding(user_name),
+     is_approved?,
+     StringSanitizer.sanitize_encoding(user_given_name),
+     StringSanitizer.sanitize_encoding(user_family_name),
      StringSanitizer.sanitize_encoding(user_email),
      StringSanitizer.sanitize_encoding(name),
      StringSanitizer.sanitize_encoding(description),

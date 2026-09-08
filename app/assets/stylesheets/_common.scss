@@ -268,3 +268,82 @@ a {
     padding: 3pt 10pt;
     border: 2px solid #700;
 }
+
+/* pretix shop integration */
+.ShopCell {
+  white-space: nowrap;
+}
+
+.TicketSecret {
+  font-family: monospace;
+  font-size: smaller;
+}
+
+.VoucherCode {
+  font-family: monospace;
+  color: #666;
+}
+
+.TicketQrDialog {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2ex;
+  text-align: center;
+}
+
+.TicketQrDialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.TicketQrDialog svg {
+  width: 280px;
+  height: 280px;
+  max-width: 80vw;
+  max-height: 80vw;
+}
+
+.TicketQrTitle {
+  font-weight: bold;
+}
+
+.ShopTools form {
+  display: inline-block;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+.ShopTools .Hint {
+  font-size: small;
+  color: #666;
+}
+
+/* collapsible tables on the event page */
+.CollapsibleTable {
+  margin: 1%;
+}
+
+.CollapsibleTable > summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5ex 1ex;
+  background: #eee;
+  border: 1px solid #ddd;
+  display: inline-block;
+}
+
+.CollapsibleTable[open] > summary {
+  margin-bottom: 0.5ex;
+}
+
+.CollapsibleTable > table {
+  margin-left: 0;
+}
+
+.CollapsibleTable > summary .WhenOpen,
+.CollapsibleTable[open] > summary .WhenClosed {
+  display: none;
+}
+
+.CollapsibleTable[open] > summary .WhenOpen {
+  display: inline;
+}

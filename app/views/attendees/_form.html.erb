@@ -7,8 +7,12 @@
         <%= f.select :attendee_type_id, AttendeeType.where(is_visible: true).load.collect { |at| [at.name, at.id] }, {:prompt => t('please_choose')} %>
       </div>
       <div class="field">
-        <%= f.label :name, t('label_name') %><br/>
-        <%= f.text_field :name %>
+        <%= f.label :given_name, t('label_given_name') %><br/>
+        <%= f.text_field :given_name %>
+      </div>
+      <div class="field">
+        <%= f.label :family_name, t('label_family_name') %><br/>
+        <%= f.text_field :family_name %>
       </div>
       <div class="field">
         <%= f.label :lug, t('label_lug') %><br/>
