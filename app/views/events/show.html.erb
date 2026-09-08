@@ -56,8 +56,8 @@
     <% if @event.shop_configured? %>
       <h3><%= t('shop_heading') %></h3>
       <div class="Indented ShopTools">
-        <%= button_to t('export_pretix_vouchers'), vouchers_as_text_event_path(@event) %>
-        <%= button_to t('export_pretix_vouchers_all'), vouchers_as_text_event_path(@event, all: 1) %>
+        <%= button_to t('export_pretix_vouchers'), vouchers_as_csv_event_path(@event) %>
+        <%= button_to t('export_pretix_vouchers_all'), vouchers_as_csv_event_path(@event, all: 1) %>
         <%= form_tag order_import_event_path(@event), method: :post, multipart: true do %>
           <%= file_field_tag :file, accept: ".csv" %><br/>
           <%= submit_tag t('import_order_csv') %>

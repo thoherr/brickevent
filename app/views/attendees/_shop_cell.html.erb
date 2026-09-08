@@ -1,17 +1,24 @@
 <%# Shop column for one attendee: order link, pending hint or ticket data.
-    show_voucher: also print the voucher code (manager views) %>
+    show_voucher: also print the voucher code (manager views)
+    Everyone who sees the ticket gets the ticket link and the QR code dialog;
+    the ticket secret as text is only rendered for admins and event managers. %>
 <% show_voucher = local_assigns.fetch(:show_voucher, false) %>
+<% show_secret = attendee.show_ticket? && can_see_ticket_secret?(attendee) %>
 <td class="ShopCell">
   <% if attendee.show_ticket? %>
     <% if attendee.ticket_url.present? %>
-      <%= link_to t('ticket_link'), attendee.ticket_url, target: '_blank', rel: 'noopener' %><br/>
+      <%= link_to t('ticket_link'), attendee.ticket_url, target: '_blank', rel: 'noopener' %>
     <% end %>
-    <span class="TicketSecret"><%= attendee.ticket_secret %></span>
     <a href="#" class="TicketQrLink" data-dialog="ticket-qr-<%= attendee.id %>"><%= t('show_qr_code') %></a>
+    <% if show_secret %>
+      <br/><span class="TicketSecret"><%= attendee.ticket_secret %></span>
+    <% end %>
     <dialog id="ticket-qr-<%= attendee.id %>" class="TicketQrDialog">
       <p class="TicketQrTitle"><%= attendee.full_name %></p>
       <%= ticket_qr_code(attendee.ticket_secret) %>
-      <p class="TicketSecret"><%= attendee.ticket_secret %></p>
+      <% if show_secret %>
+        <p class="TicketSecret"><%= attendee.ticket_secret %></p>
+      <% end %>
       <button type="button" class="TicketQrClose"><%= t('close') %></button>
     </dialog>
   <% elsif attendee.order_pending? %>

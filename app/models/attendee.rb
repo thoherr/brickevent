@@ -83,6 +83,18 @@ class Attendee < ApplicationRecord
 
 
   # CSV Stuff
+  def Attendee.voucher_csv_header
+    ["ID", "Vorname", "Nachname", "EMail", "Voucher"]
+  end
+
+  def voucher_csv_array
+    [id,
+     StringSanitizer.sanitize_encoding(given_name),
+     StringSanitizer.sanitize_encoding(family_name),
+     attendee_email,
+     voucher_code]
+  end
+
   def Attendee.csv_array_header(event)
        return ["ID","Typ","Bestätigt","Vorname","Nachname","LUG","Nickname","EMail","Telefon", "Adresse", "AFOLs-Abend","Ticket",event.label_option_1,event.label_option_2,event.label_option_3,event.label_option_4,event.label_option_5,"Bemerkungen","Anzahl Event-Shirts","Shirt-Größe","Voucher","Bestell-Link","Bestellcode","Positions-ID","Bestellstatus","Ticket-Secret","Ticket-Link","Bestellung importiert","Zuletzt geändert"]
   end

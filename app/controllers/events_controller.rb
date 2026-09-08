@@ -93,12 +93,12 @@ class EventsController < ApplicationController
     end
   end
 
-  # Voucher codes as plain text for pretix "Create multiple vouchers"
-  def vouchers_as_text
+  # Voucher list (id, name, email, voucher code) for pretix "Create multiple vouchers"
+  def vouchers_as_csv
     load_event
     only_new = params[:all] != '1'
-    send_data(@event.vouchers_as_text(only_new: only_new),
-              :type => "text/plain", :filename => "pretix-vouchers.#{@event}.txt")
+    send_data(@event.vouchers_as_csv(only_new: only_new).encode(Encoding::ISO_8859_15),
+              :type => "text/csv", :filename => "pretix-vouchers.#{@event}.csv")
   end
 
   # Import of attendee master data (same columns as the attendee export)

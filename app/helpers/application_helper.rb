@@ -12,6 +12,13 @@ module ApplicationHelper
     if value then t('yes') else t('no') end
   end
 
+  # The pretix ticket secret (and its QR code) is only for admins and event managers.
+  def can_see_ticket_secret?(attendee)
+    return false unless user_signed_in?
+
+    current_user.is_admin? || !!attendee.event&.is_managed_by?(current_user)
+  end
+
   # Favicon of the current LUG; nothing is rendered when no favicon is configured.
   def lug_favicon_link_tag(lug)
     return nil if lug.nil? || lug.favicon_url.blank?
