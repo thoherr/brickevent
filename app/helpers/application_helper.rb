@@ -28,10 +28,10 @@ module ApplicationHelper
 
   # Summary line for a collapsible table: shows "show" or "hide" depending on the
   # open state of the surrounding <details> element (switched via CSS, no JS).
-  def collapsible_table_summary(count)
+  def collapsible_table_summary(table, count)
     content_tag(:summary) do
-      content_tag(:span, t('show_table', count: count), class: 'WhenClosed') +
-        content_tag(:span, t('hide_table', count: count), class: 'WhenOpen')
+      content_tag(:span, t('show_table', table: table, count: count), class: 'WhenClosed') +
+        content_tag(:span, t('hide_table', table: table, count: count), class: 'WhenOpen')
     end
   end
 
