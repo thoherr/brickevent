@@ -75,6 +75,7 @@ class AttendancesControllerTest < ActionController::TestCase
     get :show, params: { id: attendances(:three).to_param }
     assert_response :success
     assert_select "th", text: I18n.t('heading_shop')
+    assert_select "th", text: I18n.t('heading_qr_code')
     assert_select "td.ShopCell a[href=?]", attendees(:one).order_link, text: I18n.t('order_link')
     assert_select "small.VoucherCode", count: 0
   end
@@ -88,7 +89,8 @@ class AttendancesControllerTest < ActionController::TestCase
     get :show, params: { id: attendance.to_param }
     assert_response :success
     assert_select "td.ShopCell a[href=?]", attendees(:three).ticket_url, text: I18n.t('ticket_link')
-    assert_select "td.ShopCell span.TicketSecret", text: "s3cr3tt1ck3t"
+    assert_select "td.ShopCell a.TicketQrLink", count: 0
+    assert_select "td.TicketQrCell span.TicketSecret", text: "s3cr3tt1ck3t"
     assert_select "dialog#ticket-qr-103.TicketQrDialog svg"
     assert_select "td.ShopCell a[href=?]", attendees(:three).order_link, count: 0
   end
@@ -105,7 +107,7 @@ class AttendancesControllerTest < ActionController::TestCase
     get :show, params: { id: attendances(:one).to_param }
     assert_response :success
     assert_select "td.ShopCell a[href=?]", attendees(:two).ticket_url, text: I18n.t('ticket_link')
-    assert_select "td.ShopCell a.TicketQrLink", text: I18n.t('show_qr_code')
+    assert_select "td.TicketQrCell a.TicketQrLink", text: I18n.t('show_qr_code')
     assert_select "dialog#ticket-qr-102.TicketQrDialog svg"
     assert_select ".TicketSecret", count: 0
     assert_no_match(/owner-secret/, response.body, "the secret must not appear as text")

@@ -1,7 +1,8 @@
-<%# Shop column for one attendee: order link, pending hint or ticket data.
-    show_voucher: also print the voucher code (manager views)
-    Everyone who sees the ticket gets the ticket link and the QR code dialog;
-    the ticket secret as text is only rendered for admins and event managers. %>
+<%# Shop columns for one attendee (two cells):
+    "Shop":    order link, pending hint or the pretix ticket link (+ voucher code for managers)
+    "QR-Code": link opening the dialog with the scannable ticket secret
+               (+ the secret as text for admins and event managers)
+    show_voucher: also print the voucher code (manager views) %>
 <% show_voucher = local_assigns.fetch(:show_voucher, false) %>
 <% show_secret = attendee.show_ticket? && can_see_ticket_secret?(attendee) %>
 <td class="ShopCell">
@@ -9,6 +10,17 @@
     <% if attendee.ticket_url.present? %>
       <%= link_to t('ticket_link'), attendee.ticket_url, target: '_blank', rel: 'noopener' %>
     <% end %>
+  <% elsif attendee.order_pending? %>
+    <%= t('order_pending') %>
+  <% elsif attendee.show_order_link? %>
+    <%= link_to t('order_link'), attendee.order_link, target: '_blank', rel: 'noopener' %>
+  <% end %>
+  <% if show_voucher && attendee.voucher_code.present? %>
+    <br/><small class="VoucherCode"><%= attendee.voucher_code %></small>
+  <% end %>
+</td>
+<td class="TicketQrCell">
+  <% if attendee.show_ticket? %>
     <a href="#" class="TicketQrLink" data-dialog="ticket-qr-<%= attendee.id %>"><%= t('show_qr_code') %></a>
     <% if show_secret %>
       <br/><span class="TicketSecret"><%= attendee.ticket_secret %></span>
@@ -21,12 +33,5 @@
       <% end %>
       <button type="button" class="TicketQrClose"><%= t('close') %></button>
     </dialog>
-  <% elsif attendee.order_pending? %>
-    <%= t('order_pending') %>
-  <% elsif attendee.show_order_link? %>
-    <%= link_to t('order_link'), attendee.order_link, target: '_blank', rel: 'noopener' %>
-  <% end %>
-  <% if show_voucher && attendee.voucher_code.present? %>
-    <br/><small class="VoucherCode"><%= attendee.voucher_code %></small>
   <% end %>
 </td>
