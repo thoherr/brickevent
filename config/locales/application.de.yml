@@ -248,3 +248,4 @@ de:
   import_attendee_csv_hint: "Gleiche Spalten wie der Teilnehmer-Export; Zuordnung über die Spalte ID, importiert werden Vorname, Nachname, EMail, LUG, Nickname, Bemerkungen und Bestätigt (leere Zellen bleiben unverändert)"
   attendee_data_imported_stats_notice: "Teilnehmerdaten importiert (%{ignored} übersprungen, %{failed} fehlerhaft, %{imported} importiert)"
   failed_attendee_ids: "Fehlerhafte Teilnehmer-IDs: %{inspect}"
+  heading_qr_code: "QR-Code"
