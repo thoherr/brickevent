@@ -45,8 +45,12 @@ class EventsControllerTest < ActionController::TestCase
     assert_response :success
     assert_select "details.CollapsibleTable", count: 4
     assert_select "details.CollapsibleTable[open]", count: 0
-    assert_select "details.CollapsibleTable > summary span.WhenClosed", text: I18n.t('show_table', count: 3), minimum: 2
-    assert_select "details.CollapsibleTable > summary span.WhenOpen", text: I18n.t('hide_table', count: 3), minimum: 2
+    assert_select "details.CollapsibleTable > summary span.WhenClosed", text: I18n.t('show_table', table: I18n.t('table_attendances'), count: 3), count: 1
+    assert_select "details.CollapsibleTable > summary span.WhenOpen", text: I18n.t('hide_table', table: I18n.t('table_attendances'), count: 3), count: 1
+    assert_select "details.CollapsibleTable > summary span.WhenClosed", text: I18n.t('show_table', table: I18n.t('table_attendees'), count: 3), count: 1
+    assert_select "details.CollapsibleTable > summary span.WhenClosed", text: /\A#{I18n.t('table_accommodations')} /, count: 1
+    assert_select "h2", text: /#{I18n.t('table_attendees')}/
+    assert_select "hr", minimum: 3
     assert_select "details.CollapsibleTable table.AttendeesTable", count: 2
     assert_select "details.CollapsibleTable table.ExhibitsTable", count: 1
     assert_select "details.CollapsibleTable table.AccommodationsTable", count: 1
@@ -122,28 +126,31 @@ class EventsControllerTest < ActionController::TestCase
 
   end
 
-  test "non managers should not get vouchers as text" do
+  test "non managers should not get vouchers as csv" do
     assert_raise do
-      post :vouchers_as_text, params: { id: events(:three).to_param }
+      post :vouchers_as_csv, params: { id: events(:three).to_param }
     end
   end
 
-  test "admin should get vouchers as text" do
+  test "admin should get vouchers as csv" do
     @user = users(:thoherr)
     @user.confirm
     sign_in @user
     event = events(:three)
 
-    post :vouchers_as_text, params: { id: event.to_param }
+    post :vouchers_as_csv, params: { id: event.to_param }
     assert_response :success
-    assert_equal "text/plain", response.media_type
-    assert_equal event.attendees.map { |a| "#{a.voucher_code}\n" }.join, response.body
+    assert_equal "text/csv", response.media_type
+    body = response.body.encode(Encoding::UTF_8)
+    assert_equal "ID;Vorname;Nachname;EMail;Voucher", body.lines.first.chomp
+    assert_equal 4, body.lines.size
+    assert_includes body, "101;Attendee;One;mail@thoherr.de;101-0F4C4A3E-1F2B-4C3D-8E9F-000000000101\n"
 
-    post :vouchers_as_text, params: { id: event.to_param }
-    assert_equal "", response.body
+    post :vouchers_as_csv, params: { id: event.to_param }
+    assert_equal 1, response.body.lines.size, "only the header when nothing is new"
 
-    post :vouchers_as_text, params: { id: event.to_param, all: 1 }
-    assert_equal 3, response.body.lines.size
+    post :vouchers_as_csv, params: { id: event.to_param, all: 1 }
+    assert_equal 4, response.body.lines.size
   end
 
   test "non managers should not import attendees" do

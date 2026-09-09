@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       post :csv_import
       post :order_import
       post :attendee_import
-      post :vouchers_as_text
+      post :vouchers_as_csv
     end
   end
 

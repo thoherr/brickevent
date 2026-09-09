@@ -64,6 +64,7 @@ class AttendancesControllerTest < ActionController::TestCase
   test "should show attendance" do
     get :show, params: { id: @attendance.to_param }
     assert_response :success
+    assert_select "img[src^='data:image']", { count: 0 }, "no QR code of the attendance URL on the page"
   end
 
   test "should show order link for approved attendee with voucher" do
@@ -74,6 +75,7 @@ class AttendancesControllerTest < ActionController::TestCase
     get :show, params: { id: attendances(:three).to_param }
     assert_response :success
     assert_select "th", text: I18n.t('heading_shop')
+    assert_select "th", text: I18n.t('heading_qr_code')
     assert_select "td.ShopCell a[href=?]", attendees(:one).order_link, text: I18n.t('order_link')
     assert_select "small.VoucherCode", count: 0
   end
@@ -87,9 +89,28 @@ class AttendancesControllerTest < ActionController::TestCase
     get :show, params: { id: attendance.to_param }
     assert_response :success
     assert_select "td.ShopCell a[href=?]", attendees(:three).ticket_url, text: I18n.t('ticket_link')
-    assert_select "td.ShopCell span.TicketSecret", text: "s3cr3tt1ck3t"
+    assert_select "td.ShopCell a.TicketQrLink", count: 0
+    assert_select "td.TicketQrCell span.TicketSecret", text: "s3cr3tt1ck3t"
     assert_select "dialog#ticket-qr-103.TicketQrDialog svg"
     assert_select "td.ShopCell a[href=?]", attendees(:three).order_link, count: 0
+  end
+
+  test "should show qr code but not the ticket secret to the attendance owner" do
+    # user one owns attendance one (event three) and is neither admin nor event manager;
+    # move attendee two into that attendance and give it a paid order
+    attendees(:two).update_columns(attendance_id: attendances(:one).id, is_approved: true, order_code: "OWN01", order_position_id: 1, order_status: "paid",
+                                   ticket_secret: "owner-secret", ticket_url: "https://pretix.example.com/lug1/ev3/ticket/OWN01/1/x/")
+    owner = users(:one)
+    owner.confirm
+    sign_in owner
+
+    get :show, params: { id: attendances(:one).to_param }
+    assert_response :success
+    assert_select "td.ShopCell a[href=?]", attendees(:two).ticket_url, text: I18n.t('ticket_link')
+    assert_select "td.TicketQrCell a.TicketQrLink", text: I18n.t('show_qr_code')
+    assert_select "dialog#ticket-qr-102.TicketQrDialog svg"
+    assert_select ".TicketSecret", count: 0
+    assert_no_match(/owner-secret/, response.body, "the secret must not appear as text")
   end
 
   test "should not show shop column for event without shop" do
