@@ -77,7 +77,7 @@ class EventsController < ApplicationController
     load_event
     if @event
       # According to RFC 4180 the MIME type for our csv data is text/csv
-      send_data(@event.attendees_as_csv.encode(Encoding::ISO_8859_15), :type => "text/csv", :filename => params[:filename])
+      send_csv(@event.attendees_as_csv, params[:filename])
     else
       redirect_to events_url
     end
@@ -87,7 +87,7 @@ class EventsController < ApplicationController
     load_event
     if @event
       # According to RFC 4180 the MIME type for our csv data is text/csv
-      send_data(@event.exhibits_as_csv.encode(Encoding::ISO_8859_15), :type => "text/csv", :filename => params[:filename])
+      send_csv(@event.exhibits_as_csv, params[:filename])
     else
       redirect_to events_url
     end
@@ -97,8 +97,7 @@ class EventsController < ApplicationController
   def vouchers_as_csv
     load_event
     only_new = params[:all] != '1'
-    send_data(@event.vouchers_as_csv(only_new: only_new).encode(Encoding::ISO_8859_15),
-              :type => "text/csv", :filename => "pretix-vouchers.#{@event}.csv")
+    send_csv(@event.vouchers_as_csv(only_new: only_new), "pretix-vouchers.#{@event}.csv")
   end
 
   # Import of attendee master data (same columns as the attendee export)
@@ -143,6 +142,16 @@ class EventsController < ApplicationController
   private
 
   CSV_CONTENT_TYPES = %w[text/csv application/vnd.ms-excel application/csv text/plain].freeze
+
+  # Characters outside ISO-8859-15 (e.g. a stray cedilla "¸" or letters like "ł")
+  # are transliterated instead of aborting the export with an encoding error.
+  CSV_ENCODING_FALLBACK = ->(char) { I18n.transliterate(char, replacement: '?') }
+
+  # All CSV downloads are ISO-8859-15 encoded for the spreadsheet users.
+  def send_csv(data, filename)
+    send_data(data.encode(Encoding::ISO_8859_15, fallback: CSV_ENCODING_FALLBACK),
+              :type => "text/csv", :filename => filename)
+  end
 
   def csv_upload?(upload)
     CSV_CONTENT_TYPES.include?(upload.content_type) || File.extname(upload.original_filename.to_s).casecmp?('.csv')

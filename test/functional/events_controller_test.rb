@@ -126,6 +126,29 @@ class EventsControllerTest < ActionController::TestCase
 
   end
 
+  test "csv exports survive characters outside ISO-8859-15" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+    # cedilla U+00B8 is not in ISO-8859-15, "ł" neither; "ë" and "Ž" are
+    attendees(:one).update_columns(given_name: "Zoë¸", family_name: "Žofka Łucja")
+    exhibits(:one).update_columns(name: "MOC¸ł")
+
+    post :vouchers_as_csv, params: { id: event.to_param, all: 1 }
+    assert_response :success
+    assert_equal Encoding::ISO_8859_15, response.body.encoding
+    assert_includes response.body.encode(Encoding::UTF_8), "101;Zoë?;Žofka Lucja;"
+
+    get :attendees_as_csv, params: { id: event.to_param }
+    assert_response :success
+    assert_includes response.body.encode(Encoding::UTF_8), ";Zoë?;Žofka Lucja;"
+
+    get :exhibits_as_csv, params: { id: event.to_param }
+    assert_response :success
+    assert_includes response.body.encode(Encoding::UTF_8), ";MOC?l;"
+  end
+
   test "non managers should not get vouchers as csv" do
     assert_raise do
       post :vouchers_as_csv, params: { id: events(:three).to_param }
