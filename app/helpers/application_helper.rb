@@ -12,6 +12,15 @@ module ApplicationHelper
     if value then t('yes') else t('no') end
   end
 
+  # Shop and Abhol-Code columns are shown while the shop is enabled for the event
+  # or as soon as any listed attendee has an order (so imported tickets stay
+  # visible after the order phase); otherwise the columns would only be empty.
+  def show_shop_columns?(event, attendees)
+    return false if event.nil? || !event.shop_configured?
+
+    event.shop_active? || attendees.any?(&:has_order?)
+  end
+
   # The pretix ticket secret (and its QR code) is only for admins and event managers.
   def can_see_ticket_secret?(attendee)
     return false unless user_signed_in?

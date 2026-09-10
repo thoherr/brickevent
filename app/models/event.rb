@@ -110,6 +110,11 @@ class Event < ApplicationRecord
     shop_url.present?
   end
 
+  # Shop enabled for attendees: configured and the order link switched on.
+  def shop_active?
+    shop_configured? && show_order_link?
+  end
+
   # shop_url with a guaranteed trailing slash, e.g. "https://pretix.eu/lug/event/"
   def shop_base_url
     return nil if shop_url.blank?

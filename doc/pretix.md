@@ -19,8 +19,8 @@ Design and background: `doc/plans/pretix-shop-integration.md`.
 
 | Field | Meaning |
 |---|---|
-| `shop_url` | pretix event URL from step 3 above. Enables the Shop column and the shop tools on the event page. |
-| `show_order_link` | Shows the personal order link to approved attendees in the attendance view. Switch on once the vouchers are imported into pretix. |
+| `shop_url` | pretix event URL from step 3 above. Enables the shop tools on the event page. |
+| `show_order_link` | Shows the personal order link to approved attendees in the attendance view. Switch on once the vouchers are imported into pretix. The Shop and Abhol-Code columns appear while this is on, or as soon as an attendee in the list has an imported order (so tickets stay visible after the order phase). |
 
 ## Workflow
 
