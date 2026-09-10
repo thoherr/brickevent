@@ -8,6 +8,9 @@
   <meta name="description" content="<%= "#{@lug.name} event management admin area" %>">
   <meta name="copyright" content="(c) 2010-2024 Thomas Herrmann <mail@thoherr.de>">
   <%= render "shared/meta_includes" %>
+  <%# Active Scaffold CSS: the gem's combined active_scaffold.scss cannot be compiled by Sprockets here
+      (it imports .css.erb files), so the five parts are linked individually (see also manifest.js) %>
+  <%= stylesheet_link_tag "active_scaffold_layout", "active_scaffold_images", "active_scaffold_jquery_ui", "active_scaffold_extensions", "active_scaffold_colors" %>
 </head>
 <body class="<%= @stage%> <%= I18n.locale%>">
 
