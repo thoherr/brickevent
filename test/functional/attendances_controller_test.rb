@@ -113,6 +113,25 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_no_match(/owner-secret/, response.body, "the secret must not appear as text")
   end
 
+  test "should hide shop columns while the shop is not enabled and nobody has ordered" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
+    events(:three).update!(show_order_link: false)
+    attendees(:three).update_columns(order_code: nil, order_status: nil, ticket_secret: nil, ticket_url: nil)
+
+    get :show, params: { id: attendances(:three).to_param }
+    assert_response :success
+    assert_select "th", text: I18n.t('heading_shop'), count: 0
+    assert_select "td.ShopCell", count: 0
+
+    # an imported order makes the columns appear even with the order link switched off
+    attendees(:three).update_columns(order_code: "ABC12", order_status: "paid", ticket_secret: "s3cr3t", ticket_url: nil)
+    get :show, params: { id: attendances(:three).to_param }
+    assert_select "th", text: I18n.t('heading_shop'), count: 1
+    assert_select "td.TicketQrCell a.TicketQrLink", count: 1
+  end
+
   test "should not show shop column for event without shop" do
     admin = users(:thoherr)
     admin.confirm

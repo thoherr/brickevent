@@ -135,6 +135,16 @@ class EventTest < ActiveSupport::TestCase
     assert_equal "https://pretix.example.com/lug1/ev3/", event.shop_base_url
   end
 
+  test "shop active needs url and flag" do
+    event = events(:three)
+    assert event.shop_active?
+    event.show_order_link = false
+    assert_not event.shop_active?
+    event.show_order_link = true
+    event.shop_url = ""
+    assert_not event.shop_active?
+  end
+
   test "shop url must be a http(s) url" do
     event = events(:three)
     event.shop_url = "javascript:alert(1)"
