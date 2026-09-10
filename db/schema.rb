@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_10_180000) do
   create_table "accommodation_types", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.string "description"
@@ -33,7 +33,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
   create_table "attendances", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.integer "event_id"
-    t.boolean "is_approved"
+    t.boolean "is_approved", default: false, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.index ["event_id"], name: "index_attendances_on_event_id"
@@ -43,30 +43,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
   create_table "attendee_types", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.string "description"
-    t.boolean "is_visible"
+    t.boolean "is_visible", default: true, null: false
     t.string "name"
     t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_attendee_types_on_name"
   end
 
   create_table "attendees", force: :cascade do |t|
-    t.boolean "afols_event"
+    t.boolean "afols_event", default: false, null: false
     t.integer "attendance_id"
     t.integer "attendee_type_id"
     t.datetime "created_at", precision: nil, null: false
     t.string "email"
     t.string "family_name"
     t.string "given_name"
-    t.boolean "is_approved"
+    t.boolean "is_approved", default: false, null: false
     t.string "lug"
-    t.boolean "needs_ticket", default: true
+    t.boolean "needs_ticket", default: true, null: false
     t.string "nickname"
     t.integer "number_of_shirts"
-    t.boolean "option_1", default: false
-    t.boolean "option_2", default: false
-    t.boolean "option_3", default: false
-    t.boolean "option_4", default: false
-    t.boolean "option_5", default: false
+    t.boolean "option_1", default: false, null: false
+    t.boolean "option_2", default: false, null: false
+    t.boolean "option_3", default: false, null: false
+    t.boolean "option_4", default: false, null: false
+    t.boolean "option_5", default: false, null: false
     t.string "order_code"
     t.datetime "order_imported_at"
     t.integer "order_position_id"
@@ -107,20 +107,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
     t.datetime "created_at", precision: nil, null: false
     t.string "current_voting_scope"
     t.text "description", limit: 65384
-    t.boolean "edit_of_attendees_allowed", default: false
-    t.boolean "edit_of_exhibits_allowed", default: false
+    t.boolean "edit_of_attendees_allowed", default: false, null: false
+    t.boolean "edit_of_exhibits_allowed", default: false, null: false
     t.date "end_date"
-    t.boolean "has_accommodation"
-    t.boolean "has_afols_event", default: true
-    t.boolean "has_event_shirt"
-    t.boolean "has_moc_card_service"
-    t.boolean "has_moc_transport"
-    t.boolean "has_option_1"
-    t.boolean "has_option_2"
-    t.boolean "has_option_3"
-    t.boolean "has_option_4"
-    t.boolean "has_option_5"
-    t.boolean "has_tickets", default: true
+    t.boolean "has_accommodation", default: false, null: false
+    t.boolean "has_afols_event", default: true, null: false
+    t.boolean "has_event_shirt", default: false, null: false
+    t.boolean "has_moc_card_service", default: false, null: false
+    t.boolean "has_moc_transport", default: false, null: false
+    t.boolean "has_option_1", default: false, null: false
+    t.boolean "has_option_2", default: false, null: false
+    t.boolean "has_option_3", default: false, null: false
+    t.boolean "has_option_4", default: false, null: false
+    t.boolean "has_option_5", default: false, null: false
+    t.boolean "has_tickets", default: true, null: false
     t.string "label_option_1"
     t.string "label_option_2"
     t.string "label_option_3"
@@ -131,7 +131,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
     t.integer "lug_id"
     t.string "lugname"
     t.string "name"
-    t.boolean "registration_open"
+    t.boolean "registration_open", default: false, null: false
     t.text "remarks", limit: 65384
     t.string "shop_url"
     t.boolean "show_order_link", default: false, null: false
@@ -139,7 +139,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
     t.string "title"
     t.datetime "updated_at", precision: nil, null: false
     t.string "url"
-    t.boolean "visible"
+    t.boolean "visible", default: false, null: false
     t.index ["lug_id", "registration_open", "visible"], name: "index_events_on_lug_and_registration_and_visibility"
     t.index ["lug_id"], name: "index_events_on_lug_id"
     t.index ["start_date"], name: "index_events_on_start_date"
@@ -167,13 +167,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
     t.text "description", limit: 65384
     t.integer "former_exhibit_id"
     t.integer "installation_exhibit_id"
-    t.boolean "is_approved"
-    t.boolean "is_collab", default: false
-    t.boolean "is_installation"
-    t.boolean "is_part_of_installation"
+    t.boolean "is_approved", default: false, null: false
+    t.boolean "is_collab", default: false, null: false
+    t.boolean "is_installation", default: false, null: false
+    t.boolean "is_part_of_installation", default: false, null: false
     t.string "name"
-    t.boolean "needs_power_supply"
-    t.boolean "needs_transportation"
+    t.boolean "needs_power_supply", default: false, null: false
+    t.boolean "needs_transportation", default: false, null: false
     t.integer "platform"
     t.integer "position"
     t.text "remarks", limit: 65384
@@ -224,7 +224,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.boolean "accept_data_storage"
+    t.boolean "accept_data_storage", default: false, null: false
     t.string "address"
     t.datetime "confirmation_sent_at", precision: nil
     t.string "confirmation_token"
@@ -236,7 +236,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
     t.string "encrypted_password", limit: 128, default: "", null: false
     t.string "family_name"
     t.string "given_name"
-    t.boolean "is_admin"
+    t.boolean "is_admin", default: false, null: false
     t.datetime "last_sign_in_at", precision: nil
     t.string "last_sign_in_ip"
     t.string "lug"
