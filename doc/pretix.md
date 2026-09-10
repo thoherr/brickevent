@@ -39,8 +39,9 @@ Design and background: `doc/plans/pretix-shop-integration.md`.
    "Positions", **with the pretix UI set to English** (headers and status
    texts are localized). Upload it on the event page ("pretix-Bestellungen
    importieren"). Repeat as often as needed; the import is idempotent.
-5. Attendees with a **paid** order now see the ticket link and a QR code (the
-   QR contains the ticket secret and is scannable with pretixSCAN). Admins and
+5. Attendees with a **paid** order now see the link "Bestellbestätigung" (the
+   pretix ticket page) and "Abhol-Code", which opens the QR code of the ticket
+   secret (scannable with pretixSCAN at the venue). Admins and
    event managers additionally see the ticket secret as text. Pending orders show a hint, canceled or expired orders free
    the order link again.
 
