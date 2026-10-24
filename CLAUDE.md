@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-BrickEvent is a Rails 8.1 (Ruby 3.3.6) web application for managing LEGO User Group (LUG) event registrations, exhibitor signups, and voting systems. Originally built for LEGO KidsFest 2012, it now supports multiple LUG events on a shared database with multi-tenant capabilities based on URL routing.
+BrickEvent is a Rails 8.1 (Ruby 3.4.12) web application for managing LEGO User Group (LUG) event registrations, exhibitor signups, and voting systems. Originally built for LEGO KidsFest 2012, it now supports multiple LUG events on a shared database with multi-tenant capabilities based on URL routing.
 
 ## Development Commands
 
