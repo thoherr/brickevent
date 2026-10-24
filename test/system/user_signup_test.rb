@@ -82,6 +82,7 @@ class UserSignupTest < ApplicationSystemTestCase
     @user = User.create!(:email => "email@email.com",
                 :password => "password",
                 :password_confirmation => "password",
+                :accept_data_storage => true,
                 :given_name => "My", :family_name => "Name")
     @user.confirm
     visit '/users/sign_in'
