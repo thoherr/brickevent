@@ -1,8 +1,18 @@
 <!-- Copyright 2024 by Thomas Herrmann -->
-<% if total_vote_count.size == 0 %>
+<% if total_vote_count == 0 %>
   <h4><%= t('no_votes') %></h4>
 <% else %>
-  <p><%= t('number_of_votes', size: total_vote_count) %></p>
+  <p>
+    <%= t('number_of_votes_and_voters', size: total_vote_count, count: voters[:count]) %>
+    <% if voters[:count] > 1 %>
+      <br/>
+      <%= t('votes_per_voter',
+            min: voters[:min],
+            max: voters[:max],
+            average: number_with_precision(voters[:average], precision: 1),
+            median: number_with_precision(voters[:median], precision: 1, strip_insignificant_zeros: true)) %>
+    <% end %>
+  </p>
   <table class="VotingTable FrontendTable">
     <tr>
       <th><%= t('heading_votes') %></th>
@@ -10,9 +20,9 @@
       <th><%= t('heading_moc') %></th>
       <th><%= t('heading_name') %></th>
       <th><%= t('heading_id') %></th>
-      </th>
-      <% top_voted_exhibits.each do |exhibit| %>
-      <% number_of_votes = exhibit.find_votes_for(vote_scope: voting_scope).size %>
+    </tr>
+    <% top_voted_exhibits.each do |exhibit| %>
+      <% number_of_votes = votes_by_exhibit[exhibit.id] %>
       <tr>
         <td>
           <progress max=<%= max_votes %> value=<%= number_of_votes %>></progress>

@@ -94,4 +94,80 @@ class VotingResultTest < ActiveSupport::TestCase
       assert result[:vote_count] >= calculated_count
     end
   end
+
+  # Casts votes for the given [visitor index, exhibit] pairs.
+  def cast_votes(pairs, scope = Vote.PUBLIC_VOTES)
+    visitors = Hash.new { |h, i| h[i] = Visitor.load_or_create("voting-result-test-#{i}") }
+    pairs.each { |vi, exhibit| exhibit.liked_by visitors[vi], vote_scope: scope }
+  end
+
+  def votable_exhibits(event, count)
+    existing = event.votable_single_exhibits
+    (existing.size...count).each do |i|
+      Exhibit.create!(attendance: attendances(:one), name: "Voting test MOC #{i}", unit: units(:one))
+    end
+    event.reload.votable_single_exhibits.first(count)
+  end
+
+  test "counts votes per exhibit and orders top voted by votes" do
+    event = events(:three)
+    a, b, c = votable_exhibits(event, 3)
+    cast_votes([[0, a], [0, b], [0, c], [1, a], [1, b], [2, c], [3, a]])
+
+    result = VotingResult.call(event, Vote.PUBLIC_VOTES, false)
+
+    assert_equal 7, result[:vote_count]
+    assert_equal 3, result[:max_votes]
+    assert_equal a, result[:top_voted].first
+    assert_equal({ a.id => 3, b.id => 2, c.id => 2 }, result[:votes_by_exhibit].slice(a.id, b.id, c.id))
+    assert_equal 0, result[:votes_by_exhibit][-1], "unvoted exhibits count as zero"
+  end
+
+  test "computes distinct voters and votes per voter statistics" do
+    event = events(:three)
+    a, b, c = votable_exhibits(event, 3)
+    # votes per voter: 3, 2, 1, 1
+    cast_votes([[0, a], [0, b], [0, c], [1, a], [1, b], [2, c], [3, a]])
+
+    voters = VotingResult.call(event, Vote.PUBLIC_VOTES, false)[:voters]
+
+    assert_equal 4, voters[:count]
+    assert_equal 1, voters[:min]
+    assert_equal 3, voters[:max]
+    assert_in_delta 1.75, voters[:average]
+    assert_equal 1.5, voters[:median]
+  end
+
+  test "median of an odd number of voters is the middle value" do
+    event = events(:three)
+    a, b, c = votable_exhibits(event, 3)
+    # votes per voter: 3, 1, 1
+    cast_votes([[0, a], [0, b], [0, c], [1, a], [2, b]])
+
+    voters = VotingResult.call(event, Vote.PUBLIC_VOTES, false)[:voters]
+
+    assert_equal 3, voters[:count]
+    assert_equal 1, voters[:median]
+  end
+
+  test "votes of other scopes and other events are not counted" do
+    event = events(:three)
+    a, = votable_exhibits(event, 1)
+    other_exhibit = Exhibit.create!(attendance: attendances(:four), name: "Other event MOC", unit: units(:one))
+    cast_votes([[0, a]])
+    cast_votes([[0, a], [1, a]], Vote.ATTENDEES_VOTES)
+    cast_votes([[5, other_exhibit]])
+
+    result = VotingResult.call(event, Vote.PUBLIC_VOTES, false)
+
+    assert_equal 1, result[:vote_count]
+    assert_equal 1, result[:voters][:count]
+  end
+
+  test "voter statistics are empty without votes" do
+    result = VotingResult.call(events(:three), Vote.PUBLIC_VOTES, false)
+
+    assert_equal 0, result[:vote_count]
+    assert_equal({ count: 0 }, result[:voters])
+  end
 end
