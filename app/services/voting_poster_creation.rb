@@ -99,7 +99,7 @@ class VotingPosterCreation < ApplicationService
   end
 
   def qr_png
-    RQRCode::QRCode.new(@url).as_png(size: 100)
+    RQRCode::QRCode.new(@url).as_png(size: 2000)
   end
 
 end
