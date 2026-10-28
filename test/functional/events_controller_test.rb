@@ -237,6 +237,39 @@ class EventsControllerTest < ActionController::TestCase
     assert two.order_pending?
   end
 
+  test "voting results show voter statistics" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+    exhibit = event.votable_single_exhibits.first
+    other = Exhibit.create!(attendance: attendances(:one), name: "Second MOC", unit: units(:one))
+    v1 = Visitor.create!(session_id: "results-page-1")
+    v2 = Visitor.create!(session_id: "results-page-2")
+    exhibit.liked_by v1, vote_scope: Vote.PUBLIC_VOTES
+    other.liked_by v1, vote_scope: Vote.PUBLIC_VOTES
+    exhibit.liked_by v2, vote_scope: Vote.PUBLIC_VOTES
+
+    get :votes, params: { id: event.id, locale: :en }
+
+    assert_response :success
+    assert_includes response.body, "We got 3 votes from 2 voters."
+    assert_includes response.body, "Votes per voter: min 1, max 2, average 1.5, median 1.5"
+    assert_select "table.VotingTable", 1
+  end
+
+  test "voting results show no votes message for empty tables" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+
+    get :votes, params: { id: events(:three).id }
+
+    assert_response :success
+    assert_select "h4", text: I18n.t('no_votes'), count: 4
+    assert_select "table.VotingTable", 0
+  end
+
   test "should open voting for event with HTML format" do
     @user = users(:thoherr)  # admin
     @user.confirm
