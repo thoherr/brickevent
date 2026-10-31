@@ -7,7 +7,7 @@ gem 'bootsnap'
 
 
 # Use Puma as the app server
-gem 'puma'
+gem 'puma', '~> 7.2', '>= 7.2.1'
 
 group :development, :test do
     gem 'sqlite3'
@@ -20,7 +20,7 @@ group :production do
     gem 'mysql2'
 end
 
-gem 'json'
+gem 'json', '~> 2.19', '>= 2.19.9'
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
