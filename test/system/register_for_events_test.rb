@@ -7,6 +7,7 @@ class RegisterForEventsTest < ApplicationSystemTestCase
     @user = User.create!(:email => "dummy@email.com",
                          :password => "password",
                          :password_confirmation => "password",
+                         :accept_data_storage => true,
                          :given_name => "Dummy", :family_name => "User")
     @user.confirm
     visit '/users/sign_in'
