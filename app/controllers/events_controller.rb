@@ -161,7 +161,7 @@ class EventsController < ApplicationController
     @event = Event.includes(
       attendances: [:user, :exhibits],
       attendees: { attendance: :user },
-      exhibits: { attendance: [:user, { event: { attendances: :user } }] },
+      exhibits: [:installation, { attendance: [:user, { event: { attendances: :user } }] }],
       accommodations: :attendance
     ).find(params[:id])
     raise 'Unauthorized request' unless authorized?(@event)
