@@ -29,6 +29,21 @@ class AttendeesController < ApplicationController
     end
   end
 
+  # GET /attendees/1/ticket_qr.svg
+  # The ticket QR code is loaded on demand when its dialog opens, so pages
+  # listing many attendees don't have to generate one QR code per row.
+  def ticket_qr
+    load_attendee
+    return head :not_found unless @attendee.show_ticket?
+
+    # The ETag is a digest of the secret, so the browser revalidates (and the
+    # access check runs) on every request, but the QR code is only rendered once.
+    if stale?(etag: @attendee.ticket_secret, public: false)
+      send_data helpers.ticket_qr_code(@attendee.ticket_secret),
+                type: 'image/svg+xml', disposition: 'inline'
+    end
+  end
+
   # GET /attendees/1/edit
   def edit
     load_attendee

@@ -296,7 +296,8 @@ a {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.TicketQrDialog svg {
+.TicketQrDialog svg,
+.TicketQrDialog img {
   width: 280px;
   height: 280px;
   max-width: 80vw;

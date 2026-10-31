@@ -27,7 +27,8 @@
     <% end %>
     <dialog id="ticket-qr-<%= attendee.id %>" class="TicketQrDialog">
       <p class="TicketQrTitle"><%= attendee.full_name %></p>
-      <%= ticket_qr_code(attendee.ticket_secret) %>
+      <img class="TicketQrImage" alt="<%= t('heading_qr_code') %>" width="280" height="280"
+           data-src="<%= ticket_qr_attendee_path(attendee, format: :svg) %>">
       <% if show_secret %>
         <p class="TicketSecret"><%= attendee.ticket_secret %></p>
       <% end %>

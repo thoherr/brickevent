@@ -237,6 +237,29 @@ class EventsControllerTest < ActionController::TestCase
     assert two.order_pending?
   end
 
+  test "event page preloads the installations of exhibits" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    installation = Exhibit.create!(attendance: attendances(:one), name: "Big layout", unit: units(:one), is_installation: true)
+    3.times do |i|
+      Exhibit.create!(attendance: attendances(:one), name: "Layout part #{i}", unit: units(:one),
+                      is_part_of_installation: true, installation: installation)
+    end
+
+    exhibit_lookups = []
+    callback = lambda do |*, payload|
+      exhibit_lookups << payload[:sql] if payload[:name] == "Exhibit Load" && payload[:sql] =~ /WHERE "exhibits"."id" = /
+    end
+    ActiveSupport::Notifications.subscribed(callback, "sql.active_record") do
+      get :show, params: { id: events(:three).id }
+    end
+
+    assert_response :success
+    assert_select "td", text: "Big layout", minimum: 3
+    assert_empty exhibit_lookups, "installations should be preloaded, not loaded per exhibit"
+  end
+
   test "voting results show voter statistics" do
     @user = users(:thoherr)
     @user.confirm

@@ -138,4 +138,57 @@ class AttendeesControllerTest < ActionController::TestCase
       post :approve, params: { id: @attendee.id }
     end
   end
+
+  test "ticket qr code is served as svg to an event manager or admin" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
+
+    get :ticket_qr, params: { id: attendees(:three).to_param, format: :svg }
+
+    assert_response :success
+    assert_equal "image/svg+xml", response.media_type
+    assert_match(/<svg/, response.body)
+    assert_no_match(/s3cr3tt1ck3t/, response.body, "the secret is only encoded in the QR modules")
+    assert_match(/private/, response.headers["Cache-Control"])
+  end
+
+  test "ticket qr code is served to the owner of the attendance" do
+    attendees(:two).update_columns(order_status: "paid", ticket_secret: "owner-secret")
+
+    get :ticket_qr, params: { id: attendees(:two).to_param, format: :svg }
+
+    assert_response :success
+    assert_equal "image/svg+xml", response.media_type
+  end
+
+  test "ticket qr code is denied to unrelated users" do
+    user = users(:one)
+    user.confirm
+    sign_in user
+
+    assert_raise do
+      get :ticket_qr, params: { id: attendees(:three).to_param, format: :svg }
+    end
+  end
+
+  test "ticket qr code is not found without a paid ticket" do
+    attendees(:two).update_columns(order_status: "pending", ticket_secret: "owner-secret")
+
+    get :ticket_qr, params: { id: attendees(:two).to_param, format: :svg }
+
+    assert_response :not_found
+  end
+
+  test "ticket qr code is not regenerated for a matching etag" do
+    attendees(:two).update_columns(order_status: "paid", ticket_secret: "owner-secret")
+    get :ticket_qr, params: { id: attendees(:two).to_param, format: :svg }
+    etag = response.headers["ETag"]
+    assert etag.present?
+
+    @request.headers["If-None-Match"] = etag
+    get :ticket_qr, params: { id: attendees(:two).to_param, format: :svg }
+
+    assert_response :not_modified
+  end
 end

@@ -16,8 +16,13 @@ class ShopTicketTest < ApplicationSystemTestCase
     dialog = find("dialog#ticket-qr-103", visible: :all)
     assert_not dialog[:open], "dialog should be closed initially"
 
+    img = find("dialog#ticket-qr-103 img.TicketQrImage", visible: :all)
+    assert img[:src].blank?, "the QR code should only be fetched when the dialog opens"
+
     find("a.TicketQrLink[data-dialog='ticket-qr-103']").click
-    assert_selector "dialog#ticket-qr-103[open] svg", visible: true
+    assert_selector "dialog#ticket-qr-103[open] img.TicketQrImage[src*='/attendees/103/ticket_qr.svg']", visible: true
+    assert page.evaluate_script("document.querySelector('#ticket-qr-103 img.TicketQrImage').complete && document.querySelector('#ticket-qr-103 img.TicketQrImage').naturalWidth > 0"),
+           "the QR code image should have loaded"
     assert_selector "dialog#ticket-qr-103[open]", text: "s3cr3tt1ck3t"
     take_screenshot
 
