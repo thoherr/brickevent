@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :attendees do
     member do
       post 'approve', :action => :approve, :as => :approve
+      get 'ticket_qr', :action => :ticket_qr, :as => :ticket_qr
     end
   end
   resources :events do

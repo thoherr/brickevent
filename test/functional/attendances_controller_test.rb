@@ -91,7 +91,8 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_select "td.ShopCell a[href=?]", attendees(:three).ticket_url, text: I18n.t('ticket_link')
     assert_select "td.ShopCell a.TicketQrLink", count: 0
     assert_select "td.TicketQrCell span.TicketSecret", text: "s3cr3tt1ck3t"
-    assert_select "dialog#ticket-qr-103.TicketQrDialog svg"
+    assert_select "dialog#ticket-qr-103.TicketQrDialog img.TicketQrImage[data-src^=?]", "/attendees/103/ticket_qr.svg"
+    assert_select "dialog#ticket-qr-103 svg", count: 0, message: "the QR code is loaded on demand, not rendered inline"
     assert_select "td.ShopCell a[href=?]", attendees(:three).order_link, count: 0
   end
 
@@ -108,7 +109,7 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_response :success
     assert_select "td.ShopCell a[href=?]", attendees(:two).ticket_url, text: I18n.t('ticket_link')
     assert_select "td.TicketQrCell a.TicketQrLink", text: I18n.t('show_qr_code')
-    assert_select "dialog#ticket-qr-102.TicketQrDialog svg"
+    assert_select "dialog#ticket-qr-102.TicketQrDialog img.TicketQrImage[data-src^=?]", "/attendees/102/ticket_qr.svg"
     assert_select ".TicketSecret", count: 0
     assert_no_match(/owner-secret/, response.body, "the secret must not appear as text")
   end
