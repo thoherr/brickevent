@@ -260,6 +260,21 @@ class EventsControllerTest < ActionController::TestCase
     assert_empty exhibit_lookups, "installations should be preloaded, not loaded per exhibit"
   end
 
+  test "event page shows votes and rank in the MOC table" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    exhibit = exhibits(:one)
+    2.times { |i| exhibit.liked_by Visitor.create!(session_id: "event-page-#{i}"), vote_scope: Vote.ATTENDEES_VOTES }
+
+    get :show, params: { id: events(:three).id, locale: :en }
+
+    assert_response :success
+    assert_select "table.ExhibitsTable th", text: "AFOLs voting"
+    assert_select "table.ExhibitsTable th", text: "Public voting", count: 0
+    assert_select "table.ExhibitsTable td.VotingResultCell strong", text: "2"
+  end
+
   test "voting results show voter statistics" do
     @user = users(:thoherr)
     @user.confirm

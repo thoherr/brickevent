@@ -1,0 +1,13 @@
+<%# Votes and rank of one exhibit, one cell per voting scope with votes %>
+<% standings = voting_standings(event) %>
+<% standings.scopes.each do |scope| %>
+  <% standing = standings.for(exhibit, scope) %>
+  <td class="VotingResultCell">
+    <% if standing %>
+      <strong><%= standing.votes %></strong><br/>
+      <small><%= t('voting_rank', rank: standing.rank, count: standing.of) %></small>
+    <% else %>
+      -
+    <% end %>
+  </td>
+<% end %>

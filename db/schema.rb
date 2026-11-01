@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_01_120000) do
   create_table "accommodation_types", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.string "description"
@@ -135,6 +135,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_100200) do
     t.text "remarks", limit: 65384
     t.string "shop_url"
     t.boolean "show_order_link", default: false, null: false
+    t.boolean "show_voting_results", default: false, null: false
     t.date "start_date"
     t.string "title"
     t.datetime "updated_at", precision: nil, null: false

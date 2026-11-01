@@ -204,6 +204,7 @@ de:
     one: "Es wurden %{size} Stimmen von einer Person abgegeben."
     other: "Es wurden %{size} Stimmen von %{count} Personen abgegeben."
   votes_per_voter: "Stimmen pro Person: min. %{min}, max. %{max}, Durchschnitt %{average}, Median %{median}"
+  voting_rank: "Platz %{rank} von %{count}"
   event_voting_results: "Ergebnis der MOC-Wahl"
   event_voting_posters: "Alle Stimmkarten für diese Veranstaltung herunterladen"
   collab_poll: "Wahl der Gemeinschaftsanlagen"

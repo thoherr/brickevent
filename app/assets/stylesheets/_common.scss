@@ -269,6 +269,12 @@ a {
     border: 2px solid #700;
 }
 
+/* voting results in the MOC tables */
+.VotingResultCell {
+  white-space: nowrap;
+  text-align: center;
+}
+
 /* pretix shop integration */
 .ShopCell,
 .TicketQrCell {
