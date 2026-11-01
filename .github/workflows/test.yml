@@ -1,0 +1,86 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RAILS_ENV: test
+  # The production group only holds mysql2; tests run on SQLite.
+  BUNDLE_WITHOUT: production
+
+jobs:
+  test:
+    name: Unit and controller tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Build CSS
+        run: bin/rails dartsass:build
+
+      - name: Prepare database
+        run: bin/rails db:schema:load
+
+      - name: Run tests
+        run: bin/rails test
+
+  system-test:
+    name: System tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Build CSS
+        run: bin/rails dartsass:build
+
+      - name: Prepare database
+        run: bin/rails db:schema:load
+
+      - name: Run system tests
+        run: bin/rails test:system
+
+      - name: Upload screenshots of failed system tests
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-test-screenshots
+          path: tmp/screenshots/
+          if-no-files-found: ignore
+
+  security:
+    name: Security checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Check dependencies for known vulnerabilities
+        run: bundle exec bundle-audit check --update
+
+      - name: Static security analysis
+        run: bundle exec brakeman --quiet --no-pager --exit-on-warn --exit-on-error
