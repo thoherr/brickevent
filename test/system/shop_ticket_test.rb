@@ -21,8 +21,13 @@ class ShopTicketTest < ApplicationSystemTestCase
 
     find("a.TicketQrLink[data-dialog='ticket-qr-103']").click
     assert_selector "dialog#ticket-qr-103[open] img.TicketQrImage[src*='/attendees/103/ticket_qr.svg']", visible: true
-    assert page.evaluate_script("document.querySelector('#ticket-qr-103 img.TicketQrImage').complete && document.querySelector('#ticket-qr-103 img.TicketQrImage').naturalWidth > 0"),
-           "the QR code image should have loaded"
+    # the image is fetched on open; wait for it like any other Capybara expectation
+    loaded = page.document.synchronize do
+      done = page.evaluate_script("(function (img) { return img.complete && img.naturalWidth > 0; })(document.querySelector('#ticket-qr-103 img.TicketQrImage'))")
+      raise Capybara::ExpectationNotMet, "the QR code image has not loaded yet" unless done
+      done
+    end
+    assert loaded, "the QR code image should have loaded"
     assert_selector "dialog#ticket-qr-103[open]", text: "s3cr3tt1ck3t"
     take_screenshot
 
