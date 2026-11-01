@@ -204,6 +204,7 @@ en:
     one: "We got %{size} votes from one voter."
     other: "We got %{size} votes from %{count} voters."
   votes_per_voter: "Votes per voter: min %{min}, max %{max}, average %{average}, median %{median}"
+  voting_rank: "rank %{rank} of %{count}"
   event_voting_results: "Voting results"
   event_voting_posters: "Get all voting posters for event"
   collab_poll: "Joint project poll"

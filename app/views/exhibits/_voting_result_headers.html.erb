@@ -1,0 +1,4 @@
+<%# Column headers for the voting results, one per voting scope with votes %>
+<% voting_standings(event).scopes.each do |scope| %>
+  <th><%= t(scope + '_voting') %></th>
+<% end %>

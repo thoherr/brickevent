@@ -1,4 +1,5 @@
 <!-- Copyright 2011 by Thomas Herrmann -->
+<% show_votes = show_voting_results?(event) %>
 
 <table class="ExhibitsTable FrontendTable">
   <tr>
@@ -13,6 +14,7 @@
     <th><%= t('heading_joint_project') %></th>
     <th><%= t('heading_size') %></th>
     <th><%= t('heading_remarks') %></th>
+    <%= render 'exhibits/voting_result_headers', event: event if show_votes %>
     <th colspan="3"></th>
   </tr>
 
@@ -35,6 +37,7 @@
         <% end -%>
       </td>
       <td><%= exhibit.remarks %></td>
+      <%= render 'exhibits/voting_result_cells', exhibit: exhibit, event: event if show_votes %>
       <td colspan="3">
         <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
           <%= link_to t('edit'), edit_exhibit_path(exhibit) %>

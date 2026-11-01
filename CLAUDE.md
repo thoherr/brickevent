@@ -107,6 +107,7 @@ Events have boolean flags controlling features:
 - `has_tickets`: Ticket system enabled  
 - `has_moc_transport`: MOC transport coordination
 - `show_order_link`: show the personal pretix order link to approved attendees (requires `shop_url`, see `doc/pretix.md`)
+- `show_voting_results`: show votes and rank of their own MOCs to attendees on the attendance page (admins and event managers always see them, on the event page too)
 - Various edit flags controlling what users can modify
 
 ## Testing Framework

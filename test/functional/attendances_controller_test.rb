@@ -211,4 +211,60 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 'application/json', response.media_type
   end
+
+  def cast_public_votes(exhibit, count)
+    count.times { |i| exhibit.liked_by Visitor.create!(session_id: "attendance-results-#{exhibit.id}-#{i}"), vote_scope: Vote.PUBLIC_VOTES }
+  end
+
+  def sign_in_owner
+    owner = users(:one)
+    owner.confirm
+    sign_in owner
+  end
+
+  test "owner does not see voting results until the event publishes them" do
+    cast_public_votes(exhibits(:one), 2)
+    sign_in_owner
+
+    get :show, params: { id: attendances(:one).to_param }
+
+    assert_response :success
+    assert_select "td.VotingResultCell", count: 0
+    assert_select "th", text: I18n.t('public_voting'), count: 0
+  end
+
+  test "owner sees votes and rank of own MOCs once the event publishes them" do
+    events(:three).update!(show_voting_results: true)
+    cast_public_votes(exhibits(:one), 2)
+    sign_in_owner
+
+    get :show, params: { id: attendances(:one).to_param, locale: :en }
+
+    assert_response :success
+    assert_select "th", text: "Public voting"
+    assert_select "td.VotingResultCell strong", text: "2"
+    assert_select "td.VotingResultCell small", text: /\Arank 1 of \d+\z/
+  end
+
+  test "no voting columns without votes even when results are published" do
+    events(:three).update!(show_voting_results: true)
+    sign_in_owner
+
+    get :show, params: { id: attendances(:one).to_param }
+
+    assert_response :success
+    assert_select "td.VotingResultCell", count: 0
+  end
+
+  test "admins and event managers see voting results before they are published" do
+    cast_public_votes(exhibits(:one), 1)
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
+
+    get :show, params: { id: attendances(:one).to_param }
+
+    assert_response :success
+    assert_select "td.VotingResultCell strong", text: "1"
+  end
 end
