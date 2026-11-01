@@ -6,6 +6,7 @@ class AccommodationsController < ApplicationController
   def new
     @accommodation = Accommodation.new
     @accommodation.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
+    authorize!(@accommodation) if @accommodation.attendance_id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -22,6 +23,7 @@ class AccommodationsController < ApplicationController
   # POST /accommodations.json
   def create
     @accommodation = Accommodation.new(accommodation_params)
+    authorize!(@accommodation)
 
     respond_to do |format|
       if @accommodation.save
@@ -38,9 +40,11 @@ class AccommodationsController < ApplicationController
   # PUT /accommodations/1.json
   def update
     load_accommodation
+    @accommodation.assign_attributes(accommodation_params)
+    authorize!(@accommodation) # also when the request is moved to another registration
 
     respond_to do |format|
-      if @accommodation.update(accommodation_params)
+      if @accommodation.save
         format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
         format.json { head :ok }
       else
@@ -67,7 +71,7 @@ class AccommodationsController < ApplicationController
 
   def load_accommodation
     @accommodation = Accommodation.find(params[:id])
-    raise 'Unauthorized request' unless authorized?(@accommodation)
+    authorize!(@accommodation)
   end
 
   def accommodation_params

@@ -103,10 +103,7 @@ class CsvOrderImport < ApplicationService
   private
 
   def read_content
-    raw = file.respond_to?(:read) ? file.read : File.read(file)
-    raw = raw.dup.force_encoding(Encoding::UTF_8)
-    raw = raw.encode(Encoding::UTF_8, Encoding::ISO_8859_15) unless raw.valid_encoding?
-    raw.delete_prefix("﻿")
+    CsvFileContent.read(file)
   end
 
   def detect_separator(content)

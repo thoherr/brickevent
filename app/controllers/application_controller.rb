@@ -1,11 +1,16 @@
 class ApplicationController < ActionController::Base
+  # Raised when the current user may not see or change a record.
+  class NotAuthorized < StandardError; end
+
   protect_from_forgery with: :exception
+
+  rescue_from NotAuthorized, with: :render_forbidden
 
   before_action :authenticate_user!
   before_action :store_referrer
   before_action :get_lug
   before_action :set_context
-  before_action :mailer_set_url_options
+  before_action :set_current_request_host
   before_action :configure_permitted_user_parameters, if: :devise_controller?
 
   def self.supported_locales
@@ -17,9 +22,11 @@ class ApplicationController < ActionController::Base
     @stage = ENV["STAGE"] || "prod"
   end 
 
+  # The first supported locale of: URL parameter, browser preference, default.
+  # Unsupported values are skipped instead of raising I18n::InvalidLocale.
   def set_locale
-    I18n.locale = params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
-    I18n.locale = I18n.default_locale unless ApplicationController.supported_locales.include? I18n.locale
+    requested = [params[:locale], extract_locale_from_accept_language_header].map { |l| l.to_s.downcase.to_sym }
+    I18n.locale = requested.find { |l| ApplicationController.supported_locales.include?(l) } || I18n.default_locale
   end
 
   def default_url_options
@@ -45,10 +52,12 @@ class ApplicationController < ActionController::Base
     @lug = Lug.first
   end
 
-  def mailer_set_url_options
-    # the URLs in our (confirmation) mails should link to the current instance, which can (will) differ for different LUGs
-    # see http://stackoverflow.com/questions/3432712/how-to-set-the-actionmailer-default-url-optionss-host-dynamically-to-the-reque
-    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  # Links in mails sent during this request (e.g. Devise confirmations) must
+  # point to the LUG domain the request came in on. Kept per request in
+  # Current instead of the global ActionMailer setting, which parallel
+  # requests for different LUG domains would overwrite. See DeviseMailer.
+  def set_current_request_host
+    Current.host_with_port = request.host_with_port
   end
 
   protected
@@ -58,7 +67,32 @@ class ApplicationController < ActionController::Base
   end
 
   def authorized?(object)
-    object.is_managed_by?(current_user) || current_user.is_admin?
+    return false if object.nil? || current_user.nil?
+
+    current_user.is_admin? || !!object.is_managed_by?(current_user)
+  end
+
+  # Owner of the record, manager of its event, or admin.
+  def authorize!(object)
+    raise NotAuthorized unless authorized?(object)
+  end
+
+  def event_manager?(event)
+    return false if current_user.nil?
+
+    current_user.is_admin? || !!event&.is_managed_by?(current_user)
+  end
+
+  # Manager of the event or admin; owners of a registration are not enough.
+  def authorize_event_manager!(event)
+    raise NotAuthorized unless event_manager?(event)
+  end
+
+  def render_forbidden
+    respond_to do |format|
+      format.html { render 'shared/forbidden', status: :forbidden }
+      format.any { head :forbidden }
+    end
   end
 
   private

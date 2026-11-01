@@ -57,9 +57,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "non admins should not get attendees as csv for event" do
-    assert_raise do
-      get :attendees_as_csv, params: { id: events(:three).to_param }
-    end
+    get :attendees_as_csv, params: { id: events(:three).to_param }
+    assert_response :forbidden
   end
 
   test "admin should get attendees as csv for event" do
@@ -76,9 +75,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "unauthorized user should not get exhibits as csv for event" do
-    assert_raise do
-      get :exhibits_as_csv, params: { id: events(:three).to_param }
-    end
+    get :exhibits_as_csv, params: { id: events(:three).to_param }
+    assert_response :forbidden
   end
 
   test "admin should get exhibits as csv for event" do
@@ -150,9 +148,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "non managers should not get vouchers as csv" do
-    assert_raise do
-      post :vouchers_as_csv, params: { id: events(:three).to_param }
-    end
+    post :vouchers_as_csv, params: { id: events(:three).to_param }
+    assert_response :forbidden
   end
 
   test "admin should get vouchers as csv" do
@@ -177,9 +174,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "non managers should not import attendees" do
-    assert_raise do
-      post :attendee_import, params: { id: events(:three).to_param, file: file_fixture_upload('attendee_import_valid.csv', 'text/csv') }
-    end
+    post :attendee_import, params: { id: events(:three).to_param, file: file_fixture_upload('attendee_import_valid.csv', 'text/csv') }
+    assert_response :forbidden
   end
 
   test "admin should import attendee data" do
@@ -208,9 +204,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "non managers should not import orders" do
-    assert_raise do
-      post :order_import, params: { id: events(:three).to_param, file: file_fixture_upload('pretix_orders_valid.csv', 'text/csv') }
-    end
+    post :order_import, params: { id: events(:three).to_param, file: file_fixture_upload('pretix_orders_valid.csv', 'text/csv') }
+    assert_response :forbidden
   end
 
   test "admin should import pretix orders" do
@@ -235,6 +230,18 @@ class EventsControllerTest < ActionController::TestCase
     two = attendees(:two).reload
     assert_equal "pending", two.order_status
     assert two.order_pending?
+  end
+
+  test "MOC import accepts CSV files sent with a spreadsheet content type" do
+    @user = users(:thoherr)
+    @user.confirm
+    sign_in @user
+    event = events(:three)
+
+    post :csv_import, params: { id: event.id, file: file_fixture_upload('exhibit_import_valid.csv', 'application/vnd.ms-excel') }
+
+    assert_redirected_to event_path(event)
+    assert_equal I18n.t('moc_data_imported_stats_notice', import: 0, import2: 0, import3: 3), flash[:notice]
   end
 
   test "event page preloads the installations of exhibits" do
@@ -389,9 +396,8 @@ class EventsControllerTest < ActionController::TestCase
     user.confirm
     sign_in user
 
-    assert_raise do
-      post :open_voting, params: { id: events(:three).id, voting_scope: Vote.PUBLIC_VOTES }
-    end
+    post :open_voting, params: { id: events(:three).id, voting_scope: Vote.PUBLIC_VOTES }
+    assert_response :forbidden
   end
 
 end

@@ -24,6 +24,8 @@ de:
   hint: "Hinweis"
   back_to_overview: "Zurück zur Übersichtsseite"
   back_to_event_overview: "Zurück zur Veranstaltungsübersicht"
+  access_denied_heading: "Zugriff verweigert"
+  access_denied_text: "Du darfst diese Daten nicht ansehen oder ändern. Falls das ein Fehler ist, wende Dich bitte an das Veranstaltungsteam."
   back_to_event: "Zurück zur Veranstaltung"
   delete: "Löschen"
   are_you_sure: "Bist Du sicher?"
