@@ -31,9 +31,8 @@ class ExhibitsControllerTest < ActionController::TestCase
     user = users(:three)
     user.confirm
     sign_in user
-    assert_raise do
-      get :edit, params: { id: @exhibit.to_param }
-    end
+    get :edit, params: { id: @exhibit.to_param }
+    assert_response :forbidden
   end
 
   test "should get edit if admin" do
@@ -53,9 +52,8 @@ class ExhibitsControllerTest < ActionController::TestCase
     user = users(:three)
     user.confirm
     sign_in user
-    assert_raise do
-      put :update, params: { id: @exhibit.to_param, exhibit: @exhibit.attributes }
-    end
+    put :update, params: { id: @exhibit.to_param, exhibit: @exhibit.attributes }
+    assert_response :forbidden
   end
 
   test "should update exhibit if event manager" do
@@ -78,15 +76,13 @@ class ExhibitsControllerTest < ActionController::TestCase
     user = users(:three)
     user.confirm
     sign_in user
-    assert_raise do
-      delete :destroy, params: { id: @exhibit.to_param }
-    end
+    delete :destroy, params: { id: @exhibit.to_param }
+    assert_response :forbidden
   end
 
   test "should not be approvable by user" do
-    assert_raise do
-      post :approve, params: { id: @exhibit.id }
-    end
+    post :approve, params: { id: @exhibit.id }
+    assert_response :forbidden
   end
 
   test "should be approvable by event manager" do

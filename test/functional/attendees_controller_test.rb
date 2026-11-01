@@ -30,9 +30,8 @@ class AttendeesControllerTest < ActionController::TestCase
     user = users(:one)
     user.confirm
     sign_in user
-    assert_raise do
-      get :edit, params: { id: @attendee.to_param }
-    end
+    get :edit, params: { id: @attendee.to_param }
+    assert_response :forbidden
   end
 
   test "should update attendee" do
@@ -44,9 +43,8 @@ class AttendeesControllerTest < ActionController::TestCase
     user = users(:one)
     user.confirm
     sign_in user
-    assert_raise do
-      put :update, params: { id: @attendee.to_param, attendee: @attendee.attributes }
-    end
+    put :update, params: { id: @attendee.to_param, attendee: @attendee.attributes }
+    assert_response :forbidden
   end
 
   test "admin should be able to update attendee" do
@@ -134,9 +132,8 @@ class AttendeesControllerTest < ActionController::TestCase
     user = users(:one)  # not admin or event manager
     user.confirm
     sign_in user
-    assert_raise do
-      post :approve, params: { id: @attendee.id }
-    end
+    post :approve, params: { id: @attendee.id }
+    assert_response :forbidden
   end
 
   test "ticket qr code is served as svg to an event manager or admin" do
@@ -167,9 +164,8 @@ class AttendeesControllerTest < ActionController::TestCase
     user.confirm
     sign_in user
 
-    assert_raise do
-      get :ticket_qr, params: { id: attendees(:three).to_param, format: :svg }
-    end
+    get :ticket_qr, params: { id: attendees(:three).to_param, format: :svg }
+    assert_response :forbidden
   end
 
   test "ticket qr code is not found without a paid ticket" do

@@ -5,6 +5,7 @@ class AttendeesController < ApplicationController
   def new
     @attendee = Attendee.new
     @attendee.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
+    authorize!(@attendee) if @attendee.attendance_id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -14,17 +15,15 @@ class AttendeesController < ApplicationController
 
   def approve
     load_attendee
-    raise 'approval denied' unless @attendee.event.is_managed_by?(current_user) || current_user.is_admin?
-    if @attendee
-      @attendee.is_approved=!@attendee.is_approved
-      respond_to do |format|
-        if @attendee.save
-          format.html { redirect_to @attendee.event, :notice => t('attendee_confirmation_changed') }
-          format.json { render :json => @attendee.event, :status => :updated, :location => @event }
-        else
-          format.html { render :action => "show" }
-          format.json { render :json => @attendee.errors, :status => :unprocessable_entity }
-        end
+    authorize_event_manager!(@attendee.event)
+    @attendee.is_approved=!@attendee.is_approved
+    respond_to do |format|
+      if @attendee.save
+        format.html { redirect_to @attendee.event, :notice => t('attendee_confirmation_changed') }
+        format.json { render :json => @attendee.event, :status => :ok, :location => @event }
+      else
+        format.html { render :action => "show" }
+        format.json { render :json => @attendee.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -53,6 +52,7 @@ class AttendeesController < ApplicationController
   # POST /attendees.json
   def create
     @attendee = Attendee.new(attendee_params)
+    authorize!(@attendee)
 
     respond_to do |format|
       if @attendee.save
@@ -69,9 +69,11 @@ class AttendeesController < ApplicationController
   # PUT /attendees/1.json
   def update
     load_attendee
+    @attendee.assign_attributes(attendee_params)
+    authorize!(@attendee) # also when the attendee is moved to another registration
 
     respond_to do |format|
-      if @attendee.update(attendee_params)
+      if @attendee.save
         format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated') }
         format.json { head :ok }
       else
@@ -98,7 +100,7 @@ class AttendeesController < ApplicationController
 
   def load_attendee
     @attendee = Attendee.find(params[:id])
-    raise 'Unauthorized request' unless authorized?(@attendee)
+    authorize!(@attendee)
   end
 
   def attendee_params

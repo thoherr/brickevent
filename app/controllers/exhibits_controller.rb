@@ -6,6 +6,7 @@ class ExhibitsController < ApplicationController
   def new
     @exhibit = Exhibit.new
     @exhibit.attendance_id = params[:attendance_id] unless params[:attendance_id].nil?
+    authorize!(@exhibit) if @exhibit.attendance_id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -17,17 +18,15 @@ class ExhibitsController < ApplicationController
   # POST /exhibits/approve.json
   def approve
     load_exhibit
-    if @exhibit
-      raise 'approval denied' unless @exhibit.attendance.event.is_managed_by?(current_user) || current_user.is_admin?
-      @exhibit.is_approved=!@exhibit.is_approved
-      respond_to do |format|
-        if @exhibit.save
-          format.html { redirect_to @exhibit.attendance.event, :notice => t('moc_confirmation_changed') }
-          format.json { render :json => @exhibit.attendance.event, :status => :updated, :location => @event }
-        else
-          format.html { render :action => "show" }
-          format.json { render :json => @exhibit.errors, :status => :unprocessable_entity }
-        end
+    authorize_event_manager!(@exhibit.event)
+    @exhibit.is_approved=!@exhibit.is_approved
+    respond_to do |format|
+      if @exhibit.save
+        format.html { redirect_to @exhibit.attendance.event, :notice => t('moc_confirmation_changed') }
+        format.json { render :json => @exhibit.attendance.event, :status => :ok, :location => @event }
+      else
+        format.html { render :action => "show" }
+        format.json { render :json => @exhibit.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -41,6 +40,7 @@ class ExhibitsController < ApplicationController
   # POST /exhibits.json
   def create
     @exhibit = Exhibit.new(exhibit_params)
+    authorize!(@exhibit)
 
     respond_to do |format|
       if @exhibit.save
@@ -57,9 +57,11 @@ class ExhibitsController < ApplicationController
   # PUT /exhibits/1.json
   def update
     load_exhibit
+    @exhibit.assign_attributes(exhibit_params)
+    authorize!(@exhibit) # also when the MOC is moved to another registration
 
     respond_to do |format|
-      if @exhibit.update(exhibit_params)
+      if @exhibit.save
         format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated') }
         format.json { head :ok }
       else
@@ -93,19 +95,32 @@ class ExhibitsController < ApplicationController
 
   def load_exhibit
     @exhibit = Exhibit.find(params[:id])
-    raise 'Unauthorized request' unless authorized?(@exhibit)
+    authorize!(@exhibit)
   end
+
+  # Fields only event managers and admins may set (the form hides them from attendees).
+  MANAGER_FIELDS = %i[platform position is_installation is_collab].freeze
 
   def exhibit_params
     # FIXME: get rid of "old" size attributes (size_studs, size, size_x_meter?, size_x_centimeter?, ....)
-    params.require(:exhibit).permit(:attendance_id, :name, :description, :url,
-                                    :size_studs, :size, :value, :building_hours, :brick_count,
-                                    :needs_power_supply, :needs_transportation, :is_installation,
-                                    :is_part_of_installation, :installation_exhibit_id, :is_collab,
-                                    :platform, :position,
-                                    :remarks, :size_x, :size_y, :size_z, :unit_id,
-                                    :size_x_meter, :size_y_meter, :size_z_meter,
-                                    :former_exhibit_id,
-                                    :size_x_centimeter, :size_y_centimeter, :size_z_centimeter)
+    permitted = %i[attendance_id name description url
+                   size_studs size value building_hours brick_count
+                   needs_power_supply needs_transportation
+                   is_part_of_installation installation_exhibit_id
+                   remarks size_x size_y size_z unit_id
+                   size_x_meter size_y_meter size_z_meter
+                   former_exhibit_id
+                   size_x_centimeter size_y_centimeter size_z_centimeter]
+    permitted += MANAGER_FIELDS if event_manager?(exhibit_event)
+    params.require(:exhibit).permit(*permitted)
+  end
+
+  # The event the submitted MOC belongs to: that of the target registration
+  # for new MOCs, otherwise that of the existing MOC.
+  def exhibit_event
+    attendance_id = params.dig(:exhibit, :attendance_id)
+    return Attendance.find_by(id: attendance_id)&.event if attendance_id.present?
+
+    @exhibit&.event
   end
 end

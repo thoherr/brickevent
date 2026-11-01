@@ -22,9 +22,8 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get unauthorized access when editing another user" do
-    assert_raise do
-      get :edit, params: { id: users(:two).to_param }
-    end
+    get :edit, params: { id: users(:two).to_param }
+    assert_response :forbidden
   end
 
   test "should update own data" do
@@ -33,9 +32,8 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get unauthorized access when updating another user" do
-    assert_raise do
-      put :update, params: { id: users(:two).to_param, user: users(:two).attributes }
-    end
+    put :update, params: { id: users(:two).to_param, user: users(:two).attributes }
+    assert_response :forbidden
   end
 
   test "should update data of another user when admin" do

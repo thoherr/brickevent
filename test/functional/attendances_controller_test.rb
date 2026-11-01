@@ -47,9 +47,8 @@ class AttendancesControllerTest < ActionController::TestCase
   end
 
   test "should not be approvable by user" do
-    assert_raise do
-      post :approve, params: { id: @attendance.id }
-    end
+    post :approve, params: { id: @attendance.id }
+    assert_response :forbidden
   end
 
   test "should create attendance" do
@@ -144,12 +143,14 @@ class AttendancesControllerTest < ActionController::TestCase
   end
 
   test "should not show attendance if unauthorized" do
-    assert_raise do
-      get :show, params: { id: attendances(:two).to_param }
-    end
+    get :show, params: { id: attendances(:two).to_param }
+    assert_response :forbidden
   end
 
   test "should handle failed attendance creation with invalid data" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
     assert_no_difference('Attendance.count') do
       post :create, params: {
         attendance: {
@@ -163,6 +164,9 @@ class AttendancesControllerTest < ActionController::TestCase
   end
 
   test "should return json error on failed create" do
+    admin = users(:thoherr)
+    admin.confirm
+    sign_in admin
     post :create, params: {
       attendance: {
         user_id: nil,
@@ -179,7 +183,9 @@ class AttendancesControllerTest < ActionController::TestCase
     @user.confirm
     sign_in @user
 
-    other_attendance = attendances(:two)
+    # an earlier registration of the same user, with one MOC
+    other_attendance = Attendance.create!(user: @user, event: events(:fourty_two))
+    Exhibit.create!(attendance: other_attendance, name: "Last year's MOC", unit: units(:one))
 
     post :copy_exhibits, params: {
       id: @attendance.id,

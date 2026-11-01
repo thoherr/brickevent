@@ -102,6 +102,43 @@ class CsvExhibitImportTest < ActiveSupport::TestCase
     cleanup_temp_file(file)
   end
 
+  test "re-imports its own ISO-8859-15 export" do
+    event = events(:three)
+    exhibit = exhibits(:one)
+    exhibit.update_columns(is_approved: true)
+    export = event.exhibits_as_csv
+    row = CSV.parse(export, headers: true, col_sep: ';').find { |r| r['ID'] == exhibit.id.to_s }
+    assert row, "the exhibit is part of the export"
+    edited = export.sub(/^#{exhibit.id};true;/, "#{exhibit.id};false;")
+    edited = edited.sub(/;#{row['Tisch']};#{row['Position']};/, ";9;3;")
+
+    file = Tempfile.new(['export', '.csv'])
+    file.binmode
+    file.write(edited.encode(Encoding::ISO_8859_15))
+    file.rewind
+    result = CsvExhibitImport.call(event, file)
+
+    exhibit.reload
+    assert_equal 0, result[:failure_count], result[:errors].inspect
+    assert_not exhibit.is_approved, "the umlaut header Bestätigt is recognised"
+    assert_equal [9, 3], [exhibit.platform, exhibit.position]
+  ensure
+    file&.close!
+  end
+
+  test "an invalid row counts as failure instead of aborting the import" do
+    exhibit = exhibits(:one)
+    exhibit.update_column(:url, "not a url") # fails validation on save
+    file = create_temp_csv("ID;MOC\n#{exhibit.id};Renamed\n")
+
+    result = CsvExhibitImport.call(events(:three), file)
+
+    assert_equal 1, result[:failure_count]
+    assert_equal [exhibit.id.to_s], result[:errors]
+    assert_equal "My first extraordinary MOC", exhibit.reload.name
+    cleanup_temp_file(file)
+  end
+
   private
 
   def create_temp_csv(content)

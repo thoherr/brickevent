@@ -39,8 +39,19 @@ class AttendancesController < ApplicationController
 
   # POST /attendances
   # POST /attendances.json
+  #
+  # Users register themselves for events with open registration. Event
+  # managers and admins may also register other users (by user id), approve
+  # right away, and register while registration is closed.
   def create
     @attendance = Attendance.new(attendance_params)
+    if event_manager?(@attendance.event)
+      @attendance.user_id ||= current_user.id
+    else
+      @attendance.user = current_user
+      @attendance.is_approved = false
+      raise NotAuthorized unless @attendance.event&.registration_open?
+    end
 
     respond_to do |format|
       if @attendance.save
@@ -55,17 +66,15 @@ class AttendancesController < ApplicationController
 
   def approve
     load_attendance
-    if @attendance
-      raise 'approval denied' unless @attendance.event.is_managed_by?(current_user) || current_user.is_admin?
-      @attendance.is_approved=!@attendance.is_approved
-      respond_to do |format|
-        if @attendance.save
-          format.html { redirect_to @attendance.event, :notice => 'Anmeldebestätigung geändert.' }
-          format.json { render :json => @attendance.event, :status => :ok, :location => @event }
-        else
-          format.html { render :action => "show" }
-          format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
-        end
+    authorize_event_manager!(@attendance.event)
+    @attendance.is_approved=!@attendance.is_approved
+    respond_to do |format|
+      if @attendance.save
+        format.html { redirect_to @attendance.event, :notice => 'Anmeldebestätigung geändert.' }
+        format.json { render :json => @attendance.event, :status => :ok, :location => @event }
+      else
+        format.html { render :action => "show" }
+        format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -74,6 +83,7 @@ class AttendancesController < ApplicationController
   def copy_exhibits
     load_attendance
     @other_attendance = Attendance.find(params[:other_attendance_id])
+    authorize!(@other_attendance)
 
     respond_to do |format|
       if @attendance.copy_exhibits! @other_attendance
@@ -90,6 +100,7 @@ class AttendancesController < ApplicationController
   def add_former_exhibit
     load_attendance
     @former_exhibit = Exhibit.find(params[:former_exhibit_id])
+    authorize!(@former_exhibit)
     respond_to do |format|
       if @attendance.add_former_exhibit! @former_exhibit
         format.html { redirect_to attendances_url, :notice => 'Eintrag wurde kopiert.' }
@@ -114,7 +125,7 @@ class AttendancesController < ApplicationController
 
   def load_attendance
     @attendance = Attendance.find(params[:id])
-    raise 'Unauthorized request' unless authorized?(@attendance)
+    authorize!(@attendance)
   end
 
   def attendance_params

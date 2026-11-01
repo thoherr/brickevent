@@ -27,9 +27,8 @@ class AccommodationsControllerTest < ActionController::TestCase
   end
 
   test "unauthorized user should not get edit" do
-    assert_raise do
-      get :edit, params: { id: accommodations(:two).to_param }
-    end
+    get :edit, params: { id: accommodations(:two).to_param }
+    assert_response :forbidden
   end
 
   test "should update accommodation" do
@@ -38,9 +37,8 @@ class AccommodationsControllerTest < ActionController::TestCase
   end
 
   test "unauthorized user should not update accommodation" do
-    assert_raise do
-      put :update, params: { id: accommodations(:two).to_param, accommodation: accommodations(:two).attributes }
-    end
+    put :update, params: { id: accommodations(:two).to_param, accommodation: accommodations(:two).attributes }
+    assert_response :forbidden
   end
 
   test "should destroy accommodation" do

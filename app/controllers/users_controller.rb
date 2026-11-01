@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def load_user
     @user = User.find(params[:id])
-    raise 'Unauthorized request' unless authorized?(@user)
+    authorize!(@user)
   end
 
   def user_params
