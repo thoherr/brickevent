@@ -22,7 +22,7 @@ class AttendeesController < ApplicationController
         format.html { redirect_to @attendee.event, :notice => t('attendee_confirmation_changed') }
         format.json { render :json => @attendee.event, :status => :ok, :location => @event }
       else
-        format.html { render :action => "show" }
+        format.html { render :action => "show", :status => :unprocessable_entity }
         format.json { render :json => @attendee.errors, :status => :unprocessable_entity }
       end
     end
@@ -59,7 +59,7 @@ class AttendeesController < ApplicationController
         format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_added') }
         format.json { render :json => @attendee, :status => :created, :location => @attendee }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :status => :unprocessable_entity }
         format.json { render :json => @attendee.errors, :status => :unprocessable_entity }
       end
     end
@@ -77,7 +77,7 @@ class AttendeesController < ApplicationController
         format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated') }
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "edit", :status => :unprocessable_entity }
         format.json { render :json => @attendee.errors, :status => :unprocessable_entity }
       end
     end
@@ -91,7 +91,7 @@ class AttendeesController < ApplicationController
     @attendee.destroy
 
     respond_to do |format|
-      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => t('attendee_deleted') }
+      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => t('attendee_deleted'), :status => :see_other }
       format.json { head :ok }
     end
   end

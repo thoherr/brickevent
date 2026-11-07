@@ -1,0 +1,123 @@
+/*
+ * Modern Layout Styles - Mobile First
+ * Replaces the old table-based layout with semantic HTML
+ */
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f9fafb;
+}
+
+/* Header - Preserving original layout with responsive enhancements */
+.app-header {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo img.LugLogo {
+  /* Let the logo display at its natural size, respect original padding from common.scss */
+  max-width: 200px; /* reasonable max for mobile */
+  height: auto;
+  padding: 0.5%;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  /* Right-align content to match original layout */
+  text-align: right;
+  padding-right: 2%;
+}
+
+.header-meta .VersionText {
+  display: block;
+  text-align: right;
+  margin-top: 0;
+  padding: 0;
+  font-size: xx-small;
+}
+
+.header-content .TitleText {
+  display: block;
+  text-align: right;
+  padding: 0;
+  font-weight: bold;
+  font-size: x-small;
+  margin: 0;
+}
+
+/* Navigation - Let original #mainNavi styles from common.scss work */
+.app-nav {
+  /* Don't override the original #mainNavi styles */
+  /* The styles from _common.scss will handle most of the navigation */
+  /* Just add responsive overflow for narrow screens */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Main Content - Let original #mainContent styles work */
+.app-main {
+  /* Original had margin: 1%, preserve that */
+  /* Just add max-width for very wide screens */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Tablet and Desktop Styles */
+@media (min-width: 768px) {
+  .app-header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .header-logo img.LugLogo {
+    max-width: 400px; /* Allow larger logo on desktop */
+  }
+}
+
+/* Mobile Menu Toggle (for future use) */
+.mobile-menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+}
+
+/* Ensure backward compatibility with old IDs */
+#mainTitle {
+  /* Legacy table ID - now on header */
+}
+
+#mainNavi {
+  /* Legacy nav ID - now on nav */
+}
+
+#mainContent {
+  /* Legacy content ID - now on main */
+}

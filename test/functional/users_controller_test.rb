@@ -50,7 +50,7 @@ class UsersControllerTest < ActionController::TestCase
       id: @user.to_param,
       user: { email: "", given_name: "", family_name: "" }  # Invalid - required fields empty
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_template :edit
   end
 

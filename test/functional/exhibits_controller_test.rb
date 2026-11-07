@@ -111,7 +111,7 @@ class ExhibitsControllerTest < ActionController::TestCase
         }
       }
     end
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_template :new
   end
 
@@ -133,7 +133,7 @@ class ExhibitsControllerTest < ActionController::TestCase
       id: @exhibit.to_param,
       exhibit: { url: "invalid-url" }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_template :edit
   end
 

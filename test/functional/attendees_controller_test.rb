@@ -74,7 +74,7 @@ class AttendeesControllerTest < ActionController::TestCase
         }
       }
     end
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_template :new
   end
 
@@ -100,7 +100,7 @@ class AttendeesControllerTest < ActionController::TestCase
         number_of_shirts: nil
       }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_template :edit
   end
 

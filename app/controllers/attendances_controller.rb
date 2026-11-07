@@ -58,7 +58,7 @@ class AttendancesController < ApplicationController
         format.html { redirect_to @attendance }
         format.json { render :json => @attendance, :status => :created, :location => @attendance }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :status => :unprocessable_entity }
         format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
     end
@@ -73,7 +73,7 @@ class AttendancesController < ApplicationController
         format.html { redirect_to @attendance.event, :notice => 'Anmeldebestätigung geändert.' }
         format.json { render :json => @attendance.event, :status => :ok, :location => @event }
       else
-        format.html { render :action => "show" }
+        format.html { render :action => "show", :status => :unprocessable_entity }
         format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
     end
@@ -90,7 +90,7 @@ class AttendancesController < ApplicationController
         format.html { redirect_to attendances_url, :notice => 'Einträge wurden kopiert.' }
         format.json { head :ok }
       else
-        format.html { render :action => "show" }
+        format.html { render :action => "show", :status => :unprocessable_entity }
         format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
     end
@@ -106,7 +106,7 @@ class AttendancesController < ApplicationController
         format.html { redirect_to attendances_url, :notice => 'Eintrag wurde kopiert.' }
         format.json { head :ok }
       else
-        format.html { render :action => "show" }
+        format.html { render :action => "show", :status => :unprocessable_entity }
         format.json { render :json => @attendance.errors, :status => :unprocessable_entity }
       end
     end

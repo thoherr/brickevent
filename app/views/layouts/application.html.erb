@@ -12,26 +12,31 @@
 </head>
 <body class="<%= @stage%> <%= I18n.locale%>">
 
-<table id="mainTitle">
-  <tr>
-    <td>
-      <%= image_tag "#{@lug.logo_url}", class: "LugLogo" %>
-    </td>
-    <td>
-      <span class="VersionText"><% if user_signed_in? %><%= t('logged_in_as') + " #{current_user.email} - " %><% end %><%= "Version #{SoftwareVersion.versionstring} #{@stage}" %></span>
-      <span class="TitleText"><%= titleline %></span>
-    </td>
-  </tr>
-</table>
+<header id="mainHeader" class="app-header">
+  <div class="header-logo">
+    <%= image_tag "#{@lug.logo_url}", class: "LugLogo", alt: "#{@lug.name} Logo" %>
+  </div>
+  <div class="header-content">
+    <div class="header-meta">
+      <span class="VersionText">
+        <% if user_signed_in? %>
+          <%= t('logged_in_as') + " #{current_user.email} - " %>
+        <% end %>
+        <%= "Version #{SoftwareVersion.versionstring} #{@stage}" %>
+      </span>
+    </div>
+    <h1 class="TitleText"><%= titleline %></h1>
+  </div>
+</header>
 
-<div id="mainNavi">
+<nav id="mainNavi" class="app-nav">
   <%= render "shared/user_navi" %>
-</div>
+</nav>
 
-<div id="mainContent">
+<main id="mainContent" class="app-main">
   <%= render "shared/flashes" %>
   <%= yield %>
-</div>
+</main>
 
 
 </body>

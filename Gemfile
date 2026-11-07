@@ -62,3 +62,6 @@ gem 'prawn'
 gem 'rubyzip'
 
 gem 'webrick', '~> 1.8'
+
+gem "turbo-rails"
+gem "stimulus-rails"

@@ -173,7 +173,7 @@ Modern asset pipeline using a hybrid approach:
    - Location: `app/assets/javascripts/application.js`
    - Uses `//= require` directives
    - Compiled by Sprockets (supports ERB)
-   - Loaded via `javascript_include_tag "application"`
+   - Loaded via `javascript_include_tag "application"`, **only in the admin layout** (`layouts/admin.html.erb`, Turbo disabled there)
    - Includes: jQuery, jquery_ujs, Active Scaffold
 
 2. **Importmap** (for modern ES6 modules)
@@ -183,6 +183,14 @@ Modern asset pipeline using a hybrid approach:
    - Loaded via `javascript_importmap_tags "brickevent"`
    - Every file under `app/javascript` is linked in `app/assets/config/manifest.js` (`link_tree`), so new modules only need a pin in `config/importmap.rb`
    - No build step required
+   - Loads Turbo Drive and Stimulus (`app/javascript/controllers`) on all frontend pages
+
+**Turbo conventions on the frontend** (there is no jquery_ujs there):
+- Non-GET links use `data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') }`, not `method:` / `confirm:`
+- A form re-rendered after a failed save needs `status: :unprocessable_entity`, otherwise Turbo ignores the response
+- Redirects after a DELETE need `status: :see_other` (Devise is configured for this in its initializer)
+- File downloads (PDF, ZIP, CSV) bypass Turbo with `data: { turbo: false }` (for `button_to`: `form: { data: { turbo: false } }`)
+- Page setup JS runs on `turbo:load`, not `DOMContentLoaded`
 
 **Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.
 

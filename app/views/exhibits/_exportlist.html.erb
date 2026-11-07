@@ -25,7 +25,7 @@
 
   <% exhibits.each do |exhibit| %>
       <tr>
-        <td><%= link_to to_yes_no(exhibit.is_approved?), approve_exhibit_path(exhibit), :method => :post %></td>
+        <td><%= link_to to_yes_no(exhibit.is_approved?), approve_exhibit_path(exhibit), data: { turbo_method: :post } %></td>
         <td>
           <% if user_is_admin? and exhibit.is_installation? %>
             <%= form_for(exhibit) do |f| %>
@@ -52,9 +52,9 @@
         <td><%= exhibit.platform_position %></td>
         <%= render 'exhibits/voting_result_cells', exhibit: exhibit, event: event if show_votes %>
         <td colspan="3"><%= link_to t('edit'), edit_exhibit_path(exhibit) %>
-          <%= link_to t('delete'), exhibit, :confirm => t('are_you_sure'), :method => :delete %>
+          <%= link_to t('delete'), exhibit, data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') } %>
           <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
-          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) if exhibit.votable? %>
+          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit), data: { turbo: false } if exhibit.votable? %>
         </td>
       </tr>
   <% end %>
