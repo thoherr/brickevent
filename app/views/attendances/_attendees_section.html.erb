@@ -1,0 +1,9 @@
+<%# Attendees of a registration. A Turbo Frame: the new/edit forms open inside it. %>
+<%= turbo_frame_tag "attendees" do %>
+  <p class="Indented"><%= t(:you_registered1) + " " + attendance.attendees.count.to_s + " " + t('participants') %>
+    <%= t(:you_registered2) %>
+    <% if registration_open?(attendance) -%>(<%= link_to t('register_person'), new_attendee_path(:attendance_id => attendance) -%>)
+    <% end -%>:</p>
+
+  <%= render 'attendees/table', :attendees => attendance.attendees, :event => attendance.event, :attendance => attendance %>
+<% end %>

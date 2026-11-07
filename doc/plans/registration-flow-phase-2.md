@@ -1,6 +1,6 @@
 # Implementation Plan: Inline Registration (Frontend Modernization Phase 2)
 
-Status: planned (2026-11-07)
+Status: implemented (2026-11-07)
 Scope: the attendance page (`attendances#show`) and the attendee, MOC and
 accommodation forms reached from it. Reduced version of "Phase 2" in
 `modernization-recommendation.md`, see §2 for what is left out and why.

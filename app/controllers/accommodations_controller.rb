@@ -1,6 +1,8 @@
 # encoding: UTF-8
 class AccommodationsController < ApplicationController
 
+  include AttendanceSectionResponse
+
   # GET /accommodations/new
   # GET /accommodations/new.json
   def new
@@ -27,7 +29,11 @@ class AccommodationsController < ApplicationController
 
     respond_to do |format|
       if @accommodation.save
-        format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde aufgenommen.'}
+        format.html do
+          next render_attendance_section(@accommodation.attendance, "accommodations", t('accommodation_added')) if attendance_section_request?("accommodations")
+
+          redirect_back_or_default @accommodation.attendance, :notice => t('accommodation_added')
+        end
         format.json { render :json => @accommodation, :status => :created, :location => @accommodation }
       else
         format.html { render :action => "new", :status => :unprocessable_entity }
@@ -45,7 +51,11 @@ class AccommodationsController < ApplicationController
 
     respond_to do |format|
       if @accommodation.save
-        format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
+        format.html do
+          next render_attendance_section(@accommodation.attendance, "accommodations", t('accommodation_updated')) if attendance_section_request?("accommodations")
+
+          redirect_back_or_default @accommodation.attendance, :notice => t('accommodation_updated')
+        end
         format.json { head :ok }
       else
         format.html { render :action => "edit", :status => :unprocessable_entity }
@@ -62,7 +72,11 @@ class AccommodationsController < ApplicationController
     @accommodation.destroy
 
     respond_to do |format|
-      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.', :status => :see_other }
+      format.html do
+        next render_attendance_section(@accommodation.attendance, "accommodations", t('accommodation_deleted')) if attendance_section_request?("accommodations")
+
+        redirect_back_or_default attendance_path(@attendance_id), :notice => t('accommodation_deleted'), :status => :see_other
+      end
       format.json { head :ok }
     end
   end

@@ -82,10 +82,10 @@
         <td><%= attendee.remarks %></td>
         <%= render 'attendees/shop_cell', attendee: attendee if show_shop %>
         <td colspan="2">
-          <% if @registration_open || (event && event.edit_of_attendees_allowed?) -%>
+          <% if can_edit_attendees?(attendance) -%>
             <%= link_to t('edit'), edit_attendee_path(attendee) %>
           <% end -%>
-          <% if @registration_open -%>
+          <% if registration_open?(attendance) -%>
             <%= link_to t('delete'), attendee, data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') } %>
           <% end -%>
         </td>

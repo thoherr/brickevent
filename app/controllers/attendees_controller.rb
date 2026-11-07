@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class AttendeesController < ApplicationController
+  include AttendanceSectionResponse
+
   # GET /attendees/new
   # GET /attendees/new.json
   def new
@@ -56,7 +58,11 @@ class AttendeesController < ApplicationController
 
     respond_to do |format|
       if @attendee.save
-        format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_added') }
+        format.html do
+          next render_attendance_section(@attendee.attendance, "attendees", t('attendee_added')) if attendance_section_request?("attendees")
+
+          redirect_back_or_default @attendee.attendance, :notice => t('attendee_added')
+        end
         format.json { render :json => @attendee, :status => :created, :location => @attendee }
       else
         format.html { render :action => "new", :status => :unprocessable_entity }
@@ -74,7 +80,11 @@ class AttendeesController < ApplicationController
 
     respond_to do |format|
       if @attendee.save
-        format.html { redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated') }
+        format.html do
+          next render_attendance_section(@attendee.attendance, "attendees", t('attendee_updated')) if attendance_section_request?("attendees")
+
+          redirect_back_or_default @attendee.attendance, :notice => t('attendee_updated')
+        end
         format.json { head :ok }
       else
         format.html { render :action => "edit", :status => :unprocessable_entity }
@@ -91,7 +101,11 @@ class AttendeesController < ApplicationController
     @attendee.destroy
 
     respond_to do |format|
-      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => t('attendee_deleted'), :status => :see_other }
+      format.html do
+        next render_attendance_section(@attendee.attendance, "attendees", t('attendee_deleted')) if attendance_section_request?("attendees")
+
+        redirect_back_or_default attendance_path(@attendance_id), :notice => t('attendee_deleted'), :status => :see_other
+      end
       format.json { head :ok }
     end
   end
