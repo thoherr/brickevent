@@ -159,7 +159,7 @@ class AttendancesControllerTest < ActionController::TestCase
         }
       }
     end
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_template :new
   end
 

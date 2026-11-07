@@ -214,4 +214,10 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+  # ==> Hotwire/Turbo configuration
+  # Turbo only renders a form response with an error status, and follows redirects
+  # after a DELETE (sign out) only with 303 See Other.
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
 end

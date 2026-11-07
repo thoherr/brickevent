@@ -30,7 +30,7 @@ class AccommodationsController < ApplicationController
         format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde aufgenommen.'}
         format.json { render :json => @accommodation, :status => :created, :location => @accommodation }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :status => :unprocessable_entity }
         format.json { render :json => @accommodation.errors, :status => :unprocessable_entity }
       end
     end
@@ -48,7 +48,7 @@ class AccommodationsController < ApplicationController
         format.html { redirect_back_or_default @accommodation.attendance, :notice => 'Der Hotelwunsch wurde geändert.' }
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "edit", :status => :unprocessable_entity }
         format.json { render :json => @accommodation.errors, :status => :unprocessable_entity }
       end
     end
@@ -62,7 +62,7 @@ class AccommodationsController < ApplicationController
     @accommodation.destroy
 
     respond_to do |format|
-      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.' }
+      format.html { redirect_back_or_default attendance_path(@attendance_id), :notice => 'Der Hotelwunsch wurde gelöscht.', :status => :see_other }
       format.json { head :ok }
     end
   end

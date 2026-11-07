@@ -15,7 +15,7 @@ class UsersController < ApplicationController
         format.html { redirect_to events_path, :notice => t('profile_changed') }
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "edit", :status => :unprocessable_entity }
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end

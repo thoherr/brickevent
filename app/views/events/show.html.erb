@@ -11,7 +11,7 @@
   <br/>
   <%= t('confirmed_for_afols_event') + " " + @event.number_of_attendees_at_afols_event.to_s %><br/>
   <%= t('confirmed_tickets') + " " + @event.number_of_tickets.to_s %><br/>
-  <%= link_to t('event_voting_posters'), voting_posters_event_path(@event) %><br/>
+  <%= link_to t('event_voting_posters'), voting_posters_event_path(@event), data: { turbo: false } %><br/>
   <%= link_to t('event_voting_results'), votes_event_path(@event) %>
 </p>
 
@@ -37,7 +37,7 @@
 
     <hr/>
     <h2><%= t('table_attendees') %>
-      <%= button_to 'CSV Datei der Teilnehmer exportieren', :action => 'attendees_as_csv', :id => @event, :filename => 'teilnehmer.csv' %>
+      <%= button_to 'CSV Datei der Teilnehmer exportieren', :action => 'attendees_as_csv', :id => @event, :filename => 'teilnehmer.csv', form: { data: { turbo: false } } %>
     </h2>
     <div class="Indented">
       <%= form_tag attendee_import_event_path(@event), method: :post, multipart: true do %>
@@ -57,8 +57,8 @@
     <% if @event.shop_configured? %>
       <h3><%= t('shop_heading') %></h3>
       <div class="Indented ShopTools">
-        <%= button_to t('export_pretix_vouchers'), vouchers_as_csv_event_path(@event) %>
-        <%= button_to t('export_pretix_vouchers_all'), vouchers_as_csv_event_path(@event, all: 1) %>
+        <%= button_to t('export_pretix_vouchers'), vouchers_as_csv_event_path(@event), form: { data: { turbo: false } } %>
+        <%= button_to t('export_pretix_vouchers_all'), vouchers_as_csv_event_path(@event, all: 1), form: { data: { turbo: false } } %>
         <%= form_tag order_import_event_path(@event), method: :post, multipart: true do %>
           <%= file_field_tag :file, accept: ".csv" %><br/>
           <%= submit_tag t('import_order_csv') %>
@@ -69,7 +69,7 @@
 
     <hr/>
     <h2><%= t('table_exhibits') %>
-      <%= button_to t('export_exhibit_csv'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv' %>
+      <%= button_to t('export_exhibit_csv'), :action => 'exhibits_as_csv', :id => @event, :filename => 'mocliste.csv', form: { data: { turbo: false } } %>
     </h2>
   <p>
   <div class="Indented">

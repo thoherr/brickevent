@@ -5,17 +5,19 @@
 // Read more: https://github.com/rails/importmap-rails
 //
 // Note: This app uses a hybrid JavaScript setup:
-// - Sprockets: Active Scaffold + jQuery (loaded via app/assets/javascripts/application.js)
-// - Importmap: Modern ES6 modules (this file and future additions)
+// - Sprockets: Active Scaffold + jQuery, only in the admin layout (app/assets/javascripts/application.js)
+// - Importmap: Turbo, Stimulus and our ES6 modules on all other pages (this file)
 //
 // Add new JavaScript features here using ES6 import/export syntax
 
-// Example: Import and use an ES6 module
+import "@hotwired/turbo-rails"
+import "controllers"
 import AppInfo from "utils/app_info";
 import { initTicketDialogs } from "shop_ticket_dialog";
 
-// Initialize on DOM ready
-document.addEventListener("DOMContentLoaded", () => {
+// turbo:load fires on the initial page load and after every Turbo visit,
+// DOMContentLoaded only on the initial load.
+document.addEventListener("turbo:load", () => {
   initTicketDialogs();
 
   const appInfo = new AppInfo();
@@ -29,5 +31,3 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("⚠️ This browser may not support all modern JavaScript features");
   }
 });
-import "@hotwired/turbo-rails"
-import "controllers"

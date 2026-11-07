@@ -24,7 +24,10 @@ Living document of planned work beyond immediate bug fixes. Organized by theme, 
 
 Phase 1 (done on branch): Hotwire installed, Active Scaffold → Avo, jQuery removed, semantic HTML, mobile viewport, backend search.
 
-- [ ] Rebase branch onto updated master (post dependency merges)
+Split (2026-11-07): the frontend part (viewport, Hotwire, semantic layout) moved to `feature/frontend-modernization`, independent of the admin backend; links, form errors, deletes and downloads adapted to Turbo, jQuery only in the admin layout. The Avo switch stays on `feature/ui-modernization` until the backend decision.
+
+- [x] Bring the frontend part onto current master (`feature/frontend-modernization`)
+- [ ] Decide on the admin backend: upgrade Active Scaffold to 4.x (users know it) or switch to Avo
 - [ ] Full Avo CRUD smoke test across all 10 resources (accommodations, attendances, attendees, events, event_managers, exhibits, lugs, units, users, accommodation_types/attendee_types)
 - [ ] Verify authorization rules for event managers in Avo (scope to their events only)
 - [ ] Run full test + system suite, merge to master, tag **3.0**

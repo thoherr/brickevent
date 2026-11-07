@@ -25,7 +25,7 @@ class ExhibitsController < ApplicationController
         format.html { redirect_to @exhibit.attendance.event, :notice => t('moc_confirmation_changed') }
         format.json { render :json => @exhibit.attendance.event, :status => :ok, :location => @event }
       else
-        format.html { render :action => "show" }
+        format.html { render :action => "show", :status => :unprocessable_entity }
         format.json { render :json => @exhibit.errors, :status => :unprocessable_entity }
       end
     end
@@ -47,7 +47,7 @@ class ExhibitsController < ApplicationController
         format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_created') }
         format.json { render :json => @exhibit, :status => :created, :location => @exhibit }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :status => :unprocessable_entity }
         format.json { render :json => @exhibit.errors, :status => :unprocessable_entity }
       end
     end
@@ -65,7 +65,7 @@ class ExhibitsController < ApplicationController
         format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated') }
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "edit", :status => :unprocessable_entity }
         format.json { render :json => @exhibit.errors, :status => :unprocessable_entity }
       end
     end
@@ -79,7 +79,7 @@ class ExhibitsController < ApplicationController
     @exhibit.destroy
 
     respond_to do |format|
-      format.html { redirect_to attendance_path(@attendance_id), :notice => t('moc_deleted') }
+      format.html { redirect_to attendance_path(@attendance_id), :notice => t('moc_deleted'), :status => :see_other }
       format.json { head :ok }
     end
   end

@@ -43,16 +43,16 @@
           <%= link_to t('edit'), edit_exhibit_path(exhibit) %>
         <% end -%>
         <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>
-          <%= link_to t('delete'), exhibit, data: { confirm: t('are_you_sure') }, :method => :delete %>
+          <%= link_to t('delete'), exhibit, data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') } %>
         <% end -%>
         <!-- <%= link_to t('link_create_moc_card'), edit_exhibit_path(exhibit) %> -->
         <% @attendance.other_open_attendances.each do |to_attendance| %>
           <% unless to_attendance.contains_version_of(exhibit) %>
-            <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), method: :post %>
+            <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), data: { turbo_method: :post } %>
           <% end %>
         <% end %>
         <% if user_is_admin? %>
-          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit) if exhibit.votable? %>
+          <%= link_to t('link_create_voting_card'), voting_poster_exhibit_path(exhibit), data: { turbo: false } if exhibit.votable? %>
           <% if exhibit.is_installation? %>
             <%= form_for(exhibit) do |f| %>
               <%= f.select :attendance_id, @attendance.event.attendances.collect { |a| [a.user_name, a.id] } %>

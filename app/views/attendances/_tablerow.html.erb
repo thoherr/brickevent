@@ -16,7 +16,7 @@
               <%= exhibit.name %>
               <% attendance.other_open_attendances.each do |to_attendance| %>
                   <% unless to_attendance.contains_version_of(exhibit) %>
-                      <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), method: :post %>
+                      <br/><span class="Indented"><%= link_to "--> #{to_attendance.event_title}", add_former_exhibit_attendance_path(:id => to_attendance.id, :former_exhibit_id => exhibit.id), data: { turbo_method: :post } %>
                   <% end %>
               <% end %>
             </p>
