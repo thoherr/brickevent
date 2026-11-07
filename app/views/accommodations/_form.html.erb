@@ -1,5 +1,6 @@
 <%= form_for(@accommodation) do |f| %>
     <div class="InputForm">
+      <%= render 'shared/form_errors', object: @accommodation %>
       <%= f.hidden_field :attendance_id %>
       <div class="field">
         <%= f.label :accommodation_type_id, t('label_accommodation_type') %><br/>

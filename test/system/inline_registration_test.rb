@@ -42,6 +42,28 @@ class InlineRegistrationTest < ApplicationSystemTestCase
     take_screenshot
   end
 
+  test "a missing field is reported inside the attendee section" do
+    login_admin
+    visit attendance_path(@attendance, locale: :en)
+
+    within("turbo-frame#attendees") do
+      click_on "Register another attendee"
+      fill_in 'attendee_given_name', with: "Typeless"
+      click_on 'submit'
+      assert_selector ".FormErrors li", text: "Register as must be filled in"
+      assert_equal "Typeless", find_field('attendee_given_name').value
+    end
+    # scrolled into view after the frame has rendered; wait for it like any other expectation
+    page.document.synchronize do
+      in_view = page.evaluate_script(<<~JS)
+        (() => { const r = document.querySelector(".FormErrors").getBoundingClientRect();
+                 return r.top >= 0 && r.bottom <= window.innerHeight; })()
+      JS
+      raise Capybara::ExpectationNotMet, "the error box is not scrolled into view" unless in_view
+    end
+    take_screenshot
+  end
+
   test "an invalid MOC is shown again with the error in its section, then saved" do
     login_admin
     exhibit = Exhibit.create!(attendance: @attendance, name: "Inline MOC", unit: units(:one))
@@ -107,6 +129,22 @@ class InlineRegistrationTest < ApplicationSystemTestCase
     end
     assert_selector ".FlashNotice", text: "accommodation request has been deleted"
     assert_not Accommodation.exists?(accommodation.id)
+  end
+
+  test "the ticket QR code still opens after the attendee section was updated inline" do
+    login_admin
+    visit attendance_path(@attendance, locale: :en)
+
+    within("turbo-frame#attendees") do
+      find("tr", text: "Nick3").click_on "Edit"
+      fill_in 'attendee_remarks', with: "Changed inline"
+      click_on 'submit'
+      assert_selector "td", text: "Changed inline"
+      find("a.TicketQrLink[data-dialog='ticket-qr-103']").click
+    end
+    assert_selector "dialog#ticket-qr-103[open] img.TicketQrImage[src*='/attendees/103/ticket_qr.svg']"
+    find("dialog#ticket-qr-103 button.TicketQrClose").click
+    assert_no_selector "dialog#ticket-qr-103[open]"
   end
 
   test "editing an attendee from the event page is still a full page and returns there" do

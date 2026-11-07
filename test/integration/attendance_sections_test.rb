@@ -59,6 +59,7 @@ class AttendanceSectionsTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "turbo-frame#attendees form#edit_attendee_#{attendee.id}"
+    assert_select "turbo-frame#attendees .FormErrors li", text: "Register as must be filled in"
     assert_select "turbo-frame#attendees a", text: "Cancel"
   end
 
@@ -101,5 +102,12 @@ class AttendanceSectionsTest < ActionDispatch::IntegrationTest
     assert_select "#attendance_status li", text: /Registration confirmed: no/
     assert_select "#attendance_status li", text: "Attendees confirmed: 2 of 2"
     assert_select "#attendance_status li", text: /MOCs confirmed: 1 of 1\s+\(1 without size\)/
+  end
+
+  test "the profile form shows its validation errors" do
+    patch user_path(users(:thoherr), locale: :de), params: { user: { given_name: "" } }
+
+    assert_response :unprocessable_entity
+    assert_select ".FormErrors li", text: "Bitte gib' Deinen Vornamen an."
   end
 end

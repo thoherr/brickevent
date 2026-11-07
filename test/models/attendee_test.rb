@@ -10,8 +10,11 @@ class AttendeeTest < ActiveSupport::TestCase
     missing_shirt_count = attendees(:four)
     assert_not missing_shirt_count.valid?
     assert_not missing_shirt_count.errors.empty?
-    expected_messages = {:"T-Shirts"=>["Die Anzahl muss größer 0 sein, wenn eine Größe ausgewählt wurde"]}
-    assert_equal expected_messages, missing_shirt_count.errors.messages
+    assert missing_shirt_count.errors.of_kind?(:number_of_shirts, :required_with_size)
+    I18n.with_locale(:de) do
+      assert_equal ["Anzahl der Event-Shirts muss angegeben werden, wenn eine Größe ausgewählt wurde"],
+                   missing_shirt_count.errors.full_messages
+    end
   end
   test "full name and to_s" do
     attendee = attendees(:one)

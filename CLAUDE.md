@@ -188,6 +188,8 @@ Modern asset pipeline using a hybrid approach:
 **Turbo conventions on the frontend** (there is no jquery_ujs there):
 - Non-GET links use `data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') }`, not `method:` / `confirm:`
 - A form re-rendered after a failed save needs `status: :unprocessable_entity`, otherwise Turbo ignores the response
+- Frontend forms show validation errors with `render 'shared/form_errors', object: @record`; attribute names for the messages are in `config/locales/{de,en}.yml` (`activerecord.attributes`)
+- JS handlers for content inside the attendance sections are delegated from `document` (the sections are replaced by Turbo Streams)
 - Redirects after a DELETE need `status: :see_other` (Devise is configured for this in its initializer)
 - File downloads (PDF, ZIP, CSV) bypass Turbo with `data: { turbo: false }` (for `button_to`: `form: { data: { turbo: false } }`)
 - Page setup JS runs on `turbo:load`, not `DOMContentLoaded`
