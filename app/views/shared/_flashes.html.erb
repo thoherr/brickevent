@@ -1,3 +1,5 @@
+<%# The id lets Turbo Stream responses replace the messages (see AttendanceSectionResponse). %>
+<div id="flashes">
 <% if (alert) -%>
     <div class="Flash FlashAlert"><%= alert %></div>
 <% end -%>
@@ -10,3 +12,4 @@
 <% if (notice) -%>
     <div class="Flash FlashNotice"><%= notice %></div>
 <% end -%>
+</div>

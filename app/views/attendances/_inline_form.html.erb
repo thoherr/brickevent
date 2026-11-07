@@ -1,0 +1,16 @@
+<%# A new/edit form of a section of the attendance page.
+    Loaded into the section's Turbo Frame it has a section heading and a cancel
+    link that brings the section back. As a full page (e.g. opened from the
+    event page) it has a page title and a back link, and no frame: a form
+    inside the frame would be submitted as a section request. %>
+<% if turbo_frame_request? %>
+  <%= turbo_frame_tag frame do %>
+    <h2 class="SectionFormTitle"><%= title %></h2>
+    <%= render 'form' %>
+    <div class="OverviewLink"><%= link_to t('cancel'), attendance_path(attendance_id) %></div>
+  <% end %>
+<% else %>
+  <h1><%= title %></h1>
+  <%= render 'form' %>
+  <div class="OverviewLink"><%= link_to t('back_to_overview'), back_path %></div>
+<% end %>

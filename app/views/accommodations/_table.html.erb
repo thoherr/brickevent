@@ -13,9 +13,11 @@
         <td><%= accommodation.count %></td>
         <td><%= accommodation.remarks %></td>
         <td colspan="2">
-          <% if @attendance.event_registration_open? -%><%= link_to t('edit'), edit_accommodation_path(accommodation) %>
-              <%= link_to t('delete'), accommodation, data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') } %>
-          <% end -%></td>
+          <% if registration_open?(attendance) -%>
+            <%= link_to t('edit'), edit_accommodation_path(accommodation) %>
+            <%= link_to t('delete'), accommodation, data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') } %>
+          <% end -%>
+        </td>
       </tr>
   <% end %>
 </table>

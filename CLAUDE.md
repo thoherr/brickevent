@@ -191,6 +191,7 @@ Modern asset pipeline using a hybrid approach:
 - Redirects after a DELETE need `status: :see_other` (Devise is configured for this in its initializer)
 - File downloads (PDF, ZIP, CSV) bypass Turbo with `data: { turbo: false }` (for `button_to`: `form: { data: { turbo: false } }`)
 - Page setup JS runs on `turbo:load`, not `DOMContentLoaded`
+- The attendance page has one Turbo Frame per section (`attendees`, `exhibits`, `accommodations`). The new/edit views render their form inside that frame only for frame requests (`attendances/_inline_form`), and `create`/`update`/`destroy` answer frame requests with a Turbo Stream (`AttendanceSectionResponse`); other requests keep their redirect. Links that leave the attendance from inside a section need `data: { turbo_frame: "_top" }`
 
 **Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.
 

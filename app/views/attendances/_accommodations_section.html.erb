@@ -1,0 +1,8 @@
+<%# Accommodation requests of a registration. A Turbo Frame: the new/edit forms open inside it. %>
+<%= turbo_frame_tag "accommodations" do %>
+  <p class="Indented"><%= t('accommodations_intro') %>
+    <% if registration_open?(attendance) -%>(<%= link_to t('register_accommodation'), new_accommodation_path(:attendance_id => attendance) -%>)
+    <% end -%>:</p>
+
+  <%= render 'accommodations/table', :accommodations => attendance.accommodations, :event => attendance.event, :attendance => attendance %>
+<% end %>

@@ -3,7 +3,6 @@
 <% event_title = @attendance.event.title unless @attendance.event.nil? %>
 <% event_title = "<NO EVENT>" if event_title.nil? %>
 <% event_additional_information = @attendance.event.additional_information unless @attendance.event.nil? %>
-<% @registration_open = @attendance.event_registration_open? || user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) %>
 <% user_name = @attendance.user.full_name unless @attendance.user.nil? %>
 <% user_name = "<NO USER>" if user_name.nil? %>
 
@@ -17,46 +16,20 @@
     <% end %>
 </p>
 
-<hr/>
-
-<p class="Indented"><%= t(:you_registered1) + " " + @attendance.attendees.count.to_s + " " + t('participants') %>
-  <%= t(:you_registered2) %>
-  <% if @registration_open -%>(<%= link_to t('register_person'), new_attendee_path(:attendance_id => @attendance) -%>)
-  <% end -%>:</p>
-
-<%= render 'attendees/table', :attendees => @attendance.attendees, :event => @attendance.event %>
+<%= render 'attendances/status', attendance: @attendance %>
 
 <hr/>
 
-<p class="Indented"><%= t('you_registered1') + " " + @attendance.exhibits.count.to_s %>
-  MOC<%= "s" if @attendance.exhibits.count > 1 || @attendance.exhibits.count == 0 %> <%= t('you_registered2') %>
-  <% if @registration_open || (@attendance && @attendance.event && @attendance.event.edit_of_exhibits_allowed) -%>(<%= link_to t('register_moc'), new_exhibit_path(:attendance_id => @attendance) -%>)
-  <% end -%>:</p>
+<%= render 'attendances/attendees_section', attendance: @attendance %>
 
-<%= render 'exhibits/table', :exhibits => @attendance.exhibits, :event => @attendance.event %>
+<hr/>
 
-<% if @attendance.event_registration_open? and @attendance.has_former_exhibits? %>
-    <p class="Indented"><b>
-      <%= t('hint') %></b>:
-      <%= t('copy_moc_hint1') + " " %>
-      <%= link_to t(:my_attendances), attendances_path %>
-      <%= t('copy_moc_hint2') + " " + event_title + " " + t('copy_moc_hint3') %></p>
-<% end %>
+<%= render 'attendances/exhibits_section', attendance: @attendance %>
 
 <hr/>
 
 <% if @attendance.event && @attendance.event.has_accommodation %>
-    <p class="Indented">Deine Übernachtungswünsche
-      <% if @registration_open -%>
-          (<%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>)
-      <% end -%>:</p>
-
-    <%= render 'accommodations/table', :accommodations => @attendance.accommodations, :event => @attendance.event %>
-
-    <p class="Indented">
-      <% if @registration_open -%><%= link_to 'Weiteren Hotelwunsch eintragen', new_accommodation_path(:attendance_id => @attendance) %>
-          <br/>
-      <% end -%>&nbsp;</p>
+    <%= render 'attendances/accommodations_section', attendance: @attendance %>
 
     <hr/>
 <% end %>
@@ -65,5 +38,3 @@
 <% if user_is_admin? || (@attendance.event && @attendance.event.is_managed_by?(current_user)) -%>
     <div class="OverviewLink"><%= link_to t('back_to_event'), event_path(@attendance.event) unless @attendance.event.nil? %></div>
 <% end %>
-
-
