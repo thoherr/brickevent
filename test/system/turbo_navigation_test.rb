@@ -56,4 +56,14 @@ class TurboNavigationTest < ApplicationSystemTestCase
     assert_no_selector "#logoutLink"
     assert_current_path root_path, ignore_query: true
   end
+
+  test "the admin backend is opened with a full page load" do
+    login_admin
+    click_on "Administration"
+
+    assert_current_path admin_events_path, ignore_query: true
+    assert_selector "#admin_events-active-scaffold, .active-scaffold"
+    assert page.evaluate_script("typeof window.jQuery === 'function'"), "jQuery is loaded for Active Scaffold"
+    assert page.evaluate_script("typeof window.Turbo === 'undefined'"), "the admin page is not rendered into the Turbo frontend document"
+  end
 end
