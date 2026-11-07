@@ -8,6 +8,9 @@
   <meta name="description" content="<%= "#{@lug.name} event management admin area" %>">
   <meta name="copyright" content="(c) 2010-2024 Thomas Herrmann <mail@thoherr.de>">
   <%= render "shared/meta_includes" %>
+  <%# A Turbo visit from the frontend must not render this page into the frontend document:
+      jQuery, jquery_ujs and Active Scaffold need a real page load. %>
+  <meta name="turbo-visit-control" content="reload">
   <%# jQuery, jquery_ujs and Active Scaffold are only needed in the admin backend %>
   <%= javascript_include_tag "application" %>
   <%# Active Scaffold CSS: the gem's combined active_scaffold.scss cannot be compiled by Sprockets here
