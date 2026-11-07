@@ -8,7 +8,7 @@ This analysis identifies the 5 controllers with the lowest test coverage in the 
 
 ## 1. EVENTS CONTROLLER - 59.02% Coverage (36/61 executable lines)
 
-**File:** `/Users/thomas/Development/private/brickevent/app/controllers/events_controller.rb`
+**File:** `app/controllers/events_controller.rb`
 
 ### Current Coverage
 - **Executed lines:** 36/61
@@ -147,7 +147,7 @@ end
 
 ## 2. ATTENDANCES CONTROLLER - 65.22% Coverage (45/69 executable lines)
 
-**File:** `/Users/thomas/Development/private/brickevent/app/controllers/attendances_controller.rb`
+**File:** `app/controllers/attendances_controller.rb`
 
 ### Current Coverage
 - **Executed lines:** 45/69
@@ -282,7 +282,7 @@ end
 
 ## 3. ATTENDEES CONTROLLER - 71.43% Coverage (35/49 executable lines)
 
-**File:** `/Users/thomas/Development/private/brickevent/app/controllers/attendees_controller.rb`
+**File:** `app/controllers/attendees_controller.rb`
 
 ### Current Coverage
 - **Executed lines:** 35/49
@@ -388,7 +388,7 @@ end
 
 ## 4. EXHIBITS CONTROLLER - 83.02% Coverage (44/53 executable lines)
 
-**File:** `/Users/thomas/Development/private/brickevent/app/controllers/exhibits_controller.rb`
+**File:** `app/controllers/exhibits_controller.rb`
 
 ### Current Coverage
 - **Executed lines:** 44/53
@@ -518,7 +518,7 @@ end
 
 ## 5. USERS CONTROLLER - 88.24% Coverage (15/17 executable lines)
 
-**File:** `/Users/thomas/Development/private/brickevent/app/controllers/users_controller.rb`
+**File:** `app/controllers/users_controller.rb`
 
 ### Current Coverage
 - **Executed lines:** 15/17
