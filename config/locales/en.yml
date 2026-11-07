@@ -39,3 +39,23 @@ en:
       attendee:
         given_name: "Given name"
         family_name: "Family name"
+        attendance: "Registration"
+        attendee_type: "Register as"
+        number_of_shirts: "Number of event shirts"
+      exhibit:
+        attendance: "Registration"
+        name: "Name"
+        unit: "Unit"
+        url: "URL"
+      accommodation:
+        attendance: "Registration"
+        accommodation_type: "Room type"
+        count: "Number of rooms"
+    errors:
+      messages:
+        required: "must be filled in"
+      models:
+        attendee:
+          attributes:
+            number_of_shirts:
+              required_with_size: "must be given when a size is selected"

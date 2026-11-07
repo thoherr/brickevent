@@ -1,0 +1,17 @@
+<%# Summary of the registration above its sections; updated together with a section after inline changes. %>
+<% attendees = attendance.attendees.to_a %>
+<% exhibits = attendance.exhibits.to_a %>
+<% exhibits_without_size = exhibits.count { |e| e.size_text_in_cm == 'MISSING' } %>
+<ul id="attendance_status" class="AttendanceStatus">
+  <li><%= t('status_registration_confirmed') %>: <%= to_yes_no(attendance.is_approved?) %></li>
+  <li><%= t('status_attendees_confirmed', confirmed: attendees.count(&:is_approved?), total: attendees.size) %></li>
+  <li>
+    <%= t('status_mocs_confirmed', confirmed: exhibits.count(&:is_approved?), total: exhibits.size) %>
+    <% if exhibits_without_size > 0 %>
+      <strong class="AttendanceStatusWarning"><%= t('status_mocs_without_size', count: exhibits_without_size) %></strong>
+    <% end %>
+  </li>
+  <% if show_shop_columns?(attendance.event, attendees) %>
+    <li><%= t('status_tickets_paid', paid: attendees.count(&:show_ticket?), total: attendees.size) %></li>
+  <% end %>
+</ul>

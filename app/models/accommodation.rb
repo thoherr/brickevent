@@ -1,9 +1,8 @@
 class Accommodation < ApplicationRecord
+  # belongs_to already requires both associations.
   belongs_to :attendance
   belongs_to :accommodation_type
 
-  validates_presence_of :attendance
-  validates_presence_of :accommodation_type
   validates_presence_of :count
 
   def is_managed_by?(user)

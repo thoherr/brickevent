@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from NotAuthorized, with: :render_forbidden
 
+  # First, so everything in the request (including Devise messages) uses its locale.
+  around_action :switch_locale
   before_action :authenticate_user!
   before_action :store_referrer
   before_action :get_lug
@@ -18,15 +20,20 @@ class ApplicationController < ActionController::Base
   end
 
   def set_context
-    set_locale
     @stage = ENV["STAGE"] || "prod"
-  end 
+  end
+
+  # The locale only applies to this request; setting I18n.locale directly
+  # would stay on the thread and leak into the next request (or test).
+  def switch_locale(&action)
+    I18n.with_locale(requested_locale, &action)
+  end
 
   # The first supported locale of: URL parameter, browser preference, default.
   # Unsupported values are skipped instead of raising I18n::InvalidLocale.
-  def set_locale
+  def requested_locale
     requested = [params[:locale], extract_locale_from_accept_language_header].map { |l| l.to_s.downcase.to_sym }
-    I18n.locale = requested.find { |l| ApplicationController.supported_locales.include?(l) } || I18n.default_locale
+    requested.find { |l| ApplicationController.supported_locales.include?(l) } || I18n.default_locale
   end
 
   def default_url_options
@@ -88,10 +95,13 @@ class ApplicationController < ActionController::Base
     raise NotAuthorized unless event_manager?(event)
   end
 
+  # rescue_from handlers run outside the around_action, so set the locale again.
   def render_forbidden
-    respond_to do |format|
-      format.html { render 'shared/forbidden', status: :forbidden }
-      format.any { head :forbidden }
+    I18n.with_locale(requested_locale) do
+      respond_to do |format|
+        format.html { render 'shared/forbidden', status: :forbidden }
+        format.any { head :forbidden }
+      end
     end
   end
 

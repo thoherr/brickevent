@@ -1,0 +1,4 @@
+<%# Response to a save or delete inside a section of the attendance page. %>
+<%= turbo_stream.replace section, partial: "attendances/#{section}_section", locals: { attendance: attendance } %>
+<%= turbo_stream.replace "attendance_status", partial: "attendances/status", locals: { attendance: attendance } %>
+<%= turbo_stream.replace "flashes", partial: "shared/flashes" %>

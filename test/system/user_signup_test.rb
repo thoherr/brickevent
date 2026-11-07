@@ -61,7 +61,8 @@ class UserSignupTest < ApplicationSystemTestCase
     # because we didn't accept data storage we are still on the form
     assert has_content?('BrickEvent'), "BrickEvent"
     assert has_content?('Benutzeranmeldung'), "Benutzeranmeldung"
-    assert has_content?('Accept data storage Du musst der Speicherung Deiner Daten zustimmen!'), "Accept data storage Du musst der Speicherung Deiner Daten zustimmen!"
+    assert has_content?('Du musst der Speicherung Deiner Daten zustimmen!'), "Du musst der Speicherung Deiner Daten zustimmen!"
+    assert has_no_content?('Accept data storage'), "the message is a sentence without the English attribute name in front"
 
     fill_in 'user_password', :with => password
     fill_in 'user_password_confirmation', :with => password

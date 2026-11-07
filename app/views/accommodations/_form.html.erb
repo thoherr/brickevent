@@ -1,16 +1,17 @@
 <%= form_for(@accommodation) do |f| %>
     <div class="InputForm">
+      <%= render 'shared/form_errors', object: @accommodation %>
       <%= f.hidden_field :attendance_id %>
       <div class="field">
-        <%= t('label_accommodation_type') %><br/>
-        <%= f.select :accommodation_type_id, AccommodationType.all.collect { |at| [at.name, at.id] }, {:prompt => '- Bitte auswählen -'} %>
+        <%= f.label :accommodation_type_id, t('label_accommodation_type') %><br/>
+        <%= f.select :accommodation_type_id, AccommodationType.all.collect { |at| [at.name, at.id] }, {:prompt => t('please_choose')} %>
       </div>
       <div class="field">
-        <%= t('label_number_of_rooms') %><br/>
+        <%= f.label :count, t('label_number_of_rooms') %><br/>
         <%= f.number_field :count %>
       </div>
       <div class="field">
-        <%= t('label_room_remarks') %><br/>
+        <%= f.label :remarks, t('label_room_remarks') %><br/>
         <%= f.text_area :remarks %>
       </div>
       <div class="actions">

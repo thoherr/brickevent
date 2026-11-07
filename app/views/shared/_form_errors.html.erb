@@ -1,0 +1,11 @@
+<%# Validation errors of a form's record, shown above its fields. %>
+<% if object.errors.any? %>
+  <div class="Flash FlashError FormErrors" role="alert">
+    <%= t('form_errors_heading') %>
+    <ul>
+      <% object.errors.full_messages.uniq.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

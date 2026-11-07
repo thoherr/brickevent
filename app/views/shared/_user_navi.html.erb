@@ -32,7 +32,8 @@
       </li>
       <% if user_is_admin? %>
           <li>
-            <%= link_to t('administration'), admin_events_path %>
+            <%# The admin backend is not a Turbo page (jQuery, Active Scaffold), so it needs a full page load. %>
+            <%= link_to t('administration'), admin_events_path, data: { turbo: false } %>
           </li>
       <% end %>
       <li id="logoutLink" class="mainNavi">
