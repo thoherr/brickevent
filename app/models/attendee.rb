@@ -2,10 +2,10 @@
 class Attendee < ApplicationRecord
   include PersonName
 
+  # belongs_to already requires both; an additional presence validation
+  # would report the same missing field twice.
   belongs_to :attendance
   belongs_to :attendee_type
-  validates_presence_of :attendance
-  validates_presence_of :attendee_type
 
   validate :shirt_count_positive_when_size_given
 
@@ -120,7 +120,7 @@ class Attendee < ApplicationRecord
   protected
 
   def shirt_count_positive_when_size_given
-    errors.add('T-Shirts', 'Die Anzahl muss größer 0 sein, wenn eine Größe ausgewählt wurde') if number_of_shirts.blank? && !shirt_size.blank?
+    errors.add(:number_of_shirts, :required_with_size) if number_of_shirts.blank? && !shirt_size.blank?
   end
 
 end

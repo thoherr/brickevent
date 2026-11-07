@@ -1,5 +1,6 @@
 <%= form_for(@exhibit) do |f| %>
     <div class="InputForm">
+      <%= render 'shared/form_errors', object: @exhibit %>
       <h3><%= t('supply_maximum_information') + " " + t('will_easy_our_planing') %></h3>
       <%= f.hidden_field :attendance_id %>
       <div class="field">

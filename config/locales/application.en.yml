@@ -9,7 +9,6 @@ en:
   impress: "Impress"
   logout: "Logout"
   change_password: "Change Email/Password"
-  my_profile: "My Profile"
   login: "Login"
   logged_in_as: "Logged in as"
   'yes': "yes"
@@ -269,3 +268,4 @@ en:
   status_mocs_confirmed: "MOCs confirmed: %{confirmed} of %{total}"
   status_mocs_without_size: "(%{count} without size)"
   status_tickets_paid: "Tickets paid: %{paid} of %{total}"
+  form_errors_heading: "Please correct the following:"

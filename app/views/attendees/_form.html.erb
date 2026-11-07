@@ -1,5 +1,6 @@
 <%= form_for(@attendee) do |f| %>
     <div class="InputForm">
+      <%= render 'shared/form_errors', object: @attendee %>
       <%= f.hidden_field :attendance_id %>
 
       <div class="field">
