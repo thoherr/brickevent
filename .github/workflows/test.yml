@@ -60,12 +60,14 @@ jobs:
       - name: Run system tests
         run: bin/rails test:system
 
-      - name: Upload screenshots of failed system tests
+      - name: Upload screenshots and server log of failed system tests
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: system-test-screenshots
-          path: tmp/screenshots/
+          path: |
+            tmp/screenshots/
+            log/test.log
           if-no-files-found: ignore
 
   security:
