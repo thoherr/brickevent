@@ -1,6 +1,6 @@
 # Dockerfile for BrickEvent
 
-FROM ruby:3.4.12 AS brickevent
+FROM ruby:3.4.13 AS brickevent
 
 ARG APPUSER=brickevent
 ARG APPBASEDIR=/$APPUSER

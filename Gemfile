@@ -7,7 +7,7 @@ gem 'bootsnap'
 
 
 # Use Puma as the app server
-gem 'puma', '~> 7.2', '>= 7.2.1'
+gem 'puma', '~> 7.2', '>= 7.2.2'
 
 group :development, :test do
     gem 'sqlite3'
