@@ -355,3 +355,23 @@ a {
 .CollapsibleTable[open] > summary .WhenOpen {
   display: inline;
 }
+
+/* Attendance page: status line above the sections */
+.AttendanceStatus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 2em;
+  list-style: none;
+  margin: 0.5em 0;
+  padding: 0 2% 0 1%;
+}
+
+.AttendanceStatusWarning {
+  color: #b00;
+}
+
+/* Attendance page: heading of a form opened inside a section */
+.SectionFormTitle {
+  font-size: large;
+  margin: 0.5em 0;
+}

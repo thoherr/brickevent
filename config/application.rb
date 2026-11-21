@@ -16,6 +16,11 @@ module BrickEvent
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Lets the locale files show a validation message without the attribute
+    # name in front (`format: "%{message}"`), for messages that are complete
+    # sentences, see config/locales/de.yml.
+    config.active_model.i18n_customize_full_message = true
+
     # Active Storage is loaded by rails/all but not used by this application.
     # Disabling the variant processor here (not only in production.rb, which the
     # docker setup replaces with a mounted file) avoids the image_processing warning.

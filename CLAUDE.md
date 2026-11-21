@@ -188,9 +188,12 @@ Modern asset pipeline using a hybrid approach:
 **Turbo conventions on the frontend** (there is no jquery_ujs there):
 - Non-GET links use `data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') }`, not `method:` / `confirm:`
 - A form re-rendered after a failed save needs `status: :unprocessable_entity`, otherwise Turbo ignores the response
+- Frontend forms show validation errors with `render 'shared/form_errors', object: @record`; attribute names for the messages are in `config/locales/{de,en}.yml` (`activerecord.attributes`)
+- JS handlers for content inside the attendance sections are delegated from `document` (the sections are replaced by Turbo Streams)
 - Redirects after a DELETE need `status: :see_other` (Devise is configured for this in its initializer)
 - File downloads (PDF, ZIP, CSV) bypass Turbo with `data: { turbo: false }` (for `button_to`: `form: { data: { turbo: false } }`)
 - Page setup JS runs on `turbo:load`, not `DOMContentLoaded`
+- The attendance page has one Turbo Frame per section (`attendees`, `exhibits`, `accommodations`). The new/edit views render their form inside that frame only for frame requests (`attendances/_inline_form`), and `create`/`update`/`destroy` answer frame requests with a Turbo Stream (`AttendanceSectionResponse`); other requests keep their redirect. Links that leave the attendance from inside a section need `data: { turbo_frame: "_top" }`
 
 **Why hybrid?** Active Scaffold requires jQuery and uses ERB in its JavaScript files, which Sprockets handles. New application code should use modern ES6 modules via importmap.
 

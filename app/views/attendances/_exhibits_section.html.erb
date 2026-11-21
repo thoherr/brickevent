@@ -1,0 +1,17 @@
+<%# MOCs of a registration. A Turbo Frame: the new/edit forms open inside it. %>
+<%= turbo_frame_tag "exhibits" do %>
+  <p class="Indented"><%= t('you_registered1') + " " + attendance.exhibits.count.to_s %>
+    MOC<%= "s" if attendance.exhibits.count != 1 %> <%= t('you_registered2') %>
+    <% if can_edit_exhibits?(attendance) -%>(<%= link_to t('register_moc'), new_exhibit_path(:attendance_id => attendance) -%>)
+    <% end -%>:</p>
+
+  <%= render 'exhibits/table', :exhibits => attendance.exhibits, :event => attendance.event, :attendance => attendance %>
+
+  <% if attendance.event_registration_open? and attendance.has_former_exhibits? %>
+    <p class="Indented"><b>
+      <%= t('hint') %></b>:
+      <%= t('copy_moc_hint1') + " " %>
+      <%= link_to t(:my_attendances), attendances_path, data: { turbo_frame: "_top" } %>
+      <%= t('copy_moc_hint2') + " " + attendance.event_title + " " + t('copy_moc_hint3') %></p>
+  <% end %>
+<% end %>

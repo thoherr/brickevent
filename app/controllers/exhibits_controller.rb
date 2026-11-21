@@ -1,6 +1,8 @@
 # encoding: UTF-8
 class ExhibitsController < ApplicationController
 
+  include AttendanceSectionResponse
+
   # GET /exhibits/new
   # GET /exhibits/new.json
   def new
@@ -44,7 +46,11 @@ class ExhibitsController < ApplicationController
 
     respond_to do |format|
       if @exhibit.save
-        format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_created') }
+        format.html do
+          next render_attendance_section(@exhibit.attendance, "exhibits", t('moc_created')) if attendance_section_request?("exhibits")
+
+          redirect_back_or_default @exhibit.attendance, :notice => t('moc_created')
+        end
         format.json { render :json => @exhibit, :status => :created, :location => @exhibit }
       else
         format.html { render :action => "new", :status => :unprocessable_entity }
@@ -62,7 +68,11 @@ class ExhibitsController < ApplicationController
 
     respond_to do |format|
       if @exhibit.save
-        format.html { redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated') }
+        format.html do
+          next render_attendance_section(@exhibit.attendance, "exhibits", t('moc_updated')) if attendance_section_request?("exhibits")
+
+          redirect_back_or_default @exhibit.attendance, :notice => t('moc_updated')
+        end
         format.json { head :ok }
       else
         format.html { render :action => "edit", :status => :unprocessable_entity }
@@ -79,7 +89,11 @@ class ExhibitsController < ApplicationController
     @exhibit.destroy
 
     respond_to do |format|
-      format.html { redirect_to attendance_path(@attendance_id), :notice => t('moc_deleted'), :status => :see_other }
+      format.html do
+        next render_attendance_section(@exhibit.attendance, "exhibits", t('moc_deleted')) if attendance_section_request?("exhibits")
+
+        redirect_to attendance_path(@attendance_id), :notice => t('moc_deleted'), :status => :see_other
+      end
       format.json { head :ok }
     end
   end

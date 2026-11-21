@@ -184,21 +184,26 @@ end
 class LocaleHandlingTest < ActionController::TestCase
   tests EventsController
 
-  # I18n.locale is global for the test thread; don't leak English into later tests.
-  teardown { I18n.locale = I18n.default_locale }
+  # The locale applies to the request only; I18n.locale must not keep it afterwards
+  # (it would leak into the next request on the same thread, or into later tests).
+  def assert_locale_not_leaked
+    assert_equal I18n.default_locale, I18n.locale
+  end
 
   test "an unsupported locale falls back to the default instead of failing" do
     get :index, params: { locale: "xx" }
 
     assert_response :success
-    assert_equal I18n.default_locale, I18n.locale
+    assert_select "h1", "Veranstaltungsübersicht"
+    assert_locale_not_leaked
   end
 
   test "a supported locale in the URL is used" do
     get :index, params: { locale: "en" }
 
     assert_response :success
-    assert_equal :en, I18n.locale
+    assert_select "h1", "Event overview"
+    assert_locale_not_leaked
   end
 
   test "the browser language is used when the URL has none" do
@@ -206,6 +211,7 @@ class LocaleHandlingTest < ActionController::TestCase
 
     get :index
 
-    assert_equal :en, I18n.locale
+    assert_select "h1", "Event overview"
+    assert_locale_not_leaked
   end
 end

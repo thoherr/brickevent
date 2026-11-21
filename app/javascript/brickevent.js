@@ -15,6 +15,13 @@ import "controllers"
 import AppInfo from "utils/app_info";
 import { initTicketDialogs } from "shop_ticket_dialog";
 
+// A form re-rendered with validation errors inside a Turbo Frame keeps the
+// scroll position of the submit button, so its error box may be out of view.
+document.addEventListener("turbo:frame-render", (event) => {
+  const errors = event.target.querySelector(".FormErrors");
+  if (errors) errors.scrollIntoView({ block: "nearest" });
+});
+
 // turbo:load fires on the initial page load and after every Turbo visit,
 // DOMContentLoaded only on the initial load.
 document.addEventListener("turbo:load", () => {

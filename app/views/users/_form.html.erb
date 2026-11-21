@@ -1,5 +1,6 @@
 <div class="InputForm">
   <%= form_for(@user) do |f| %>
+      <%= render 'shared/form_errors', object: @user %>
       <div class="field">
         <%= f.label :given_name, t(:label_given_name) %><br/>
         <%= f.text_field :given_name %>
